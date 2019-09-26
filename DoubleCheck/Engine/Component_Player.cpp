@@ -11,7 +11,7 @@ void Player::Init(Object* obj)
 
 void Player::Update(float dt)
 {
-    //Attack();
+    Attack();
 }
 
 void Player::Attack()

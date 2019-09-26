@@ -3,7 +3,6 @@
 
 void Object::AddComponent(Component* comp)
 {
-    comp->Init(this);
     components_.push_back(comp);
 }
 

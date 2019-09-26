@@ -34,7 +34,6 @@ void ObjectManager::Update(float dt)
             if (obj->IsDead())
                 delete_obj.push_back(obj);
         }
-
         for (auto& remove_obj : delete_obj)
         {
             DeleteObject(remove_obj);

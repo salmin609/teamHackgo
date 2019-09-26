@@ -54,7 +54,6 @@ void Graphic::Delete()
 void Graphic::Draw(Vertices& shape, material material)
 {
     //GL::begin_drawing();
-
     GL::draw(shape, material);
 
     GL::end_drawing();

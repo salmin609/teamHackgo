@@ -6,6 +6,7 @@
 #include "Graphic.h"
 #include "Object.h"
 
+
 void Helper_Addpoint_Circle(std::size_t& point_count, Mesh& mesh, float& radius, float position_x = 0, float position_y = 0, bool move_up_down = true)
 {
     float theta;
@@ -41,7 +42,6 @@ void Helper_Addpoint_Ellipse(std::size_t& point_count, Mesh& mesh, float& radius
         mesh.AddPoint({ location_x ,location_y });
         mesh.AddTextureCoordinate({ to_radians(270.f), 10.f });
     }
-
 }
 
 Mesh m_create_circle(float radius, Color4ub color, std::size_t point_count, vector2 origin = { 0.1f, 0.1f }, bool is_ellipse = false, float location_x = 0, float location_y = 0, bool move_up_down = true) noexcept
@@ -93,7 +93,20 @@ void Sprite::Init(Object* obj)
 
     m_owner->SetMesh(square);
     m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+
+    int size_for_normal = m_owner->GetMesh().Get_Points().size();
+    std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
+    for(int i = 0 ; i < size_for_normal; ++i)
+    {
+        vector2 normal_vec = vector_for_normal[i];
+
+        normal_vec.x = normal_vec.x / abs(normal_vec.x);
+        normal_vec.y = normal_vec.y / abs(normal_vec.y);
+        m_owner->Get_Normalize_Points().push_back(normal_vec);
+    }
+    //m_owner->Get_Normalize_Points() = m_owner->GetMesh().Get_Points();
     m_owner->Set_Center({ 0.0f , 0.0f});
+    
 }
 /*
  * Original
@@ -129,15 +142,17 @@ void Sprite::Init(Object* obj)
             Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.9f);
         }
 
-        vector2 save_translation = m_owner->GetTransform().GetTranslation();
-        vector2 convert_translation = normalize(save_translation);
-        m_owner->GetTransform().SetTranslation(convert_translation);
+        //vector2 save_translation = m_owner->GetTransform().GetTranslation();
+        //vector2 convert_translation = normalize(save_translation);
+        //m_owner->GetTransform().SetTranslation(convert_translation);
         convert_center = m_owner->GetTransform().GetModelToWorld() * convert_center;
-        m_owner->GetTransform().SetTranslation(save_translation);
+        //m_owner->GetTransform().SetTranslation(save_translation);
 
         convert_center = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * convert_center;
         convert_center = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * convert_center;
-        convert_center = Graphic::GetGraphic()->Get_View().Get_Ndc_Matrix() * convert_center;
+        //convert_center = Graphic::GetGraphic()->Get_View().Get_Ndc_Matrix() * convert_center;
+        convert_center.x *= 640;
+        convert_center.y *= 360;
         
         m_owner->Set_Center({convert_center.x, convert_center.y});
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,16 +163,13 @@ void Sprite::Init(Object* obj)
         for(int i = 0 ; i < point_size; i++)
         {
             vector3 convert_points;
-            convert_points.x = m_owner->Get_Object_Points_Value()[i].x;
-            convert_points.y = m_owner->Get_Object_Points_Value()[i].y;
+            //convert_points.x = m_owner->Get_Object_Points_Value()[i].x;
+            //convert_points.y = m_owner->Get_Object_Points_Value()[i].y;
+            convert_points.x = m_owner->Get_Normalize_Points()[i].x;
+            convert_points.y = m_owner->Get_Normalize_Points()[i].y;
             convert_points.z = 1.0f;
 
-            vector2 save_translation_sec = m_owner->GetTransform().GetTranslation();
-            vector2 convert_translation_sec = normalize(save_translation_sec);
-            m_owner->GetTransform().SetTranslation(convert_translation_sec);
             convert_points = m_owner->GetTransform().GetModelToWorld() * convert_points;
-            m_owner->GetTransform().SetTranslation(save_translation_sec);
-
             convert_points = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * convert_points;
             convert_points = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * convert_points;
             convert_points = Graphic::GetGraphic()->Get_View().Get_Ndc_Matrix() * convert_points;

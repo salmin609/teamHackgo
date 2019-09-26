@@ -42,7 +42,7 @@ void Application::Init()
     glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 
     window = glfwCreateWindow(1280, 720, "sangministhebest", nullptr, nullptr);
-
+    
     glfwMakeContextCurrent(window);
 	/*glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwGetFramebufferSize(window, &width, &height);*/
@@ -138,9 +138,6 @@ void Application::Update(float dt)
     {
         std::cout << "aaa" << std::endl;
     }
-	
-	/*std::cout << FPS_frame << " "<<std::endl;
-	std::cout << dt << " ";*/
 }
 
 void Application::Imgui_Update()
@@ -187,17 +184,6 @@ void Application::Imgui_Update()
                         following_mouse.y = input.Get_Mouse_Pos().y - origin_mouse_pos.y;//origin_mouse_pos.y - input.Get_Mouse_Pos().y;
 
                         following_mouse = normalize(following_mouse);
-
-                        /*vector3 convert_mouse_pos;
-                        convert_mouse_pos.x = input.Get_Mouse_Pos().x;
-                        convert_mouse_pos.y = input.Get_Mouse_Pos().y;
-                        convert_mouse_pos.z = 1.0f;
-                        convert_mouse_pos = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * convert_mouse_pos;
-                        convert_mouse_pos = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * convert_mouse_pos;
-                        vector2 converted;
-                        converted.x = convert_mouse_pos.x;
-                        converted.y = convert_mouse_pos.y;
-                        this_obj->GetTransform().SetTranslation(converted);*/
                         this_obj->GetTransform().SetTranslation(input.Get_Mouse_Pos());
                     }
                 }
