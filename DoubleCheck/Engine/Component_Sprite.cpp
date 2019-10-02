@@ -5,6 +5,7 @@
 #include "StockShaders.hpp"
 #include "Graphic.h"
 #include "Object.h"
+#include "glCheck.hpp"
 
 
 void Helper_Addpoint_Circle(std::size_t& point_count, Mesh& mesh, float& radius, float position_x = 0, float position_y = 0, bool move_up_down = true)
@@ -72,13 +73,24 @@ Mesh m_create_wire_circle(float radius, Color4ub color, std::size_t point_count)
     return temp_mesh;
 }
 
+bool Sprite::can_load_to_texture(Texture& texture, const char* file_path)
+{
+	const bool is_okay = texture.LoadFromPNG(file_path);
+	if (!is_okay)
+	{
+		std::cerr << "Failed to load \"" << file_path << "\"\n";
+	}
+	return is_okay;
+}
+
 
 void Sprite::Init(Object* obj)
 {
     m_owner = obj;
-
-    //texture.LoadFromPNG("../Sprite/temp.png");
-
+	const auto path = "../sprite/salmin.png" ;
+	if (!can_load_to_texture(texture, path))
+		std::cout << "Fuck My Life" << std::endl;
+	material.textureUniforms["texture_to_sample"] = { &texture };
     material.shader = &SHADER::interpolated_colors();
     material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
 

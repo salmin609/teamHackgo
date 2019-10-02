@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
 #include <string>
-
 class Color4f;
 struct matrix3;
 struct vector3;
