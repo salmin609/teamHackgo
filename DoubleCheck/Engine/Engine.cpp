@@ -46,26 +46,27 @@ void Engine::Init()
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
-    //temp->AddComponent(new Physics);
     temp->AddComponent(new Sprite());
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
     temp->AddComponent(new Component_TopDownMovement());
-    //temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
-    //temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp->Set_Name("first");
 
     Object* temp_sec = new Object();
-    //temp_sec->AddComponent(new Physics);
     temp_sec->AddComponent(new Sprite());
-    temp_sec->AddComponent(new Component_Transform());
-    temp_sec->AddComponent(new Component_TopDownMovement());
-    //temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
-    //temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    temp_sec->AddComponent(new Component_Enemy());
     temp_sec->Set_Name("second");
+    temp_sec->Set_Tag("enemy");
+
+    Object* temp_third = new Object();
+    temp_third->AddComponent(new Sprite());
+    temp_third->AddComponent(new Component_Enemy());
+    temp_third->Set_Name("third");
+    temp_third->Set_Tag("enemy");
 
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
+    object_manager->AddObject(temp_third);
 
     game_timer.Reset();
 }
@@ -131,14 +132,6 @@ void Engine::Reset()
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
 
-    for (auto obj : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
-    {
-        if (obj->Get_Need_Update_Points())
-        {
-            obj->Get_Object_Points() = obj->Get_Normalize_Points();
-            obj->Set_Need_Update_Points(false);
-        }
-    }
 
     //Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(1.0f);
     //Graphic::GetGraphic()->Get_View().Get_Camera().SetCenter({ 0,0 });

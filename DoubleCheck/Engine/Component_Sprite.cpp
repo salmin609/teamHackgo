@@ -72,29 +72,42 @@ Mesh m_create_wire_circle(float radius, Color4ub color, std::size_t point_count)
     return temp_mesh;
 }
 
+bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
+{
+    const bool is_okay = texture.LoadFromPNG(file_path);
+    if (!is_okay)
+    {
+        std::cerr << "Failed to load \"" << file_path << "\"\n";
+    }
+    return is_okay;
+}
+
 
 void Sprite::Init(Object* obj)
 {
     m_owner = obj;
 
     //texture.LoadFromPNG("../Sprite/temp.png");
+    material.shader = &(SHADER::textured());
+    if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
+    {
+        std::cout << "fail to load texture" << std::endl;
+    }
 
-    material.shader = &SHADER::interpolated_colors();
+    texture.SelectTextureForSlot(texture);
+    material.textureUniforms["texture_to_sample"] = {&(texture)};
+    material.color4fUniforms["color"] = { 1.0f };
     material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
 
-    const auto layout = { VertexLayoutDescription::Position2WithFloats,
-    VertexLayoutDescription::Color4WithUnsignedBytes,
-    VertexLayoutDescription::TextureCoordinates2WithFloats };
-
     Mesh square;
-    //square = MESH::create_circle(100, { 50, 0,0, 255 });
     square = MESH::create_box(100, { 100,100,100,255 });
-    shape.InitializeWithMeshAndLayout(square, layout);
+    shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
 
     m_owner->SetMesh(square);
     m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
 
     int size_for_normal = m_owner->GetMesh().Get_Points().size();
+
     std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
     for(int i = 0 ; i < size_for_normal; ++i)
     {
@@ -104,7 +117,6 @@ void Sprite::Init(Object* obj)
         normal_vec.y = normal_vec.y / abs(normal_vec.y);
         m_owner->Get_Normalize_Points().push_back(normal_vec);
     }
-    //m_owner->Get_Normalize_Points() = m_owner->GetMesh().Get_Points();
     m_owner->Set_Center({ 0.0f , 0.0f});
     
 }
@@ -125,64 +137,7 @@ void Sprite::Init(Object* obj)
         mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
         mat_ndc *= m_owner->GetTransform().GetModelToWorld();
 
-        //Set center pos;
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        vector3 convert_center;
-        convert_center.x = m_owner->Get_Center().x;
-        convert_center.y = m_owner->Get_Center().y;
-        convert_center.z = 1.0f;
-
-        float save_zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
-        if(save_zoom > 0)
-        {
-            Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(1.1f);
-        }
-        else
-        {
-            Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.9f);
-        }
-
-        //vector2 save_translation = m_owner->GetTransform().GetTranslation();
-        //vector2 convert_translation = normalize(save_translation);
-        //m_owner->GetTransform().SetTranslation(convert_translation);
-        convert_center = m_owner->GetTransform().GetModelToWorld() * convert_center;
-        //m_owner->GetTransform().SetTranslation(save_translation);
-
-        convert_center = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * convert_center;
-        convert_center = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * convert_center;
-        //convert_center = Graphic::GetGraphic()->Get_View().Get_Ndc_Matrix() * convert_center;
-        convert_center.x *= 640;
-        convert_center.y *= 360;
-        
-        m_owner->Set_Center({convert_center.x, convert_center.y});
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Move the points
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        int point_size = m_owner->Get_Object_Points().size();
-        for(int i = 0 ; i < point_size; i++)
-        {
-            vector3 convert_points;
-            //convert_points.x = m_owner->Get_Object_Points_Value()[i].x;
-            //convert_points.y = m_owner->Get_Object_Points_Value()[i].y;
-            convert_points.x = m_owner->Get_Normalize_Points()[i].x;
-            convert_points.y = m_owner->Get_Normalize_Points()[i].y;
-            convert_points.z = 1.0f;
-
-            convert_points = m_owner->GetTransform().GetModelToWorld() * convert_points;
-            convert_points = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * convert_points;
-            convert_points = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * convert_points;
-            convert_points = Graphic::GetGraphic()->Get_View().Get_Ndc_Matrix() * convert_points;
-
-            vector2 result;
-            result.x = convert_points.x;
-            result.y = convert_points.y;
-
-            m_owner->Set_Object_Point(i, result);
-        }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         m_owner->GetMesh().Get_Is_Moved() = false;
-        Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(save_zoom);
         material.matrix3Uniforms["to_ndc"] = mat_ndc;
     }
 
