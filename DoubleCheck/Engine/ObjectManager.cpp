@@ -56,10 +56,10 @@ void ObjectManager::Delete()
 
 void ObjectManager::AddObject(Object* obj)
 {
-    for (auto component : obj->GetComponentContainer())
-    {
-        component->Init(obj);
-    }
+    //for (auto component : obj->GetComponentContainer())
+    //{
+    //    component->Init(obj);
+    //}
 
     objects.push_back(std::shared_ptr<Object>(obj));
 }

@@ -52,12 +52,12 @@ bool Shader::LoadFromSource(const std::string& vertex_shader_source_code,
 
     if (vertex_result == GL_FALSE)
     {
-        glDeleteShader(vertex_id);
+		glDeleteShader(vertex_id);
         GLint max_length = 0;
-        glGetShaderiv(vertex_id, GL_INFO_LOG_LENGTH, &max_length);
+		glGetShaderiv(vertex_id, GL_INFO_LOG_LENGTH, &max_length);
         GLchar* vertex_info_log = new GLchar[max_length + 1];
 
-        glGetProgramInfoLog(vertex_id, max_length, &max_length, vertex_info_log);
+		glGetProgramInfoLog(vertex_id, max_length, &max_length, vertex_info_log);
         std::cerr << "Fail to compile vertex shader " << vertex_info_log << std::endl;
         uniformNameToLocation.clear();
         delete[] vertex_info_log;
@@ -66,32 +66,32 @@ bool Shader::LoadFromSource(const std::string& vertex_shader_source_code,
 
     if (fragment_result == GL_FALSE)
     {
-        glDeleteShader(fragment_id);
+		glDeleteShader(fragment_id);
         GLint max_length = 0;
-        glGetShaderiv(fragment_id, GL_INFO_LOG_LENGTH, &max_length);
+		glGetShaderiv(fragment_id, GL_INFO_LOG_LENGTH, &max_length);
         GLchar* fragment_info_log = new GLchar[max_length + 1];
 
-        glGetProgramInfoLog(fragment_id, max_length, &max_length, fragment_info_log);
+		glGetProgramInfoLog(fragment_id, max_length, &max_length, fragment_info_log);
         std::cerr << "Fail to compile fragment shader " << fragment_info_log << std::endl;
         uniformNameToLocation.clear();
         delete[] fragment_info_log;
         return false;
     }
-    glAttachShader(handleToShader, vertex_id);
-    glAttachShader(handleToShader, fragment_id);
+	glAttachShader(handleToShader, vertex_id);
+	glAttachShader(handleToShader, fragment_id);
 
-    glLinkProgram(handleToShader);
-    glGetProgramiv(handleToShader, GL_LINK_STATUS, &program_result);
+	glLinkProgram(handleToShader);
+	glGetProgramiv(handleToShader, GL_LINK_STATUS, &program_result);
 
-    glDeleteShader(vertex_id);
-    glDeleteShader(fragment_id);
+	glDeleteShader(vertex_id);
+	glDeleteShader(fragment_id);
     if (program_result == GL_FALSE)
     {
         GLint max_length = 0;
-        glGetProgramiv(handleToShader, GL_INFO_LOG_LENGTH, &max_length);
+		glGetProgramiv(handleToShader, GL_INFO_LOG_LENGTH, &max_length);
         GLchar* program_info_log = new GLchar[max_length + 1];
 
-        glGetProgramInfoLog(handleToShader, max_length, &max_length, program_info_log);
+		glGetProgramInfoLog(handleToShader, max_length, &max_length, program_info_log);
         std::cerr << "Fail to link program " << program_info_log << std::endl;
 
         glDeleteShader(vertex_id);
@@ -119,34 +119,34 @@ int Shader::GetUniformLocation(const std::string& name) noexcept
 void Shader::SendUniformVariable(const std::string& variable_name, const matrix3& affine_matrix) noexcept
 {
     int uniform_location = GetUniformLocation(variable_name);
-    glUniformMatrix3fv(uniform_location, 1, GL_FALSE, &affine_matrix.elements[0][0]);
+	glUniformMatrix3fv(uniform_location, 1, GL_FALSE, &affine_matrix.elements[0][0]);
 }
 void Shader::SendUniformVariable(const std::string& variable_name, float number) noexcept
 {
     int uniform_location = GetUniformLocation(variable_name);
-    glUniform1f(uniform_location, number);
+	glUniform1f(uniform_location, number);
 }
 void Shader::SendUniformVariable(const std::string& variable_name, int number) noexcept
 {
     int uniform_location = GetUniformLocation(variable_name);
-    glUniform1i(uniform_location, number);
+	glUniform1i(uniform_location, number);
 }
 void Shader::SendUniformVariable(const std::string& variable_name, Color4f color) noexcept
 {
     int uniform_location = GetUniformLocation(variable_name);
-    glUniform4f(uniform_location, color.red, color.green, color.blue, color.alpha);
+	glUniform4f(uniform_location, color.red, color.green, color.blue, color.alpha);
 }
 void Shader::Select(const Shader& shader) noexcept
 {
-    glUseProgram(shader.GetShaderHandler());
+	glUseProgram(shader.GetShaderHandler());
 }
 void Shader::SelectNothing() noexcept
 {
-    glUseProgram(NULL);
+	glUseProgram(NULL);
 }
 void Shader::Delete() noexcept
 {
-    glDeleteProgram(handleToShader);
+	glDeleteProgram(handleToShader);
     uniformNameToLocation.clear();
 }
 

@@ -1,11 +1,10 @@
 
-#include "Image.hpp"
-#include "Texture.hpp"
-#include "glCheck.hpp"
 #include <GL/glew.h>
 #include <cassert>
 #include <filesystem>
 #include <iostream>
+#include "Image.hpp"
+#include "Texture.hpp"
 
 
 bool Texture::LoadFromPNG(const std::filesystem::path& file_path) noexcept
@@ -25,7 +24,6 @@ bool Texture::LoadFromMemory(const int image_width, const int image_height, cons
 {
     assert(image_width > 0 && image_height > 0);
     assert(colors != nullptr);
-
     DeleteTexture();
     width = image_width;
     height = image_height;
@@ -43,7 +41,7 @@ bool Texture::LoadFromMemory(const int image_width, const int image_height, cons
 
 void Texture::SelectTextureForSlot(const Texture& texture, unsigned slot) noexcept
 {
-    glActiveTexture(GL_TEXTURE0 + slot);
+	glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, texture.GetTextureHandle());
 }
 

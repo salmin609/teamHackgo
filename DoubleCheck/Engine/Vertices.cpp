@@ -88,7 +88,6 @@ void Vertices::InitializeWithMeshAndLayout(const Mesh& mesh, const VertexLayoutD
     layout = vertex_layout;
     glBufferData(GL_ARRAY_BUFFER, bufferVertexCapacity * vertex_layout.GetVertexSize(), NULL, GL_STATIC_DRAW);
     vertex_layout.SendVertexDescriptionToOpenGL();
-
     WriteMeshDataToVertexBuffer(mesh);
 
 }

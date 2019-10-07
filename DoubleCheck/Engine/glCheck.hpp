@@ -5,12 +5,12 @@
 
    Use this to automatically error check an OpenGL Calls.
    ie
-        glCheck(glClearColor(0,0,0,1));
-        int GetVertexAttributeLocation(...)
-        {
-            int location = glCheck(glGetAttribLocation(handleToShader, vertex_field_name));
-            return location;
-        }
+		glCheck(glClearColor(0,0,0,1));
+		int GetVertexAttributeLocation(...)
+		{
+			int location = glCheck(glGetAttribLocation(handleToShader, vertex_field_name));
+			return location;
+		}
  */
 #pragma once
 

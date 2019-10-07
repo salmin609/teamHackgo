@@ -70,9 +70,6 @@ void Transform::SetTranslation(const vector2& new_translation) noexcept
 {
     translation.x = new_translation.x;
     translation.y = new_translation.y;
-
-	save_translation.x += translation.x;
-	save_translation.y += translation.y;
 }
 
 void Transform::AddTranslation(const vector2& translation)
@@ -85,10 +82,6 @@ vector2 Transform::Get_Save_Translation()const noexcept
 {
 	return save_translation;
 }
-//void Transform::Set_Save_Translation(const vector2& new_translation)noexcept
-//{
-//	
-//}
 vector2 Transform::GetScale() const noexcept
 {
     return scale;
