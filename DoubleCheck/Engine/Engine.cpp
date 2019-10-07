@@ -2,7 +2,6 @@
 #include "Application.hpp"
 #include "ObjectManager.h"
 #include "Input.h"
-#include <iostream>
 #include "Component_Player.h"
 #include "Graphic.h"
 #include "StateManager.h"
@@ -11,13 +10,8 @@
 #include "Component_Sprite.h"
 #include "Component_Transform.h"
 #include "Component_TopDownMovement.h"
-#include "GL.hpp"
 #include "Physics.h"
 #include "Message_Manager.h"
-#include "Component_Enemy.h"
-
-#include<iostream>
-#include"Transform.hpp"
 
 namespace
 {
@@ -46,22 +40,22 @@ void Engine::Init()
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
-    //temp->AddComponent(new Physics);
+    temp->AddComponent(new Physics);
     temp->AddComponent(new Sprite());
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
-    temp->AddComponent(new Component_TopDownMovement());
-    //temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
-    //temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    //temp->AddComponent(new Component_TopDownMovement());
+    temp->SetTranslation({ 200, 200 });
+    temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
+    temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp->Set_Name("first");
 
     Object* temp_sec = new Object();
-    //temp_sec->AddComponent(new Physics);
+    temp_sec->AddComponent(new Physics);
     temp_sec->AddComponent(new Sprite());
     temp_sec->AddComponent(new Component_Transform());
-    temp_sec->AddComponent(new Component_TopDownMovement());
-    //temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
-    //temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
+    temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp_sec->Set_Name("second");
 
     object_manager->AddObject(temp);

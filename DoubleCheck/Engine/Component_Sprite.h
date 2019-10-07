@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.hpp"
-#include <iostream>
 #include "Shader.hpp"
 #include "Vertices.hpp"
 #include "Material.hpp"
