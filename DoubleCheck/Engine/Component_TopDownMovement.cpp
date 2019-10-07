@@ -25,11 +25,13 @@ void Component_TopDownMovement::Update(float dt)
         }
 
         m_owner->GetMesh().Get_Is_Moved() = true;
+        m_owner->Set_Need_Update_Points(true);
     }
     else if (input.Is_Key_Pressed(GLFW_KEY_S))
     {
         m_owner->GetTransform().AddTranslation({ 0.0f, -1.0f });
         m_owner->GetMesh().Get_Is_Moved() = true;
+        m_owner->Set_Need_Update_Points(true);
     }
     else if (input.Is_Key_Pressed((GLFW_KEY_A)))
     {
@@ -37,6 +39,7 @@ void Component_TopDownMovement::Update(float dt)
 
         //Graphic::GetGraphic()->get_need_update_sprite() = true;
         m_owner->GetMesh().Get_Is_Moved() = true;
+        m_owner->Set_Need_Update_Points(true);
     }
     else if (input.Is_Key_Pressed((GLFW_KEY_D)))
     {
@@ -44,6 +47,7 @@ void Component_TopDownMovement::Update(float dt)
 
        // Graphic::GetGraphic()->get_need_update_sprite() = true;
         m_owner->GetMesh().Get_Is_Moved() = true;
+        m_owner->Set_Need_Update_Points(true);
     }
     else
     {

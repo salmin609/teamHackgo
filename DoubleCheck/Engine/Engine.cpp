@@ -2,7 +2,6 @@
 #include "Application.hpp"
 #include "ObjectManager.h"
 #include "Input.h"
-#include <iostream>
 #include "Component_Player.h"
 #include "Graphic.h"
 #include "StateManager.h"
@@ -11,13 +10,8 @@
 #include "Component_Sprite.h"
 #include "Component_Transform.h"
 #include "Component_TopDownMovement.h"
-#include "GL.hpp"
 #include "Physics.h"
 #include "Message_Manager.h"
-#include "Component_Enemy.h"
-
-#include<iostream>
-#include"Transform.hpp"
 
 namespace
 {
@@ -41,27 +35,27 @@ void Engine::Init()
     state_manager->Init();
     graphic->Init();
     msg_manager->Init();
-    
+
     state_manager->AddState("Menu", new Menu);
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
-    //temp->AddComponent(new Physics);
+    temp->AddComponent(new Physics);
     temp->AddComponent(new Sprite());
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
-    temp->AddComponent(new Component_TopDownMovement());
-   //temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
-   //temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    //temp->AddComponent(new Component_TopDownMovement());
+    temp->SetTranslation({ 200, 200 });
+    temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
+    temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp->Set_Name("first");
 
     Object* temp_sec = new Object();
-    //temp_sec->AddComponent(new Physics);
+    temp_sec->AddComponent(new Physics);
     temp_sec->AddComponent(new Sprite());
     temp_sec->AddComponent(new Component_Transform());
-    temp_sec->AddComponent(new Component_TopDownMovement());
-   //temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
-   //temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
+    temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp_sec->Set_Name("second");
 
     object_manager->AddObject(temp);
@@ -126,10 +120,20 @@ void Engine::Delete()
 
 void Engine::Reset()
 {
-    if(Graphic::GetGraphic()->get_need_update_sprite())
+    if (Graphic::GetGraphic()->get_need_update_sprite())
     {
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
+
+    for (auto obj : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
+    {
+        if (obj->Get_Need_Update_Points())
+        {
+            obj->Get_Object_Points() = obj->Get_Normalize_Points();
+            obj->Set_Need_Update_Points(false);
+        }
+    }
+
     //Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(1.0f);
     //Graphic::GetGraphic()->Get_View().Get_Camera().SetCenter({ 0,0 });
 }

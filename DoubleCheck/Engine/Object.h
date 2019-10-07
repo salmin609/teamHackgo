@@ -17,12 +17,27 @@ private:
     std::string m_name;
     vector2 center_pos;
     std::vector<vector2> object_points;
+    std::vector<vector2> normalize_points;
     int m_id;
     //IMGUI
     bool is_selected = false;
+
+    bool need_update_points = false;
     
 
 public:
+    std::vector<vector2>& Get_Normalize_Points()
+    {
+        return normalize_points;
+    }
+    void Set_Need_Update_Points(bool toggle)
+    {
+        need_update_points = toggle;
+    }
+    bool Get_Need_Update_Points()
+    {
+        return need_update_points;
+    }
     vector2 Get_Center()
     {
         return center_pos;

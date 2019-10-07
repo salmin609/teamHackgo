@@ -2,6 +2,7 @@
 //#include <algorithm> not in used
 #include <cassert>
 #include <filesystem>
+
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_ONLY_PNG
 #pragma warning(push)
@@ -9,6 +10,7 @@
 #pragma warning(disable : 4100) // unreferenced formal parameter
 #include <stb_image.h>
 #pragma warning(pop)
+
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STBI_MSC_SECURE_CRT
 #include <stb_image_write.h>
@@ -25,7 +27,8 @@ void Image::ResizeToPixelWidthHeight(const int pixel_width, const int pixel_heig
 bool Image::LoadFromPNG(const std::filesystem::path& file_path) noexcept
 {
     int channels;
-    unsigned char* is_load_proper = (stbi_load(file_path.string().c_str(), &width, &height, &channels, ChannelsPerColor));;
+	std::string file_name = file_path.string();
+    unsigned char* is_load_proper = stbi_load(file_name.c_str(), &width, &height, &channels, ChannelsPerColor);
 
     Color4ub temp_color;
     for (int i = 0; i < width * height * ChannelsPerColor; i += ChannelsPerColor)

@@ -34,7 +34,6 @@ void ObjectManager::Update(float dt)
             if (obj->IsDead())
                 delete_obj.push_back(obj);
         }
-
         for (auto& remove_obj : delete_obj)
         {
             DeleteObject(remove_obj);
@@ -57,10 +56,10 @@ void ObjectManager::Delete()
 
 void ObjectManager::AddObject(Object* obj)
 {
-    for (auto component : obj->GetComponentContainer())
-    {
-        component->Init(obj);
-    }
+    //for (auto component : obj->GetComponentContainer())
+    //{
+    //    component->Init(obj);
+    //}
 
     objects.push_back(std::shared_ptr<Object>(obj));
 }
