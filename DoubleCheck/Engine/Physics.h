@@ -3,6 +3,7 @@
 #include "Component.hpp"
 #include "Object.h"
 #include "Mesh.hpp"
+#include "Sound_Manager.h"
 
 class Physics : public Component
 {
@@ -25,6 +26,7 @@ public:
     }
       
 private:
+    Sound sound;
     std::vector<vector2> points{};
     vector2 acceleration{};
     vector2 velocity{};
