@@ -12,7 +12,10 @@
 #include "Component_TopDownMovement.h"
 #include "Physics.h"
 #include "Message_Manager.h"
+#include "Sound_Manager.h"
+#include "Windows.h"
 
+extern Sound sound;
 namespace
 {
     Application* app_ = nullptr;
@@ -24,6 +27,13 @@ namespace
 
 void Engine::Init()
 {
+    sound.initialize();
+    sound.load();
+    sound.play(0);
+    sound.volume(0, 20);
+    Sleep(1400);
+    sound.play(2);
+    sound.volume(2, 32);
     app_ = Application::Get_Application();
     object_manager = ObjectManager::GetObjectManager();
     state_manager = StateManager::GetStateManager();

@@ -4,9 +4,12 @@
 #include <vector>
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
+#include "Sound_Manager.h"
 
 void Physics::Init(Object* obj)
 {
+    sound.initialize();
+    sound.load();
     m_owner = obj;
 }
 
@@ -524,6 +527,7 @@ void Physics::Update(float dt)
             {
                 KnockBack(i.get());
                 printf("collide1!!!!!!!!!\n");
+                sound.play(1);
             }
         }
     }
