@@ -16,6 +16,8 @@ public:
     void AddObject(Object* obj);
     void DeleteObject(std::shared_ptr<Object> obj);
 
+    std::vector<Object*> Find_Objects_By_Tag(std::string tag);
+
     std::vector<std::shared_ptr<Object>>& GetObjectManagerContainer()
     {
         return objects;

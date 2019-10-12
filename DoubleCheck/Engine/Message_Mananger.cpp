@@ -13,6 +13,8 @@ void Message_Manager::Save_Message(Message* msg)
 {
     messages.push_back(msg);
 }
+
+
 void Message_Manager::Init()
 {
 

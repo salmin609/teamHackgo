@@ -191,6 +191,7 @@ void Application::Imgui_Update()
                 {
                     this_obj->GetTransform().AddTranslation({ 0.0f, 0.0f });
                 }
+                Graphic::GetGraphic()->get_need_update_sprite() = true;
             }
             ImGui::TreePop();
         }
