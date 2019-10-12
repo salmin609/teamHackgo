@@ -723,11 +723,9 @@ void Physics::KnockBack(Object* object)
     if (owner_speed < object_speed)
     {
 
-        m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(owner_acceleration * 2.f);
+        m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(object_acceleration * 2.f);
         m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
         m_owner->GetMesh().Get_Is_Moved() = true;
-
-
 
         object->GetComponentByTemplate<Physics>()->SetAcceleration({ 0, 0 });
         object->GetTransform().AddTranslation({ 0, 0 });
