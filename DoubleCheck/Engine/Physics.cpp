@@ -328,8 +328,8 @@ void Physics::Acceleration()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-    printf("%f, %f \n", acceleration.x, acceleration.y);
-    printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
+   // printf("%f, %f \n", acceleration.x, acceleration.y);
+   // printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
 }
 
 bool Physics::BoxToBoxCollision(Mesh mesh) const
@@ -493,7 +493,7 @@ void Physics::BasicMovement()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-    printf("%f, %f\n", velocity.x, velocity.y);
+    //printf("%f, %f\n", velocity.x, velocity.y);
 }
 
 void Physics::Update(float dt)

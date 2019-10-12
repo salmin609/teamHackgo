@@ -12,6 +12,8 @@ class Object
 private:
     Transform m_transform;
     Mesh m_mesh;
+    Mesh m_debug_mesh;
+
     std::vector<Component*>components_;
     bool is_dead{};
     std::string m_name;
@@ -19,10 +21,13 @@ private:
     std::vector<vector2> object_points;
     std::vector<vector2> normalize_points;
     int m_id;
+    bool need_change_translation = false;
+    vector2 convert_translation;
     //IMGUI
     bool is_selected = false;
     std::string tag;
     bool need_update_points = false;
+    bool is_debug_mode = false;
     
 
 public:
@@ -77,6 +82,19 @@ public:
     }
 
     Mesh& GetMesh() { return m_mesh; }
+    Mesh& Get_Debug_Mesh()
+    {
+        return m_debug_mesh;
+    }
+    bool& Get_Is_Need_Convert_Translation()
+    {
+        return need_change_translation;
+    }
+    vector2& Get_Convert_Translation()
+    {
+        return convert_translation;
+    }
+
     template <typename COMPONENT>
     COMPONENT* GetComponentByTemplate() const;
 
@@ -106,6 +124,12 @@ public:
     {
         return is_selected;
     }
+    bool& Get_Is_Debugmode()
+    {
+        return is_debug_mode;
+    }
+    
+
     char name_buf[64];
 
 public:
@@ -120,6 +144,7 @@ public:
     void SetScale(float scale);
     void SetDepth(float depth);
     void SetMesh(Mesh mesh);
+    void Set_Debug_Mesh(Mesh mesh);
     std::string GetName();
 
     /*bool IsDead()

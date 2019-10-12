@@ -40,6 +40,10 @@ private:
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+    //Imgui drag and drop
+    bool is_drag_and_drop_mode = false;
+    
+
 public:
     static Application* Get_Application();
     void Init();
