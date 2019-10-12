@@ -90,7 +90,6 @@ void Sprite::Init(Object* obj)
 	const auto path = staticSpritePath;
     material.shader = &(SHADER::textured());
 
-    debug_material.shader = &(SHADER::textured());
     
     if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
     {
@@ -122,12 +121,13 @@ void Sprite::Init(Object* obj)
         normal_vec.x = normal_vec.x / abs(normal_vec.x);
         normal_vec.y = normal_vec.y / abs(normal_vec.y);
         m_owner->Get_Normalize_Points().push_back(normal_vec);
-    }
+    }*/
+	debug_material.shader = &(SHADER::solid_color());
     m_owner->Set_Center({ 0.0f , 0.0f});
 
     Mesh debug_mesh;
     debug_mesh = MESH::create_wire_circle(100, { 255,0,0,255 });
-    debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::textured_vertex_layout());
+    debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
     m_owner->Set_Debug_Mesh(debug_mesh);
 }
