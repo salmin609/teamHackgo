@@ -7,6 +7,7 @@ void Object::AddComponent(Component* comp)
     components_.push_back(comp);
 }
 
+
 void Object::DeleteComponent(Component* comp)
 {
      components_.erase(std::find(components_.begin(), components_.end(), comp));

@@ -9,8 +9,11 @@
 class Sprite : public Component
 {
 public:
-    void Init(Object *obj) override;
-    void Update(float dt) override;
+	Sprite();
+	Sprite(Object* obj, const char* staticSpritePath);
+	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames);
+	void Init(Object* obj) override;
+	void Update(float dt) override;
     bool Can_Load_To_Texture(Texture& texture, const char* file_path);
 private:
     Shader shader;
@@ -21,4 +24,9 @@ private:
 
     float seconds = 0;
     int width = 1280, height = 720;
+
+	bool is_animated = false;
+	int frame = 0;
+	int speed = 100;
+	float spriteWidth = 0;
 };
