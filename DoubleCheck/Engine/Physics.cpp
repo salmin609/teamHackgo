@@ -5,11 +5,10 @@
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
 #include "Sound_Manager.h"
+#include "Engine.hpp"
 
 void Physics::Init(Object* obj)
 {
-    sound.initialize();
-    sound.load();
     m_owner = obj;
 }
 
@@ -331,8 +330,8 @@ void Physics::Acceleration()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-   // printf("%f, %f \n", acceleration.x, acceleration.y);
-   // printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
+    // printf("%f, %f \n", acceleration.x, acceleration.y);
+    // printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
 }
 
 void Physics::Acceleration2()
@@ -712,64 +711,24 @@ void Physics::KnockBack(Object* object)
 
     if (owner_speed >= object_speed)
     {
-        if (object_acceleration.x >= 0 && object_acceleration.y >= 0)
-        {
-            object->GetComponentByTemplate<Physics>()->SetAcceleration(-owner_acceleration * 2.f);
-            object->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            object->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (object_acceleration.x >= 0 && object_acceleration.y < 0)
-        {
-            object->GetComponentByTemplate<Physics>()->SetAcceleration(-owner_acceleration * 2.f);
-            object->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            object->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (object_acceleration.x < 0 && object_acceleration.y >= 0)
-        {
-            object->GetComponentByTemplate<Physics>()->SetAcceleration((-owner_acceleration * 2.f));
-            object->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            object->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (object_acceleration.x < 0 && object_acceleration.y < 0)
-        {
-            object->GetComponentByTemplate<Physics>()->SetAcceleration(-owner_acceleration * 2.f);
-            object->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            object->GetMesh().Get_Is_Moved() = true;
-        }
+
+        object->GetComponentByTemplate<Physics>()->SetAcceleration(owner_acceleration * 2.f);
+        object->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
+        object->GetMesh().Get_Is_Moved() = true;
 
         acceleration = { 0, 0 };
         m_owner->GetTransform().AddTranslation(acceleration);
         m_owner->GetMesh().Get_Is_Moved() = true;
     }
-    else
+    if (owner_speed < object_speed)
     {
-        if (owner_acceleration.x >= 0 && owner_acceleration.y >= 0)
-        {
-            m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(-object_acceleration * 2.f);
-            m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (owner_acceleration.x >= 0 && owner_acceleration.y < 0)
-        {
-            m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(-object_acceleration * 2.f);
-            m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (owner_acceleration.x < 0 && owner_acceleration.y >= 0)
-        {
-            m_owner->GetComponentByTemplate<Physics>()->SetAcceleration((-object_acceleration * 2.f));
-            m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (owner_acceleration.x < 0 && owner_acceleration.y < 0)
-        {
-            m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(-object_acceleration * 2.f);
-            m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
 
-        object->GetComponentByTemplate<Physics>()->SetAcceleration({0, 0});
-        object->GetTransform().AddTranslation({0, 0});
+        m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(object_acceleration * 2.f);
+        m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
+        m_owner->GetMesh().Get_Is_Moved() = true;
+
+        object->GetComponentByTemplate<Physics>()->SetAcceleration({ 0, 0 });
+        object->GetTransform().AddTranslation({ 0, 0 });
         m_owner->GetMesh().Get_Is_Moved() = true;
     }
 }
@@ -954,7 +913,6 @@ void Physics::BasicMovement2()
 
 void Physics::Update(float dt)
 {
-    timer += dt;
 
     for (const auto& i : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
     {
@@ -963,7 +921,7 @@ void Physics::Update(float dt)
             //BasicMovement();
             Acceleration();
         }
-        else if(m_owner->GetName() == "second")
+        else if (m_owner->GetName() == "second")
         {
             Acceleration2();
             //BasicMovement2();
@@ -983,6 +941,7 @@ void Physics::Update(float dt)
                 if (CircleToCircleCollision(i.get()))
                 {
                     KnockBack(i.get());
+
                     printf("collide1!!!!!!!!!\n");
                     //sound.play(1);
                 }

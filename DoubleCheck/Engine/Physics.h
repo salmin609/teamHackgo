@@ -28,7 +28,6 @@ public:
     }
       
 private:
-    Sound sound;
     std::vector<vector2> points{};
     vector2 acceleration{};
     vector2 velocity{};
