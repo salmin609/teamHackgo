@@ -2,6 +2,8 @@
 #include "Timer.hpp"
 #include "Sound_Manager.h"
 
+extern Sound sound;
+
 class Engine
 {
 public:

@@ -12,12 +12,13 @@ void Component_Enemy::Update(float dt)
     {
         std::cout << "die" << std::endl;
         m_owner->SetDeadCondition(true);
-
     }
 }
 
 void Component_Enemy::Decrease_HP(int dmg)
 {
     hp -= dmg;
+    std::cout << "Enemy : " << m_owner->Get_Id() << std::endl;
     std::cout << "Current HP: " << hp << std::endl;
+    std::cout << std::endl;
 }

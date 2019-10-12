@@ -68,3 +68,18 @@ void ObjectManager::DeleteObject(std::shared_ptr<Object> obj)
 {
     objects.erase(std::find(objects.begin(), objects.end(), obj));
 }
+
+std::vector<Object*> ObjectManager::Find_Objects_By_Tag(std::string tag)
+{
+    std::vector<Object*> objects_have_tag;
+
+    for(auto object : objects)
+    {
+        if(object.get()->Get_Tag() == "enemy")
+        {
+            objects_have_tag.push_back(object.get());
+        }
+    }
+
+    return objects_have_tag;
+}

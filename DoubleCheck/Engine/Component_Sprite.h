@@ -11,7 +11,7 @@ class Sprite : public Component
 public:
     void Init(Object *obj) override;
     void Update(float dt) override;
-
+    bool Can_Load_To_Texture(Texture& texture, const char* file_path);
 private:
     Shader shader;
     Vertices shape;

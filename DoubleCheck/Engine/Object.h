@@ -21,11 +21,19 @@ private:
     int m_id;
     //IMGUI
     bool is_selected = false;
-
+    std::string tag;
     bool need_update_points = false;
     
 
 public:
+    std::string Get_Tag()
+    {
+        return tag;
+    }
+    void Set_Tag(std::string tag)
+    {
+        this->tag = tag;
+    }
     std::vector<vector2>& Get_Normalize_Points()
     {
         return normalize_points;
@@ -48,6 +56,7 @@ public:
     }
     Object()
     {
+        tag = "none";
         m_id = object_id_increment;
         object_id_increment++;
     }

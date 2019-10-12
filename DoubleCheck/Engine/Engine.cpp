@@ -2,6 +2,7 @@
 #include "Application.hpp"
 #include "ObjectManager.h"
 #include "Input.h"
+
 #include "Component_Player.h"
 #include "Graphic.h"
 #include "StateManager.h"
@@ -10,10 +11,12 @@
 #include "Component_Sprite.h"
 #include "Component_Transform.h"
 #include "Component_TopDownMovement.h"
+#include "GL.hpp"
 #include "Physics.h"
 #include "Message_Manager.h"
 #include "Sound_Manager.h"
 #include "Windows.h"
+#include "Component_Enemy.h"
 
 extern Sound sound;
 namespace
@@ -50,6 +53,7 @@ void Engine::Init()
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
+
     temp->AddComponent(new Physics);
     temp->AddComponent(new Sprite());
     temp->AddComponent(new Player());
@@ -67,9 +71,17 @@ void Engine::Init()
     temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
     temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp_sec->Set_Name("second");
+    temp_sec->Set_Tag("enemy");
+
+    Object* temp_third = new Object();
+    temp_third->AddComponent(new Sprite());
+    temp_third->AddComponent(new Component_Enemy());
+    temp_third->Set_Name("third");
+    temp_third->Set_Tag("enemy");
 
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
+    object_manager->AddObject(temp_third);
 
     game_timer.Reset();
 }
@@ -135,14 +147,6 @@ void Engine::Reset()
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
 
-    for (auto obj : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
-    {
-        if (obj->Get_Need_Update_Points())
-        {
-            obj->Get_Object_Points() = obj->Get_Normalize_Points();
-            obj->Set_Need_Update_Points(false);
-        }
-    }
 
     //Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(1.0f);
     //Graphic::GetGraphic()->Get_View().Get_Camera().SetCenter({ 0,0 });
