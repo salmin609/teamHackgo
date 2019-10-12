@@ -89,7 +89,10 @@ void Sprite::Init(Object* obj)
 /*
 	const auto path = staticSpritePath;
     material.shader = &(SHADER::textured());
-    if(!Can_Load_To_Texture(texture, path))
+
+    debug_material.shader = &(SHADER::textured());
+    
+    if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
     {
         std::cout << "fail to load texture" << std::endl;
     }
@@ -98,8 +101,12 @@ void Sprite::Init(Object* obj)
     material.color4fUniforms["color"] = { 1.0f };
     material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
 
+    debug_material.color4fUniforms["color"] = { 1.0f };
+    debug_material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
+
     Mesh square;
     square = MESH::create_box(100, { 100,100,100,255 });
+    
     shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
 
     m_owner->SetMesh(square);
@@ -116,8 +123,13 @@ void Sprite::Init(Object* obj)
         normal_vec.y = normal_vec.y / abs(normal_vec.y);
         m_owner->Get_Normalize_Points().push_back(normal_vec);
     }
-    m_owner->Set_Center({ 0.0f , 0.0f});*/
-    
+    m_owner->Set_Center({ 0.0f , 0.0f});
+
+    Mesh debug_mesh;
+    debug_mesh = MESH::create_wire_circle(100, { 255,0,0,255 });
+    debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::textured_vertex_layout());
+
+    m_owner->Set_Debug_Mesh(debug_mesh);
 }
 /*
  * Original
@@ -201,6 +213,7 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 void Sprite::Update(float dt)
 {	
     shape.UpdateVerticesFromMesh(m_owner->GetMesh());
+    debug_shape.UpdateVerticesFromMesh(m_owner->Get_Debug_Mesh());
 
     seconds += dt;
 	uint32_t ticks = seconds + 1;
@@ -234,9 +247,17 @@ void Sprite::Update(float dt)
 
         m_owner->GetMesh().Get_Is_Moved() = false;
         material.matrix3Uniforms["to_ndc"] = mat_ndc;
+        debug_material.matrix3Uniforms["to_ndc"] = mat_ndc;
     }
 
     material.floatUniforms["time"] = seconds;
+    debug_material.floatUniforms["time"] = seconds;
 
     Graphic::GetGraphic()->Draw(shape, material);
+
+    if(m_owner->Get_Is_Debugmode())
+    {
+        Graphic::GetGraphic()->Draw(debug_shape, debug_material);
+    }
+    
 }

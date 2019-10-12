@@ -91,11 +91,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui;$(SolutionDir)Engine\inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>(SolutionDir)Engine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -104,11 +105,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui;$(SolutionDir)Engine\inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Engine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,7 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui;$(SolutionDir)Engine\inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -127,7 +130,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Engine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,7 +143,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Math_lib;$(SolutionDir)external\glew\include;$(SolutionDir)external\glfw\include;$(SolutionDir)external\stb\include;$(SolutionDir)external\glm\glm;$(SolutionDir)Sprite;$(SolutionDir)external\imgui;$(SolutionDir)Engine\inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -146,7 +151,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>(SolutionDir)Engine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -188,6 +194,7 @@
     <ClInclude Include="Component_Player.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="Sound_Manager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="StockShaders.hpp" />
@@ -226,6 +233,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Sound_Manager.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
