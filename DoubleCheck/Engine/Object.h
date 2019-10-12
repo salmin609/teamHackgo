@@ -1,7 +1,7 @@
 #pragma once
 #include "Transform.hpp"
 #include "Mesh.hpp"
-#include "Component.hpp"/
+#include "Component.hpp"
 #include <string>
 #include <iostream>
 

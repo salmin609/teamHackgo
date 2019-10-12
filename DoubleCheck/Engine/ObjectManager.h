@@ -12,6 +12,7 @@ public:
     void Init();
     void Update(float dt);
     void Delete();
+    void Clear();
 
     void AddObject(Object* obj);
     void DeleteObject(std::shared_ptr<Object> obj);

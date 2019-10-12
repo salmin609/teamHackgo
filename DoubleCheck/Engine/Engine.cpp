@@ -101,11 +101,18 @@ void Engine::Update()
 
     if (input.Is_Key_Triggered(GLFW_KEY_1))
         state_manager->is_pause = !state_manager->is_pause;
+    if (input.Is_Key_Triggered(GLFW_KEY_N))
+    {
+        Clear();
+        StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+    }
 }
 
 void Engine::Delete()
 {
-
+    
+    object_manager->Delete();
+    
 }
 
 void Engine::Reset()
@@ -114,4 +121,10 @@ void Engine::Reset()
     {
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
+}
+
+void Engine::Clear()
+{
+    object_manager->Clear();
+    //app_->Clear();
 }

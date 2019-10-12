@@ -11,7 +11,7 @@ public:
     void Update();
     void Delete();
     void Reset();
-
+    void Clear();
 	//void Test();
 
     bool IsDone() { return is_done; }

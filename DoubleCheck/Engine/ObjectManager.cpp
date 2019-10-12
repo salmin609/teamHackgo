@@ -54,6 +54,12 @@ void ObjectManager::Delete()
     object_manager = nullptr;
 }
 
+void ObjectManager::Clear()
+{
+    objects.clear();
+    delete_obj.clear();
+}
+
 void ObjectManager::AddObject(Object* obj)
 {
     //for (auto component : obj->GetComponentContainer())

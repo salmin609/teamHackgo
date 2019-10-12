@@ -119,11 +119,8 @@ void Application::Update(float dt)
         //Engine re_start;
         //re_start.Test();
     }
-    if(input.Is_Key_Triggered(GLFW_KEY_N))
-    {
-        
-    }
 
+    
     save_dt += dt;
     if (save_dt >= 1.0f)
     {
@@ -179,8 +176,8 @@ void Application::Imgui_Update()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
     static vector2 origin_mouse_pos;
-    if (show_demo_window)
-        ImGui::ShowDemoWindow(&show_demo_window);
+    //if (show_demo_window)
+    //    ImGui::ShowDemoWindow(&show_demo_window);
     ImGui::Begin("salmin gui");
 
     for (int i = 0; i < ObjectManager::GetObjectManager()->GetObjectManagerContainer().size(); i++)
@@ -323,9 +320,10 @@ void Application::Save()
 
 void Application::Clear()
 {
-    ObjectManager::GetObjectManager()->Init();
-    StateManager::GetStateManager()->Init();
-    Graphic::GetGraphic()->Init();
+    //ObjectManager::GetObjectManager()->Init();
+    //StateManager::GetStateManager()->Init();
+    //Graphic::GetGraphic()->Init();
+    //ImGui::CloseCurrentPopup();
 }
 bool Application::IsFullScreen()
 {
