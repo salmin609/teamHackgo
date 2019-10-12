@@ -5,11 +5,10 @@
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
 #include "Sound_Manager.h"
+#include "Engine.hpp"
 
 void Physics::Init(Object* obj)
 {
-    sound.initialize();
-    sound.load();
     m_owner = obj;
 }
 
