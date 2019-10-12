@@ -10,7 +10,7 @@ void Object::AddComponent(Component* comp)
 
 void Object::DeleteComponent(Component* comp)
 {
-     components_.erase(std::find(components_.begin(), components_.end(), comp));
+    components_.erase(std::find(components_.begin(), components_.end(), comp));
 }
 
 void Object::SetTranslation(vector2 pos)

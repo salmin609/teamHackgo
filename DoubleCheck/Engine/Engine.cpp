@@ -53,7 +53,7 @@ void Engine::Init()
 
     Object* temp = new Object();
 
-    temp->AddComponent(new Physics);
+    temp->AddComponent(new Physics());
     temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
@@ -64,7 +64,7 @@ void Engine::Init()
     temp->Set_Name("first");
 
     Object* temp_sec = new Object();
-    temp_sec->AddComponent(new Physics);
+    temp_sec->AddComponent(new Physics());
     temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
     temp_sec->AddComponent(new Component_Transform());
     temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);

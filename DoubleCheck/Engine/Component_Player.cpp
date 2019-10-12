@@ -3,11 +3,16 @@
 #include "ObjectManager.h"
 #include "Input.h"
 #include "Component_Enemy.h"
+#include "Component_Sprite.h"
 
 void Player::Init(Object* obj)
 {
     m_owner = obj;
-    std::cout << "Player is init" << std::endl;
+
+    Object* hp_bar = new Object();
+    hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/temp.png"));
+    hp_bar->SetTranslation(m_owner->GetTransform().GetTranslation());
+
 }
 
 void Player::Update(float dt)
