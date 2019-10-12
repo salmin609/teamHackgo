@@ -10,10 +10,12 @@ class Physics : public Component
 public:
     void Init(Object *obj) override;
     void Acceleration();
+    void Acceleration2();
     bool BoxToBoxCollision(Mesh mesh) const;
     bool CircleToCircleCollision(Object* object) const;
     void KnockBack(Object* object);
     void BasicMovement();
+    void BasicMovement2();
     void Update(float dt) override;
 
     void SetAcceleration(vector2 accel)
