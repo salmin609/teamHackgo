@@ -207,7 +207,7 @@ void Application::Imgui_Update()
                 vector2 this_pos = input.Get_Mouse_Pos();
 
                 Object* new_obj = new Object();
-                new_obj->AddComponent(new Sprite());
+                new_obj->AddComponent(new Sprite(new_obj,"../sprite/temp.png"));
                 new_obj->Get_Is_Selected() = true;
 
                 new_obj->SetTranslation(this_pos);
@@ -289,7 +289,7 @@ void Application::Imgui_Update()
             vector2 this_pos = input.Get_Mouse_Pos();
 
             Object* new_obj = new Object();
-            new_obj->AddComponent(new Sprite());
+            new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
             new_obj->Get_Is_Selected() = true;
 
             new_obj->SetTranslation(this_pos);

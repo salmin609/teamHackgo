@@ -86,17 +86,15 @@ bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
 void Sprite::Init(Object* obj)
 {
     m_owner = obj;
-
-    //texture.LoadFromPNG("../Sprite/temp.png");
+/*
+	const auto path = staticSpritePath;
     material.shader = &(SHADER::textured());
 
-    debug_material.shader = &(SHADER::textured());
     
     if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
     {
         std::cout << "fail to load texture" << std::endl;
     }
-
     texture.SelectTextureForSlot(texture);
     material.textureUniforms["texture_to_sample"] = {&(texture)};
     material.color4fUniforms["color"] = { 1.0f };
@@ -123,12 +121,13 @@ void Sprite::Init(Object* obj)
         normal_vec.x = normal_vec.x / abs(normal_vec.x);
         normal_vec.y = normal_vec.y / abs(normal_vec.y);
         m_owner->Get_Normalize_Points().push_back(normal_vec);
-    }
+    }*/
+	debug_material.shader = &(SHADER::solid_color());
     m_owner->Set_Center({ 0.0f , 0.0f});
 
     Mesh debug_mesh;
     debug_mesh = MESH::create_wire_circle(100, { 255,0,0,255 });
-    debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::textured_vertex_layout());
+    debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
     m_owner->Set_Debug_Mesh(debug_mesh);
 }
@@ -137,13 +136,109 @@ void Sprite::Init(Object* obj)
  */
 
 
- void Sprite::Update(float dt)
+Sprite::Sprite(Object* obj, const char* staticSpritePath)
 {
+	m_owner = obj;
+
+	const auto path = staticSpritePath;
+	material.shader = &(SHADER::textured());
+	if (!Can_Load_To_Texture(texture, path))
+	{
+		std::cout << "fail to load texture" << std::endl;
+	}
+	texture.SelectTextureForSlot(texture);
+	material.textureUniforms["texture_to_sample"] = { &(texture) };
+	material.color4fUniforms["color"] = { 1.0f };
+	material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
+
+	Mesh square;
+	square = MESH::create_box(100, { 100,100,100,255 });
+	shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
+
+	m_owner->SetMesh(square);
+	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+
+	int size_for_normal = m_owner->GetMesh().Get_Points().size();
+
+	std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
+	for (int i = 0; i < size_for_normal; ++i)
+	{
+		vector2 normal_vec = vector_for_normal[i];
+
+		normal_vec.x = normal_vec.x / abs(normal_vec.x);
+		normal_vec.y = normal_vec.y / abs(normal_vec.y);
+		m_owner->Get_Normalize_Points().push_back(normal_vec);
+	}
+	m_owner->Set_Center({ 0.0f , 0.0f });
+
+}
+
+Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames)
+{
+	m_owner = obj;
+	is_animated = animated;
+	frame = frames;
+	const auto path = aniamtedSpritePath;
+	material.shader = &(SHADER::textured());
+	if (!Can_Load_To_Texture(texture, path))
+	{
+		std::cout << "fail to load texture" << std::endl;
+	}
+	texture.SelectTextureForSlot(texture);
+	material.textureUniforms["texture_to_sample"] = { &(texture) };
+	material.color4fUniforms["color"] = { 1.0f };
+	material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
+
+	Mesh square;
+	square = MESH::create_box(100, { 100,100,100,255 });
+	shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
+
+	m_owner->SetMesh(square);
+	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+
+	int size_for_normal = m_owner->GetMesh().Get_Points().size();
+
+	std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
+	for (int i = 0; i < size_for_normal; ++i)
+	{
+		vector2 normal_vec = vector_for_normal[i];
+
+		normal_vec.x = normal_vec.x / abs(normal_vec.x);
+		normal_vec.y = normal_vec.y / abs(normal_vec.y);
+		m_owner->Get_Normalize_Points().push_back(normal_vec);
+	}
+	m_owner->Set_Center({ 0.0f , 0.0f });
+}
+
+void Sprite::Update(float dt)
+{	
     shape.UpdateVerticesFromMesh(m_owner->GetMesh());
     debug_shape.UpdateVerticesFromMesh(m_owner->Get_Debug_Mesh());
 
     seconds += dt;
+	uint32_t ticks = seconds + 1;
 
+	if (is_animated)
+	{
+		m_owner->GetMesh().ClearTextureCoordinates();		
+		if (spriteWidth <= 1)
+		{
+			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
+			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 0 });
+			spriteWidth += float(1.0 / frame);
+		}
+		else 
+		{
+			spriteWidth = 0;
+			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
+			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 0 });
+			spriteWidth += float(1.0 / frame);
+		}
+		m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 0 });
+		m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
+		m_owner->SetMesh(m_owner->GetMesh());
+		shape.UpdateVerticesFromMesh(m_owner->GetMesh());
+	}
     if(m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite())
     {
         matrix3 mat_ndc = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
