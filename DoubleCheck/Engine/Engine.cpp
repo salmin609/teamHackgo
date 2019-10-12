@@ -19,6 +19,7 @@
 #include "Component_Enemy.h"
 
 extern Sound sound;
+
 namespace
 {
     Application* app_ = nullptr;
@@ -33,7 +34,7 @@ void Engine::Init()
     sound.initialize();
     sound.load();
     sound.play(0);
-    sound.volume(0, 20);
+    sound.volume(0, 5);
     Sleep(1400);
     sound.play(2);
     sound.volume(2, 32);
@@ -55,7 +56,7 @@ void Engine::Init()
     Object* temp = new Object();
 
     temp->AddComponent(new Physics);
-    temp->AddComponent(new Sprite());
+    temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
     //temp->AddComponent(new Component_TopDownMovement());
@@ -66,7 +67,7 @@ void Engine::Init()
 
     Object* temp_sec = new Object();
     temp_sec->AddComponent(new Physics);
-    temp_sec->AddComponent(new Sprite());
+    temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
     temp_sec->AddComponent(new Component_Transform());
     temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
     temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");

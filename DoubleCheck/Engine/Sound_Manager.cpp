@@ -31,7 +31,6 @@ void Sound::load(void)
 /* Playing specific sound */
 void Sound::play(int Channel_Num)
 {
-
     result = FMOD_System_PlaySound(f_system, sound[Channel_Num], 0, 0, &channel[Channel_Num]);
     result = FMOD_System_Update(f_system);
     if (result != FMOD_OK)
@@ -44,4 +43,8 @@ void Sound::play(int Channel_Num)
 void Sound::volume(int Channel_Num, float Volume)
 {
     result = FMOD_Channel_SetVolume(channel[Channel_Num], Volume);
+    if (result != FMOD_OK)
+    {
+        return;
+    }
 }
