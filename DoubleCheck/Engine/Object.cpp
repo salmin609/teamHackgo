@@ -42,6 +42,11 @@ void Object::SetMesh(Mesh mesh)
     m_mesh = mesh;
 }
 
+void Object::Set_Debug_Mesh(Mesh mesh)
+{
+    m_debug_mesh = mesh;
+}
+
 std::string Object::GetName()
 {
     return m_name;

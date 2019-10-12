@@ -73,49 +73,18 @@ void Engine::Init()
     temp_sec->Set_Name("second");
     temp_sec->Set_Tag("enemy");
 
-    Object* temp_third = new Object();
-    temp_third->AddComponent(new Sprite());
-    temp_third->AddComponent(new Component_Enemy());
-    temp_third->Set_Name("third");
-    temp_third->Set_Tag("enemy");
+    //Object* temp_third = new Object();
+    //temp_third->AddComponent(new Sprite());
+    //temp_third->AddComponent(new Component_Enemy());
+    //temp_third->Set_Name("third");
+    //temp_third->Set_Tag("enemy");
 
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
-    object_manager->AddObject(temp_third);
+    //object_manager->AddObject(temp_third);
 
     game_timer.Reset();
 }
-//void Engine::Test()
-//{
-//	state_manager->AddState("Menu", new Menu);
-//	state_manager->AddState("Level1", new Level1);
-//
-//	Object* temp = new Object();
-//	temp->AddComponent(new Sprite());
-//	temp->AddComponent(new Component_Transform());
-//	temp->AddComponent(new Component_TopDownMovement());
-//	temp->Set_Name("first");
-//
-//	Object* temp_sec = new Object();
-//	temp_sec->AddComponent(new Sprite());
-//	temp_sec->AddComponent(new Component_Transform());
-//	temp_sec->Set_Name("second");
-//
-//	std::cout << temp->GetTransform.GetTranslation();
-//	std::cout << temp->GetTransform().Get_Save_Translation().x;
-//	/*Object* temp_third = new Object();
-//	temp_third->AddComponent(new Sprite());
-//	temp_third->AddComponent(new Component_Transform);
-//	temp_third->Set_Name("save");
-//
-//	temp_third->AddComponent(new Transform(1, 1));
-//	*/
-//	object_manager->AddObject(temp);
-//	object_manager->AddObject(temp_sec);
-//	object_manager->AddObject(temp_third);
-//
-//	game_timer.Reset();
-//}
 
 void Engine::Update()
 {
@@ -146,8 +115,4 @@ void Engine::Reset()
     {
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
-
-
-    //Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(1.0f);
-    //Graphic::GetGraphic()->Get_View().Get_Camera().SetCenter({ 0,0 });
 }
