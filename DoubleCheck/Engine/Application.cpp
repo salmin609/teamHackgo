@@ -119,6 +119,10 @@ void Application::Update(float dt)
         //Engine re_start;
         //re_start.Test();
     }
+    if(input.Is_Key_Triggered(GLFW_KEY_N))
+    {
+        
+    }
 
     save_dt += dt;
     if (save_dt >= 1.0f)

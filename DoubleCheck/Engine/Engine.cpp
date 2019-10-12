@@ -53,24 +53,24 @@ void Engine::Init()
 
     Object* temp = new Object();
 
-    //temp->AddComponent(new Physics);
+    temp->AddComponent(new Physics);
     temp->AddComponent(new Sprite());
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
     //temp->AddComponent(new Component_TopDownMovement());
-    //temp->SetTranslation({ 200, 200 });
-    //temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
-    //temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    temp->SetTranslation({ 200, 200 });
+    temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
+    temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp->Set_Name("first");
 
-    //Object* temp_sec = new Object();
-    //temp_sec->AddComponent(new Physics);
-    //temp_sec->AddComponent(new Sprite());
-    //temp_sec->AddComponent(new Component_Transform());
-    //temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
-    //temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
-    //temp_sec->Set_Name("second");
-    //temp_sec->Set_Tag("enemy");
+    Object* temp_sec = new Object();
+    temp_sec->AddComponent(new Physics);
+    temp_sec->AddComponent(new Sprite());
+    temp_sec->AddComponent(new Component_Transform());
+    temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
+    temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+    temp_sec->Set_Name("second");
+    temp_sec->Set_Tag("enemy");
 
     //Object* temp_third = new Object();
     //temp_third->AddComponent(new Sprite());
@@ -79,7 +79,7 @@ void Engine::Init()
     //temp_third->Set_Tag("enemy");
 
     object_manager->AddObject(temp);
-    //object_manager->AddObject(temp_sec);
+    object_manager->AddObject(temp_sec);
     //object_manager->AddObject(temp_third);
 
     game_timer.Reset();
