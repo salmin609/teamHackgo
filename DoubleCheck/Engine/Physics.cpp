@@ -330,8 +330,8 @@ void Physics::Acceleration()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-    printf("%f, %f \n", acceleration.x, acceleration.y);
-    printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
+   // printf("%f, %f \n", acceleration.x, acceleration.y);
+   // printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
 }
 
 void Physics::Acceleration2()
@@ -812,6 +812,7 @@ void Physics::BasicMovement()
         }
         else
         {
+            velocity = { 1, 0 };
             velocity = { -1, 0 };
             m_owner->GetTransform().AddTranslation(velocity);
             m_owner->GetMesh().Get_Is_Moved() = true;
@@ -859,6 +860,7 @@ void Physics::BasicMovement()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
+    //printf("%f, %f\n", velocity.x, velocity.y);
 }
 
 void Physics::BasicMovement2()
