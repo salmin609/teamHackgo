@@ -159,6 +159,9 @@
     <ClInclude Include="Sound_Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Component_Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="Sound_Manager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_Collision.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
