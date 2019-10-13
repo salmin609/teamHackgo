@@ -54,7 +54,6 @@ void Engine::Init()
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
-
     temp->AddComponent(new Physics);
     temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
     temp->AddComponent(new Player());
@@ -80,10 +79,18 @@ void Engine::Init()
     //temp_third->Set_Name("third");
     //temp_third->Set_Tag("enemy");
 
+//	Object* temp_fourth = new Object();
+////	temp_fourth->AddComponent(new Physics);
+//	temp_fourth->AddComponent(new Sprite());
+//	temp_fourth->AddComponent(new Component_Transform());
+////	temp_fourth->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_fourth);
+////	temp_fourth->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+//	temp_fourth->Set_Name("fourth");
+//
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
-    //object_manager->AddObject(temp_third);
-
+    object_manager->AddObject(temp_third);
+	//object_manager->AddObject(temp_fourth);
     game_timer.Reset();
 }
 

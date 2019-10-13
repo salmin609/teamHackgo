@@ -82,6 +82,10 @@ bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
     return is_okay;
 }
 
+//void Sprite::Ckeck_Enemy(Object* obj)
+//{
+//	
+//}
 
 void Sprite::Init(Object* obj)
 {
