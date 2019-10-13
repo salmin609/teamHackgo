@@ -19,7 +19,6 @@ public:
     bool IsDone() { return is_done; }
 
 private:
-    Sound sound;
     bool is_done = false;
     float m_dt;
     Timer game_timer;

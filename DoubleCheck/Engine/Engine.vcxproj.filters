@@ -159,7 +159,11 @@
     <ClInclude Include="Sound_Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Common_Header.h">
+=======
+    <ClInclude Include="Component_Collision.h">
+>>>>>>> 289e923576e461f93bcabdedac7daf07553f04ee
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -265,6 +269,9 @@
     </ClCompile>
     <ClCompile Include="Sound_Manager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_Collision.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

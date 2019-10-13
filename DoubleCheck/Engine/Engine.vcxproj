@@ -176,6 +176,7 @@
     <ClInclude Include="Color4ub.hpp" />
     <ClInclude Include="Common_Header.h" />
     <ClInclude Include="Component.hpp" />
+    <ClInclude Include="Component_Collision.h" />
     <ClInclude Include="Component_Enemy.h" />
     <ClInclude Include="Component_Sprite.h" />
     <ClInclude Include="Component_TopDownMovement.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraView.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Component_Collision.cpp" />
     <ClCompile Include="Component_Enemy.cpp" />
     <ClCompile Include="Component_Player.cpp" />
     <ClCompile Include="Component_Sprite.cpp" />
