@@ -118,14 +118,21 @@ void Application::Update(float dt)
 	{
 		Clear();
 
-	}
-	if (input.Is_Key_Triggered(GLFW_KEY_R))
-	{
-		Clear();
+        //Engine re_start;
+        //re_start.Test();
+    }
 
-		//Engine re_start;
-		//re_start.Test();
-	}
+    
+    save_dt += dt;
+    if (save_dt >= 1.0f)
+    {
+        std::stringstream title;
+        title << "sangministhebest" << " " << " [" << FPS_frame << " FPS]";
+        glfwSetWindowTitle(window, title.str().c_str());
+        FPS_frame = 0;
+        save_dt = 0;
+    }
+    FPS_frame++;
 
 	save_dt += dt;
 	if (save_dt >= 1.0f)
@@ -172,49 +179,13 @@ matrix3 helper_inverse(matrix3 model_to_world)
 
 void Application::Imgui_Update()
 {
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplGlfw_NewFrame();
-	ImGui::NewFrame();
-	static vector2 origin_mouse_pos;
-	if (show_demo_window)
-		ImGui::ShowDemoWindow(&show_demo_window);
-	ImGui::Begin("hakgo gui");
-	//ImGui::IsMouseDragging
-	//~
-	//static int listbox_item_current = -1, listbox_item_current2 = -1;
-	//if (ImGui::TreeNode("Enemy"))
-	//{
-	//	int selectedenemy = 0;
-	//	const char* listbox_enemy[] = { "sangmin", "jeesoo", "minseok", "chulseong", "suwhan" };
-	//	static bool selected[5] = { false };
-	//	Object* this_obj = ObjectManager::GetObjectManager()->GetObjectManagerContainer_Value()[0].get();
-	//	ImGui::TextWrapped("Sprite UI");
-	//	/*ImGui::ListBox("listbox\n(single select)", &listbox_item_current, listbox_enemy, IM_ARRAYSIZE(listbox_enemy),5);
-	//	ImGui::PushItemWidth(-1);
-	//	ImGui::PopItemWidth();*/
-	//	static std::string preview = "";
-	//	//ImGui::Combo("Combo", &selectedenemy, listbox_enemy, IM_ARRAYSIZE(listbox_enemy));
-	//	if (ImGui::BeginCombo("Listbox", " "))
-	//	{
-	//		preview = "";
-	//		//std::string save_enemy = listbox_enemy;
-	//		
-	//		for (size_t i = 0; i < IM_ARRAYSIZE(listbox_enemy); i++)
-	//		{
-	//			ImGui::Selectable(listbox_enemy[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
-	//			if (selected[3])
-	//			{
-	//				std::cout << "check";
-	//				vec.push_back(listbox_enemy[3]);
-	//			}
-	//		}
-	//		
-	//		ImGui::EndCombo();
-	//	}
-	//~
-		//if (ImGui::Selectable("sex", true, ImGuiSelectableFlags_AllowDoubleClick))
-		//{
-		//	// Do stuff
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    static vector2 origin_mouse_pos;
+    //if (show_demo_window)
+    //    ImGui::ShowDemoWindow(&show_demo_window);
+    ImGui::Begin("salmin gui");
 
 		//	if (ImGui::IsMouseDoubleClicked(0))
 		//	{
@@ -258,6 +229,11 @@ void Application::Imgui_Update()
 
 		//}
 
+
+            if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
+            {
+                this_obj->Set_Name(this_obj->name_buf);
+            }
 
 
 		/*for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
@@ -325,21 +301,102 @@ void Application::Imgui_Update()
 
 		//			is_drag_and_drop_mode = false;
 
-		//		}
-		//	}
-		//	
-		//}
+                    float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+                    float zoom_converted = zoom - 1.f;
+                    float zoom_finish = 1.f - zoom_converted;
+                    vector2 converted = { mouse.x - result.x, mouse.y - result.y };
+                    this_obj->GetMesh().Get_Is_Moved() = true;
+                    this_obj->GetTransform().SetTranslation({ mouse.x + (zoom_finish * (mouse.x - result.x)), mouse.y + (zoom_finish * (mouse.y - result.y)) });
+                }
+            }
 
-		for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-		{
-			ImGui::PushID(i);
-			if ((i % 3) != 0)
-				ImGui::SameLine();
-			//int frame_padding = -1 + i;     // -1 = uses default padding
-			//ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
+            if (ImGui::Checkbox("Component_physics", &this_obj->Get_Component_Info_Reference().component_info_physics))
+            {
+                if (this_obj->Get_Component_Info_Reference().component_info_physics)
+                {
+                    this_obj->AddComponent(new Physics());
+                }
+            }
+            if(ImGui::Checkbox("Component_sprite", &this_obj->Get_Component_Info_Reference().component_info_sprite))
+            {
+                if(this_obj->Get_Component_Info_Reference().component_info_sprite)
+                {
+                    //this_obj->AddComponent(new Sprite());
+                }
+            }
+            if (ImGui::Checkbox("Component_Top_Down_Move", &this_obj->Get_Component_Info_Reference().component_info_top_down_movement))
+            {
+                if (this_obj->Get_Component_Info_Reference().component_info_top_down_movement)
+                {
+                    this_obj->AddComponent(new Component_TopDownMovement());
+                }
+            }
+            
 
-			ImGui::Button(names[i], ImVec2(60, 60));
+            ImGui::TreePop();
+        }
+    }
+    static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
+    if (ImGui::TreeNode("Drag and Drop"))
+    {
+        for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+        {
+            ImGui::PushID(i);
+            if ((i % 3) != 0)
+                ImGui::SameLine();
+            ImGui::Button(names[i], ImVec2(60, 60));
 
+            if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+            {
+                ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
+                ImGui::EndDragDropSource();
+                which_one_to_make = names[i];
+                is_drag_and_drop_mode = true;
+            }
+            if (ImGui::BeginDragDropTarget())
+            {
+                ImGui::EndDragDropTarget();
+            }
+            ImGui::PopID();
+        }
+        ImGui::Unindent();
+        ImGui::TreePop();
+    }
+    if (is_drag_and_drop_mode)
+    {
+        if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
+        {
+            vector2 this_pos = input.Get_Mouse_Pos();
+
+            Object* new_obj = new Object();
+
+            if(which_one_to_make == names[0])
+            {
+                new_obj->Set_Name(names[0]);
+                new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp2.png"));
+            }
+            else if(which_one_to_make == names[1])
+            {
+                
+            }
+            else if (which_one_to_make == names[2])
+            {
+
+            }
+            else if(which_one_to_make == names[3])
+            {
+                new_obj->Set_Name(names[3]);
+                new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
+            }
+            else if (which_one_to_make == names[4])
+            {
+
+            }
+
+            new_obj->SetTranslation(this_pos);
+            
+            new_obj->GetMesh().Get_Is_Moved() = true;
+            ObjectManager::GetObjectManager()->AddObject(new_obj);
 
 			//for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
 			//{
@@ -491,9 +548,10 @@ void Application::Save()
 
 void Application::Clear()
 {
-	ObjectManager::GetObjectManager()->Init();
-	StateManager::GetStateManager()->Init();
-	Graphic::GetGraphic()->Init();
+    //ObjectManager::GetObjectManager()->Init();
+    //StateManager::GetStateManager()->Init();
+    //Graphic::GetGraphic()->Init();
+    //ImGui::CloseCurrentPopup();
 }
 bool Application::IsFullScreen()
 {

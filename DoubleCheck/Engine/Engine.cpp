@@ -55,6 +55,8 @@ void Engine::Init()
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
+
+
     temp->AddComponent(new Physics);
     temp->AddComponent(new Collision);
     temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));

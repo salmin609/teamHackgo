@@ -5,10 +5,16 @@
 void Component_TopDownMovement::Init(Object* obj)
 {
     m_owner = obj;
+    m_owner->Get_Component_Info_Reference().component_info_top_down_movement = true;
 }
 
 void Component_TopDownMovement::Update(float dt)
 {
+    if(!m_owner->Get_Component_Info_Reference().component_info_top_down_movement)
+    {
+        m_owner->DeleteComponent(this);
+    }
+
 
     //WASD pressed movement
     if (input.Is_Key_Pressed(GLFW_KEY_W))
