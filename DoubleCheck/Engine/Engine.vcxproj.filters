@@ -1,178 +1,217 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\external\imgui\imgui.cpp" />
-    <ClCompile Include="..\external\imgui\imgui_demo.cpp" />
-    <ClCompile Include="..\external\imgui\imgui_draw.cpp" />
-    <ClCompile Include="..\external\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="..\external\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraView.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Component_Collision.cpp" />
-    <ClCompile Include="Component_Enemy.cpp" />
-    <ClCompile Include="Component_Player.cpp" />
-    <ClCompile Include="Component_Sprite.cpp" />
-    <ClCompile Include="Component_TopDownMovement.cpp" />
-    <ClCompile Include="Component_Transform.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="GL.cpp" />
-    <ClCompile Include="Graphic.cpp" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="Message_Mananger.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
-    <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="VertexLayoutDescription.cpp" />
-    <ClCompile Include="Vertices.cpp" />
-    <ClCompile Include="View.cpp" />
-    <ClCompile Include="Object_Component_Info.cpp" />
+    <ClCompile Include="Component_Collision.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_Enemy.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_Player.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_Sprite.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_TopDownMovement.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component_Transform.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraView.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="GL.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexLayoutDescription.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertices.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_impl_glfw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapFont.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Object_Component_Info.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Color4ub.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="angles.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexLayoutDescription.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertices.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraView.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GL.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="glCheck.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StockShaders.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_TopDownMovement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imconfig.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui_impl_glfw.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui_impl_opengl3.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui_internal.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imstb_rectpack.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imstb_textedit.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imstb_truetype.h">
-      <Filter>external\imgui\IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Message_Manager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\external\imgui\imconfig.h" />
+    <ClInclude Include="angles.hpp" />
+    <ClInclude Include="Application.hpp" />
+    <ClInclude Include="Engine.hpp" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="Message_Manager.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Sound_Manager.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="Timer.hpp" />
+    <ClInclude Include="Transform.hpp" />
+    <ClInclude Include="Component_Collision.h">
+      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Component_Enemy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Component_Player.h">
+      <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Component_Sprite.h">
-      <Filter>Header Files</Filter>
+      <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Sound_Manager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Component_TopDownMovement.h">
+      <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="BitmapFont.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Component_Transform.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraView.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Color4ub.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="GL.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="glCheck.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="StockShaders.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.hpp">
+      <Filter>Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Text.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexLayoutDescription.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertices.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imgui.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imgui_impl_glfw.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imgui_impl_opengl3.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imgui_internal.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imstb_rectpack.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imstb_textedit.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui\imstb_truetype.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapFont.hpp">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Common_Header.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.hpp">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Object_Component_Info.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -278,11 +317,21 @@
     <ClCompile Include="Sound_Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BitmapFont.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Component">
+      <UniqueIdentifier>{18876640-ac93-45c7-a66d-6e7f9cac3608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{3270c4af-e6d5-4a9b-84ac-3b26096a1917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{218bc585-3e57-489a-b307-62decf4c2b4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StockShaders.inl">
+      <Filter>Graphic</Filter>
+    </None>
   </ItemGroup>
 </Project>
