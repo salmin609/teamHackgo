@@ -28,4 +28,6 @@ private:
     vector2 acceleration{};
     vector2 velocity{};
     float timer = 0;
+    vector2 prev_pos;
+    vector2 direction_vector{};
 };

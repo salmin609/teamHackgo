@@ -54,22 +54,15 @@ bool Collision::CircleToCircleCollision()
             physics.KnockBack(&objects[i], &objects[i + 1]);
             return true;
         }
-        else
-        {
-            return false;
-        }
-
+        return false;
     }
     return false;
 }
 
 void Collision::Update(float dt)
 {
-    timer += dt;
-
-        if (CircleToCircleCollision() == true)
-        {
-            printf("Collision Sex!");
-            timer = 0;
-        }
+    if (CircleToCircleCollision())
+    {
+        printf("Collision!");
+    }
 }
