@@ -338,7 +338,6 @@ void Application::Imgui_Update()
             {
 
             }
-
             new_obj->SetTranslation(this_pos);
             
             new_obj->GetMesh().Get_Is_Moved() = true;

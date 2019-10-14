@@ -10,9 +10,13 @@ void Player::Init(Object* obj)
     m_owner = obj;
     m_owner->Get_Component_Info_Reference().component_info_player = true;
 
-    Object* hp_bar = new Object();
-    hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/temp.png"));
-    hp_bar->SetTranslation(m_owner->GetTransform().GetTranslation());
+    //Object* hp_bar = new Object();
+    //hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/temp.png"));
+    //hp_bar->GetMesh().Get_Is_Moved() = true;
+    //vector2 hp_bar_pos = m_owner->GetTransform().GetTranslation();
+    //hp_bar_pos.y -= 50;
+    //hp_bar->SetTranslation(hp_bar_pos);
+    //ObjectManager::GetObjectManager()->AddObject(hp_bar);
 
 }
 
