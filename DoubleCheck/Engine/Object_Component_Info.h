@@ -15,6 +15,7 @@ public:
     bool component_info_physics;
     bool component_info_collision;
     bool component_info_sprite;
+    bool component_info_top_down_movement;
 
 private:
 

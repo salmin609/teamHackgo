@@ -9,4 +9,5 @@ Object_Component_Info::Object_Component_Info(Object* obj)
     component_info_physics = false;
     component_info_collision = false;
     component_info_sprite = false;
+    component_info_top_down_movement = false;
 }

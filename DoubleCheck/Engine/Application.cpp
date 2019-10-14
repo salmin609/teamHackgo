@@ -270,6 +270,14 @@ void Application::Imgui_Update()
                     //this_obj->AddComponent(new Sprite());
                 }
             }
+            if (ImGui::Checkbox("Component_Top_Down_Move", &this_obj->Get_Component_Info_Reference().component_info_top_down_movement))
+            {
+                if (this_obj->Get_Component_Info_Reference().component_info_top_down_movement)
+                {
+                    this_obj->AddComponent(new Component_TopDownMovement());
+                }
+            }
+            
 
             ImGui::TreePop();
         }
@@ -288,6 +296,7 @@ void Application::Imgui_Update()
             {
                 ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
                 ImGui::EndDragDropSource();
+                which_one_to_make = names[i];
                 is_drag_and_drop_mode = true;
             }
             if (ImGui::BeginDragDropTarget())
@@ -306,11 +315,32 @@ void Application::Imgui_Update()
             vector2 this_pos = input.Get_Mouse_Pos();
 
             Object* new_obj = new Object();
-            new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
-            new_obj->Get_Is_Selected() = true;
+
+            if(which_one_to_make == names[0])
+            {
+                new_obj->Set_Name(names[0]);
+                new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp2.png"));
+            }
+            else if(which_one_to_make == names[1])
+            {
+                
+            }
+            else if (which_one_to_make == names[2])
+            {
+
+            }
+            else if(which_one_to_make == names[3])
+            {
+                new_obj->Set_Name(names[3]);
+                new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
+            }
+            else if (which_one_to_make == names[4])
+            {
+
+            }
 
             new_obj->SetTranslation(this_pos);
-            new_obj->Set_Name("dynamical added");
+            
             new_obj->GetMesh().Get_Is_Moved() = true;
             ObjectManager::GetObjectManager()->AddObject(new_obj);
 
