@@ -10,6 +10,7 @@
 void Physics::Init(Object* obj)
 {
     m_owner = obj;
+    m_owner->Get_Component_Info_Reference().component_info_physics = true;
 }
 
 void Physics::Acceleration()
@@ -652,8 +653,8 @@ void Physics::Acceleration2()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-    printf("%f, %f \n", acceleration.x, acceleration.y);
-    printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
+   /* printf("%f, %f \n", acceleration.x, acceleration.y);
+    printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);*/
 }
 
 void Physics::KnockBack(Object* object_1, Object* object_2)
@@ -880,6 +881,11 @@ void Physics::Update(float dt)
     //direction_vector.y = m_owner->GetTransform().GetTranslation().y - prev_pos.y;
     //std::cout << "dir vec x : " << direction_vector.x << std::endl;
     //std::cout << "dir vec y : " << direction_vector.y << std::endl;
+
+    if(!m_owner->Get_Component_Info_Reference().component_info_physics)
+    {
+        m_owner->DeleteComponent(this);
+    }
 
     for (const auto& i : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
     {

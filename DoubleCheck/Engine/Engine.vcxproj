@@ -194,6 +194,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Component_Player.h" />
+    <ClInclude Include="Object_Component_Info.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Sound_Manager.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="Message_Mananger.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Object_Component_Info.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />

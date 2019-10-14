@@ -3,6 +3,7 @@
 #include "Mesh.hpp"
 #include "Component.hpp"
 #include <string>
+#include "Object_Component_Info.h"
 #include <iostream>
 
 inline int object_id_increment = 1;
@@ -23,14 +24,22 @@ private:
     int m_id;
     bool need_change_translation = false;
     vector2 convert_translation;
+    Object_Component_Info component_info;
+    
     //IMGUI
     bool is_selected = false;
     std::string tag;
     bool need_update_points = false;
     bool is_debug_mode = false;
     
+    
 
 public:
+    Object_Component_Info& Get_Component_Info_Reference()
+    {
+        return component_info;
+    }
+
     std::string Get_Tag()
     {
         return tag;
@@ -59,7 +68,7 @@ public:
     {
         center_pos = new_center;
     }
-    Object()
+    Object() : component_info(this)
     {
         tag = "none";
         m_id = object_id_increment;

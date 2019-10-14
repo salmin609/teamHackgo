@@ -8,6 +8,7 @@
 void Player::Init(Object* obj)
 {
     m_owner = obj;
+    m_owner->Get_Component_Info_Reference().component_info_player = true;
 
     Object* hp_bar = new Object();
     hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/temp.png"));

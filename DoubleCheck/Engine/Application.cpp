@@ -193,6 +193,7 @@ void Application::Imgui_Update()
             ImGui::SliderFloat("scale_y", &this_obj->GetTransform().GetScale_Reference().y, -2.0f, 2.0f);
 
 
+
             if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
             {
                 this_obj->Set_Name(this_obj->name_buf);
@@ -254,6 +255,22 @@ void Application::Imgui_Update()
                     this_obj->GetTransform().SetTranslation({ mouse.x + (zoom_finish * (mouse.x - result.x)), mouse.y + (zoom_finish * (mouse.y - result.y)) });
                 }
             }
+
+            if (ImGui::Checkbox("Component_physics", &this_obj->Get_Component_Info_Reference().component_info_physics))
+            {
+                if (this_obj->Get_Component_Info_Reference().component_info_physics)
+                {
+                    this_obj->AddComponent(new Physics());
+                }
+            }
+            if(ImGui::Checkbox("Component_sprite", &this_obj->Get_Component_Info_Reference().component_info_sprite))
+            {
+                if(this_obj->Get_Component_Info_Reference().component_info_sprite)
+                {
+                    //this_obj->AddComponent(new Sprite());
+                }
+            }
+
             ImGui::TreePop();
         }
     }
