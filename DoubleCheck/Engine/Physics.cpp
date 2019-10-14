@@ -10,6 +10,7 @@
 void Physics::Init(Object* obj)
 {
     m_owner = obj;
+    m_owner->Get_Component_Info_Reference().component_info_physics = true;
 }
 
 void Physics::Acceleration()
@@ -652,84 +653,39 @@ void Physics::Acceleration2()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-    printf("%f, %f \n", acceleration.x, acceleration.y);
-    printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);
+   /* printf("%f, %f \n", acceleration.x, acceleration.y);
+    printf("translation = %f, %f\n\n\n", m_owner->GetTransform().GetTranslation().x, m_owner->GetTransform().GetTranslation().y);*/
 }
 
-bool Physics::BoxToBoxCollision(Mesh mesh) const
+void Physics::KnockBack(Object* object_1, Object* object_2)
 {
-    if (m_owner->GetMesh().GetPoint(0).x > mesh.GetPoint(2).x || m_owner->GetMesh().GetPoint(0).y > mesh.GetPoint(2).y)
+    vector2 object_1_acceleration = object_1->GetComponentByTemplate<Physics>()->GetAcceleration();
+    vector2 object_2_acceleration = object_2->GetComponentByTemplate<Physics>()->GetAcceleration();
+
+    float object_1_speed = sqrt((object_1_acceleration.x * object_1_acceleration.x) + (object_1_acceleration.y * object_1_acceleration.y));
+    float object_2_speed = sqrt((object_2_acceleration.x * object_2_acceleration.x) + (object_2_acceleration.y * object_2_acceleration.y));
+
+    
+
+    if (object_2_speed >= object_1_speed)
     {
-        return false;
+        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(object_2_acceleration * 2.f);
+        //object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
+        object_1->GetMesh().Get_Is_Moved() = true;
+
+        object_2->GetComponentByTemplate<Physics>()->SetAcceleration({ 0, 0 });
+        //object_2->GetTransform().AddTranslation({0, 0});
+        object_2->GetMesh().Get_Is_Moved() = true;
     }
-    else if (m_owner->GetMesh().GetPoint(1).x > mesh.GetPoint(3).x || m_owner->GetMesh().GetPoint(1).y < mesh.GetPoint(3).y)
+    if (object_2_speed < object_1_speed)
     {
-        return false;
-    }
-    else if (m_owner->GetMesh().GetPoint(2).x < mesh.GetPoint(0).x || m_owner->GetMesh().GetPoint(2).y < mesh.GetPoint(0).y)
-    {
-        return false;
-    }
-    else if (m_owner->GetMesh().GetPoint(3).x < mesh.GetPoint(1).x || m_owner->GetMesh().GetPoint(3).y > mesh.GetPoint(1).y)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
+        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(object_1_acceleration * 2.f);
+        //object_2->GetTransform().AddTranslation(object_2->GetComponentByTemplate<Physics>()->GetAcceleration());
+        object_2->GetMesh().Get_Is_Moved() = true;
 
-bool Physics::CircleToCircleCollision(Object* object) const
-{
-    const vector2 my_position = m_owner->GetTransform().GetTranslation();
-    const vector2 position = object->GetTransform().GetTranslation();
-    float distance;
-    float owner_radius = m_owner->GetTransform().GetScale().x * 100.f;
-    float radius = object->GetTransform().GetScale().x * 100.f;
-
-    distance = sqrt((my_position.x - position.x) * (my_position.x - position.x) + (my_position.y - position.y) * (my_position.y - position.y));
-
-    if (distance <= (owner_radius + radius))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-    return false;
-}
-
-void Physics::KnockBack(Object* object)
-{
-    vector2 object_acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
-    vector2 owner_acceleration = m_owner->GetComponentByTemplate<Physics>()->GetAcceleration();
-
-    float object_speed = sqrt((object_acceleration.x * object_acceleration.x) + (object_acceleration.y * object_acceleration.y));
-    float owner_speed = sqrt((owner_acceleration.x * owner_acceleration.x) + (owner_acceleration.y * owner_acceleration.y));
-
-    if (owner_speed >= object_speed)
-    {
-
-        object->GetComponentByTemplate<Physics>()->SetAcceleration(owner_acceleration * 2.f);
-        object->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-        object->GetMesh().Get_Is_Moved() = true;
-
-        acceleration = { 0, 0 };
-        m_owner->GetTransform().AddTranslation(acceleration);
-        m_owner->GetMesh().Get_Is_Moved() = true;
-    }
-    if (owner_speed < object_speed)
-    {
-
-        m_owner->GetComponentByTemplate<Physics>()->SetAcceleration(object_acceleration * 2.f);
-        m_owner->GetTransform().AddTranslation(object->GetComponentByTemplate<Physics>()->GetAcceleration());
-        m_owner->GetMesh().Get_Is_Moved() = true;
-
-        object->GetComponentByTemplate<Physics>()->SetAcceleration({ 0, 0 });
-        object->GetTransform().AddTranslation({ 0, 0 });
-        m_owner->GetMesh().Get_Is_Moved() = true;
+        object_1->GetComponentByTemplate<Physics>()->SetAcceleration({ 0, 0 });
+        //object_1->GetTransform().AddTranslation({ 0, 0 });
+        object_1->GetMesh().Get_Is_Moved() = true;
     }
 }
 
@@ -913,6 +869,23 @@ void Physics::BasicMovement2()
 
 void Physics::Update(float dt)
 {
+    //timer += dt;
+
+    //if(timer > 0.1f)
+    //{
+    //    prev_pos = m_owner->GetTransform().GetTranslation();
+    //    timer = 0.f;
+    //    std::cout << "reset" << std::endl;
+    //}
+    //direction_vector.x = m_owner->GetTransform().GetTranslation().x - prev_pos.x;
+    //direction_vector.y = m_owner->GetTransform().GetTranslation().y - prev_pos.y;
+    //std::cout << "dir vec x : " << direction_vector.x << std::endl;
+    //std::cout << "dir vec y : " << direction_vector.y << std::endl;
+
+    if(!m_owner->Get_Component_Info_Reference().component_info_physics)
+    {
+        m_owner->DeleteComponent(this);
+    }
 
     for (const auto& i : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
     {
@@ -925,27 +898,6 @@ void Physics::Update(float dt)
         {
             Acceleration2();
             //BasicMovement2();
-        }
-        if (i.get()->GetName() != m_owner->GetName())
-        {
-
-            if (i->GetComponentContainer()[0]->GetComponentName() == "BoxToBoxCollision" && m_owner->GetComponentContainer()[0]->GetComponentName() == "BoxToBoxCollision")
-            {
-                if (BoxToBoxCollision(i.get()->GetMesh()))
-                {
-                    printf("fuck\n");
-                }
-            }
-            else if (i->GetComponentContainer()[0]->GetComponentName() == "CircleToCircleCollision" && m_owner->GetComponentContainer()[0]->GetComponentName() == "CircleToCircleCollision")
-            {
-                if (CircleToCircleCollision(i.get()))
-                {
-                    KnockBack(i.get());
-
-                    printf("collide1!!!!!!!!!\n");
-                    //sound.play(1);
-                }
-            }
         }
     }
 }

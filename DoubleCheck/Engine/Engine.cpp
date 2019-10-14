@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "Input.h"
 
+#include "Component_Collision.h"
 #include "Component_Player.h"
 #include "Graphic.h"
 #include "StateManager.h"
@@ -18,7 +19,7 @@
 #include "Windows.h"
 #include "Component_Enemy.h"
 
-extern Sound sound;
+Sound sound;
 
 namespace
 {
@@ -31,13 +32,13 @@ namespace
 
 void Engine::Init()
 {
-    sound.initialize();
-    sound.load();
-    sound.play(0);
-    sound.volume(0, 5);
-    Sleep(1400);
-    sound.play(2);
-    sound.volume(2, 32);
+    //sound.initialize();
+    //sound.load();
+    //sound.play(0);
+    //sound.volume(0, 5);
+    //Sleep(1400);
+    //sound.play(2);
+    //sound.volume(2, 32);
     app_ = Application::Get_Application();
     object_manager = ObjectManager::GetObjectManager();
     state_manager = StateManager::GetStateManager();
@@ -55,21 +56,20 @@ void Engine::Init()
 
     Object* temp = new Object();
     temp->AddComponent(new Physics);
+    temp->AddComponent(new Collision);
     temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
     //temp->AddComponent(new Component_TopDownMovement());
     temp->SetTranslation({ 200, 200 });
-    temp->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp);
-    temp->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
     temp->Set_Name("first");
 
     Object* temp_sec = new Object();
     temp_sec->AddComponent(new Physics);
+    //temp->AddComponent(new Collision);
     temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
     temp_sec->AddComponent(new Component_Transform());
-    temp_sec->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_sec);
-    temp_sec->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+
     temp_sec->Set_Name("second");
     temp_sec->Set_Tag("enemy");
 
@@ -89,7 +89,7 @@ void Engine::Init()
 //
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
-    object_manager->AddObject(temp_third);
+    //object_manager->AddObject(temp_third);
 	//object_manager->AddObject(temp_fourth);
     game_timer.Reset();
 }
@@ -110,11 +110,18 @@ void Engine::Update()
 
     if (input.Is_Key_Triggered(GLFW_KEY_1))
         state_manager->is_pause = !state_manager->is_pause;
+    if (input.Is_Key_Triggered(GLFW_KEY_N))
+    {
+        Clear();
+        StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+    }
 }
 
 void Engine::Delete()
 {
-
+    
+    object_manager->Delete();
+    
 }
 
 void Engine::Reset()
@@ -123,4 +130,10 @@ void Engine::Reset()
     {
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
+}
+
+void Engine::Clear()
+{
+    object_manager->Clear();
+    //app_->Clear();
 }

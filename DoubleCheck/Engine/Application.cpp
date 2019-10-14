@@ -106,17 +106,17 @@ void Application::Update(float dt)
 	window_size.width = (float)w;
 	window_size.height = (float)h;
 
-    if (input.Is_Key_Triggered(GLFW_KEY_F))
-    {
-        Toggle_Fullscreen();
-    }
-    if (input.Is_Key_Triggered(GLFW_KEY_K))
-    {
-        Save();
-    }
-    if (input.Is_Key_Triggered(GLFW_KEY_R))
-    {
-        Clear();
+	if (input.Is_Key_Triggered(GLFW_KEY_F))
+	{
+		Toggle_Fullscreen();
+	}
+	if (input.Is_Key_Triggered(GLFW_KEY_K))
+	{
+		Save();
+	}
+	if (input.Is_Key_Triggered(GLFW_KEY_R))
+	{
+		Clear();
 
 	}
 	if (input.Is_Key_Triggered(GLFW_KEY_R))
@@ -150,24 +150,24 @@ void Application::Update(float dt)
 
 matrix3 helper_inverse(matrix3 model_to_world)
 {
-    double det = model_to_world(0, 0) * (model_to_world(1, 1) * model_to_world(2, 2) - model_to_world(2, 1) * model_to_world(1, 2)) -
-        model_to_world(0, 1) * (model_to_world(1, 0) * model_to_world(2, 2) - model_to_world(1, 2) * model_to_world(2, 0)) +
-        model_to_world(0, 2) * (model_to_world(1, 0) * model_to_world(2, 1) - model_to_world(1, 1) * model_to_world(2, 0));
+	double det = model_to_world(0, 0) * (model_to_world(1, 1) * model_to_world(2, 2) - model_to_world(2, 1) * model_to_world(1, 2)) -
+		model_to_world(0, 1) * (model_to_world(1, 0) * model_to_world(2, 2) - model_to_world(1, 2) * model_to_world(2, 0)) +
+		model_to_world(0, 2) * (model_to_world(1, 0) * model_to_world(2, 1) - model_to_world(1, 1) * model_to_world(2, 0));
 
-    double invdet = 1 / det;
+	double invdet = 1 / det;
 
-    matrix3 minv;
-    minv(0, 0) = static_cast<float>((model_to_world(1, 1) * model_to_world(2, 2) - model_to_world(2, 1) * model_to_world(1, 2)) * invdet);
-    minv(0, 1) = static_cast<float>((model_to_world(0, 2) * model_to_world(2, 1) - model_to_world(0, 1) * model_to_world(2, 2)) * invdet);
-    minv(0, 2) = static_cast<float>((model_to_world(0, 1) * model_to_world(1, 2) - model_to_world(0, 2) * model_to_world(1, 1)) * invdet);
-    minv(1, 0) = static_cast<float>((model_to_world(1, 2) * model_to_world(2, 0) - model_to_world(1, 0) * model_to_world(2, 2)) * invdet);
-    minv(1, 1) = static_cast<float>((model_to_world(0, 0) * model_to_world(2, 2) - model_to_world(0, 2) * model_to_world(2, 0)) * invdet);
-    minv(1, 2) = static_cast<float>((model_to_world(1, 0) * model_to_world(0, 2) - model_to_world(0, 0) * model_to_world(1, 2)) * invdet);
-    minv(2, 0) = static_cast<float>((model_to_world(1, 0) * model_to_world(2, 1) - model_to_world(2, 0) * model_to_world(1, 1)) * invdet);
-    minv(2, 1) = static_cast<float>((model_to_world(2, 0) * model_to_world(0, 1) - model_to_world(0, 0) * model_to_world(2, 1)) * invdet);
-    minv(2, 2) = static_cast<float>((model_to_world(0, 0) * model_to_world(1, 1) - model_to_world(1, 0) * model_to_world(0, 1)) * invdet);
+	matrix3 minv;
+	minv(0, 0) = static_cast<float>((model_to_world(1, 1) * model_to_world(2, 2) - model_to_world(2, 1) * model_to_world(1, 2)) * invdet);
+	minv(0, 1) = static_cast<float>((model_to_world(0, 2) * model_to_world(2, 1) - model_to_world(0, 1) * model_to_world(2, 2)) * invdet);
+	minv(0, 2) = static_cast<float>((model_to_world(0, 1) * model_to_world(1, 2) - model_to_world(0, 2) * model_to_world(1, 1)) * invdet);
+	minv(1, 0) = static_cast<float>((model_to_world(1, 2) * model_to_world(2, 0) - model_to_world(1, 0) * model_to_world(2, 2)) * invdet);
+	minv(1, 1) = static_cast<float>((model_to_world(0, 0) * model_to_world(2, 2) - model_to_world(0, 2) * model_to_world(2, 0)) * invdet);
+	minv(1, 2) = static_cast<float>((model_to_world(1, 0) * model_to_world(0, 2) - model_to_world(0, 0) * model_to_world(1, 2)) * invdet);
+	minv(2, 0) = static_cast<float>((model_to_world(1, 0) * model_to_world(2, 1) - model_to_world(2, 0) * model_to_world(1, 1)) * invdet);
+	minv(2, 1) = static_cast<float>((model_to_world(2, 0) * model_to_world(0, 1) - model_to_world(0, 0) * model_to_world(2, 1)) * invdet);
+	minv(2, 2) = static_cast<float>((model_to_world(0, 0) * model_to_world(1, 1) - model_to_world(1, 0) * model_to_world(0, 1)) * invdet);
 
-    return minv;
+	return minv;
 }
 
 void Application::Imgui_Update()
@@ -179,7 +179,7 @@ void Application::Imgui_Update()
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
 	ImGui::Begin("hakgo gui");
-
+	//ImGui::IsMouseDragging
 	//~
 	//static int listbox_item_current = -1, listbox_item_current2 = -1;
 	//if (ImGui::TreeNode("Enemy"))
@@ -257,9 +257,24 @@ void Application::Imgui_Update()
 		//	ImGui::TreePop();
 
 		//}
+
+
+
+		/*for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
+		{
+			ImGui::Selectable(names[i], &selected[i], ImGuiDragDropFlags_::ImGuiDragDropFlags_None);
+			if (selected[3])
+			{
+				std::cout << "check";
+				vec.push_back(names[3]);
+			}
+		}*/
 	static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
+
+	//int b = (int)names[0];
+
 	static bool selected[5] = { false };
-	
+
 	ImGuiIO& io = ImGui::GetIO();
 	ImTextureID a = io.Fonts->TexID;
 	//ImTextureID a = "../Sprite/dicksean.png";
@@ -270,60 +285,113 @@ void Application::Imgui_Update()
 	//static int pressed_count = 0;
 	if (ImGui::TreeNode("Drag and Drop"))
 	{
-	//IM_ASSERT	
-		
+		//IM_ASSERT	
+
+		//if (ImGui::BeginCombo("Listbox", " "))
+		//{
+		//	//preview = "";
+		//	//std::string save_enemy = listbox_enemy;
+
+		//	for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
+		//	{
+		//		ImGui::Selectable(names[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
+		//		if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+		//		{
+		//			ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
+		//			ImGui::EndDragDropSource();
+		//			is_drag_and_drop_mode = true;
+		//		}
+		//	}
+
+		//	ImGui::EndCombo();
+		//}
+		//if (selected[0])
+		//{
+		//	if (is_drag_and_drop_mode)
+		//	{
+		//		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
+		//		{
+		//			std::cout << "dick";
+		//			vector2 this_pos = input.Get_Mouse_Pos();
+
+		//			Object* new_obj = new Object();
+		//			new_obj->AddComponent(new Sprite(new_obj, "../sprite/salmin.png"));
+		//			new_obj->Get_Is_Selected() = true;
+
+		//			new_obj->SetTranslation(this_pos);
+		//			new_obj->Set_Name("dynamical added");
+		//			new_obj->GetMesh().Get_Is_Moved() = true;
+		//			ObjectManager::GetObjectManager()->AddObject(new_obj);
+
+		//			is_drag_and_drop_mode = false;
+
+		//		}
+		//	}
+		//	
+		//}
+
 		for (int i = 0; i < IM_ARRAYSIZE(names); i++)
 		{
 			ImGui::PushID(i);
 			if ((i % 3) != 0)
 				ImGui::SameLine();
-			//ImGui::Button(names[i], ImVec2(60, 60));
-			//ImGui::ImageButton("../Sprite/dicksean.png", ImVec2(60, 60));
-			int frame_padding = -1 + i;     // -1 = uses default padding
-			/*ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));*/
-			ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
-			//ImGui::Image(a, ImVec2(my_tex_w, my_tex_h), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
-			//if (ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f)))
-			//{
+			//int frame_padding = -1 + i;     // -1 = uses default padding
+			//ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
 
-			//	//pressed_count += 1;
+			ImGui::Button(names[i], ImVec2(60, 60));
+
+
+			//for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
+			//{
+			//	ImGui::Selectable(names[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
+			//	if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+			//	{
+			//		ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
+			//		ImGui::EndDragDropSource();
+			//		is_drag_and_drop_mode = true;
+			//	}
 			//}
-				
+			//ImGui::Selectable(names[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
+
 			if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
 			{
 				ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
 				ImGui::EndDragDropSource();
 				is_drag_and_drop_mode = true;
 			}
+
 			if (ImGui::BeginDragDropTarget())
 			{
 				ImGui::EndDragDropTarget();
 			}
 
-			
 			ImGui::PopID();
 		}
-		
-		/*for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
-		{
-			ImGui::Selectable(names[i], &selected[i], ImGuiDragDropFlags_::ImGuiDragDropFlags_None);
-			if (selected[3])
-			{
-				std::cout << "check";
-				vec.push_back(names[3]);
-			}
-		}*/
+
 		ImGui::Unindent();
 		ImGui::TreePop();
 	}
+	//if (input.Is_Key_Released(GLFW_MOUSE_BUTTON_LEFT))
+	//{
+	//	for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+	//	{
+	//		if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+	//		{
+	//			ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
+	//			ImGui::EndDragDropSource();
+	//			is_drag_and_drop_mode = true;
+	//		}
+	//	}
+	//}
 	if (is_drag_and_drop_mode)
 	{
-		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
+		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT) && ImGui::IsMouseDown(GLFW_MOUSE_BUTTON_1))
 		{
+			//if(ImGui::IsMouseDown())
 			vector2 this_pos = input.Get_Mouse_Pos();
 
 			Object* new_obj = new Object();
-			new_obj->AddComponent(new Sprite());
+			new_obj->AddComponent(new Sprite(new_obj, "../sprite/salmin.png"));
 			new_obj->Get_Is_Selected() = true;
 
 			new_obj->SetTranslation(this_pos);
@@ -333,7 +401,28 @@ void Application::Imgui_Update()
 
 			is_drag_and_drop_mode = false;
 		}
+		/*if (ImGui::IsMouseDragging(0, 0.0f))
+		{
+			if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
+			{
+				vector2 this_pos = input.Get_Mouse_Pos();
+
+				Object* new_obj = new Object();
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/salmin.png"));
+				new_obj->Get_Is_Selected() = true;
+
+				new_obj->SetTranslation(this_pos);
+				new_obj->Set_Name("dynamical added");
+				new_obj->GetMesh().Get_Is_Moved() = true;
+				ObjectManager::GetObjectManager()->AddObject(new_obj);
+
+				is_drag_and_drop_mode = false;
+			}
+		}*/
+
 	}
+
+
 	for (int i = 0; i < ObjectManager::GetObjectManager()->GetObjectManagerContainer().size(); i++)
 	{
 		Object* this_obj = ObjectManager::GetObjectManager()->GetObjectManagerContainer_Value()[i].get();
@@ -395,26 +484,26 @@ void Application::Delete()
 
 void Application::Save()
 {
-    //Transform a;
-    //Transform::Transform().Get_Save_Translation();
-    //std::cout<< Transform::Transform().Get_Save_Translation().x;
+	//Transform a;
+	//Transform::Transform().Get_Save_Translation();
+	//std::cout<< Transform::Transform().Get_Save_Translation().x;
 }
 
 void Application::Clear()
 {
-    ObjectManager::GetObjectManager()->Init();
-    StateManager::GetStateManager()->Init();
-    Graphic::GetGraphic()->Init();
+	ObjectManager::GetObjectManager()->Init();
+	StateManager::GetStateManager()->Init();
+	Graphic::GetGraphic()->Init();
 }
 bool Application::IsFullScreen()
 {
-    return glfwGetWindowMonitor(window);
+	return glfwGetWindowMonitor(window);
 }
 
 void Application::TurnOnMonitorVerticalSynchronization(bool enable)
 {
-    get_vsync = enable;
-    glfwSwapInterval(enable);
+	get_vsync = enable;
+	glfwSwapInterval(enable);
 }
 
 void Application::Toggle_Fullscreen()

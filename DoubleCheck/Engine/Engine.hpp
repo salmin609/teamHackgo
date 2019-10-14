@@ -13,13 +13,12 @@ public:
     void Update();
     void Delete();
     void Reset();
-
+    void Clear();
 	//void Test();
 
     bool IsDone() { return is_done; }
 
 private:
-    Sound sound;
     bool is_done = false;
     float m_dt;
     Timer game_timer;

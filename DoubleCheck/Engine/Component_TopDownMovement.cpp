@@ -1,5 +1,5 @@
 #include "Component_TopDownMovement.h"
-#include "Graphic.h"
+
 
 
 void Component_TopDownMovement::Init(Object* obj)

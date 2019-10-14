@@ -174,7 +174,9 @@
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="CameraView.hpp" />
     <ClInclude Include="Color4ub.hpp" />
+    <ClInclude Include="Common_Header.h" />
     <ClInclude Include="Component.hpp" />
+    <ClInclude Include="Component_Collision.h" />
     <ClInclude Include="Component_Enemy.h" />
     <ClInclude Include="Component_Sprite.h" />
     <ClInclude Include="Component_TopDownMovement.h" />
@@ -192,6 +194,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Component_Player.h" />
+    <ClInclude Include="Object_Component_Info.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Sound_Manager.h" />
@@ -216,6 +219,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraView.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Component_Collision.cpp" />
     <ClCompile Include="Component_Enemy.cpp" />
     <ClCompile Include="Component_Player.cpp" />
     <ClCompile Include="Component_Sprite.cpp" />
@@ -231,6 +235,7 @@
     <ClCompile Include="Message_Mananger.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Object_Component_Info.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
