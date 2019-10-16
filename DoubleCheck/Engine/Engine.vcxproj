@@ -171,6 +171,7 @@
     <ClInclude Include="..\external\imgui\imstb_truetype.h" />
     <ClInclude Include="angles.hpp" />
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="CameraView.hpp" />
     <ClInclude Include="Color4ub.hpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="StockShaders.hpp" />
+    <ClInclude Include="Text.hpp" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="Transform.hpp" />
@@ -222,6 +224,7 @@
     <ClCompile Include="..\external\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraView.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -252,6 +255,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="VertexLayoutDescription.cpp" />
