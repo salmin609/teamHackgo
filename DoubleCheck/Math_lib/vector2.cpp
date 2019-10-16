@@ -65,9 +65,9 @@ vector2 operator+(const vector2& v1, const vector2& v2) noexcept
 vector2 operator-(const vector2& v1, const vector2& v2) noexcept
 {
     vector2 result_vec;
-    v2.x > v1.x ? result_vec.x = v2.x - v1.x : result_vec.x = v1.x - v2.x;
-    v2.y > v1.y ? result_vec.y = v2.y - v1.y : result_vec.y = v1.y - v2.y;
-
+    result_vec.x = v1.x - v2.x;
+    result_vec.y = v1.y - v2.y;
+   
     return result_vec;
 }
 vector2 operator*(const vector2& v, float scale) noexcept

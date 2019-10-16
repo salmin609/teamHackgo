@@ -8,9 +8,10 @@
 #pragma once
 #define SOUND_NUM 20
 
+
 #include "fmod.hpp"
-#include "stdio.h"
-#include "stdlib.h"
+extern float sound_timer;
+
 class Sound {
 public:
 
@@ -21,6 +22,7 @@ public:
 
     void initialize();
     void load();
-    void play(int Channel_Num);
+    void play(int Sound_Num);
     void volume(int Channel_Num, float Volume);
+    void stop(int Sound_Num);
 };
