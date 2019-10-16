@@ -15,6 +15,11 @@ public:
     void AddState(std::string name, State* state);
     void DeleteState(std::shared_ptr<State> state);
 
+    std::unordered_map<std::string, std::shared_ptr<State>> Get_States()
+    {
+        return states;
+    }
+
     bool is_pause = true;
 private:
     static StateManager* state_manager;

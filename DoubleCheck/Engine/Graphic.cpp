@@ -26,10 +26,8 @@ void Graphic::Init()
     glEnable(GL_DEPTH | GL_BLEND);
     view.Init();
     Application::Get_Application()->Imgui_Init();
-    //background color
+
     glClearColor(1 ,1,1,1);
-
-
 }
 
 void Graphic::Update(float dt)

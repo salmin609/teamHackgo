@@ -32,13 +32,13 @@ namespace
 
 void Engine::Init()
 {
-    sound.initialize();
-    sound.load();
-    sound.play(0);
-    sound.volume(0, 5);
-    Sleep(1400);
-    sound.play(2);
-    sound.volume(2, 32);
+    //sound.initialize();
+    //sound.load();
+    //sound.play(0);
+    //sound.volume(0, 5);
+    //Sleep(1400);
+    //sound.play(2);
+    //sound.volume(2, 32);
     app_ = Application::Get_Application();
     object_manager = ObjectManager::GetObjectManager();
     state_manager = StateManager::GetStateManager();
@@ -58,10 +58,11 @@ void Engine::Init()
     temp->AddComponent(new Physics);
     temp->AddComponent(new Collision);
     temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
+    temp->SetTranslation({ 200, 200 });
     temp->AddComponent(new Player());
     temp->AddComponent(new Component_Transform());
     //temp->AddComponent(new Component_TopDownMovement());
-    temp->SetTranslation({ 200, 200 });
+    
     temp->Set_Name("first");
 
     Object* temp_sec = new Object();
@@ -89,11 +90,19 @@ void Engine::Init()
     //temp_third->Set_Name("third");
     //temp_third->Set_Tag("enemy");
 
+//	Object* temp_fourth = new Object();
+////	temp_fourth->AddComponent(new Physics);
+//	temp_fourth->AddComponent(new Sprite());
+//	temp_fourth->AddComponent(new Component_Transform());
+////	temp_fourth->GetComponentByTemplate<Physics>()->CircleToCircleCollision(temp_fourth);
+////	temp_fourth->GetComponentContainer()[0]->SetComponentName("CircleToCircleCollision");
+//	temp_fourth->Set_Name("fourth");
+//
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
     //object_manager->AddObject(fuck_me);
     //object_manager->AddObject(temp_third);
-
+	//object_manager->AddObject(temp_fourth);
     game_timer.Reset();
 }
 
@@ -113,11 +122,18 @@ void Engine::Update()
 
     if (input.Is_Key_Triggered(GLFW_KEY_1))
         state_manager->is_pause = !state_manager->is_pause;
+    if (input.Is_Key_Triggered(GLFW_KEY_N))
+    {
+        Clear();
+        StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+    }
 }
 
 void Engine::Delete()
 {
-
+    
+    object_manager->Delete();
+    
 }
 
 void Engine::Reset()
@@ -126,4 +142,10 @@ void Engine::Reset()
     {
         Graphic::GetGraphic()->get_need_update_sprite() = false;
     }
+}
+
+void Engine::Clear()
+{
+    object_manager->Clear();
+    //app_->Clear();
 }

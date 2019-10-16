@@ -23,10 +23,16 @@ public:
     {
         return acceleration;
     }
+	vector2 &GetAcceleration_Reference() 
+	{
+		return acceleration;
+	}
       
 private:
     std::vector<vector2> points{};
     vector2 acceleration{};
     vector2 velocity{};
     float timer = 0;
+    vector2 prev_pos;
+    vector2 direction_vector{};
 };
