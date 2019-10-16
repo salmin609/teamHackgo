@@ -887,11 +887,7 @@ void Physics::Update(float dt)
     {
         Acceleration2();
     }
-    else if(m_owner->GetName() == "third")
-    {
-        JustMove();
-    }
-    else if(m_owner->GetName() == "fourth")
+    else
     {
         JustMove();
     }
