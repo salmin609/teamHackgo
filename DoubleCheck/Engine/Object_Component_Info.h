@@ -8,7 +8,6 @@ public:
     Object_Component_Info(Object* obj);
 
 
-
     Object* m_owner;
     bool component_info_player;
     bool component_info_enemy;

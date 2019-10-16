@@ -9,6 +9,7 @@ public:
     void Init(Object *obj) override;
     void Acceleration();
     void Acceleration2();
+    void JustMove();
     void KnockBack(Object* object_1, Object* object_2);
     void BasicMovement();
     void BasicMovement2();
@@ -22,7 +23,12 @@ public:
     {
         return acceleration;
     }
-      
+	vector2 &GetAcceleration_Reference() 
+	{
+		return acceleration;
+	}
+
+    bool is_collided = false;
 private:
     std::vector<vector2> points{};
     vector2 acceleration{};
