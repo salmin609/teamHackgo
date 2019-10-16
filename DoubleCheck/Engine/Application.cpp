@@ -383,9 +383,6 @@ void Application::Delete()
 
 void Application::Save()
 {
-	//Transform a;
-	//Transform::Transform().Get_Save_Translation();
-	//std::cout<< Transform::Transform().Get_Save_Translation().x;
 }
 
 void Application::Clear()
