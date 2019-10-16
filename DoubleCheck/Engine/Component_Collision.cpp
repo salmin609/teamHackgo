@@ -2,6 +2,7 @@
 #include "Physics.h"
 #include "Object.h"
 #include "ObjectManager.h"
+#include "Engine.hpp"
 
 void Collision::Init(Object* obj)
 {
@@ -37,6 +38,7 @@ bool Collision::CircleToCircleCollision()
     std::vector<Object> objects;
     std::vector<vector2> objects_position;
     std::vector<float> objects_radius;
+    bool if_it_is_collide = false;
 
     for (const auto& i : ObjectManager::GetObjectManager()->GetObjectManagerContainer())
     {
@@ -45,31 +47,30 @@ bool Collision::CircleToCircleCollision()
         objects_radius.push_back(i.get()->GetTransform().GetScale().x * 100.f);
     }
 
-    for (unsigned int i = 0; i < objects_position.size() - 1; ++i)
+    for (unsigned int i = 0; i < objects_position.size(); ++i)
     {
-        const float distance = sqrt((objects_position[i].x - objects_position[i + 1].x) * (objects_position[i].x - objects_position[i + 1].x) + (objects_position[i].y - objects_position[i + 1].y) * (objects_position[i].y - objects_position[i + 1].y));
-
-        if (distance <= objects_radius[i] + objects_radius[i + 1])
+        for (unsigned int j = 0; j < objects_position.size(); ++j)
         {
-            physics.KnockBack(&objects[i], &objects[i + 1]);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+            if (i != j)
+            {
+                const float distance = sqrt((objects_position[i].x - objects_position[j].x) * (objects_position[i].x - objects_position[j].x) + (objects_position[i].y - objects_position[j].y) * (objects_position[i].y - objects_position[j].y));
 
+                if (distance <= objects_radius[i] + objects_radius[j])
+                {
+                    if_it_is_collide = true;
+                    physics.KnockBack(&objects[i], &objects[j]);
+                }
+            }
+        }
     }
-    return false;
+    return if_it_is_collide;
 }
 
 void Collision::Update(float dt)
 {
-    timer += dt;
-
-        if (CircleToCircleCollision() == true)
-        {
-            printf("Collision Sex!");
-            timer = 0;
-        }
+    if (CircleToCircleCollision() == true)
+    {
+        printf("Collision Sex!");
+        sound.play(1);
+    }
 }

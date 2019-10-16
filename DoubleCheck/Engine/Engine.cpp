@@ -55,7 +55,6 @@ void Engine::Init()
     state_manager->AddState("Level1", new Level1);
 
     Object* temp = new Object();
-
     temp->AddComponent(new Physics);
     temp->AddComponent(new Collision);
     temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
@@ -67,10 +66,20 @@ void Engine::Init()
 
     Object* temp_sec = new Object();
     temp_sec->AddComponent(new Physics);
-    //temp->AddComponent(new Collision);
+    //temp_sec->AddComponent(new Collision);
     temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
     temp_sec->AddComponent(new Component_Transform());
 
+    //Object* fuck_me = new Object();
+    //fuck_me->AddComponent(new Physics);
+    //fuck_me->AddComponent(new Collision);
+    //fuck_me->AddComponent(new Sprite(fuck_me, "../sprite/salmin.png"));
+    //fuck_me->AddComponent(new Player());
+    //fuck_me->AddComponent(new Component_Transform());
+    //fuck_me->SetTranslation({ -200, -200 });
+    //fuck_me->GetMesh().Get_Is_Moved() = true;
+
+    //fuck_me->Set_Name("third");
     temp_sec->Set_Name("second");
     temp_sec->Set_Tag("enemy");
 
@@ -82,6 +91,7 @@ void Engine::Init()
 
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
+    //object_manager->AddObject(fuck_me);
     //object_manager->AddObject(temp_third);
 
     game_timer.Reset();
