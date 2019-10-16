@@ -54,6 +54,12 @@ void ObjectManager::Delete()
     object_manager = nullptr;
 }
 
+void ObjectManager::Clear()
+{
+    objects.clear();
+    delete_obj.clear();
+}
+
 void ObjectManager::AddObject(Object* obj)
 {
     //for (auto component : obj->GetComponentContainer())
@@ -83,3 +89,16 @@ std::vector<Object*> ObjectManager::Find_Objects_By_Tag(std::string tag)
 
     return objects_have_tag;
 }
+
+Object* ObjectManager::Find_Object_By_Name(std::string name)
+{
+    for(auto object : objects)
+    {
+        if(object.get()->GetName() == name)
+        {
+            return object.get();
+        }
+    }
+    return nullptr;
+}
+

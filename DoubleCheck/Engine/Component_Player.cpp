@@ -3,11 +3,21 @@
 #include "ObjectManager.h"
 #include "Input.h"
 #include "Component_Enemy.h"
+#include "Component_Sprite.h"
 
 void Player::Init(Object* obj)
 {
     m_owner = obj;
-    std::cout << "Player is init" << std::endl;
+    m_owner->Get_Component_Info_Reference().component_info_player = true;
+
+    //Object* hp_bar = new Object();
+    //hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/temp.png"));
+    //hp_bar->GetMesh().Get_Is_Moved() = true;
+    //vector2 hp_bar_pos = m_owner->GetTransform().GetTranslation();
+    //hp_bar_pos.y -= 50;
+    //hp_bar->SetTranslation(hp_bar_pos);
+    //ObjectManager::GetObjectManager()->AddObject(hp_bar);
+
 }
 
 void Player::Update(float dt)
@@ -29,7 +39,7 @@ void Player::Attack()
         Object* obj = ObjectManager::GetObjectManager()->GetObjectManagerContainer_Value()[1].get();
         Message_Manager::Get_Message_Manager()->Save_Message(new Message(obj, m_owner, "attack"));
     }*/
-    if(input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_RIGHT))
+   /* if(input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_RIGHT))
     {
         std::vector<Object*> objects_with_tag;
         objects_with_tag = ObjectManager::GetObjectManager()->Find_Objects_By_Tag("enemy");
@@ -37,5 +47,5 @@ void Player::Attack()
         {
             Message_Manager::Get_Message_Manager()->Save_Message(new Message(objects, m_owner, "attack"));
         }
-    }
+    }*/
 }

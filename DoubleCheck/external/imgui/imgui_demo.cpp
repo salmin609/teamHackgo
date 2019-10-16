@@ -2796,7 +2796,8 @@ static void ShowDemoWindowMisc()
 
     if (ImGui::CollapsingHeader("Inputs, Navigation & Focus"))
     {
-        ImGuiIO& io = ImGui::GetIO();
+        
+		ImGuiIO& io = ImGui::GetIO();
 
         ImGui::Text("WantCaptureMouse: %d", io.WantCaptureMouse);
         ImGui::Text("WantCaptureKeyboard: %d", io.WantCaptureKeyboard);

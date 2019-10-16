@@ -66,6 +66,16 @@ vector2 Transform::GetTranslation() const noexcept
     return translation;
 }
 
+//void Transform::SetAcceleration(const vector2& new_acceleration)noexcept
+//{
+//	acceleration.x = new_acceleration.x;
+//	acceleration.y = new_acceleration.y;
+//}
+//
+//vector2 Transform::GetAcceleration() const noexcept
+//{
+//	return acceleration;
+//}
 void Transform::SetTranslation(const vector2& new_translation) noexcept
 {
     translation.x = new_translation.x;

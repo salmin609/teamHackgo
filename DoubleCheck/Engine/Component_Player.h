@@ -14,5 +14,6 @@ public:
     }
 
 private:
+    Object* hp_bar = nullptr;
     int damage = 2;
 };

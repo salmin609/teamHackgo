@@ -82,46 +82,16 @@ bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
     return is_okay;
 }
 
+//void Sprite::Ckeck_Enemy(Object* obj)
+//{
+//	
+//}
 
 void Sprite::Init(Object* obj)
 {
     m_owner = obj;
-/*
-	const auto path = staticSpritePath;
-    material.shader = &(SHADER::textured());
+    m_owner->Get_Component_Info_Reference().component_info_sprite = true;
 
-    
-    if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
-    {
-        std::cout << "fail to load texture" << std::endl;
-    }
-    texture.SelectTextureForSlot(texture);
-    material.textureUniforms["texture_to_sample"] = {&(texture)};
-    material.color4fUniforms["color"] = { 1.0f };
-    material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
-
-    debug_material.color4fUniforms["color"] = { 1.0f };
-    debug_material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
-
-    Mesh square;
-    square = MESH::create_box(100, { 100,100,100,255 });
-    
-    shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
-
-    m_owner->SetMesh(square);
-    m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
-
-    int size_for_normal = m_owner->GetMesh().Get_Points().size();
-
-    std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
-    for(int i = 0 ; i < size_for_normal; ++i)
-    {
-        vector2 normal_vec = vector_for_normal[i];
-
-        normal_vec.x = normal_vec.x / abs(normal_vec.x);
-        normal_vec.y = normal_vec.y / abs(normal_vec.y);
-        m_owner->Get_Normalize_Points().push_back(normal_vec);
-    }*/
 	debug_material.shader = &(SHADER::solid_color());
     m_owner->Set_Center({ 0.0f , 0.0f});
 
@@ -212,6 +182,11 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 
 void Sprite::Update(float dt)
 {	
+    if(!m_owner->Get_Component_Info_Reference().component_info_sprite)
+    {
+        m_owner->DeleteComponent(this);
+    }
+
     shape.UpdateVerticesFromMesh(m_owner->GetMesh());
     debug_shape.UpdateVerticesFromMesh(m_owner->Get_Debug_Mesh());
 
@@ -261,3 +236,44 @@ void Sprite::Update(float dt)
     }
     
 }
+
+
+
+
+
+/*
+    const auto path = staticSpritePath;
+    material.shader = &(SHADER::textured());
+
+
+    if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
+    {
+        std::cout << "fail to load texture" << std::endl;
+    }
+    texture.SelectTextureForSlot(texture);
+    material.textureUniforms["texture_to_sample"] = {&(texture)};
+    material.color4fUniforms["color"] = { 1.0f };
+    material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
+
+    debug_material.color4fUniforms["color"] = { 1.0f };
+    debug_material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
+
+    Mesh square;
+    square = MESH::create_box(100, { 100,100,100,255 });
+
+    shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
+
+    m_owner->SetMesh(square);
+    m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+
+    int size_for_normal = m_owner->GetMesh().Get_Points().size();
+
+    std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
+    for(int i = 0 ; i < size_for_normal; ++i)
+    {
+        vector2 normal_vec = vector_for_normal[i];
+
+        normal_vec.x = normal_vec.x / abs(normal_vec.x);
+        normal_vec.y = normal_vec.y / abs(normal_vec.y);
+        m_owner->Get_Normalize_Points().push_back(normal_vec);
+    }*/
