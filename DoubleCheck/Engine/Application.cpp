@@ -363,7 +363,7 @@ void Application::Imgui_Update()
 				new_obj->AddComponent(new Sprite(new_obj, "../sprite/maknae.png"));
 			}
 			new_obj->SetTranslation(this_pos);
-			new_obj->AddComponent(new Physics);
+			//new_obj->AddComponent(new Physics);
 			new_obj->GetMesh().Get_Is_Moved() = true;
 			ObjectManager::GetObjectManager()->AddObject(new_obj);
 
@@ -383,9 +383,6 @@ void Application::Delete()
 
 void Application::Save()
 {
-	//Transform a;
-	//Transform::Transform().Get_Save_Translation();
-	//std::cout<< Transform::Transform().Get_Save_Translation().x;
 }
 
 void Application::Clear()
