@@ -35,7 +35,7 @@ void Player::Attack()
         Object* obj = ObjectManager::GetObjectManager()->GetObjectManagerContainer_Value()[1].get();
         Message_Manager::Get_Message_Manager()->Save_Message(new Message(obj, m_owner, "attack"));
     }*/
-    if(input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_RIGHT))
+   /* if(input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_RIGHT))
     {
         std::vector<Object*> objects_with_tag;
         objects_with_tag = ObjectManager::GetObjectManager()->Find_Objects_By_Tag("enemy");
@@ -43,5 +43,5 @@ void Player::Attack()
         {
             Message_Manager::Get_Message_Manager()->Save_Message(new Message(objects, m_owner, "attack"));
         }
-    }
+    }*/
 }

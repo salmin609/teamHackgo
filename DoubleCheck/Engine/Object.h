@@ -4,6 +4,7 @@
 #include "Component.hpp"
 #include <string>
 #include "Object_Component_Info.h"
+#include "Physics.h"
 #include <iostream>
 
 inline int object_id_increment = 1;
@@ -30,7 +31,7 @@ private:
     bool is_selected = false;
     std::string tag;
     bool need_update_points = false;
-    bool is_debug_mode = false;
+    bool is_debug_mode = true;
     
     
 
@@ -148,6 +149,7 @@ public:
     void DeleteComponent(Component* comp);
 
     void SetTranslation(vector2 pos);
+	
     void SetRotation(float angle);
     void SetScale(vector2 scale);
     void SetScale(float scale);

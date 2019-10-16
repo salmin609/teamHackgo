@@ -12,6 +12,7 @@ void Physics::Init(Object* obj)
     m_owner = obj;
     m_owner->Get_Component_Info_Reference().component_info_physics = true;
 }
+//void Physics::Set
 
 void Physics::Acceleration()
 {

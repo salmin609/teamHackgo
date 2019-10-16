@@ -7,8 +7,6 @@
 #include "Message_Manager.h"
 #include "Component_Sprite.h"
 
-#include "Component_Sprite.h"
-
 
 Application* Application::application = nullptr;
 
@@ -118,21 +116,10 @@ void Application::Update(float dt)
 	{
 		Clear();
 
-        //Engine re_start;
-        //re_start.Test();
-    }
+		//Engine re_start;
+		//re_start.Test();
+	}
 
-    
-    save_dt += dt;
-    if (save_dt >= 1.0f)
-    {
-        std::stringstream title;
-        title << "sangministhebest" << " " << " [" << FPS_frame << " FPS]";
-        glfwSetWindowTitle(window, title.str().c_str());
-        FPS_frame = 0;
-        save_dt = 0;
-    }
-    FPS_frame++;
 
 	save_dt += dt;
 	if (save_dt >= 1.0f)
@@ -147,6 +134,12 @@ void Application::Update(float dt)
 
 	if (input.Is_Key_Triggered(GLFW_KEY_ESCAPE))
 	{
+		//delete Application::Get_Application();
+		//delete ObjectManager::GetObjectManager();
+		//delete StateManager::GetStateManager();
+		//delete Graphic::GetGraphic();
+		//delete Message_Manager::Get_Message_Manager();
+
 		exit(0);
 	}
 	if (input.Is_Mouse_Double_Clicked(GLFW_MOUSE_BUTTON_LEFT))
@@ -179,357 +172,179 @@ matrix3 helper_inverse(matrix3 model_to_world)
 
 void Application::Imgui_Update()
 {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-    static vector2 origin_mouse_pos;
-    //if (show_demo_window)
-    //    ImGui::ShowDemoWindow(&show_demo_window);
-    ImGui::Begin("salmin gui");
-
-		//	if (ImGui::IsMouseDoubleClicked(0))
-		//	{
-		//		// Do stuff
-		//	}
-		//}
-		/*if (this_obj->Get_Is_Selected())
-		{
-			if (input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_LEFT))
-			{
-				Ckeck_Enemy();
-			}
-		}
-		ImGui::PushID()*/
-		//	ImGui::Checkbox("select", &this_obj->Get_Is_Selected());
-		//	if (this_obj->Get_Is_Selected())
-		//	{
-		//		if (input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_LEFT))
-		//		{
-		//			origin_mouse_pos = input.Get_Mouse_Pos();
-		//		}
-		//		else if (input.Is_Mouse_Pressed(GLFW_MOUSE_BUTTON_LEFT))
-		//		{
-		//			if (origin_mouse_pos != input.Get_Mouse_Pos())
-		//			{
-		//				vector2 following_mouse;
-		//				following_mouse.x = input.Get_Mouse_Pos().x - origin_mouse_pos.x;//origin_mouse_pos.x - input.Get_Mouse_Pos().x;
-		//				following_mouse.y = input.Get_Mouse_Pos().y - origin_mouse_pos.y;//origin_mouse_pos.y - input.Get_Mouse_Pos().y;
-
-		//				following_mouse = normalize(following_mouse);
-		//				this_obj->GetTransform().SetTranslation(input.Get_Mouse_Pos());
-		//			}
-		//		}
-		//		else if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
-		//		{
-		//			this_obj->GetTransform().AddTranslation({ 0.0f, 0.0f });
-		//		}
-		//		Graphic::GetGraphic()->get_need_update_sprite() = true;
-		//	}
-		//	ImGui::TreePop();
-
-		//}
-
-
-            if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
-            {
-                this_obj->Set_Name(this_obj->name_buf);
-            }
-
-
-		/*for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
-		{
-			ImGui::Selectable(names[i], &selected[i], ImGuiDragDropFlags_::ImGuiDragDropFlags_None);
-			if (selected[3])
-			{
-				std::cout << "check";
-				vec.push_back(names[3]);
-			}
-		}*/
-	static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
-
-	//int b = (int)names[0];
-
-	static bool selected[5] = { false };
-
-	ImGuiIO& io = ImGui::GetIO();
-	ImTextureID a = io.Fonts->TexID;
-	//ImTextureID a = "../Sprite/dicksean.png";
-	float my_tex_w = (float)io.Fonts->TexWidth;
-	float my_tex_h = (float)io.Fonts->TexHeight;
-	//bool ret = Sprite::Can_Load_To_Texture(name[i], "../Sprite/temp.png");
-	//bool ret = Sprite::Can_Load_To_Texture(texture, "../Sprite/temp.png")
-	//static int pressed_count = 0;
-	if (ImGui::TreeNode("Drag and Drop"))
-	{
-		//IM_ASSERT	
-
-		//if (ImGui::BeginCombo("Listbox", " "))
-		//{
-		//	//preview = "";
-		//	//std::string save_enemy = listbox_enemy;
-
-		//	for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
-		//	{
-		//		ImGui::Selectable(names[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
-		//		if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-		//		{
-		//			ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
-		//			ImGui::EndDragDropSource();
-		//			is_drag_and_drop_mode = true;
-		//		}
-		//	}
-
-		//	ImGui::EndCombo();
-		//}
-		//if (selected[0])
-		//{
-		//	if (is_drag_and_drop_mode)
-		//	{
-		//		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
-		//		{
-		//			std::cout << "dick";
-		//			vector2 this_pos = input.Get_Mouse_Pos();
-
-		//			Object* new_obj = new Object();
-		//			new_obj->AddComponent(new Sprite(new_obj, "../sprite/salmin.png"));
-		//			new_obj->Get_Is_Selected() = true;
-
-		//			new_obj->SetTranslation(this_pos);
-		//			new_obj->Set_Name("dynamical added");
-		//			new_obj->GetMesh().Get_Is_Moved() = true;
-		//			ObjectManager::GetObjectManager()->AddObject(new_obj);
-
-		//			is_drag_and_drop_mode = false;
-
-                    float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
-                    float zoom_converted = zoom - 1.f;
-                    float zoom_finish = 1.f - zoom_converted;
-                    vector2 converted = { mouse.x - result.x, mouse.y - result.y };
-                    this_obj->GetMesh().Get_Is_Moved() = true;
-                    this_obj->GetTransform().SetTranslation({ mouse.x + (zoom_finish * (mouse.x - result.x)), mouse.y + (zoom_finish * (mouse.y - result.y)) });
-                }
-            }
-
-            if (ImGui::Checkbox("Component_physics", &this_obj->Get_Component_Info_Reference().component_info_physics))
-            {
-                if (this_obj->Get_Component_Info_Reference().component_info_physics)
-                {
-                    this_obj->AddComponent(new Physics());
-                }
-            }
-            if(ImGui::Checkbox("Component_sprite", &this_obj->Get_Component_Info_Reference().component_info_sprite))
-            {
-                if(this_obj->Get_Component_Info_Reference().component_info_sprite)
-                {
-                    //this_obj->AddComponent(new Sprite());
-                }
-            }
-            if (ImGui::Checkbox("Component_Top_Down_Move", &this_obj->Get_Component_Info_Reference().component_info_top_down_movement))
-            {
-                if (this_obj->Get_Component_Info_Reference().component_info_top_down_movement)
-                {
-                    this_obj->AddComponent(new Component_TopDownMovement());
-                }
-            }
-            
-
-            ImGui::TreePop();
-        }
-    }
-    static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
-    if (ImGui::TreeNode("Drag and Drop"))
-    {
-        for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-        {
-            ImGui::PushID(i);
-            if ((i % 3) != 0)
-                ImGui::SameLine();
-            ImGui::Button(names[i], ImVec2(60, 60));
-
-            if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-            {
-                ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
-                ImGui::EndDragDropSource();
-                which_one_to_make = names[i];
-                is_drag_and_drop_mode = true;
-            }
-            if (ImGui::BeginDragDropTarget())
-            {
-                ImGui::EndDragDropTarget();
-            }
-            ImGui::PopID();
-        }
-        ImGui::Unindent();
-        ImGui::TreePop();
-    }
-    if (is_drag_and_drop_mode)
-    {
-        if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
-        {
-            vector2 this_pos = input.Get_Mouse_Pos();
-
-            Object* new_obj = new Object();
-
-            if(which_one_to_make == names[0])
-            {
-                new_obj->Set_Name(names[0]);
-                new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp2.png"));
-            }
-            else if(which_one_to_make == names[1])
-            {
-                
-            }
-            else if (which_one_to_make == names[2])
-            {
-
-            }
-            else if(which_one_to_make == names[3])
-            {
-                new_obj->Set_Name(names[3]);
-                new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
-            }
-            else if (which_one_to_make == names[4])
-            {
-
-            }
-
-            new_obj->SetTranslation(this_pos);
-            
-            new_obj->GetMesh().Get_Is_Moved() = true;
-            ObjectManager::GetObjectManager()->AddObject(new_obj);
-
-			//for (size_t i = 0; i < IM_ARRAYSIZE(names); i++)
-			//{
-			//	ImGui::Selectable(names[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
-			//	if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-			//	{
-			//		ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
-			//		ImGui::EndDragDropSource();
-			//		is_drag_and_drop_mode = true;
-			//	}
-			//}
-			//ImGui::Selectable(names[i], &selected[i], ImGuiSelectableFlags_::ImGuiSelectableFlags_DontClosePopups);
-
-			if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-			{
-				ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
-				ImGui::EndDragDropSource();
-				is_drag_and_drop_mode = true;
-			}
-
-			if (ImGui::BeginDragDropTarget())
-			{
-				ImGui::EndDragDropTarget();
-			}
-
-			ImGui::PopID();
-		}
-
-		ImGui::Unindent();
-		ImGui::TreePop();
-	}
-	//if (input.Is_Key_Released(GLFW_MOUSE_BUTTON_LEFT))
-	//{
-	//	for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-	//	{
-	//		if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-	//		{
-	//			ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
-	//			ImGui::EndDragDropSource();
-	//			is_drag_and_drop_mode = true;
-	//		}
-	//	}
-	//}
-	if (is_drag_and_drop_mode)
-	{
-		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT) && ImGui::IsMouseDown(GLFW_MOUSE_BUTTON_1))
-		{
-			//if(ImGui::IsMouseDown())
-			vector2 this_pos = input.Get_Mouse_Pos();
-
-			Object* new_obj = new Object();
-			new_obj->AddComponent(new Sprite(new_obj, "../sprite/salmin.png"));
-			new_obj->Get_Is_Selected() = true;
-
-			new_obj->SetTranslation(this_pos);
-			new_obj->Set_Name("dynamical added");
-			new_obj->GetMesh().Get_Is_Moved() = true;
-			ObjectManager::GetObjectManager()->AddObject(new_obj);
-
-			is_drag_and_drop_mode = false;
-		}
-		/*if (ImGui::IsMouseDragging(0, 0.0f))
-		{
-			if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
-			{
-				vector2 this_pos = input.Get_Mouse_Pos();
-
-				Object* new_obj = new Object();
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/salmin.png"));
-				new_obj->Get_Is_Selected() = true;
-
-				new_obj->SetTranslation(this_pos);
-				new_obj->Set_Name("dynamical added");
-				new_obj->GetMesh().Get_Is_Moved() = true;
-				ObjectManager::GetObjectManager()->AddObject(new_obj);
-
-				is_drag_and_drop_mode = false;
-			}
-		}*/
-
-	}
-
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+	static vector2 origin_mouse_pos;
+	//if (show_demo_window)
+	//    ImGui::ShowDemoWindow(&show_demo_window);
+	ImGui::Begin("salmin gui");
 
 	for (int i = 0; i < ObjectManager::GetObjectManager()->GetObjectManagerContainer().size(); i++)
 	{
 		Object* this_obj = ObjectManager::GetObjectManager()->GetObjectManagerContainer_Value()[i].get();
-
+		this_obj->Get_Is_Debugmode();
 		if (ImGui::TreeNode(this_obj->Get_Name().c_str()))
 		{
-
 			ImGui::TextWrapped("Salmin UI");
-			ImGui::SliderFloat("translation_x", &this_obj->GetTransform().GetTranslation_Reference().x, -1.0f, 1.0f);
+			ImGui::SliderFloat("translation_x", &this_obj->GetTransform().GetTranslation_Reference().x, -1.0f, 150.0f);
 			ImGui::SliderFloat("translation_y", &this_obj->GetTransform().GetTranslation_Reference().y, -1.0f, 1.0f);
 			ImGui::SliderFloat("scale_x", &this_obj->GetTransform().GetScale_Reference().x, -2.0f, 2.0f);
 			ImGui::SliderFloat("scale_y", &this_obj->GetTransform().GetScale_Reference().y, -2.0f, 2.0f);
-
+			if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
+			{
+				ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
+				ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
+			}
+			
 			if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
 			{
 				this_obj->Set_Name(this_obj->name_buf);
 			}
 
 			ImGui::Checkbox("select", &this_obj->Get_Is_Selected());
+			
+			if (ImGui::Button("Delete Object"))
+			{
+				this_obj->SetDeadCondition(true);
+			}
 
 			if (this_obj->Get_Is_Selected())
 			{
-				if (input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_LEFT))
+				if (input.Is_Mouse_Pressed(GLFW_MOUSE_BUTTON_RIGHT))
 				{
-					origin_mouse_pos = input.Get_Mouse_Pos();
-				}
-				else if (input.Is_Mouse_Pressed(GLFW_MOUSE_BUTTON_LEFT))
-				{
-					if (origin_mouse_pos != input.Get_Mouse_Pos())
-					{
-						vector2 following_mouse;
-						following_mouse.x = input.Get_Mouse_Pos().x - origin_mouse_pos.x;//origin_mouse_pos.x - input.Get_Mouse_Pos().x;
-						following_mouse.y = input.Get_Mouse_Pos().y - origin_mouse_pos.y;//origin_mouse_pos.y - input.Get_Mouse_Pos().y;
+					this_obj->GetTransform().SetTranslation(input.Get_Mouse_Pos());
 
-						following_mouse = normalize(following_mouse);
-						this_obj->GetTransform().SetTranslation(input.Get_Mouse_Pos());
-					}
+					vector3 converting;
+					vector2 mouse = input.Get_Mouse_Pos();
+
+					converting.x = input.Get_Mouse_Pos().x;
+					converting.y = input.Get_Mouse_Pos().y;
+					converting.z = 1.0f;
+
+					converting = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * converting;
+					converting = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * converting;
+					converting.x *= 640;
+					converting.y *= 360;
+
+					vector2 result;
+					result.x = converting.x;
+					result.y = converting.y;
+
+					this_obj->Get_Is_Need_Convert_Translation() = true;
+					this_obj->Get_Convert_Translation() = { mouse.x - result.x, mouse.y - result.y };
+
+					float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+					float zoom_converted = zoom - 1.f;
+					float zoom_finish = 1.f - zoom_converted;
+					vector2 converted = { mouse.x - result.x, mouse.y - result.y };
+					this_obj->GetMesh().Get_Is_Moved() = true;
+					this_obj->GetTransform().SetTranslation({ mouse.x + (zoom_finish * (mouse.x - result.x)), mouse.y + (zoom_finish * (mouse.y - result.y)) });
 				}
-				else if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
-				{
-					this_obj->GetTransform().AddTranslation({ 0.0f, 0.0f });
-				}
-				Graphic::GetGraphic()->get_need_update_sprite() = true;
 			}
+
+			if (ImGui::Checkbox("Component_physics", &this_obj->Get_Component_Info_Reference().component_info_physics))
+			{
+				if (this_obj->Get_Component_Info_Reference().component_info_physics)
+				{
+					this_obj->AddComponent(new Physics());
+				}
+			}
+			if (ImGui::Checkbox("Component_sprite", &this_obj->Get_Component_Info_Reference().component_info_sprite))
+			{
+				if (this_obj->Get_Component_Info_Reference().component_info_sprite)
+				{
+					//this_obj->AddComponent(new Sprite());
+				}
+			}
+			if (ImGui::Checkbox("Component_Top_Down_Move", &this_obj->Get_Component_Info_Reference().component_info_top_down_movement))
+			{
+				if (this_obj->Get_Component_Info_Reference().component_info_top_down_movement)
+				{
+					this_obj->AddComponent(new Component_TopDownMovement());
+				}
+			}
+
 			ImGui::TreePop();
+		}
+	}
+	static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
+	ImGuiIO& io = ImGui::GetIO();
+	ImTextureID a = io.Fonts->TexID;
+	//ImGui_ImplGlfwGL3_RenderDrawData()
+	float my_tex_w = (float)io.Fonts->TexWidth;
+	float my_tex_h = (float)io.Fonts->TexHeight;
+
+	if (ImGui::TreeNode("Drag and Drop"))
+	{
+		for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+		{
+			ImGui::PushID(i);
+			if ((i % 3) != 0)
+				ImGui::SameLine();
+			int frame_padding = -1 + i;     // -1 = uses default padding
+			//ImGui::Button(names[i], ImVec2(60, 60));
+			//ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
+			ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0));
+			if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+			{
+				ImGui::SetDragDropPayload("DND_DEMO_CELL", &i, sizeof(int));        // Set payload to carry the index of our item (could be anything)
+				ImGui::EndDragDropSource();
+				which_one_to_make = names[i];
+				is_drag_and_drop_mode = true;
+			}
+			if (ImGui::BeginDragDropTarget())
+			{
+				ImGui::EndDragDropTarget();
+			}
+			ImGui::PopID();
+		}
+		ImGui::Unindent();
+		ImGui::TreePop();
+	}
+	if (is_drag_and_drop_mode)
+	{
+		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
+		{
+			vector2 this_pos = input.Get_Mouse_Pos();
+
+			Object* new_obj = new Object();
+
+			if (which_one_to_make == names[0])
+			{
+				new_obj->Set_Name(names[0]);
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/dicksean.png"));
+			}
+			else if (which_one_to_make == names[1])
+			{
+				new_obj->Set_Name(names[1]);
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/kingchulseong.png"));
+			}
+			else if (which_one_to_make == names[2])
+			{
+				new_obj->Set_Name(names[2]);
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/waterpunch.png"));
+			}
+			else if (which_one_to_make == names[3])
+			{
+				new_obj->Set_Name(names[3]);
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
+			}
+			else if (which_one_to_make == names[4])
+			{
+				new_obj->Set_Name(names[4]);
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/Su whan.png"));
+			}
+			new_obj->SetTranslation(this_pos);
+			//new_obj->AddComponent(new Physics);
+			new_obj->GetMesh().Get_Is_Moved() = true;
+			ObjectManager::GetObjectManager()->AddObject(new_obj);
+
+			is_drag_and_drop_mode = false;
 		}
 	}
 
 	ImGui::End();
-
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -548,10 +363,10 @@ void Application::Save()
 
 void Application::Clear()
 {
-    //ObjectManager::GetObjectManager()->Init();
-    //StateManager::GetStateManager()->Init();
-    //Graphic::GetGraphic()->Init();
-    //ImGui::CloseCurrentPopup();
+	//ObjectManager::GetObjectManager()->Init();
+	//StateManager::GetStateManager()->Init();
+	//Graphic::GetGraphic()->Init();
+	//ImGui::CloseCurrentPopup();
 }
 bool Application::IsFullScreen()
 {

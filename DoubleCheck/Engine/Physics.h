@@ -22,6 +22,10 @@ public:
     {
         return acceleration;
     }
+	vector2 &GetAcceleration_Reference() 
+	{
+		return acceleration;
+	}
       
 private:
     std::vector<vector2> points{};

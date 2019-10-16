@@ -19,7 +19,7 @@ public:
     {
         return translation;
     }
-    void    SetTranslation(const vector2& new_translation) noexcept;
+    void SetTranslation(const vector2& new_translation) noexcept;
     void AddTranslation(const vector2& translation);
 	vector2 Get_Save_Translation()const noexcept;
 	//void Set_Save_Translation(const vector2& new_translation)noexcept;
@@ -29,13 +29,19 @@ public:
     {
         return scale;
     }
-
+	/*vector2 GetAcceleration()const noexcept;
+	vector2& GetAcceleration_Reference()
+	{
+		return acceleration;
+	}*/
     vector2 &GetCenter()
     {
         return center;
     }
     void    SetScale(const float& new_scale) noexcept;
     void    SetScale(const vector2& new_scale) noexcept;
+
+	void SetAcceleration(const vector2& new_acceleration) noexcept;
 
     float GetRotation() const noexcept;
     void  SetRotation(float new_rotation) noexcept;
@@ -44,6 +50,7 @@ public:
     void             SetParent(const Transform* transform_parent) noexcept;
 
 private:
+	vector2			 acceleration = { 0, 0 };
     vector2          translation{};
     vector2          scale{1.0f, 1.0f};
 	vector2			 save_translation{0, 0};
