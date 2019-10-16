@@ -658,7 +658,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
     }
 }
 
-void Physics::Dash(Object* object)
+void Physics::Dash(Object* object) const
 {
     vector2 acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
     acceleration = normalize(acceleration);

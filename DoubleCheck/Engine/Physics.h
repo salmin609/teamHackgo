@@ -11,7 +11,7 @@ public:
     void Acceleration2();
     void JustMove();
     void KnockBack(Object* object_1, Object* object_2);
-    void Dash(Object* object);
+    void Dash(Object* object) const;
     void BasicMovement();
     void BasicMovement2();
     void Update(float dt) override;
