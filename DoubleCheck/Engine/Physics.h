@@ -9,6 +9,7 @@ public:
     void Init(Object *obj) override;
     void Acceleration();
     void Acceleration2();
+    void JustMove();
     void KnockBack(Object* object_1, Object* object_2);
     void BasicMovement();
     void BasicMovement2();
