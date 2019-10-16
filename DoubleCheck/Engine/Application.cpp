@@ -148,28 +148,6 @@ void Application::Update(float dt)
     }
 }
 
-matrix3 helper_inverse(matrix3 model_to_world)
-{
-    double det = model_to_world(0, 0) * (model_to_world(1, 1) * model_to_world(2, 2) - model_to_world(2, 1) * model_to_world(1, 2)) -
-        model_to_world(0, 1) * (model_to_world(1, 0) * model_to_world(2, 2) - model_to_world(1, 2) * model_to_world(2, 0)) +
-        model_to_world(0, 2) * (model_to_world(1, 0) * model_to_world(2, 1) - model_to_world(1, 1) * model_to_world(2, 0));
-
-    double invdet = 1 / det;
-
-    matrix3 minv;
-    minv(0, 0) = static_cast<float>((model_to_world(1, 1) * model_to_world(2, 2) - model_to_world(2, 1) * model_to_world(1, 2)) * invdet);
-    minv(0, 1) = static_cast<float>((model_to_world(0, 2) * model_to_world(2, 1) - model_to_world(0, 1) * model_to_world(2, 2)) * invdet);
-    minv(0, 2) = static_cast<float>((model_to_world(0, 1) * model_to_world(1, 2) - model_to_world(0, 2) * model_to_world(1, 1)) * invdet);
-    minv(1, 0) = static_cast<float>((model_to_world(1, 2) * model_to_world(2, 0) - model_to_world(1, 0) * model_to_world(2, 2)) * invdet);
-    minv(1, 1) = static_cast<float>((model_to_world(0, 0) * model_to_world(2, 2) - model_to_world(0, 2) * model_to_world(2, 0)) * invdet);
-    minv(1, 2) = static_cast<float>((model_to_world(1, 0) * model_to_world(0, 2) - model_to_world(0, 0) * model_to_world(1, 2)) * invdet);
-    minv(2, 0) = static_cast<float>((model_to_world(1, 0) * model_to_world(2, 1) - model_to_world(2, 0) * model_to_world(1, 1)) * invdet);
-    minv(2, 1) = static_cast<float>((model_to_world(2, 0) * model_to_world(0, 1) - model_to_world(0, 0) * model_to_world(2, 1)) * invdet);
-    minv(2, 2) = static_cast<float>((model_to_world(0, 0) * model_to_world(1, 1) - model_to_world(1, 0) * model_to_world(0, 1)) * invdet);
-
-    return minv;
-}
-
 void Application::Imgui_Update()
 {
     ImGui_ImplOpenGL3_NewFrame();
@@ -194,28 +172,15 @@ void Application::Imgui_Update()
 
 
 
-            if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
-            {
-                this_obj->Set_Name(this_obj->name_buf);
-            }
+            //if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
+            //{
+            //    this_obj->Set_Name(this_obj->name_buf);
+            //}
 
             ImGui::Checkbox("select", &this_obj->Get_Is_Selected());
             ImGui::Checkbox("debug_mode", &this_obj->Get_Is_Debugmode());
 
-            if (ImGui::Button("Create Object"))
-            {
-                //vector2 this_pos = this_obj->GetTransform_Value().GetTranslation();
-                vector2 this_pos = input.Get_Mouse_Pos();
-
-                Object* new_obj = new Object();
-                new_obj->AddComponent(new Sprite(new_obj,"../sprite/temp.png"));
-                new_obj->Get_Is_Selected() = true;
-
-                new_obj->SetTranslation(this_pos);
-                new_obj->Set_Name("dynamical added");
-                new_obj->GetMesh().Get_Is_Moved() = true;
-                ObjectManager::GetObjectManager()->AddObject(new_obj);
-            }
+            
 
             if (ImGui::Button("Delete Object"))
             {
@@ -227,32 +192,7 @@ void Application::Imgui_Update()
                 if (input.Is_Mouse_Pressed(GLFW_MOUSE_BUTTON_LEFT))
                 {
                     this_obj->GetTransform().SetTranslation(input.Get_Mouse_Pos());
-
-                    vector3 converting;
-                    vector2 mouse = input.Get_Mouse_Pos();
-
-                    converting.x = input.Get_Mouse_Pos().x;
-                    converting.y = input.Get_Mouse_Pos().y;
-                    converting.z = 1.0f;
-
-                    converting = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform() * converting;
-                    converting = Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera() * converting;
-                    converting.x *= 640;
-                    converting.y *= 360;
-
-                    vector2 result;
-                    result.x = converting.x;
-                    result.y = converting.y;
-
-                    this_obj->Get_Is_Need_Convert_Translation() = true;
-                    this_obj->Get_Convert_Translation() = { mouse.x - result.x, mouse.y - result.y };
-
-                    float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
-                    float zoom_converted = zoom - 1.f;
-                    float zoom_finish = 1.f - zoom_converted;
-                    vector2 converted = { mouse.x - result.x, mouse.y - result.y };
                     this_obj->GetMesh().Get_Is_Moved() = true;
-                    this_obj->GetTransform().SetTranslation({ mouse.x + (zoom_finish * (mouse.x - result.x)), mouse.y + (zoom_finish * (mouse.y - result.y)) });
                 }
             }
 

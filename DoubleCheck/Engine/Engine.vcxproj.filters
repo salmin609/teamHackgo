@@ -71,6 +71,12 @@
     <ClCompile Include="View.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="BitmapFont.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Object_Component_Info.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
     <ClCompile Include="..\external\imgui\imgui.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
@@ -88,12 +94,6 @@
     </ClCompile>
     <ClCompile Include="..\external\imgui\imgui_widgets.cpp">
       <Filter>Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="BitmapFont.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="Object_Component_Info.cpp">
-      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
