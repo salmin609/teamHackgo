@@ -294,23 +294,23 @@ void Application::Imgui_Update()
 			
 			if (i == 0)
 			{
-				ImGui::ImageButton(reinterpret_cast<void*>(object1.GetTextureHandle()), ImVec2(32, 32), ImVec2(0, 0));
+				ImGui::ImageButton((void*)object1.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
 			}
 			else if (i == 1)
 			{
-				ImGui::ImageButton(reinterpret_cast<void*>(object2.GetTextureHandle()), ImVec2(32, 32), ImVec2(0, 0));
+				ImGui::ImageButton((void*)object2.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
 			}
 			else if (i == 2)
 			{
-				ImGui::ImageButton(reinterpret_cast<void*>(object3.GetTextureHandle()), ImVec2(32, 32), ImVec2(0, 0));
+				ImGui::ImageButton((void*)object3.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
 			}
 			else if (i == 3)
 			{
-				ImGui::ImageButton(reinterpret_cast<void*>(object4.GetTextureHandle()), ImVec2(32, 32), ImVec2(0, 0));
+				ImGui::ImageButton((void*)object4.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
 			}
 			else if (i == 4)
 			{
-				ImGui::ImageButton(reinterpret_cast<void*>(object5.GetTextureHandle()), ImVec2(32, 32), ImVec2(0, 0));
+				ImGui::ImageButton((void*)object5.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
 			}
 
 			if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
@@ -455,4 +455,3 @@ namespace
 		glViewport(0, 0, width, height);
 	}*/
 }
-
