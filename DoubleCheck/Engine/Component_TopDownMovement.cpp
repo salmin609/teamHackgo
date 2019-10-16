@@ -17,15 +17,15 @@ void Component_TopDownMovement::Update(float dt)
 
 
     //WASD pressed movement
-    if (input.Is_Key_Pressed(GLFW_KEY_W))
+    if (input.Is_Key_Pressed(GLFW_KEY_I))
     {
         m_owner->GetTransform().AddTranslation({ 0.0f, 1.0f });
 
-        if (input.Is_Key_Pressed((GLFW_KEY_D)))
+        if (input.Is_Key_Pressed((GLFW_KEY_L)))
         {
             m_owner->GetTransform().AddTranslation({ 1.0f, 0.0f });
         }
-        else if (input.Is_Key_Pressed((GLFW_KEY_A)))
+        else if (input.Is_Key_Pressed((GLFW_KEY_J)))
         {
             m_owner->GetTransform().AddTranslation({ -1.0f, 0.0f });
         }
@@ -33,13 +33,13 @@ void Component_TopDownMovement::Update(float dt)
         m_owner->GetMesh().Get_Is_Moved() = true;
         m_owner->Set_Need_Update_Points(true);
     }
-    else if (input.Is_Key_Pressed(GLFW_KEY_S))
+    else if (input.Is_Key_Pressed(GLFW_KEY_K))
     {
         m_owner->GetTransform().AddTranslation({ 0.0f, -1.0f });
         m_owner->GetMesh().Get_Is_Moved() = true;
         m_owner->Set_Need_Update_Points(true);
     }
-    else if (input.Is_Key_Pressed((GLFW_KEY_A)))
+    else if (input.Is_Key_Pressed((GLFW_KEY_J)))
     {
         m_owner->GetTransform().AddTranslation({ -1.0f, 0.0f });
 
@@ -47,7 +47,7 @@ void Component_TopDownMovement::Update(float dt)
         m_owner->GetMesh().Get_Is_Moved() = true;
         m_owner->Set_Need_Update_Points(true);
     }
-    else if (input.Is_Key_Pressed((GLFW_KEY_D)))
+    else if (input.Is_Key_Pressed((GLFW_KEY_L)))
     {
         m_owner->GetTransform().AddTranslation({ 1.0f, 0.0f });
 
