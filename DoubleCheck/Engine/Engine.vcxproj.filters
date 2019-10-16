@@ -16,6 +16,7 @@
     <ClCompile Include="View.cpp" />
     <ClCompile Include="Object_Component_Info.cpp" />
     <ClCompile Include="imgui_impl_glfw_gl3.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\external\imgui\imgui.cpp" />
     <ClCompile Include="..\external\imgui\imgui_demo.cpp" />
     <ClCompile Include="..\external\imgui\imgui_draw.cpp" />
@@ -40,6 +41,8 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
+=======
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\imgui\imconfig.h" />
@@ -60,6 +63,7 @@
     <ClInclude Include="Vertices.hpp" />
     <ClInclude Include="View.h" />
     <ClInclude Include="Object_Component_Info.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\external\imgui\imgui.h" />
     <ClInclude Include="..\external\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="..\external\imgui\imgui_impl_opengl3.h" />
@@ -91,6 +95,8 @@
     <ClInclude Include="StockShaders.hpp" />
     <ClInclude Include="Text.hpp" />
     <ClInclude Include="Texture.hpp" />
+=======
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
