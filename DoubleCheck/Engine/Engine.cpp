@@ -2,7 +2,6 @@
 #include "Application.hpp"
 #include "ObjectManager.h"
 #include "Input.h"
-
 #include "Component_Collision.h"
 #include "Component_Player.h"
 #include "Graphic.h"
@@ -32,13 +31,13 @@ namespace
 
 void Engine::Init()
 {
-    sound.initialize();
-    sound.load();
-    sound.play(0);
-    sound.volume(0, 1);
-    Sleep(1400);
-    sound.play(2);
-    sound.volume(2, 8);
+    //sound.initialize();
+    //sound.load();
+    //sound.play(0);
+    //sound.volume(0, 1);
+    //Sleep(1400);
+    //sound.play(2);
+    //sound.volume(2, 8);
 
     app_ = Application::Get_Application();
     object_manager = ObjectManager::GetObjectManager();
@@ -67,7 +66,6 @@ void Engine::Init()
 
     Object* temp_sec = new Object();
     temp_sec->AddComponent(new Physics);
-    temp_sec->AddComponent(new Collision);
     temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
     temp_sec->AddComponent(new Component_Transform());
     temp_sec->Set_Name("second");
@@ -76,7 +74,6 @@ void Engine::Init()
 
     Object* temp_third = new Object();
     temp_third->AddComponent(new Physics);
-    temp_third->AddComponent(new Collision);
     temp_third->AddComponent(new Sprite(temp_third, "../sprite/salmin.png"));
     temp_third->AddComponent(new Component_Enemy());
     temp_third->SetTranslation({ -200, -200 });
@@ -85,7 +82,6 @@ void Engine::Init()
 
     Object* temp_fourth = new Object();
     temp_fourth->AddComponent(new Physics);
-    temp_fourth->AddComponent(new Collision);
     temp_fourth->AddComponent(new Sprite(temp_fourth, "../sprite/salmin.png"));
     temp_fourth->SetTranslation({ -400, -400 });
     temp_fourth->AddComponent(new Component_Transform());

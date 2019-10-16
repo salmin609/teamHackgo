@@ -330,7 +330,7 @@ void Physics::Acceleration()
             m_owner->GetMesh().Get_Is_Moved() = true;
         }
     }
-    printf("first translation = %f,  %f\n", acceleration.x, acceleration.y);
+    //printf("first translation = %f,  %f\n", acceleration.x, acceleration.y);
 }
 
 void Physics::Acceleration2()
@@ -652,7 +652,7 @@ void Physics::Acceleration2()
         }
     }
 
-    printf("Second translation = %f,  %f\n", acceleration.x, acceleration.y);
+    //printf("Second translation = %f,  %f\n", acceleration.x, acceleration.y);
 }
 
 void Physics::JustMove()
@@ -681,7 +681,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
         object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_1->GetMesh().Get_Is_Moved() = true;
 
-        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go/2.f);
+        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go / 2.f);
         object_2->GetTransform().AddTranslation(object_2->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_2->GetMesh().Get_Is_Moved() = true;
     }
@@ -693,7 +693,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
         object_2->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_2->GetMesh().Get_Is_Moved() = true;
 
-        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go/2.f);
+        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go / 2.f);
         object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_1->GetMesh().Get_Is_Moved() = true;
     }
@@ -887,11 +887,7 @@ void Physics::Update(float dt)
     {
         Acceleration2();
     }
-    else if(m_owner->GetName() == "third")
-    {
-        JustMove();
-    }
-    else if(m_owner->GetName() == "fourth")
+    else
     {
         JustMove();
     }
