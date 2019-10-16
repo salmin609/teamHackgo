@@ -1,5 +1,6 @@
 ﻿#include "Sound_Manager.h"
-#include <string>
+
+float sound_timer = 0;
 
 /* Initializing Sounds */
 void Sound::initialize(void)
@@ -29,9 +30,9 @@ void Sound::load(void)
 }
 
 /* Playing specific sound */
-void Sound::play(int Channel_Num)
+void Sound::play(int Sound_Num)
 {
-    result = FMOD_System_PlaySound(f_system, sound[Channel_Num], 0, 0, &channel[Channel_Num]);
+    result = FMOD_System_PlaySound(f_system, sound[Sound_Num], 0, 0, &channel[Sound_Num]);
     result = FMOD_System_Update(f_system);
     if (result != FMOD_OK)
     {
@@ -47,4 +48,9 @@ void Sound::volume(int Channel_Num, float Volume)
     {
         return;
     }
+}
+
+void Sound::stop(int Sound_Num)
+{
+    result = FMOD_Channel_Stop(channel[Sound_Num]);
 }

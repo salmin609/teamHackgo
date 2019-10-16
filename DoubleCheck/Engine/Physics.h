@@ -27,7 +27,8 @@ public:
 	{
 		return acceleration;
 	}
-      
+
+    bool is_collided = false;
 private:
     std::vector<vector2> points{};
     vector2 acceleration{};

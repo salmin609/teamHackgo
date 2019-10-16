@@ -42,7 +42,11 @@ private:
 	std::string which_one_to_make;
 	//Imgui drag and drop
 	bool is_drag_and_drop_mode = false;
-
+	Texture object1;
+	Texture object2;
+	Texture object3;
+	Texture object4;
+	Texture object5;
 
 public:
 	static Application* Get_Application();
