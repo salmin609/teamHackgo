@@ -30,7 +30,7 @@ void Application::Init()
 		glfwTerminate();
 		return;
 	}
-	
+
 
 	GLenum glew_err_check;
 
@@ -81,6 +81,7 @@ void Application::Init()
 	object2.LoadFromPNG("../sprite/kingchulseong.png");
 	object3.LoadFromPNG("../sprite/waterpunch.png");
 	object4.LoadFromPNG("../sprite/temp.png");
+	object5.LoadFromPNG("../sprite/maknae.png");
 }
 //void Application::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 //{
@@ -197,19 +198,21 @@ void Application::Imgui_Update()
 			ImGui::SliderFloat("translation_y", &this_obj->GetTransform().GetTranslation_Reference().y, -1.0f, 1.0f);
 			ImGui::SliderFloat("scale_x", &this_obj->GetTransform().GetScale_Reference().x, -2.0f, 2.0f);
 			ImGui::SliderFloat("scale_y", &this_obj->GetTransform().GetScale_Reference().y, -2.0f, 2.0f);
-			if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
+			ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
+			ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
+			/*if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
 			{
 				ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
 				ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
-			}
-			
+			}*/
+
 			if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
 			{
 				this_obj->Set_Name(this_obj->name_buf);
 			}
 
 			ImGui::Checkbox("select", &this_obj->Get_Is_Selected());
-			
+
 			if (ImGui::Button("Delete Object"))
 			{
 				this_obj->SetDeadCondition(true);
@@ -276,11 +279,10 @@ void Application::Imgui_Update()
 	}
 	static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
 	ImGuiIO& io = ImGui::GetIO();
-	//ImTextureID a = io.Fonts->TexID;
-	//ImGui_ImplGlfwGL3_RenderDrawData()
+	
 	float my_tex_w = (float)io.Fonts->TexWidth;
 	float my_tex_h = (float)io.Fonts->TexHeight;
-	
+
 	if (ImGui::TreeNode("Drag and Drop"))
 	{
 		for (int i = 0; i < IM_ARRAYSIZE(names); i++)
@@ -289,8 +291,7 @@ void Application::Imgui_Update()
 			if ((i % 3) != 0)
 				ImGui::SameLine();
 			int frame_padding = -1 + i;     // -1 = uses default padding
-			//ImGui::Button(names[i], ImVec2(60, 60));
-			//ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
+			
 			if (i == 0)
 			{
 				ImGui::ImageButton((void*)object1.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
@@ -359,10 +360,10 @@ void Application::Imgui_Update()
 			else if (which_one_to_make == names[4])
 			{
 				new_obj->Set_Name(names[4]);
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/Su whan.png"));
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/maknae.png"));
 			}
 			new_obj->SetTranslation(this_pos);
-			//new_obj->AddComponent(new Physics);
+			new_obj->AddComponent(new Physics);
 			new_obj->GetMesh().Get_Is_Moved() = true;
 			ObjectManager::GetObjectManager()->AddObject(new_obj);
 
