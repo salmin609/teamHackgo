@@ -279,8 +279,7 @@ void Application::Imgui_Update()
 	}
 	static const char* names[5] = { "JISOO", "Chulseong", "Sangmin", "min seok" , "Su whan" };
 	ImGuiIO& io = ImGui::GetIO();
-	//ImTextureID a = io.Fonts->TexID;
-	//ImGui_ImplGlfwGL3_RenderDrawData()
+	
 	float my_tex_w = (float)io.Fonts->TexWidth;
 	float my_tex_h = (float)io.Fonts->TexHeight;
 
@@ -292,8 +291,7 @@ void Application::Imgui_Update()
 			if ((i % 3) != 0)
 				ImGui::SameLine();
 			int frame_padding = -1 + i;     // -1 = uses default padding
-			//ImGui::Button(names[i], ImVec2(60, 60));
-			//ImGui::ImageButton(a, ImVec2(32, 32), ImVec2(0, 0), ImVec2(32.0f / my_tex_w, 32 / my_tex_h), frame_padding, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
+			
 			if (i == 0)
 			{
 				ImGui::ImageButton((void*)object1.GetTextureHandle(), ImVec2(32, 32), ImVec2(0, 0));
