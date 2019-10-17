@@ -67,7 +67,8 @@ void Engine::Init()
 
     Object* temp_sec = new Object();
     temp_sec->AddComponent(new Physics);
-    temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
+    temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/pen_normal.png"));
+    temp_sec->SetTranslation({ -200, 0});
     temp_sec->AddComponent(new Component_Transform());
     temp_sec->Set_Name("second");
     temp_sec->Set_Tag("enemy");
@@ -75,7 +76,7 @@ void Engine::Init()
 
     Object* temp_third = new Object();
     temp_third->AddComponent(new Physics);
-    temp_third->AddComponent(new Sprite(temp_third, "../sprite/salmin.png"));
+    temp_third->AddComponent(new Sprite(temp_third, "../sprite/pen_red.png"));
     temp_third->AddComponent(new Component_Enemy());
     temp_third->SetTranslation({ -200, -200 });
     temp_third->Set_Name("third");
@@ -83,15 +84,23 @@ void Engine::Init()
 
     Object* temp_fourth = new Object();
     temp_fourth->AddComponent(new Physics);
-    temp_fourth->AddComponent(new Sprite(temp_fourth, "../sprite/salmin.png"));
-    temp_fourth->SetTranslation({ -400, -400 });
+    temp_fourth->AddComponent(new Sprite(temp_fourth, "../sprite/pen_purple.png"));
+    temp_fourth->SetTranslation({ -400, 0 });
     temp_fourth->AddComponent(new Component_Transform());
     temp_fourth->Set_Name("fourth");
+
+    Object* temp_fifth = new Object();
+    temp_fifth ->AddComponent(new Physics);
+    temp_fifth ->AddComponent(new Sprite(temp_fifth, "../sprite/pen_green.png"));
+    temp_fifth ->SetTranslation({ -400, -200 });
+    temp_fifth ->AddComponent(new Component_Transform());
+    temp_fifth ->Set_Name("fifth");
 
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
     object_manager->AddObject(temp_third);
     object_manager->AddObject(temp_fourth);
+    object_manager->AddObject(temp_fifth);
 
     game_timer.Reset();
 }
