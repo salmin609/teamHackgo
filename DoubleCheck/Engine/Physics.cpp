@@ -658,15 +658,16 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
     }
 }
 
-void Physics::Dash(Object* object) const
+void Physics::Dash(Object* object)
 {
     vector2 acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
     acceleration = normalize(acceleration);
     if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
     {
-        acceleration += {15 * acceleration.x, 15 *acceleration.y};
-        object->GetTransform().AddTranslation(acceleration);
-        object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration / 3);
+        timer = 0;
+        acceleration += {30 * acceleration.x, 30 *acceleration.y};
+        object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
+        is_dashed = true;
     }
 }
 
@@ -850,10 +851,18 @@ void Physics::BasicMovement2()
 
 void Physics::Update(float dt)
 {
+    timer += dt;
+
     if (m_owner->GetName() == "first")
     {
         Acceleration();
         Dash(m_owner);
+        
+        if(is_dashed == true && timer >= 0.2)
+        {
+            m_owner->GetComponentByTemplate<Physics>()->SetAcceleration({0, 0});
+            is_dashed = false;
+        }
     }
     else if (m_owner->GetName() == "second")
     {

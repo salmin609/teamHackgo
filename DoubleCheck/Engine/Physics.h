@@ -11,7 +11,7 @@ public:
     void Acceleration2();
     void JustMove();
     void KnockBack(Object* object_1, Object* object_2);
-    void Dash(Object* object) const;
+    void Dash(Object* object);
     void BasicMovement();
     void BasicMovement2();
     void Update(float dt) override;
@@ -30,11 +30,12 @@ public:
 	}
 
     bool is_collided = false;
+    bool is_dashed = false;
 private:
     std::vector<vector2> points{};
     vector2 acceleration{};
     vector2 velocity{};
-    float timer = 0;
+    mutable float timer = 0;
     vector2 prev_pos;
     vector2 direction_vector{};
 };
