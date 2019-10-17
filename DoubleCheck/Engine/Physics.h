@@ -30,11 +30,12 @@ public:
 	}
 
     bool is_collided = false;
+    bool is_dashed = false;
 private:
     std::vector<vector2> points{};
     vector2 acceleration{};
     vector2 velocity{};
-    float timer = 0;
+    mutable float timer = 0;
     vector2 prev_pos;
     vector2 direction_vector{};
 };

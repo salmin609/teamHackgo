@@ -96,7 +96,7 @@ void Sprite::Init(Object* obj)
     m_owner->Set_Center({ 0.0f , 0.0f});
 
     Mesh debug_mesh;
-    debug_mesh = MESH::create_wire_circle(100, { 255,0,0,255 });
+    debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
     debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
     m_owner->Set_Debug_Mesh(debug_mesh);
