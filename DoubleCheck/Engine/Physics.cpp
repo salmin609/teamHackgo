@@ -1,7 +1,6 @@
 #include "Physics.h"
 #include "ObjectManager.h"
 #include <cmath>
-#include <vector>
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
 #include "Engine.hpp"
@@ -640,7 +639,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
         object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_1->GetMesh().Get_Is_Moved() = true;
 
-        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go / 2.f);
+        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
         object_2->GetTransform().AddTranslation(object_2->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_2->GetMesh().Get_Is_Moved() = true;
     }
@@ -652,7 +651,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
         object_2->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_2->GetMesh().Get_Is_Moved() = true;
 
-        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go / 2.f);
+        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
         object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_1->GetMesh().Get_Is_Moved() = true;
     }
@@ -665,7 +664,7 @@ void Physics::Dash(Object* object)
     if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
     {
         timer = 0;
-        acceleration += {30 * acceleration.x, 30 *acceleration.y};
+        acceleration += {50 * acceleration.x, 50 *acceleration.y};
         object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
         is_dashed = true;
     }
@@ -858,7 +857,7 @@ void Physics::Update(float dt)
         Acceleration();
         Dash(m_owner);
         
-        if(is_dashed == true && timer >= 0.2)
+        if(is_dashed == true && timer >= 0.1)
         {
             m_owner->GetComponentByTemplate<Physics>()->SetAcceleration({0, 0});
             is_dashed = false;
