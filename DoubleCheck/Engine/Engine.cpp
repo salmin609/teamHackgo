@@ -19,6 +19,8 @@
 #include "Windows.h"
 #include "Component_Enemy.h"
 
+#include <thread>
+
 Sound sound;
 
 namespace
@@ -30,15 +32,34 @@ namespace
     Message_Manager* msg_manager = nullptr;
 }
 
+void Update_App(float dt)
+{
+    //Invoke();
+
+    app_->Update(dt);
+}
+void Update_Graphic(float dt)
+{
+    graphic->Update(dt);
+}
+void Update_Obj(float dt)
+{
+    object_manager->Update(dt);
+}
+void Update_Msg(float dt)
+{
+    msg_manager->Update(dt);
+}
+
 void Engine::Init()
 {
-    sound.initialize();
+   /* sound.initialize();
     sound.load();
     sound.play(0);
     sound.volume(0, 1);
     Sleep(1400);
     sound.play(2);
-    sound.volume(2, 8);
+    sound.volume(2, 8);*/
 
     app_ = Application::Get_Application();
     object_manager = ObjectManager::GetObjectManager();
@@ -102,20 +123,32 @@ void Engine::Init()
     object_manager->AddObject(temp_fourth);
     object_manager->AddObject(temp_fifth);
 
+    //thread_app = std::thread(&Update_App, 1);
+    //thread_app.join();
     game_timer.Reset();
 }
+
 
 void Engine::Update()
 {
     m_dt = game_timer.GetElapsedSeconds();
     game_timer.Reset();
 
+
+    //std::thread thread_app(app_->Update);
+    //std::thread thread_obj(&Update_Obj, m_dt);
+    
+    //thread_app = std::thread(&Update_App, m_dt);
+    //thread_app.join();
+    //thread_app = thread_app(&app_->Update, app_->Update());
+    //Update_App(m_dt);
     app_->Update(m_dt);
     state_manager->Update(m_dt);
     graphic->Update(m_dt);
+    //std::thread thread_graphic(&Update_Graphic, m_dt);
     object_manager->Update(m_dt);
     msg_manager->Update(m_dt);
-
+    //std::thread thread_msg(&Update_Msg, m_dt);
     //Reset camera zoom
     Reset();
 
@@ -126,6 +159,15 @@ void Engine::Update()
         Clear();
         StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
     }
+   /* if(thread_app.joinable())
+    {
+        thread_app.join();
+    }*/
+
+    
+    //thread_graphic.detach();
+    //thread_obj.detach();
+    //thread_msg.detach();
 }
 
 void Engine::Delete()

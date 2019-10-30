@@ -1,6 +1,7 @@
 #pragma once
 #include "Timer.hpp"
 #include "Sound_Manager.h"
+#include <thread>
 
 extern Sound sound;
 
@@ -22,4 +23,6 @@ private:
     bool is_done = false;
     float m_dt;
     Timer game_timer;
+
+    //std::thread thread_app;
 };
