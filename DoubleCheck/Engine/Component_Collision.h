@@ -11,7 +11,7 @@ public:
     bool BoxToBoxCollision(Mesh mesh) const;
     bool CircleToCircleCollision() ;
     void Update(float dt) override;
-
+    void ArenaColision();
 private:
     Physics physics;
     float timer = 0;
