@@ -82,6 +82,8 @@ void Application::Init()
 	object3.LoadFromPNG("../sprite/waterpunch.png");
 	object4.LoadFromPNG("../sprite/temp.png");
 	object5.LoadFromPNG("../sprite/maknae.png");
+
+    //m_thread = std::thread(this->Update, this);
 }
 //void Application::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 //{
