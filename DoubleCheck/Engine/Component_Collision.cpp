@@ -75,7 +75,7 @@ void Collision::ArenaColision()
 
         const float distance = sqrt((obj_i_trans.x * obj_i_trans.x) + (obj_i_trans.y * obj_i_trans.y));
 
-        if (distance >= 1000)
+        if (distance >= 10000)
         {
             const vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
             obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
