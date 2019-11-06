@@ -246,6 +246,13 @@ void Sprite::Update(float dt)
                 {
                     Object* obj = m_owner->Get_Belongs_Objects()[i];
                     matrix3 trans = mat_ndc * MATRIX3::build_translation(0, -100);
+                    float fixed_size_convert = 1.0f;
+                    if(Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom() < 1.0f)
+                    {
+                        fixed_size_convert -= Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+                        trans = trans * MATRIX3::build_scale(1.0f + fixed_size_convert);
+                    }
+
                     obj->GetComponentByTemplate<Sprite>()->Get_Material().matrix3Uniforms["to_ndc"] = trans;
                     Graphic::GetGraphic()->Draw(obj->GetComponentByTemplate<Sprite>()->Get_Shape(),
                         obj->GetComponentByTemplate<Sprite>()->Get_Material());
