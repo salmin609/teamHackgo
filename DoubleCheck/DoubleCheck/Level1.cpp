@@ -4,11 +4,11 @@ void Level1::Load()
 {
     player = new Object();
     player->AddComponent(new Player());
-    player->AddComponent(new Sprite(player, "../Sprite/temp.png"));
+    player->AddComponent(new Sprite(player, "../Sprite/awesomeface.png"));
 
 
-    player->Set_Name("player");
-    player->Set_Tag("player");
+    player->Set_Name("first");
+    player->Set_Tag("first");
 
     ObjectManager::GetObjectManager()->AddObject(player);
 }

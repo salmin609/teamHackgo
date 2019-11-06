@@ -10,13 +10,20 @@ void Player::Init(Object* obj)
     m_owner = obj;
     m_owner->Get_Component_Info_Reference().component_info_player = true;
 
-    //Object* hp_bar = new Object();
-    //hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/temp.png"));
-    //hp_bar->GetMesh().Get_Is_Moved() = true;
-    //vector2 hp_bar_pos = m_owner->GetTransform().GetTranslation();
-    //hp_bar_pos.y -= 50;
-    //hp_bar->SetTranslation(hp_bar_pos);
+    Object* hp_bar = new Object();
+
+    hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/HP.png", false));
+    hp_bar->GetMesh().Get_Is_Moved() = true;
+    vector2 hp_bar_pos = m_owner->GetTransform().GetTranslation();
+    hp_bar_pos.y -= 100;
+    hp_bar->SetTranslation(hp_bar_pos);
+    hp_bar->Get_Is_Debugmode() = false;
+    hp_bar->Set_Name("hp_bar");
+    hp_bar->Set_Tag("hp_bar");
+    this->hp_bar = hp_bar;
+    m_owner->Get_Belongs_Objects().push_back(hp_bar);
     //ObjectManager::GetObjectManager()->AddObject(hp_bar);
+    
 
 }
 

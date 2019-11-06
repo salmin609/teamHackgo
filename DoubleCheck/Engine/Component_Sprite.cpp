@@ -95,18 +95,18 @@ void Sprite::Init(Object* obj)
 	debug_material.shader = &(SHADER::solid_color());
     m_owner->Set_Center({ 0.0f , 0.0f});
 
-    Mesh debug_mesh;
-    debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
-    debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
+    //Mesh debug_mesh;
+    //debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+    //debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
-    m_owner->Set_Debug_Mesh(debug_mesh);
+    //m_owner->Set_Debug_Mesh(debug_mesh);
 }
 /*
  * Original
  */
 
 
-Sprite::Sprite(Object* obj, const char* staticSpritePath)
+Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawing)
 {
 	m_owner = obj;
 
@@ -141,9 +141,17 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath)
 	}
 	m_owner->Set_Center({ 0.0f , 0.0f });
 
+    if(need_debug_drawing)
+    {
+        Mesh debug_mesh;
+        debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+        debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
+
+        m_owner->Set_Debug_Mesh(debug_mesh);
+    }
 }
 
-Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames)
+Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, bool need_debug_drawing)
 {
 	m_owner = obj;
 	is_animated = animated;
@@ -178,6 +186,15 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 		m_owner->Get_Normalize_Points().push_back(normal_vec);
 	}
 	m_owner->Set_Center({ 0.0f , 0.0f });
+
+    if(need_debug_drawing)
+    {
+        Mesh debug_mesh;
+        debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+        debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
+
+        m_owner->Set_Debug_Mesh(debug_mesh);
+    }
 }
 
 void Sprite::Update(float dt)
@@ -220,6 +237,22 @@ void Sprite::Update(float dt)
         mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
         mat_ndc *= m_owner->GetTransform().GetModelToWorld();
 
+        if(!m_owner->Get_Belongs_Objects().empty())
+        {
+            int size = m_owner->Get_Belongs_Objects().size();
+            for(int i = 0; i < size; i++)
+            {
+                if(m_owner->Get_Belongs_Objects()[i]->GetComponentByTemplate<Sprite>() != nullptr)
+                {
+                    Object* obj = m_owner->Get_Belongs_Objects()[i];
+                    matrix3 trans = mat_ndc * MATRIX3::build_translation(0, -100);
+                    obj->GetComponentByTemplate<Sprite>()->Get_Material().matrix3Uniforms["to_ndc"] = trans;
+                    Graphic::GetGraphic()->Draw(obj->GetComponentByTemplate<Sprite>()->Get_Shape(),
+                        obj->GetComponentByTemplate<Sprite>()->Get_Material());
+                }
+            }
+        }
+
         m_owner->GetMesh().Get_Is_Moved() = false;
         material.matrix3Uniforms["to_ndc"] = mat_ndc;
         debug_material.matrix3Uniforms["to_ndc"] = mat_ndc;
@@ -236,44 +269,3 @@ void Sprite::Update(float dt)
     }
     
 }
-
-
-
-
-
-/*
-    const auto path = staticSpritePath;
-    material.shader = &(SHADER::textured());
-
-
-    if(!Can_Load_To_Texture(texture, "../Sprite/temp.png"))
-    {
-        std::cout << "fail to load texture" << std::endl;
-    }
-    texture.SelectTextureForSlot(texture);
-    material.textureUniforms["texture_to_sample"] = {&(texture)};
-    material.color4fUniforms["color"] = { 1.0f };
-    material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
-
-    debug_material.color4fUniforms["color"] = { 1.0f };
-    debug_material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
-
-    Mesh square;
-    square = MESH::create_box(100, { 100,100,100,255 });
-
-    shape.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
-
-    m_owner->SetMesh(square);
-    m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
-
-    int size_for_normal = m_owner->GetMesh().Get_Points().size();
-
-    std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
-    for(int i = 0 ; i < size_for_normal; ++i)
-    {
-        vector2 normal_vec = vector_for_normal[i];
-
-        normal_vec.x = normal_vec.x / abs(normal_vec.x);
-        normal_vec.y = normal_vec.y / abs(normal_vec.y);
-        m_owner->Get_Normalize_Points().push_back(normal_vec);
-    }*/

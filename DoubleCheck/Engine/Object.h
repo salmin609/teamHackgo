@@ -17,6 +17,7 @@ private:
     Mesh m_debug_mesh;
 
     std::vector<Component*>components_;
+    std::vector<Object*> belongs_object;
     bool is_dead{};
     std::string m_name;
     vector2 center_pos;
@@ -39,6 +40,10 @@ public:
     Object_Component_Info& Get_Component_Info_Reference()
     {
         return component_info;
+    }
+    std::vector<Object*>& Get_Belongs_Objects()
+    {
+        return belongs_object;
     }
 
     std::string Get_Tag()
