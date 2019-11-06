@@ -387,9 +387,9 @@ void Physics::Dash(Object* object)
     if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
     {
         timer = 0;
-        acceleration += {50 * acceleration.x, 50 *acceleration.y};
+        acceleration += {50 * acceleration.x, 50 * acceleration.y};
         object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
-        is_dashed = true;
+        is_dashed = false;
     }
 }
 
@@ -490,12 +490,10 @@ void Physics::Update(float dt)
     if (m_owner->GetName() == "first")
     {
         Acceleration();
-        Dash(m_owner);
-        
-        if(is_dashed == true && timer >= 0.1)
+
+        if (is_dashed == false && timer >= 1)
         {
-            m_owner->GetComponentByTemplate<Physics>()->SetAcceleration({0, 0});
-            is_dashed = false;
+            Dash(m_owner);
         }
     }
     else
