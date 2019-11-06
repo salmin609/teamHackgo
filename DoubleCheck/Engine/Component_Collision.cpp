@@ -4,6 +4,20 @@
 #include "ObjectManager.h"
 #include "Engine.hpp"
 
+#define  PI  3.14159265359
+float RadianToDegree(float radian)
+{
+    float degree = radian * (180 / PI);
+
+    return degree;
+}
+
+float DegreeToRadian(float degree)
+{
+    float radian = degree * (PI / 180);
+
+    return radian;
+}
 void Collision::Init(Object* obj)
 {
     m_owner = obj;
@@ -64,7 +78,7 @@ bool Collision::CircleToCircleCollision()
     return if_it_is_collide;
 }
 
-void Collision::ArenaColision()
+void Collision::CircleArenaCollision()
 {
     const unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
 
@@ -83,6 +97,66 @@ void Collision::ArenaColision()
     }
 }
 
+void Collision::SquareArenaCollision()
+{
+    const unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
+    const float line_max_point = 5000;
+    const float line_min_point = -5000;
+    float angle = 0;
+    float angle2 = 0;
+    for (unsigned int i = 0; i < object_position_size; ++i)
+    {
+        Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
+        vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
+
+        const float max_x = obj_i_trans.x + 70.0;
+        const float min_x = obj_i_trans.x - 70.0;
+        const float max_y = obj_i_trans.y + 70.0;
+        const float min_y = obj_i_trans.y - 70.0;
+
+        if (line_max_point - max_x <= 0)
+        {
+            vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
+
+            angle = RadianToDegree(angle_between({ 0,1 }, direction_to_go));
+            angle2 = 2 * (180 - angle);
+            angle = 360 - angle2;
+            direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
+        }
+        else if (line_max_point - max_y <= 0)
+        {
+            vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
+            angle = RadianToDegree(angle_between({ -1,0 }, direction_to_go));
+
+            angle2 = 2 * (180 - angle);
+            angle = 360 - angle2;
+            direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
+        }
+        else if (line_min_point - min_x >= 0)
+        {
+            vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
+            angle = RadianToDegree(angle_between({ 0,-1 }, direction_to_go));
+
+            angle2 = 2 * (180 - angle);
+            angle = 360 - angle2;
+            direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
+        }
+        else if (line_min_point - min_y >= 0)
+        {
+            vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
+            angle = RadianToDegree(angle_between({ 1,0 }, direction_to_go));
+
+            angle2 = 2 * (180 - angle);
+            angle = 360 - angle2;
+            direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
+        }
+    }
+}
+
 void Collision::Update(float dt)
 {
     sound_timer += dt;
@@ -93,5 +167,5 @@ void Collision::Update(float dt)
         sound.volume(1, 1);
         sound_timer = 0;
     }
-    ArenaColision();
+    SquareArenaCollision();
 }
