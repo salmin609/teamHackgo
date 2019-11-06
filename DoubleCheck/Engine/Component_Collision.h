@@ -9,9 +9,10 @@ class Collision : public Component
 public:
     void Init(Object *obj) override;
     bool BoxToBoxCollision(Mesh mesh) const;
-    bool CircleToCircleCollision() ;
+    bool CircleToCircleCollision();
     void Update(float dt) override;
-    void ArenaColision();
+    void CircleArenaCollision();
+    void SquareArenaCollision();
 private:
     Physics physics;
     float timer = 0;
