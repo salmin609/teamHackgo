@@ -18,6 +18,9 @@
 #include "Sound_Manager.h"
 #include "Windows.h"
 #include "Component_Enemy.h"
+#include "BitmapFont.hpp"
+#include "Text.hpp"
+#include "Shader.hpp"
 
 #include <thread>
 
