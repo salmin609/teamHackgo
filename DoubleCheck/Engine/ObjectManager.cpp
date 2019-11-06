@@ -66,13 +66,12 @@ void ObjectManager::AddObject(Object* obj)
     //{
     //    component->Init(obj);
     //}
-
     objects.push_back(std::shared_ptr<Object>(obj));
 }
 
 void ObjectManager::DeleteObject(std::shared_ptr<Object> obj)
 {
-    objects.erase(std::find(objects.begin(), objects.end(), obj));
+    //objects.erase(std::find(objects.begin(), objects.end(), obj));
 }
 
 std::vector<Object*> ObjectManager::Find_Objects_By_Tag(std::string tag)

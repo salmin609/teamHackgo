@@ -1,7 +1,6 @@
 #include "Physics.h"
 #include "ObjectManager.h"
 #include <cmath>
-#include <vector>
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
 #include "Engine.hpp"
@@ -21,25 +20,25 @@ void Physics::Acceleration()
         {
             if (acceleration.x >= 0 && acceleration.y >= 0)
             {
-                acceleration += {-0.15, 0.06};
+                acceleration += {-0.24, 0.06};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else if (acceleration.x >= 0 && acceleration.y < 0)
             {
-                acceleration += {-0.15, 0.15};
+                acceleration += {-0.24, 0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else if (acceleration.x < 0 && acceleration.y >= 0)
             {
-                acceleration += {-0.06, 0.15};
+                acceleration += {-0.06, 0.06};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else
             {
-                acceleration += {-0.06, 0.06};
+                acceleration += {-0.06, 0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -54,25 +53,31 @@ void Physics::Acceleration()
             }
             else if (acceleration.x >= 0 && acceleration.y < 0)
             {
-                acceleration += {0.06, 0.15};
+                acceleration += {0.06, 0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else if (acceleration.x < 0 && acceleration.y >= 0)
             {
-                acceleration += {0.15, 0.06};
+                acceleration += {0.24, 0.06};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else
             {
-                acceleration += {0.15, 0.15};
+                acceleration += {0.24, 0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
         }
         else
         {
+            if(abs(acceleration.x) > 0)
+            {
+                acceleration.x += -acceleration.x / 100.0;
+                m_owner->GetTransform().AddTranslation(acceleration);
+                m_owner->GetMesh().Get_Is_Moved() = true;
+            }
             if (acceleration.y >= 0)
             {
                 acceleration += {0.00, 0.06};
@@ -81,7 +86,7 @@ void Physics::Acceleration()
             }
             else if (acceleration.y < 0)
             {
-                acceleration += {0.00, 0.15};
+                acceleration += {0.00, 0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -91,48 +96,48 @@ void Physics::Acceleration()
     {
         if (input.Is_Key_Pressed(GLFW_KEY_A) && input.Is_Key_Pressed(GLFW_KEY_W))
         {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.15, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {-0.15, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.06, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {-0.06, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
+            //if (acceleration.x >= 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {-0.24, 0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x >= 0 && acceleration.y < 0)
+            //{
+            //    acceleration += {-0.24, 0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x < 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {-0.06, 0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else
+            //{
+            //    acceleration += {-0.06, 0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
         }
         else if (input.Is_Key_Pressed(GLFW_KEY_A) && input.Is_Key_Pressed(GLFW_KEY_S))
         {
             if (acceleration.x >= 0 && acceleration.y >= 0)
             {
-                acceleration += {-0.15, -0.15};
+                acceleration += {-0.24, -0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else if (acceleration.x >= 0 && acceleration.y < 0)
             {
-                acceleration += {-0.15, -0.06};
+                acceleration += {-0.24, -0.06};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else if (acceleration.x < 0 && acceleration.y >= 0)
             {
-                acceleration += {-0.06, -0.15};
+                acceleration += {-0.06, -0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -147,13 +152,19 @@ void Physics::Acceleration()
         {
             if (acceleration.x >= 0)
             {
-                acceleration.x += -0.15;
+                acceleration.x += -0.24;
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else
             {
                 acceleration.x += -0.06;
+                m_owner->GetTransform().AddTranslation(acceleration);
+                m_owner->GetMesh().Get_Is_Moved() = true;
+            }
+            if(abs(acceleration.y) > 0)
+            {
+                acceleration.y += -acceleration.y / 100.0;
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -165,7 +176,7 @@ void Physics::Acceleration()
         {
             if (acceleration.x >= 0 && acceleration.y >= 0)
             {
-                acceleration += {0.06, -0.15};
+                acceleration += {0.06, -0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -177,13 +188,13 @@ void Physics::Acceleration()
             }
             else if (acceleration.x < 0 && acceleration.y >= 0)
             {
-                acceleration += {0.15, -0.15};
+                acceleration += {0.24, -0.24};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
             else
             {
-                acceleration += {0.15, -0.06};
+                acceleration += {0.24, -0.06};
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -191,36 +202,42 @@ void Physics::Acceleration()
         }
         else if (input.Is_Key_Pressed(GLFW_KEY_S) && input.Is_Key_Pressed(GLFW_KEY_A))
         {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.15, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {-0.15, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.06, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {-0.06, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
+            //if (acceleration.x >= 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {-0.24, -0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x >= 0 && acceleration.y < 0)
+            //{
+            //    acceleration += {-0.24, -0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x < 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {-0.06, -0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else
+            //{
+            //    acceleration += {-0.06, -0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
         }
         else
         {
+            if(abs(acceleration.x) > 0)
+            {
+                acceleration.x += -acceleration.x / 100.0;
+                m_owner->GetTransform().AddTranslation(acceleration);
+                m_owner->GetMesh().Get_Is_Moved() = true;
+            }
             if (acceleration.y >= 0)
             {
-                acceleration.y += -0.15;
+                acceleration.y += -0.24;
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -236,57 +253,57 @@ void Physics::Acceleration()
     {
         if (input.Is_Key_Pressed(GLFW_KEY_D) && input.Is_Key_Pressed(GLFW_KEY_S))
         {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.06, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {0.06, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.15, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {0.15, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
+            //if (acceleration.x >= 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {0.06, -0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x >= 0 && acceleration.y < 0)
+            //{
+            //    acceleration += {0.06, -0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x < 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {0.24, -0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else
+            //{
+            //    acceleration += {0.24, -0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
         }
         else if (input.Is_Key_Pressed(GLFW_KEY_D) && input.Is_Key_Pressed(GLFW_KEY_W))
         {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.06, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {0.06, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.15, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {0.15, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
+            //if (acceleration.x >= 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {0.06, 0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x >= 0 && acceleration.y < 0)
+            //{
+            //    acceleration += {0.06, 0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else if (acceleration.x < 0 && acceleration.y >= 0)
+            //{
+            //    acceleration += {0.24, 0.06};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
+            //else
+            //{
+            //    acceleration += {0.24, 0.24};
+            //    m_owner->GetTransform().AddTranslation(acceleration);
+            //    m_owner->GetMesh().Get_Is_Moved() = true;
+            //}
         }
         else
         {
@@ -298,7 +315,13 @@ void Physics::Acceleration()
             }
             else
             {
-                acceleration.x += 0.15;
+                acceleration.x += 0.24;
+                m_owner->GetTransform().AddTranslation(acceleration);
+                m_owner->GetMesh().Get_Is_Moved() = true;
+            }
+            if(abs(acceleration.y) > 0)
+            {
+                acceleration.y += -acceleration.y / 100.0;
                 m_owner->GetTransform().AddTranslation(acceleration);
                 m_owner->GetMesh().Get_Is_Moved() = true;
             }
@@ -306,312 +329,11 @@ void Physics::Acceleration()
     }
     else
     {
-        acceleration += {-acceleration.x / 100, -acceleration.y / 100};
+        acceleration += {-acceleration.x / 40, -acceleration.y / 40};
         m_owner->GetTransform().AddTranslation(acceleration);
         m_owner->GetMesh().Get_Is_Moved() = true;
     }
     printf("first translation = %f,  %f\n", acceleration.x, acceleration.y);
-}
-
-void Physics::Acceleration2()
-{
-    if (input.Is_Key_Pressed(GLFW_KEY_KP_5))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_5) && input.Is_Key_Pressed(GLFW_KEY_KP_1))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.15, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {-0.15, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.06, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {-0.06, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_5) && input.Is_Key_Pressed(GLFW_KEY_KP_3))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.06, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {0.06, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.15, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {0.15, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else
-        {
-            if (acceleration.y >= 0)
-            {
-                acceleration += {0.00, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.y < 0)
-            {
-                acceleration += {0.00, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-    }
-    else if (input.Is_Key_Pressed(GLFW_KEY_KP_1))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_1) && input.Is_Key_Pressed(GLFW_KEY_KP_5))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.15, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {-0.15, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.06, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {-0.06, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_1) && input.Is_Key_Pressed(GLFW_KEY_KP_2))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.15, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {-0.15, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.06, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {-0.06, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else
-        {
-            if (acceleration.x >= 0)
-            {
-                acceleration.x += -0.15;
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration.x += -0.06;
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-    }
-    else if (input.Is_Key_Pressed(GLFW_KEY_KP_2))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_2) && input.Is_Key_Pressed(GLFW_KEY_KP_3))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.06, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {0.06, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.15, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {0.15, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_2) && input.Is_Key_Pressed(GLFW_KEY_KP_1))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.15, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {-0.15, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {-0.06, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {-0.06, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else
-        {
-            if (acceleration.y >= 0)
-            {
-                acceleration.y += -0.15;
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration.y += -0.06;
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-    }
-    else if (input.Is_Key_Pressed(GLFW_KEY_KP_3))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_3) && input.Is_Key_Pressed(GLFW_KEY_KP_2))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.06, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {0.06, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.15, -0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {0.15, -0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_3) && input.Is_Key_Pressed(GLFW_KEY_KP_2))
-        {
-            if (acceleration.x >= 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.06, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x >= 0 && acceleration.y < 0)
-            {
-                acceleration += {0.06, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else if (acceleration.x < 0 && acceleration.y >= 0)
-            {
-                acceleration += {0.15, 0.06};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration += {0.15, 0.15};
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-        else
-        {
-            if (acceleration.x >= 0)
-            {
-                acceleration.x += 0.06;
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-            else
-            {
-                acceleration.x += 0.15;
-                m_owner->GetTransform().AddTranslation(acceleration);
-                m_owner->GetMesh().Get_Is_Moved() = true;
-            }
-        }
-    }
-    else
-    {
-        acceleration += {-acceleration.x / 100, -acceleration.y / 100};
-        m_owner->GetTransform().AddTranslation(acceleration);
-        m_owner->GetMesh().Get_Is_Moved() = true;
-    }
-
-    printf("Second translation = %f,  %f\n", acceleration.x, acceleration.y);
 }
 
 void Physics::JustMove()
@@ -640,7 +362,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
         object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_1->GetMesh().Get_Is_Moved() = true;
 
-        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go / 2.f);
+        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
         object_2->GetTransform().AddTranslation(object_2->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_2->GetMesh().Get_Is_Moved() = true;
     }
@@ -652,7 +374,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
         object_2->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_2->GetMesh().Get_Is_Moved() = true;
 
-        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go / 2.f);
+        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
         object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
         object_1->GetMesh().Get_Is_Moved() = true;
     }
@@ -665,7 +387,7 @@ void Physics::Dash(Object* object)
     if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
     {
         timer = 0;
-        acceleration += {30 * acceleration.x, 30 *acceleration.y};
+        acceleration += {50 * acceleration.x, 50 *acceleration.y};
         object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
         is_dashed = true;
     }
@@ -761,94 +483,6 @@ void Physics::BasicMovement()
     //printf("%f, %f\n", velocity.x, velocity.y);
 }
 
-void Physics::BasicMovement2()
-{
-    if (input.Is_Key_Pressed(GLFW_KEY_KP_5))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_5) && input.Is_Key_Pressed(GLFW_KEY_KP_1))
-        {
-            velocity = { -1, 1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_5) && input.Is_Key_Pressed(GLFW_KEY_KP_3))
-        {
-            velocity = { 1, 1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else
-        {
-            velocity = { 0, 1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-    }
-    if (input.Is_Key_Pressed(GLFW_KEY_KP_1))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_1) && input.Is_Key_Pressed(GLFW_KEY_KP_5))
-        {
-            velocity = { -1, 1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_1) && input.Is_Key_Pressed(GLFW_KEY_KP_2))
-        {
-            velocity = { -1, -1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else
-        {
-            velocity = { -1, 0 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-    }
-    if (input.Is_Key_Pressed(GLFW_KEY_KP_2))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_2) && input.Is_Key_Pressed(GLFW_KEY_KP_1))
-        {
-            velocity = { -1, -1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_2) && input.Is_Key_Pressed(GLFW_KEY_KP_3))
-        {
-            velocity = { 1, -1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else
-        {
-            velocity = { 0, -1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-    }
-    if (input.Is_Key_Pressed(GLFW_KEY_KP_3))
-    {
-        if (input.Is_Key_Pressed(GLFW_KEY_KP_3) && input.Is_Key_Pressed(GLFW_KEY_KP_5))
-        {
-            velocity = { 1, 1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else if (input.Is_Key_Pressed(GLFW_KEY_KP_3) && input.Is_Key_Pressed(GLFW_KEY_KP_2))
-        {
-            velocity = { 1, -1 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-        else
-        {
-            velocity = { 1, 0 };
-            m_owner->GetTransform().AddTranslation(velocity);
-            m_owner->GetMesh().Get_Is_Moved() = true;
-        }
-    }
-}
-
 void Physics::Update(float dt)
 {
     timer += dt;
@@ -858,15 +492,11 @@ void Physics::Update(float dt)
         Acceleration();
         Dash(m_owner);
         
-        if(is_dashed == true && timer >= 0.2)
+        if(is_dashed == true && timer >= 0.1)
         {
             m_owner->GetComponentByTemplate<Physics>()->SetAcceleration({0, 0});
             is_dashed = false;
         }
-    }
-    else if (m_owner->GetName() == "second")
-    {
-        Acceleration2();
     }
     else
     {

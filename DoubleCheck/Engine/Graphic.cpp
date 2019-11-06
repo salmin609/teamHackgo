@@ -27,7 +27,7 @@ void Graphic::Init()
     view.Init();
     Application::Get_Application()->Imgui_Init();
 
-    glClearColor(1 ,1,1,1);
+    glClearColor(0.31372 ,0.73725,0.8745,1);
 }
 
 void Graphic::Update(float dt)
