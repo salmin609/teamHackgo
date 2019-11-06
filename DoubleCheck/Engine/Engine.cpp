@@ -22,13 +22,9 @@
 #include "Windows.h"
 #include "Component_Enemy.h"
 
-<<<<<<< HEAD
-
 using namespace std;
-=======
 #include <thread>
 
->>>>>>> e9f3fbc2515b20d8a3edbc51eb7da5d9a1d7a488
 Sound sound;
 
 namespace
