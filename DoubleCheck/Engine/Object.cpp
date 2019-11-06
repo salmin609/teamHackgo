@@ -1,4 +1,4 @@
-#include <algorithm>
+ #include <algorithm>
 #include "Object.h"
 
 void Object::AddComponent(Component* comp)

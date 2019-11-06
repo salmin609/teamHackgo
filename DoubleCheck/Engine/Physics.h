@@ -22,7 +22,7 @@ public:
     }
     vector2 GetAcceleration() const
     {
-        return acceleration;
+         return acceleration;
     }
 	vector2 &GetAcceleration_Reference() 
 	{

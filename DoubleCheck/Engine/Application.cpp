@@ -6,6 +6,9 @@
 #include "ObjectManager.h"
 #include "Message_Manager.h"
 #include "Component_Sprite.h"
+#include <fstream>
+
+using namespace std;
 
 
 Application* Application::application = nullptr;
@@ -82,6 +85,9 @@ void Application::Init()
 	object3.LoadFromPNG("../sprite/waterpunch.png");
 	object4.LoadFromPNG("../sprite/temp.png");
 	object5.LoadFromPNG("../sprite/maknae.png");
+	
+
+	
 }
 //void Application::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 //{
@@ -200,6 +206,7 @@ void Application::Imgui_Update()
 			ImGui::SliderFloat("scale_y", &this_obj->GetTransform().GetScale_Reference().y, -2.0f, 2.0f);
 			ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
 			ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
+
 			/*if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
 			{
 				ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);

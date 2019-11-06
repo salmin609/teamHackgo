@@ -1,0 +1,2 @@
+position -600 600
+scale 2 2
