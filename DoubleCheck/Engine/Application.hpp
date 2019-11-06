@@ -20,6 +20,7 @@
 #include "../DoubleCheck/Level1.h"
 
 #include "Transform.hpp"
+#include <thread>
 
 class Application
 {
@@ -47,6 +48,8 @@ private:
 	Texture object3;
 	Texture object4;
 	Texture object5;
+
+    //std::thread m_thread;
 
 public:
 	static Application* Get_Application();

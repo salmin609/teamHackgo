@@ -8,12 +8,10 @@ class Physics : public Component
 public:
     void Init(Object *obj) override;
     void Acceleration();
-    void Acceleration2();
     void JustMove();
     void KnockBack(Object* object_1, Object* object_2);
     void Dash(Object* object);
     void BasicMovement();
-    void BasicMovement2();
     void Update(float dt) override;
 
     void SetAcceleration(vector2 accel)
