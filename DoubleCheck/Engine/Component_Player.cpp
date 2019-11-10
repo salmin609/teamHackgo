@@ -21,15 +21,13 @@ void Player::Init(Object* obj)
     hp_bar_pos.y -= 100;
     hp_bar->SetTranslation(hp_bar_pos);
     hp_bar->Get_Is_Debugmode() = false;
-    hp_bar->Set_Name("hp_bar");
+    hp_bar->Set_Name(m_owner->Get_Name() + "hp_bar");
     hp_bar->Set_Tag("hp_bar");
     
     this->hp_bar = hp_bar;
     m_owner->Get_Belongs_Objects().push_back(hp_bar);
     
     ObjectManager::GetObjectManager()->AddObject(hp_bar);
-    
-
 }
 
 void Player::Update(float dt)

@@ -17,19 +17,35 @@ void Message::Update(float dt)
     }
     if(message_name == "collision")
     {
-        Object* target_hp_bar = m_target->Get_Belong_Object_By_Name("hp_bar");
+        Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
         if(target_hp_bar != nullptr)
         {
             if(target_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
             {
                 float damage_to_target = 0;
                 Physics* temp_physics = m_from->GetComponentByTemplate<Physics>();
-                damage_to_target = (sqrt((temp_physics->GetAcceleration().x * temp_physics->GetAcceleration().x) +
-                    (temp_physics->GetAcceleration().y * temp_physics->GetAcceleration().y)));
+                damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
+                    (temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
 
                 std::cout << "damage to target : " << damage_to_target << std::endl;
 
-                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 10);
+                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
+            }
+        }
+
+        Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
+        if (from_hp_bar != nullptr)
+        {
+            if (from_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
+            {
+                float damage_to_target = 1;
+                Physics* temp_physics = m_target->GetComponentByTemplate<Physics>();
+                damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
+                    (temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
+
+                std::cout << "damage to from : " << damage_to_target << std::endl;
+
+                from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
             }
         }
     }

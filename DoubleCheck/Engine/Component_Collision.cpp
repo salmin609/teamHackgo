@@ -76,6 +76,10 @@ bool Collision::CircleToCircleCollision()
                         if (distance <= obj_i_radius + obj_j_radius)
                         {
                             if_it_is_collide = true;
+                            obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
+                            obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().y;
+                            obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().x;
+                            obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().y;
                             physics.KnockBack(obj_i, obj_j);
 
                             Message_Manager::Get_Message_Manager()->Save_Message(new Message(obj_j, obj_i, "collision"));

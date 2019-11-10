@@ -134,6 +134,10 @@ public:
     {
         return m_transform.GetScale();
     }
+    vector2& GetScale_Reference()
+    {
+        return m_transform.GetScale_Reference();
+    }
 
     //IMGUI
     bool& Get_Is_Selected()
@@ -166,6 +170,7 @@ public:
     bool Get_Need_To_Update();
 
     Object* Get_Belong_Object_By_Name(std::string name);
+    Object* Get_Belong_Object_By_Tag(std::string tag);
     
     /*bool IsDead()
     {
