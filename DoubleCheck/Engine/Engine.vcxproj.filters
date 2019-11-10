@@ -115,9 +115,7 @@
     <ClCompile Include="View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Component_Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="Component_Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="angles.hpp">
@@ -264,9 +262,7 @@
     <ClInclude Include="View.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Component_Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Component_Text.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
