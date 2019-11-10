@@ -2,7 +2,7 @@
 #include "Timer.hpp"
 #include "Sound_Manager.h"
 #include <thread>
-
+#include "Text.hpp"
 extern Sound sound;
 
 class Engine
@@ -23,6 +23,6 @@ private:
     bool is_done = false;
     float m_dt;
     Timer game_timer;
-
+	Text text{};
     //std::thread thread_app;
 };

@@ -1,2 +1,2 @@
-position -600 600
+position -1600 -1600
 scale 2 2

@@ -13,6 +13,7 @@
 #include "../DoubleCheck/MainMenu.h"
 #include "../DoubleCheck/Level1.h"
 #include "Component_Sprite.h"
+#include "Component_Text.h"
 #include "Component_Transform.h"
 #include "Component_TopDownMovement.h"
 #include "GL.hpp"
@@ -21,6 +22,8 @@
 #include "Sound_Manager.h"
 #include "Windows.h"
 #include "Component_Enemy.h"
+#include "BitmapFont.hpp"
+#include "Shader.hpp"
 
 using namespace std;
 #include <thread>
@@ -57,6 +60,7 @@ void Update_Msg(float dt)
 
 void Engine::Init()
 {
+
 	sound.initialize();
 	sound.load();
 	sound.play(0);
@@ -144,10 +148,16 @@ void Engine::Init()
 	temp_fourth->AddComponent(new Component_Transform());
 	temp_fourth->Set_Name("fourth");
 
+	Object* text_obj = new Object();
+	text_obj->AddComponent(new TextComp(text_obj, L"Please jump on 5th floor Suhwan!", { 255,0,0,255 }, { 50,50 }));
+	text_obj->SetTranslation({ 500,300 });
+	text_obj->Set_Name("text");
+
 	object_manager->AddObject(temp);
 	object_manager->AddObject(temp_sec);
 	object_manager->AddObject(temp_third);
 	object_manager->AddObject(temp_fourth);
+	object_manager->AddObject(text_obj);
 
 
 	ofstream fileOut;
@@ -164,6 +174,8 @@ void Engine::Init()
 	fileOut.close();
 
 	game_timer.Reset();
+
+   
 }
 
 
