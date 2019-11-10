@@ -52,3 +52,23 @@ std::string Object::GetName()
 {
     return m_name;
 }
+
+bool Object::Get_Need_To_Update()
+{
+    return need_to_update;
+}
+
+Object* Object::Get_Belong_Object_By_Name(std::string name)
+{
+    if(!belongs_object.empty())
+    {
+        for(Object* obj : belongs_object)
+        {
+            if(obj->GetName() == name)
+            {
+                return obj;
+            }
+        }
+    }
+    return nullptr;
+}

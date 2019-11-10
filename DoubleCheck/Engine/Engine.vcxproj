@@ -179,6 +179,7 @@
     <ClInclude Include="Component.hpp" />
     <ClInclude Include="Component_Collision.h" />
     <ClInclude Include="Component_Enemy.h" />
+    <ClInclude Include="Component_Hpbar.h" />
     <ClInclude Include="Component_Sprite.h" />
     <ClInclude Include="Component_TopDownMovement.h" />
     <ClInclude Include="Component_Transform.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component_Collision.cpp" />
     <ClCompile Include="Component_Enemy.cpp" />
+    <ClCompile Include="Component_Hpbar.cpp" />
     <ClCompile Include="Component_Player.cpp" />
     <ClCompile Include="Component_Sprite.cpp" />
     <ClCompile Include="Component_TopDownMovement.cpp" />

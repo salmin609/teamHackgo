@@ -4,15 +4,18 @@
 #include "Input.h"
 #include "Component_Enemy.h"
 #include "Component_Sprite.h"
+#include "Component_Hpbar.h"
 
 void Player::Init(Object* obj)
 {
     m_owner = obj;
     m_owner->Get_Component_Info_Reference().component_info_player = true;
-
-    Object* hp_bar = new Object();
+    
+    Object* hp_bar = new Object(false);
 
     hp_bar->AddComponent(new Sprite(hp_bar, "../Sprite/HP.png", false));
+    hp_bar->AddComponent(new Hp_Bar());
+
     hp_bar->GetMesh().Get_Is_Moved() = true;
     vector2 hp_bar_pos = m_owner->GetTransform().GetTranslation();
     hp_bar_pos.y -= 100;
@@ -20,9 +23,11 @@ void Player::Init(Object* obj)
     hp_bar->Get_Is_Debugmode() = false;
     hp_bar->Set_Name("hp_bar");
     hp_bar->Set_Tag("hp_bar");
+    
     this->hp_bar = hp_bar;
     m_owner->Get_Belongs_Objects().push_back(hp_bar);
-    //ObjectManager::GetObjectManager()->AddObject(hp_bar);
+    
+    ObjectManager::GetObjectManager()->AddObject(hp_bar);
     
 
 }
@@ -36,6 +41,14 @@ void Player::Update(float dt)
         std::cout << "center_pos_x :" << m_owner->GetTransform().GetTranslation().x << std::endl;
         std::cout << "center_pos_y :" << m_owner->GetTransform().GetTranslation().y << std::endl;
         std::cout << std::endl;
+    }
+
+    if(input.Is_Key_Triggered(GLFW_KEY_L))
+    {
+        Object* obj = ObjectManager::GetObjectManager()->Find_Object_By_Name("hp_bar");
+
+        //obj->GetComponentByTemplate<Hp_Bar>()->Decrease();
+
     }
 }
 

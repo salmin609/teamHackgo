@@ -333,7 +333,7 @@ void Physics::Acceleration()
         m_owner->GetTransform().AddTranslation(acceleration);
         m_owner->GetMesh().Get_Is_Moved() = true;
     }
-    printf("first translation = %f,  %f\n", acceleration.x, acceleration.y);
+    
 }
 
 void Physics::JustMove()

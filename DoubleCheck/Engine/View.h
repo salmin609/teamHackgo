@@ -24,6 +24,6 @@ public:
     {
         return ndc_matrix;
     }
-
+    void Convert_Cam_Zoom();
 
 };

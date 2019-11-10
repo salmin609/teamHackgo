@@ -5,6 +5,7 @@
 #include "StockShaders.hpp"
 #include "Graphic.h"
 #include "Object.h"
+#include "Component_Hpbar.h"
 
 
 void Helper_Addpoint_Circle(std::size_t& point_count, Mesh& mesh, float& radius, float position_x = 0, float position_y = 0, bool move_up_down = true)
@@ -242,10 +243,21 @@ void Sprite::Update(float dt)
             int size = m_owner->Get_Belongs_Objects().size();
             for(int i = 0; i < size; i++)
             {
+                
                 if(m_owner->Get_Belongs_Objects()[i]->GetComponentByTemplate<Sprite>() != nullptr)
                 {
                     Object* obj = m_owner->Get_Belongs_Objects()[i];
-                    matrix3 trans = mat_ndc * MATRIX3::build_translation(0, -100);
+                    obj->GetTransform().GetTranslation_Reference() = m_owner->GetTransform().GetTranslation();
+                    obj->GetTransform().GetTranslation_Reference().x += obj->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset();
+                    //matrix3 trans = mat_ndc * MATRIX3::build_translation(0, -100);
+                    ///////////////////////////////////////////////////////////////////////////
+
+                    matrix3 trans = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
+                    trans *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
+                    trans *= obj->GetTransform().GetModelToWorld();
+
+                    trans = trans * MATRIX3::build_translation(0, -100);
+
                     float fixed_size_convert = 1.0f;
                     if(Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom() < 1.0f)
                     {

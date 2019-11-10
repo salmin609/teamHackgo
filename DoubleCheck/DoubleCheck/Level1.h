@@ -34,4 +34,5 @@ public:
 
 private:
     Object* player;
+    Object* player_sec;
 };
