@@ -10,6 +10,7 @@
 #include "../DoubleCheck/MainMenu.h"
 #include "../DoubleCheck/Level1.h"
 #include "Component_Sprite.h"
+#include "Component_Text.h"
 #include "Component_Transform.h"
 #include "Component_TopDownMovement.h"
 #include "GL.hpp"
@@ -19,7 +20,6 @@
 #include "Windows.h"
 #include "Component_Enemy.h"
 #include "BitmapFont.hpp"
-#include "Text.hpp"
 #include "Shader.hpp"
 
 #include <thread>
@@ -79,6 +79,8 @@ void Engine::Init()
     state_manager->AddState("Menu", new Menu);
     state_manager->AddState("Level1", new Level1);
 
+
+
     Object* temp = new Object();
     temp->AddComponent(new Physics);
     temp->AddComponent(new Collision);
@@ -120,11 +122,17 @@ void Engine::Init()
     temp_fifth ->AddComponent(new Component_Transform());
     temp_fifth ->Set_Name("fifth");
 
+	Object* text_obj = new Object();
+	text_obj->AddComponent(new TextComp(text_obj, L"Please jump on 5th floor Suhwan!", { 255,0,0,255 }, { 50,50 }));
+	text_obj->SetTranslation({500,300});
+	text_obj->Set_Name("text");
+
     object_manager->AddObject(temp);
     object_manager->AddObject(temp_sec);
     object_manager->AddObject(temp_third);
     object_manager->AddObject(temp_fourth);
     object_manager->AddObject(temp_fifth);
+	object_manager->AddObject(text_obj);
 
     game_timer.Reset();
 }

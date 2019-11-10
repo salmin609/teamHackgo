@@ -39,7 +39,7 @@
     public:
         bool               LoadFromFile(const std::filesystem::path& filename);
         bool               LoadDefinition(const std::wstring& font_definition, std::vector<Texture> page_textures);
-        const information& GetInformation() const noexcept;
+		const information& GetInformation() const noexcept;
         character          GetCharacter(wchar_t character_id) const noexcept;
         unsigned short     GetLineHeight() const noexcept;
         const Texture&     GetTexture(int page_index) const noexcept;
