@@ -1,4 +1,4 @@
-#include <fstream>
+﻿#include <fstream>
 #include <sstream>
 
 #include "Engine.hpp"
@@ -84,41 +84,70 @@ void Engine::Init()
 	state_manager->AddState("Menu", new Menu);
 	state_manager->AddState("Level1", new Level1);
 	
-
 	Object* temp = new Object();
-	temp->AddComponent(new Physics);
-	temp->AddComponent(new Collision);
-	temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
-	temp->AddComponent(new Player());
-	temp->AddComponent(new Component_Transform());
-	temp->Set_Name("first");
-	ifstream readFile("../Data/Objects/Object1.txt");
+	
+	ifstream readFile("../Data/Objects/Objects.txt");
 
 
 	if (readFile.is_open())
 	{
-		std::string line;
-		std::string type;
-		int value_x, value_y;;
+		string line;
+		string type;
+		string name;
+		string locate;
+		string animate;
+		int result, frame, value_x, value_y;
 		while (std::getline(readFile, line))
 		{
 			std::stringstream keystream(line);
 			keystream >> type;
+			
+			if(type == "Player")
+			{
+				temp->AddComponent(new Physics);
+				temp->AddComponent(new Collision);
+				temp->AddComponent(new Player());
+				temp->AddComponent(new Component_Transform());
+			}
+			else if(type == "Name:")
+			{
+				keystream >> name;
+				temp->Set_Name(name);
+			}
+			else if (type == "Sprite:")
+			{
+				keystream >> locate;
+				keystream >> animate;
+				keystream >> frame;
 
-			if (type == "position")
+				if(animate == "true")
+				{
+					result = 1;
+				}
+				else if(animate == "false")
+				{
+					result = 0;
+				}
+			
+				
+				temp->AddComponent(new Sprite(temp, locate.c_str() , result, frame));
+				temp->Set_path(locate.c_str());
+			}
+			else if (type == "Position:")
 			{
 				keystream >> value_x;
 				keystream >> value_y;
 
 				temp->SetTranslation(vector2(value_x, value_y));
 			}
-			else if (type == "scale")
+			else if (type == "Scale:")
 			{
 				keystream >> value_x;
 				keystream >> value_y;
 
 				temp->SetScale(vector2(value_x, value_y));
 				//.?????
+				result = 0; frame = 0; value_x = 0; value_y = 0;	
 			}
 		}
 	}
@@ -149,7 +178,7 @@ void Engine::Init()
 	temp_fourth->Set_Name("fourth");
 
 	Object* text_obj = new Object();
-	text_obj->AddComponent(new TextComp(text_obj, L"Please jump on 5th floor Suhwan!", { 255,0,0,255 }, { 50,50 }));
+	text_obj->AddComponent(new TextComp(text_obj, L"Please jump on 5th floor Suhwan! ", { 255,0,0,255 }, { 50,50 }));
 	text_obj->SetTranslation({ 500,300 });
 	text_obj->Set_Name("text");
 
@@ -162,14 +191,19 @@ void Engine::Init()
 
 	ofstream fileOut;
 	temp->Get_Is_Debugmode();
-	fileOut.open("../Data/Objects/Object1.txt");
+	fileOut.open("../Data/Objects/Objects.txt");
 	if (fileOut.fail())
 	{
 		cout << "Can't read the file " << endl;
 	}
-	fileOut << "position " << temp->GetTransform().GetTranslation_Reference().x << " ";
+	
+	fileOut << "Player " << endl;
+	fileOut << "Name: " << temp->Get_Name() << endl;
+	fileOut << "Sprite: " << temp->Get_Path() << " ";
+	//fileOut <<//오브젝트에 만들어서 패스 경로 생성
+	fileOut << "Position: " << temp->GetTransform().GetTranslation_Reference().x << " ";
 	fileOut << temp->GetTransform().GetTranslation_Reference().y << endl;
-	fileOut << "scale " << temp->GetTransform().GetScale_Reference().x << " ";
+	fileOut << "Scale: " << temp->GetTransform().GetScale_Reference().x << " ";
 	fileOut << temp->GetTransform().GetScale_Reference().y << endl;
 	fileOut.close();
 

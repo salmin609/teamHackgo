@@ -1,0 +1,5 @@
+Player 
+Name: first
+Sprite: ../sprite/anime.png 
+Position: 200 200
+Scale: 1 1

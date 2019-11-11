@@ -32,6 +32,7 @@ private:
     std::string tag;
     bool need_update_points = false;
     bool is_debug_mode = true;
+	std::string m_path;
     
     
 
@@ -39,6 +40,15 @@ public:
     Object_Component_Info& Get_Component_Info_Reference()
     {
         return component_info;
+    }
+	void Set_path(std::string path)
+	{
+		m_path = path;
+	}
+
+	std::string Get_Path()
+    {
+		return m_path;
     }
 
     std::string Get_Tag()
