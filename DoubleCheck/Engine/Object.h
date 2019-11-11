@@ -34,6 +34,8 @@ private:
 	bool need_update_points = false;
 	bool is_debug_mode = true;
 	std::string m_path;
+	std::string m_state;
+	int m_frame;
 
 	bool need_to_update;
 
@@ -46,11 +48,30 @@ public:
 	{
 		m_path = path;
 	}
-
+	std::string Get_AnimateState()
+	{
+		return m_state;
+	}
+	
 	std::string Get_Path()
 	{
 		return m_path;
 	}
+
+	void Set_AniState(std::string state)
+	{
+		m_state = state;
+	}
+
+	void Set_Frame(int frame)
+	{
+		m_frame = frame;
+	}
+	int Get_Frame()
+	{
+		return m_frame;
+	}
+	
 	std::vector<Object*>& Get_Belongs_Objects()
 	{
 		return belongs_object;

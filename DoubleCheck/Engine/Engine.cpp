@@ -131,7 +131,9 @@ void Engine::Init()
 			
 				
 				temp->AddComponent(new Sprite(temp, locate.c_str() , result, frame));
-				temp->Set_path(locate.c_str());
+				temp->Set_path(locate);
+				temp->Set_AniState(animate);
+				temp->Set_Frame(frame);
 			}
 			else if (type == "Position:")
 			{
@@ -199,7 +201,8 @@ void Engine::Init()
 	fileOut << "Player " << endl;
 	fileOut << "Name: " << temp->Get_Name() << endl;
 	fileOut << "Sprite: " << temp->Get_Path() << " ";
-	//fileOut <<//오브젝트에 만들어서 패스 경로 생성
+	fileOut << temp->Get_AnimateState() << " ";
+	fileOut << temp->Get_Frame() << endl; //오브젝트에 만들어서 패스 경로 생성
 	fileOut << "Position: " << temp->GetTransform().GetTranslation_Reference().x << " ";
 	fileOut << temp->GetTransform().GetTranslation_Reference().y << endl;
 	fileOut << "Scale: " << temp->GetTransform().GetScale_Reference().x << " ";
