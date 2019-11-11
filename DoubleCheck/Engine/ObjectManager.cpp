@@ -27,9 +27,12 @@ void ObjectManager::Update(float dt)
 
         for (auto& obj : objects)
         {
-            for (auto component : obj->GetComponentContainer())
+            if(obj->Get_Need_To_Update())
             {
-                component->Update(dt);
+                for (auto component : obj->GetComponentContainer())
+                {
+                    component->Update(dt);
+                }
             }
             if (obj->IsDead())
                 delete_obj.push_back(obj);
@@ -80,7 +83,7 @@ std::vector<Object*> ObjectManager::Find_Objects_By_Tag(std::string tag)
 
     for(auto object : objects)
     {
-        if(object.get()->Get_Tag() == "enemy")
+        if(object.get()->Get_Tag() == tag)
         {
             objects_have_tag.push_back(object.get());
         }

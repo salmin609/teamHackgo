@@ -17,6 +17,7 @@ private:
     Mesh m_debug_mesh;
 
     std::vector<Component*>components_;
+    std::vector<Object*> belongs_object;
     bool is_dead{};
     std::string m_name;
     vector2 center_pos;
@@ -33,12 +34,16 @@ private:
     bool need_update_points = false;
     bool is_debug_mode = true;
     
-    
+    bool need_to_update;
 
 public:
     Object_Component_Info& Get_Component_Info_Reference()
     {
         return component_info;
+    }
+    std::vector<Object*>& Get_Belongs_Objects()
+    {
+        return belongs_object;
     }
 
     std::string Get_Tag()
@@ -69,10 +74,11 @@ public:
     {
         center_pos = new_center;
     }
-    Object() : component_info(this)
+    Object(bool need_to_update = true) : component_info(this)
     {
         tag = "none";
         m_id = object_id_increment;
+        this->need_to_update = need_to_update;
         object_id_increment++;
     }
     Transform& GetTransform() { return m_transform; }
@@ -128,6 +134,10 @@ public:
     {
         return m_transform.GetScale();
     }
+    vector2& GetScale_Reference()
+    {
+        return m_transform.GetScale_Reference();
+    }
 
     //IMGUI
     bool& Get_Is_Selected()
@@ -157,7 +167,11 @@ public:
     void SetMesh(Mesh mesh);
     void Set_Debug_Mesh(Mesh mesh);
     std::string GetName();
+    bool Get_Need_To_Update();
 
+    Object* Get_Belong_Object_By_Name(std::string name);
+    Object* Get_Belong_Object_By_Tag(std::string tag);
+    
     /*bool IsDead()
     {
         return is_dead;
