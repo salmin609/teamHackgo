@@ -335,38 +335,41 @@ void Physics::JustMove()
 
 void Physics::KnockBack(Object* object_1, Object* object_2)
 {
-    vector2 object_1_pos = object_1->GetTransform().GetTranslation();
-    vector2 object_2_pos = object_2->GetTransform().GetTranslation();
-    vector2 object_1_acceleration = object_1->GetComponentByTemplate<Physics>()->GetAcceleration();
-    vector2 object_2_acceleration = object_2->GetComponentByTemplate<Physics>()->GetAcceleration();
-    vector2 direction_to_go;
-
-    float object_1_speed = sqrt((object_1_acceleration.x * object_1_acceleration.x) + (object_1_acceleration.y * object_1_acceleration.y));
-    float object_2_speed = sqrt((object_2_acceleration.x * object_2_acceleration.x) + (object_2_acceleration.y * object_2_acceleration.y));
-
-    if (object_2_speed >= object_1_speed)
+    if (object_1->GetComponentByTemplate<Physics>() != nullptr && object_2->GetComponentByTemplate<Physics>() != nullptr)
     {
-        direction_to_go = normalize(object_1_pos - object_2_pos);
+        vector2 object_1_pos = object_1->GetTransform().GetTranslation();
+        vector2 object_2_pos = object_2->GetTransform().GetTranslation();
+        vector2 object_1_acceleration = object_1->GetComponentByTemplate<Physics>()->GetAcceleration();
+        vector2 object_2_acceleration = object_2->GetComponentByTemplate<Physics>()->GetAcceleration();
+        vector2 direction_to_go;
 
-        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * object_2_speed);
-        object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
-        object_1->GetMesh().Get_Is_Moved() = true;
+        float object_1_speed = sqrt((object_1_acceleration.x * object_1_acceleration.x) + (object_1_acceleration.y * object_1_acceleration.y));
+        float object_2_speed = sqrt((object_2_acceleration.x * object_2_acceleration.x) + (object_2_acceleration.y * object_2_acceleration.y));
 
-        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
-        object_2->GetTransform().AddTranslation(object_2->GetComponentByTemplate<Physics>()->GetAcceleration());
-        object_2->GetMesh().Get_Is_Moved() = true;
-    }
-    else if (object_2_speed < object_1_speed)
-    {
-        direction_to_go = normalize(object_2_pos - object_1_pos);
+        if (object_2_speed >= object_1_speed)
+        {
+            direction_to_go = normalize(object_1_pos - object_2_pos);
 
-        object_2->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * object_1_speed);
-        object_2->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
-        object_2->GetMesh().Get_Is_Moved() = true;
+            object_1->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * object_2_speed);
+            object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
+            object_1->GetMesh().Get_Is_Moved() = true;
 
-        object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
-        object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
-        object_1->GetMesh().Get_Is_Moved() = true;
+            object_2->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
+            object_2->GetTransform().AddTranslation(object_2->GetComponentByTemplate<Physics>()->GetAcceleration());
+            object_2->GetMesh().Get_Is_Moved() = true;
+        }
+        else if (object_2_speed < object_1_speed)
+        {
+            direction_to_go = normalize(object_2_pos - object_1_pos);
+
+            object_2->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * object_1_speed);
+            object_2->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
+            object_2->GetMesh().Get_Is_Moved() = true;
+
+            object_1->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
+            object_1->GetTransform().AddTranslation(object_1->GetComponentByTemplate<Physics>()->GetAcceleration());
+            object_1->GetMesh().Get_Is_Moved() = true;
+        }
     }
 }
 

@@ -10,14 +10,18 @@ class Sprite : public Component
 {
 public:
 	Sprite();
-	Sprite(Object* obj, const char* staticSpritePath);
-	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames);
+	Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawing = true);
+	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, bool need_debug_drawing = true);
 	void Init(Object* obj) override;
 	void Update(float dt) override;
     bool Can_Load_To_Texture(Texture& texture, const char* file_path);
     material& Get_Material()
     {
         return material;
+    }
+    Vertices& Get_Shape()
+    {
+        return shape;
     }
 private:
 

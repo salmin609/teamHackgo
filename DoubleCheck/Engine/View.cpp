@@ -33,25 +33,45 @@ void View::Update(float dt)
         camera.SetCenter(new_center);
         Graphic::GetGraphic()->get_need_update_sprite() = true;
     }
-    else if (input.Is_Key_Pressed(GLFW_KEY_LEFT))
+    if (input.Is_Key_Pressed(GLFW_KEY_LEFT))
     {
         vector2 new_center = camera.GetCenter();
         new_center.x -= 1.0f;
         camera.SetCenter(new_center);
         Graphic::GetGraphic()->get_need_update_sprite() = true;
     }
-    else if (input.Is_Key_Pressed(GLFW_KEY_DOWN))
+    if (input.Is_Key_Pressed(GLFW_KEY_DOWN))
     {
         vector2 new_center = camera.GetCenter();
         new_center.y -= 1.0f;
         camera.SetCenter(new_center);
         Graphic::GetGraphic()->get_need_update_sprite() = true;
     }
-    else if (input.Is_Key_Pressed(GLFW_KEY_UP))
+    if (input.Is_Key_Pressed(GLFW_KEY_UP))
     {
         vector2 new_center = camera.GetCenter();
         new_center.y += 1.0f;
         camera.SetCenter(new_center);
         Graphic::GetGraphic()->get_need_update_sprite() = true;
     }
+    //Convert_Cam_Zoom();
+
+
+}
+
+void View::Convert_Cam_Zoom()
+{
+    std::vector<Object*> player_vec = ObjectManager::GetObjectManager()->Find_Objects_By_Tag("player");
+    std::vector<vector2> player_pos;
+    float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+    const int player_vec_size = player_vec.size();
+
+    for(int i = 0; i < player_vec_size; i++)
+    {
+        player_pos.push_back(player_vec[i]->GetTransform().GetTranslation());
+    }
+
+
+
+
 }

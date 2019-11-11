@@ -7,8 +7,8 @@
 #include "Message_Manager.h"
 #include "Component_Sprite.h"
 #include <fstream>
-
 using namespace std;
+#include "Component_Hpbar.h"
 
 
 Application* Application::application = nullptr;
@@ -201,16 +201,25 @@ void Application::Imgui_Update()
 			ImGui::TextWrapped("Salmin UI");
 			ImGui::SliderFloat("translation_x", &this_obj->GetTransform().GetTranslation_Reference().x, -1.0f, 150.0f);
 			ImGui::SliderFloat("translation_y", &this_obj->GetTransform().GetTranslation_Reference().y, -1.0f, 1.0f);
-			ImGui::SliderFloat("scale_x", &this_obj->GetTransform().GetScale_Reference().x, -2.0f, 2.0f);
+			if(ImGui::SliderFloat("scale_x", &this_obj->GetTransform().GetScale_Reference().x, -2.0f, 2.0f))
+			{
+			    if(this_obj->GetComponentByTemplate<Hp_Bar>() != nullptr)
+			    {
+                    this_obj->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset() = 0;
+			    }
+			}
 			ImGui::SliderFloat("scale_y", &this_obj->GetTransform().GetScale_Reference().y, -2.0f, 2.0f);
-			ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
-			ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
 
-			/*if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
+			if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
 			{
 				ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
 				ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
-			}*/
+			}
+            //if(this_obj->GetComponentByTemplate<Hp_Bar>() != nullptr)
+            //{
+            //    ImGui::SliderFloat("hp_x", &this_obj->GetScale_Reference().x, -2.0f, 2.0f);
+            //    ImGui::SliderFloat("hp_y", &this_obj->GetScale_Reference().y, -2.0f, 2.0f);
+            //}
 
 			if (ImGui::InputText("name", this_obj->name_buf, 64, ImGuiInputTextFlags_EnterReturnsTrue))
 			{
@@ -279,6 +288,7 @@ void Application::Imgui_Update()
 					this_obj->AddComponent(new Component_TopDownMovement());
 				}
 			}
+            
 
 			ImGui::TreePop();
 		}

@@ -26,6 +26,10 @@ public:
 	{
 		return acceleration;
 	}
+    vector2& Get_Save_Acceleration_Reference()
+    {
+        return accel_save;
+    }
 
     bool is_collided = false;
     bool is_dashed = false;
@@ -36,4 +40,5 @@ private:
     mutable float timer = 0;
     vector2 prev_pos;
     vector2 direction_vector{};
+    vector2 accel_save{};
 };
