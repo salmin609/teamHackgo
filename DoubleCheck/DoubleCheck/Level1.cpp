@@ -18,7 +18,6 @@ void Level1::Load()
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
 
-
     player_sec->SetTranslation({ 200,200 });
     player_sec->AddComponent(new Player());
     player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png"));
