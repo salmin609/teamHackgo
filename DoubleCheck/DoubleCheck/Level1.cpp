@@ -1,8 +1,17 @@
 #include "Level1.h"
 #include "Component_Collision.h"
+#include "Referee.h"
+
+namespace
+{
+    Referee* referee = nullptr;
+
+}
 
 void Level1::Load()
 {
+    referee = Referee::Get_Referee();
+
     player = new Object();
     player->Set_Name("first");
     player->Set_Tag("player");
@@ -32,5 +41,5 @@ void Level1::Load()
 
 void Level1::Update(float dt)
 {
-
+    referee->Update(dt);
 }

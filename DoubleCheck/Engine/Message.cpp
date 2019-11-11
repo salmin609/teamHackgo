@@ -4,6 +4,7 @@
 #include "Component_Enemy.h"
 #include "Message_Manager.h"
 #include "Component_Hpbar.h"
+#include "Referee.h"
 
 void Message::Init()
 {
@@ -49,12 +50,19 @@ void Message::Update(float dt)
             }
         }
     }
+    if(message_name == "respawn")
+    {
+        if(m_from->GetName() == "second")
+        {
+            Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_SECOND_DIE);
+        }
+    }
 
     std::string log = m_from->Get_Name() + " " + message_name + " " + m_target->Get_Name();
 
     Message_Manager::Get_Message_Manager()->Get_Log().push_back(log);
 
-    delete(this);
+    should_delete = true;
 }
 
 void Message::Delete()
