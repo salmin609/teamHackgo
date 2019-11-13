@@ -22,6 +22,7 @@
 #include "BitmapFont.hpp"
 #include "Shader.hpp"
 
+
 #include <thread>
 
 Sound sound;
@@ -149,10 +150,12 @@ void Engine::Update()
     graphic->Update(m_dt);
 
     object_manager->Update(m_dt);
+
     msg_manager->Update(m_dt);
+    StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
     //Reset camera zoom
     Reset();
-    StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
+    
     
     
 

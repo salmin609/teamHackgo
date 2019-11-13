@@ -53,7 +53,7 @@ bool Collision::CircleToCircleCollision()
 {
     bool if_it_is_collide = false;
     unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
-
+    ObjectManager* check = ObjectManager::GetObjectManager();
     for (unsigned int i = 0; i < object_position_size; ++i)
     {
         Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
