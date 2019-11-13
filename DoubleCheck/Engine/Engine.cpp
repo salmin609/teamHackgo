@@ -156,7 +156,7 @@ void Engine::Init()
 
 
 
-	Object* temp_sec = new Object();
+	/*Object* temp_sec = new Object();
 	temp_sec->AddComponent(new Physics);
 	temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/salmin.png"));
 	temp_sec->AddComponent(new Component_Transform());
@@ -188,8 +188,8 @@ void Engine::Init()
 	object_manager->AddObject(temp_sec);
 	object_manager->AddObject(temp_third);
 	object_manager->AddObject(temp_fourth);
-	object_manager->AddObject(text_obj);
-
+	object_manager->AddObject(text_obj);*/
+	StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
 	ofstream fileOut;
 	temp->Get_Is_Debugmode();
 	fileOut.open("../Data/Objects/Objects.txt");
@@ -219,13 +219,18 @@ void Engine::Update()
     m_dt = game_timer.GetElapsedSeconds();
     game_timer.Reset();
 
+    
     app_->Update(m_dt);
     state_manager->Update(m_dt);
     graphic->Update(m_dt);
+
     object_manager->Update(m_dt);
     msg_manager->Update(m_dt);
     //Reset camera zoom
     Reset();
+    StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
+    
+    
 
     if (input.Is_Key_Triggered(GLFW_KEY_1))
         state_manager->is_pause = !state_manager->is_pause;

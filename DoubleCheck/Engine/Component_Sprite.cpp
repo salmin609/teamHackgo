@@ -129,6 +129,7 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawin
 	m_owner->SetMesh(square);
 	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
 
+    /*
 	int size_for_normal = m_owner->GetMesh().Get_Points().size();
 
 	std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
@@ -141,7 +142,7 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawin
 		m_owner->Get_Normalize_Points().push_back(normal_vec);
 	}
 	m_owner->Set_Center({ 0.0f , 0.0f });
-
+    */
     if(need_debug_drawing)
     {
         Mesh debug_mesh;
@@ -231,6 +232,7 @@ void Sprite::Update(float dt)
 		m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
 		m_owner->SetMesh(m_owner->GetMesh());
 		shape.UpdateVerticesFromMesh(m_owner->GetMesh());
+
 	}
     if(m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite())
     {

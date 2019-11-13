@@ -36,6 +36,7 @@ private:
 	std::string m_path;
 	std::string m_state;
 	int m_frame;
+	Object* this_obj_owner = nullptr;
 
 	bool need_to_update;
 
@@ -178,6 +179,15 @@ public:
 	bool& Get_Is_Debugmode()
 	{
 		return is_debug_mode;
+	}
+
+	Object* Get_This_Obj_Owner()
+	{
+		return this->this_obj_owner;
+	}
+	void Set_This_Obj_Owner(Object* owner)
+	{
+		this->this_obj_owner = owner;
 	}
 
 
