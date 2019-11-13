@@ -34,5 +34,6 @@ private:
     std::vector<Stage_Statement> stage_statements;
 
     float player_second_respawn_timer = 3.0f;
+    Object* player_sec_temp;
 
 };

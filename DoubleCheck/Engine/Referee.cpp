@@ -2,6 +2,7 @@
 #include "Component_Player.h"
 #include "Component_Sprite.h"
 #include "ObjectManager.h"
+#include "Graphic.h"
 Referee* Referee::referee = nullptr;
 
 
@@ -17,6 +18,15 @@ Referee* Referee::Get_Referee()
 void Referee::Init()
 {
     stage_statements.clear();
+    player_sec_temp = new Object();
+    player_sec_temp->AddComponent(new Player());
+    player_sec_temp->AddComponent(new Sprite(player_sec_temp, "../Sprite/awesomeface_red.png"));
+    player_sec_temp->AddComponent(new Physics());
+    player_sec_temp->Set_Name("second");
+    player_sec_temp->Set_Tag("player");
+    player_sec_temp->SetTranslation({ 200,200 });
+    
+
 }
 
 void Referee::Update(float dt)
@@ -52,14 +62,8 @@ void Referee::Respawn(Stage_Statement statement)
     switch(statement)
     {
     case PLAYER_SECOND_DIE:
-        Object* new_player_sec = new Object();
-        new_player_sec->Set_Name("second");
-        new_player_sec->Set_Tag("player");
-        new_player_sec->SetTranslation({ 200,200 });
-        new_player_sec->AddComponent(new Player());
-        new_player_sec->AddComponent(new Sprite(new_player_sec, "../Sprite/awesomeface_red.png"));
-        new_player_sec->AddComponent(new Physics());
-        ObjectManager::GetObjectManager()->AddObject(new_player_sec);
+        
+        ObjectManager::GetObjectManager()->AddObject(player_sec_temp);
         break;
     }
 }

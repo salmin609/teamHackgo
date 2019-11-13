@@ -143,15 +143,17 @@ void Engine::Update()
     m_dt = game_timer.GetElapsedSeconds();
     game_timer.Reset();
 
+    
     app_->Update(m_dt);
     state_manager->Update(m_dt);
     graphic->Update(m_dt);
+
     object_manager->Update(m_dt);
     msg_manager->Update(m_dt);
     //Reset camera zoom
     Reset();
-
     StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
+    
     
 
     if (input.Is_Key_Triggered(GLFW_KEY_1))

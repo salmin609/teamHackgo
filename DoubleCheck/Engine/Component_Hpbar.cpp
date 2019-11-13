@@ -2,6 +2,8 @@
 #include "Object.h"
 #include "Message_Manager.h"
 #include "Referee.h"
+#include "Component_Text.h"
+#include "ObjectManager.h"
 
 void Hp_Bar::Init(Object* obj)
 {
@@ -24,12 +26,20 @@ void Hp_Bar::Decrease(float dmg)
         m_owner->GetTransform().GetScale_Reference().x -= damage;
         offset -= static_cast<int>(damage * 50);
 
+        //Object* dmg_text = new Object();
+        //dmg_text->AddComponent(new TextComp(dmg_text, L"dmg", { 255,0,0,255 }, { 50,50 }));
+        //dmg_text->SetTranslation({ Hp_Owner_Obj->GetTransform().GetTranslation().x, Hp_Owner_Obj->GetTransform().GetTranslation().y });
+        //dmg_text->Set_Name("text");
+
+        //ObjectManager::GetObjectManager()->AddObject(dmg_text);
+
         if(m_owner->GetTransform().GetScale_Reference().x <= 0)
         {
             m_owner->SetDeadCondition(true);
             Hp_Owner_Obj->SetDeadCondition(true);
             Message_Manager::Get_Message_Manager()->Save_Message(new Message(Referee::Get_Referee(), Hp_Owner_Obj, "respawn"));
         }
+        
     }
 
 }

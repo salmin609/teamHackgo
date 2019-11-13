@@ -11,6 +11,7 @@ namespace
 void Level1::Load()
 {
     referee = Referee::Get_Referee();
+    referee->Init();
 
     player = new Object();
     player->Set_Name("first");
