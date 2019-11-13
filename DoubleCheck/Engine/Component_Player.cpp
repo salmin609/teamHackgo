@@ -23,10 +23,13 @@ void Player::Init(Object* obj)
     hp_bar->Get_Is_Debugmode() = false;
     hp_bar->Set_Name(m_owner->Get_Name() + "hp_bar");
     hp_bar->Set_Tag("hp_bar");
+    hp_bar->Set_This_Obj_Owner(m_owner);
     
     this->hp_bar = hp_bar;
     m_owner->Get_Belongs_Objects().push_back(hp_bar);
-    
+
+
+
     ObjectManager::GetObjectManager()->AddObject(hp_bar);
 }
 
