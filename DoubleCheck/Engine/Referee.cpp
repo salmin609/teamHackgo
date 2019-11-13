@@ -60,7 +60,6 @@ void Referee::Respawn(Stage_Statement statement)
         new_player_sec->AddComponent(new Sprite(new_player_sec, "../Sprite/awesomeface_red.png"));
         new_player_sec->AddComponent(new Physics());
         ObjectManager::GetObjectManager()->AddObject(new_player_sec);
-
         break;
     }
 }
