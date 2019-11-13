@@ -32,6 +32,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Object_Component_Info.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Referee.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -41,7 +42,6 @@
     <ClCompile Include="VertexLayoutDescription.cpp" />
     <ClCompile Include="Vertices.cpp" />
     <ClCompile Include="View.cpp" />
-    <ClCompile Include="Referee.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\imgui\imconfig.h" />
@@ -82,6 +82,7 @@
     <ClInclude Include="Component_Player.h" />
     <ClInclude Include="Object_Component_Info.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="Referee.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Sound_Manager.h" />
     <ClInclude Include="State.h" />
@@ -94,7 +95,6 @@
     <ClInclude Include="VertexLayoutDescription.hpp" />
     <ClInclude Include="Vertices.hpp" />
     <ClInclude Include="View.h" />
-    <ClInclude Include="Referee.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StockShaders.inl" />
