@@ -231,6 +231,7 @@ void Sprite::Update(float dt)
 		m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
 		m_owner->SetMesh(m_owner->GetMesh());
 		shape.UpdateVerticesFromMesh(m_owner->GetMesh());
+
 	}
     if(m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite())
     {
