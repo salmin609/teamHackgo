@@ -94,9 +94,6 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="Referee.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>source</Filter>
     </ClCompile>
