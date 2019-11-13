@@ -51,6 +51,7 @@ bool Collision::BoxToBoxCollision(Mesh mesh) const
 
 bool Collision::CircleToCircleCollision()
 {
+<<<<<<< Updated upstream
 	bool if_it_is_collide = false;
 	unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
 
@@ -93,6 +94,35 @@ bool Collision::CircleToCircleCollision()
 		}
 	}
 	return if_it_is_collide;
+=======
+    bool if_it_is_collide = false;
+    unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
+
+    for (unsigned int i = 0; i < object_position_size; ++i)
+    {
+        Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
+        vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
+        float obj_i_radius = obj_i->GetTransform().GetScale().x * 70.f;
+
+        for (unsigned int j = 0; j < object_position_size; ++j)
+        {
+            Object* obj_j = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[j].get();
+            vector2 obj_j_trans = obj_j->GetTransform().GetTranslation();
+            float obj_j_radius = obj_j->GetTransform().GetScale().x * 70.f;
+            if (i != j)
+            {
+                const float distance = sqrt((obj_i_trans.x - obj_j_trans.x) * (obj_i_trans.x - obj_j_trans.x) + (obj_i_trans.y - obj_j_trans.y) * (obj_i_trans.y - obj_j_trans.y));
+
+                if (distance <= obj_i_radius + obj_j_radius)
+                {
+                    if_it_is_collide = true;
+                    physics.KnockBack(obj_i, obj_j);
+                }
+            }
+        }
+    }
+    return if_it_is_collide;
+>>>>>>> Stashed changes
 }
 
 void Collision::CircleArenaCollision()
