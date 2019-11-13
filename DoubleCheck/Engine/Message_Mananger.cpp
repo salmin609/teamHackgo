@@ -23,11 +23,23 @@ void Message_Manager::Update(float dt)
 {
     if(!messages.empty())
     {
-        for(auto& msg : messages)
+        delete_msg.clear();
+
+        for(Message* msg : messages)
         {
             msg->Update(dt);
+
+            if(msg->Get_Should_Delete())
+            {
+                delete_msg.push_back(msg);
+            }
         }
-        messages.clear();
+        for(auto& delete_msg : this->delete_msg)
+        {
+            messages.erase(std::find(messages.begin(), messages.end(), delete_msg));
+        }
+
+        //messages.clear();
     }
 }
 void Message_Manager::Delete()

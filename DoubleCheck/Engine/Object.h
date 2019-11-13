@@ -33,6 +33,8 @@ private:
     std::string tag;
     bool need_update_points = false;
     bool is_debug_mode = true;
+
+    Object* this_obj_owner = nullptr;
     
     bool need_to_update;
 
@@ -147,6 +149,14 @@ public:
     bool& Get_Is_Debugmode()
     {
         return is_debug_mode;
+    }
+    void Set_This_Obj_Owner(Object* owner)
+    {
+        this->this_obj_owner = owner;
+    }
+    Object* Get_This_Obj_Owner()
+    {
+        return this->this_obj_owner;
     }
     
 

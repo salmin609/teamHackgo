@@ -13,6 +13,7 @@ private:
     static Message_Manager* msg_manager;
     std::vector<Message*> messages;
     std::vector<std::string> msg_log;
+    std::vector<Message*> delete_msg;
 
 public:
     static Message_Manager* Get_Message_Manager();
