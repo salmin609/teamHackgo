@@ -26,6 +26,16 @@ void Hp_Bar::Decrease(float dmg)
         m_owner->GetTransform().GetScale_Reference().x -= damage;
         offset -= static_cast<int>(damage * 50);
 
+        if(Hp_Owner_Obj->Get_Name() == "first")
+        {
+            Object* text = ObjectManager::GetObjectManager()->Find_Object_By_Name("red_text");
+            vector2 text_pos = Hp_Owner_Obj->GetTransform().GetTranslation();
+            text_pos.y += 10;
+            text->GetTransform().SetTranslation(text_pos);
+            //ObjectManager::GetObjectManager()->AddObject(text);
+
+        }
+
         if(m_owner->GetTransform().GetScale_Reference().x <= 0)
         {
             m_owner->SetDeadCondition(true);
