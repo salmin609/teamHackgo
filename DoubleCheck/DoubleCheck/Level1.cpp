@@ -41,13 +41,14 @@ void Level1::Load()
 
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 
-    text = new Object();
-    text->AddComponent(new TextComp(text, L"Hit!", { 255,0,0,255 }, { 50,50 }));
-    text->SetTranslation({ 200,200 });;
-    text->Set_Name("red_text");
-    text->Set_Tag("text");
+    //text = new Object();
+    //text->AddComponent(new TextComp(text, L"Hitddfddffdfdffd!", { 255,0,0,255 }, { 50,50 }));
+    //text->SetTranslation({ 200,200 });;
+    //text->Set_Name("red_text");
+    //text->Set_Tag("text");
 
-    object_manager->AddObject(text);
+    //object_manager->AddObject(text);
+    //ObjectManager::GetObjectManager()->AddObject(text);
 }
 
 void Level1::Update(float dt)
