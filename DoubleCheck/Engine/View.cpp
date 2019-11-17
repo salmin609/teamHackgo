@@ -55,8 +55,6 @@ void View::Update(float dt)
         Graphic::GetGraphic()->get_need_update_sprite() = true;
     }
     //Convert_Cam_Zoom();
-
-
 }
 
 void View::Convert_Cam_Zoom()

@@ -121,6 +121,9 @@
     <ClCompile Include="View.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="Referee.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="angles.hpp">

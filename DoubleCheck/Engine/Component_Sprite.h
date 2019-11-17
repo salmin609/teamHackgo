@@ -9,7 +9,7 @@
 class Sprite : public Component
 {
 public:
-	Sprite();
+	Sprite(Object* obj, bool need_debug_drawing = false);
 	Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawing = true);
 	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, bool need_debug_drawing = true);
 	void Init(Object* obj) override;
