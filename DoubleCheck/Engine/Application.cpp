@@ -8,7 +8,6 @@
 #include "Component_Sprite.h"
 #include "Component_Hpbar.h"
 
-
 Application* Application::application = nullptr;
 
 
@@ -31,6 +30,8 @@ void Application::Init()
 		glfwTerminate();
 		return;
 	}
+
+	//Messagebox::Init_Box();
 
 
 	GLenum glew_err_check;
@@ -130,7 +131,6 @@ void Application::Update(float dt)
 		//re_start.Test();
 	}
 
-
 	save_dt += dt;
 	if (save_dt >= 1.0f)
 	{
@@ -179,7 +179,16 @@ matrix3 helper_inverse(matrix3 model_to_world)
 
 	return minv;
 }
-
+//int Application::DisplayConfirmSaveAsMessageBox()
+//{
+//	int message_box_ID = MessageBox(NULL, "Dicksean is back.", "Confirm Save As", MB_ICONEXCLAMATION | MB_YESNO);
+//	
+//	if (message_box_ID == IDYES)
+//	{
+//
+//	}
+//	return message_box_ID;
+//}
 void Application::Imgui_Update()
 {
 	ImGui_ImplOpenGL3_NewFrame();

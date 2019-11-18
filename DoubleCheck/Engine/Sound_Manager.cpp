@@ -1,5 +1,9 @@
 ﻿#include "Sound_Manager.h"
 
+#include <exception>
+#include <fstream>
+#include <iostream>
+#include "Messagebox.h"
 float sound_timer = 0;
 
 /* Initializing Sounds */
@@ -12,7 +16,42 @@ void Sound::initialize(void)
 /* Loading Sound files */
 void Sound::load(void)
 {
-    result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
+	std::ifstream f;
+	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+	try
+	{
+		f.open("Sounds/TeamDoubleCheck.mp3");
+		result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
+	}
+	catch (std::system_error & e)
+	{
+		std::cerr << e.code().message() << std::endl;
+		Messagebox::Init_Box("Sounds/TeamDoubleCheck.mp3");
+	}
+
+	try
+	{
+		f.open("Sounds/DouDouDouDoubleCheck.mp3");
+		result = FMOD_System_CreateSound(f_system, "Sounds/DouDouDouDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[1]);
+	}
+	catch (std::system_error & e)
+	{
+		std::cerr << e.code().message() << std::endl;
+		Messagebox::Init_Box("Sounds/DouDouDouDoubleCheck.mp3");
+	}
+
+	try
+	{
+		f.open("Sounds/GameBGM.mp3");
+		result = FMOD_System_CreateSound(f_system, "Sounds/GameBGM.mp3", FMOD_DEFAULT, nullptr, &sound[2]);
+	}
+	catch (std::system_error & e)
+	{
+		std::cerr << e.code().message() << std::endl;
+		Messagebox::Init_Box("Sounds/GameBGM.mp3");
+	}
+	/*result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
     if (result != FMOD_OK)
     {
         return;
@@ -26,7 +65,7 @@ void Sound::load(void)
     if (result != FMOD_OK)
     {
         return;
-    }
+    }*/
 }
 
 /* Playing specific sound */
