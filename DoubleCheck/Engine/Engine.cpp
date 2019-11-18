@@ -83,76 +83,76 @@ void Engine::Init()
 
 	state_manager->AddState("Menu", new Menu);
 	state_manager->AddState("Level1", new Level1);
-	
-	Object* temp = new Object();
-	
-	ifstream readFile("../Data/Objects/Objects.txt");
+
+	//Object* temp = new Object();
+	//
+	//ifstream readFile("../Data/Objects/Objects.txt");
 
 
-	if (readFile.is_open())
-	{
-		string line;
-		string type;
-		string name;
-		string locate;
-		string animate;
-		int result, frame, value_x, value_y;
-		while (std::getline(readFile, line))
-		{
-			std::stringstream keystream(line);
-			keystream >> type;
-			
-			if(type == "Player")
-			{
-				temp->AddComponent(new Physics);
-				temp->AddComponent(new Collision);
-				temp->AddComponent(new Player());
-				temp->AddComponent(new Component_Transform());
-			}
-			else if(type == "Name:")
-			{
-				keystream >> name;
-				temp->Set_Name(name);
-			}
-			else if (type == "Sprite:")
-			{
-				keystream >> locate;
-				keystream >> animate;
-				keystream >> frame;
+	//if (readFile.is_open())
+	//{
+	//	string line;
+	//	string type;
+	//	string name;
+	//	string locate;
+	//	string animate;
+	//	int result = 0, frame = 0, value_x = 0, value_y = 0;
+	//	while (std::getline(readFile, line))
+	//	{
+	//		std::stringstream keystream(line);
+	//		keystream >> type;
+	//		
+	//		if(type == "Player")
+	//		{
+	//			temp->AddComponent(new Physics);
+	//			temp->AddComponent(new Collision);
+	//			temp->AddComponent(new Player());
+	//			temp->AddComponent(new Component_Transform());
+	//		}
+	//		else if(type == "Name:")
+	//		{
+	//			keystream >> name;
+	//			temp->Set_Name(name);
+	//		}
+	//		else if (type == "Sprite:")
+	//		{
+	//			keystream >> locate;
+	//			keystream >> animate;
+	//			keystream >> frame;
 
-				if(animate == "true")
-				{
-					result = 1;
-				}
-				else if(animate == "false")
-				{
-					result = 0;
-				}
-			
-				
-				temp->AddComponent(new Sprite(temp, locate.c_str() , result, frame));
-				temp->Set_path(locate);
-				temp->Set_AniState(animate);
-				temp->Set_Frame(frame);
-			}
-			else if (type == "Position:")
-			{
-				keystream >> value_x;
-				keystream >> value_y;
+	//			if(animate == "true")
+	//			{
+	//				result = 1;
+	//			}
+	//			else if(animate == "false")
+	//			{
+	//				result = 0;
+	//			}
+	//		
+	//			
+	//			temp->AddComponent(new Sprite(temp, locate.c_str() , result, frame));
+	//			temp->Set_path(locate);
+	//			temp->Set_AniState(animate);
+	//			temp->Set_Frame(frame);
+	//		}
+	//		else if (type == "Position:")
+	//		{
+	//			keystream >> value_x;
+	//			keystream >> value_y;
 
-				temp->SetTranslation(vector2(value_x, value_y));
-			}
-			else if (type == "Scale:")
-			{
-				keystream >> value_x;
-				keystream >> value_y;
+	//			temp->SetTranslation(vector2(value_x, value_y));
+	//		}
+	//		else if (type == "Scale:")
+	//		{
+	//			keystream >> value_x;
+	//			keystream >> value_y;
 
-				temp->SetScale(vector2(value_x, value_y));
-				//.?????
-				result = 0; frame = 0; value_x = 0; value_y = 0;	
-			}
-		}
-	}
+	//			temp->SetScale(vector2(value_x, value_y));
+	//			//.?????
+	//			result = 0; frame = 0; value_x = 0; value_y = 0;	
+	//		}
+	//	}
+	//}
 
 
 
@@ -190,24 +190,24 @@ void Engine::Init()
 	object_manager->AddObject(temp_fourth);
 	object_manager->AddObject(text_obj);*/
 	StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
-	ofstream fileOut;
-	temp->Get_Is_Debugmode();
-	fileOut.open("../Data/Objects/Objects.txt");
-	if (fileOut.fail())
-	{
-		cout << "Can't read the file " << endl;
-	}
-	
-	fileOut << "Player " << endl;
-	fileOut << "Name: " << temp->Get_Name() << endl;
-	fileOut << "Sprite: " << temp->Get_Path() << " ";
-	fileOut << temp->Get_AnimateState() << " ";
-	fileOut << temp->Get_Frame() << endl; //오브젝트에 만들어서 패스 경로 생성
-	fileOut << "Position: " << temp->GetTransform().GetTranslation_Reference().x << " ";
-	fileOut << temp->GetTransform().GetTranslation_Reference().y << endl;
-	fileOut << "Scale: " << temp->GetTransform().GetScale_Reference().x << " ";
-	fileOut << temp->GetTransform().GetScale_Reference().y << endl;
-	fileOut.close();
+	//ofstream fileOut;
+	//temp->Get_Is_Debugmode();
+	//fileOut.open("../Data/Objects/Objects.txt");
+	//if (fileOut.fail())
+	//{
+	//	cout << "Can't read the file " << endl;
+	//}
+	//
+	//fileOut << "Player " << endl;
+	//fileOut << "Name: " << temp->Get_Name() << endl;
+	//fileOut << "Sprite: " << temp->Get_Path() << " ";
+	//fileOut << temp->Get_AnimateState() << " ";
+	//fileOut << temp->Get_Frame() << endl; //오브젝트에 만들어서 패스 경로 생성
+	//fileOut << "Position: " << temp->GetTransform().GetTranslation_Reference().x << " ";
+	//fileOut << temp->GetTransform().GetTranslation_Reference().y << endl;
+	//fileOut << "Scale: " << temp->GetTransform().GetScale_Reference().x << " ";
+	//fileOut << temp->GetTransform().GetScale_Reference().y << endl;
+	//fileOut.close();
 
 	game_timer.Reset();
 
@@ -259,3 +259,4 @@ void Engine::Clear()
 	object_manager->Clear();
 	//app_->Clear();
 }
+

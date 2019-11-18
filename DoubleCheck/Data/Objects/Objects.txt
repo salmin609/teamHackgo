@@ -1,5 +1,5 @@
-Player 
+Type: player
 Name: first
 Sprite: ../sprite/anime.png true 6
-Position: 200 200
+Position: 400 400
 Scale: 1 1
