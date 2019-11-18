@@ -139,7 +139,7 @@ void Collision::SquareArenaCollision()
 		const float max_y = obj_i_trans.y + 70.0;
 		const float min_y = obj_i_trans.y - 70.0;
 
-		if (line_max_point - max_x <= 0)
+		if (line_max_point - max_x <= 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 
@@ -149,7 +149,7 @@ void Collision::SquareArenaCollision()
 			direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
 			obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 		}
-		else if (line_max_point - max_y <= 0)
+		else if (line_max_point - max_y <= 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			angle = RadianToDegree(angle_between({ -1,0 }, direction_to_go));
@@ -159,7 +159,7 @@ void Collision::SquareArenaCollision()
 			direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
 			obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 		}
-		else if (line_min_point - min_x >= 0)
+		else if (line_min_point - min_x >= 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			angle = RadianToDegree(angle_between({ 0,-1 }, direction_to_go));
@@ -169,7 +169,7 @@ void Collision::SquareArenaCollision()
 			direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
 			obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 		}
-		else if (line_min_point - min_y >= 0)
+		else if (line_min_point - min_y >= 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			angle = RadianToDegree(angle_between({ 1,0 }, direction_to_go));
