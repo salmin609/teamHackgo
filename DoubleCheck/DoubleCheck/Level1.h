@@ -39,4 +39,6 @@ private:
     Object* player_sec;
 
     Object* text;
+	Object* arena;
+
 };

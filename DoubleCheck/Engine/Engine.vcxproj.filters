@@ -15,6 +15,7 @@
     <ClCompile Include="Component_Collision.cpp" />
     <ClCompile Include="Component_Enemy.cpp" />
     <ClCompile Include="Component_Hpbar.cpp" />
+    <ClCompile Include="Component_Item.cpp" />
     <ClCompile Include="Component_Player.cpp" />
     <ClCompile Include="Component_Sprite.cpp" />
     <ClCompile Include="Component_Text.cpp" />
@@ -42,7 +43,6 @@
     <ClCompile Include="VertexLayoutDescription.cpp" />
     <ClCompile Include="Vertices.cpp" />
     <ClCompile Include="View.cpp" />
-    <ClCompile Include="Component_Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\imgui\imconfig.h" />
@@ -64,6 +64,7 @@
     <ClInclude Include="Component_Collision.h" />
     <ClInclude Include="Component_Enemy.h" />
     <ClInclude Include="Component_Hpbar.h" />
+    <ClInclude Include="Component_Item.h" />
     <ClInclude Include="Component_Sprite.h" />
     <ClInclude Include="Component_Text.h" />
     <ClInclude Include="Component_TopDownMovement.h" />
@@ -96,7 +97,6 @@
     <ClInclude Include="VertexLayoutDescription.hpp" />
     <ClInclude Include="Vertices.hpp" />
     <ClInclude Include="View.h" />
-    <ClInclude Include="Component_Item.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StockShaders.inl" />

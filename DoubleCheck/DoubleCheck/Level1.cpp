@@ -17,6 +17,12 @@ void Level1::Load()
     referee->Init();
     object_manager = ObjectManager::GetObjectManager();
 
+	arena = new Object();	
+	arena->Set_Name("icearena");	
+	arena->AddComponent(new Sprite(arena));
+
+	ObjectManager::GetObjectManager()->AddObject(arena);
+	
     player = new Object();
     player->Set_Name("first");
     player->Set_Tag("player");

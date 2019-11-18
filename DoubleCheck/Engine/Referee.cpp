@@ -5,6 +5,7 @@
 #include "Graphic.h"
 #include "Component_Collision.h"
 #include "Component_Item.h"
+
 Referee* Referee::referee = nullptr;
 
 
@@ -23,7 +24,6 @@ void Referee::Init()
     player_first_temp = new Object*[player_first_life]();
     player_sec_temp = new Object*[player_sec_life]();
     item_save = new Object*[item_num]();
-
 
     for (int i = 0; i < player_first_life; i++)
     {
@@ -57,7 +57,6 @@ void Referee::Init()
         item_save[i]->Set_Tag("item");
         item_save[i]->SetTranslation({ -200,-200 });
     }
-
 }
 
 void Referee::Update(float dt)
@@ -100,6 +99,11 @@ void Referee::Update(float dt)
         item_num--;
     }
 
+
+    if(this->GetComponentByTemplate<Collision>() != nullptr)
+    {
+        this->GetComponentByTemplate<Collision>()->Update(dt);
+    }
 
     if(this->GetComponentByTemplate<Collision>() != nullptr)
     {
