@@ -13,6 +13,12 @@ void Level1::Load()
     referee = Referee::Get_Referee();
     referee->Init();
 
+	arena = new Object();	
+	arena->Set_Name("icearena");	
+	arena->AddComponent(new Sprite(arena));
+
+	ObjectManager::GetObjectManager()->AddObject(arena);
+	
     player = new Object();
     player->Set_Name("first");
     player->Set_Tag("player");
