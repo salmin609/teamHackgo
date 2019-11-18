@@ -54,7 +54,7 @@ void Sound::load(void)
 	result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
     if (result != FMOD_OK)
     {
-		Messagebox::Init_Box("Sounds/GameBGM.mp3");
+		Messagebox::Init_Box("Sounds/TeamDoubleCheck.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/DouDouDouDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[1]);
     if (result != FMOD_OK)
