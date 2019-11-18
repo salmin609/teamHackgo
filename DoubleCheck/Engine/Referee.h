@@ -31,6 +31,8 @@ public:
 private:
     Referee(){}
     static Referee* referee;
+
+
     std::vector<Stage_Statement> stage_statements;
 
     float player_second_respawn_timer = 3.0f;
@@ -42,4 +44,7 @@ private:
     int player_sec_life = 3;
     int player_first_life = 3;
 
+    Object** item_save;
+    float item_respawn_timer = 10.0f;
+    int item_num = 5;
 };
