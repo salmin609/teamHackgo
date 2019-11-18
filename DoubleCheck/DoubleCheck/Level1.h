@@ -6,10 +6,12 @@
 #include "ObjectManager.h"
 #include "Physics.h"
 #include "Common_Header.h"
+//#include "Component_Text.h"
 
 class Level1 : public State
 {
 public:
+    //class TextComp;
     Level1()
     {
         current_state = GameState::Game;
@@ -35,5 +37,8 @@ public:
 private:
     Object* player;
     Object* player_sec;
+
+    Object* text;
 	Object* arena;
+
 };
