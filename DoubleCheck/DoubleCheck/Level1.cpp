@@ -33,7 +33,6 @@ void Level1::Load()
     
     ObjectManager::GetObjectManager()->AddObject(player);
 
-
     player_sec = new Object();
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
@@ -42,11 +41,10 @@ void Level1::Load()
     player_sec->AddComponent(new Player());
     player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png"));
     player_sec->AddComponent(new Physics());
-
-    referee->AddComponent(new Collision());
-
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 
+
+    referee->AddComponent(new Collision());
     //text = new Object();
     //text->AddComponent(new TextComp(text, L"Hitddfddffdfdffd!", { 255,0,0,255 }, { 50,50 }));
     //text->SetTranslation({ 200,200 });;
