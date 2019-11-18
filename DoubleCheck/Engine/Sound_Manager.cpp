@@ -16,7 +16,7 @@ void Sound::initialize(void)
 /* Loading Sound files */
 void Sound::load(void)
 {
-	std::ifstream f;
+	/*std::ifstream f;
 	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 	try
@@ -50,22 +50,22 @@ void Sound::load(void)
 	{
 		std::cerr << e.code().message() << std::endl;
 		Messagebox::Init_Box("Sounds/GameBGM.mp3");
-	}
-	/*result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
+	}*/
+	result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
     if (result != FMOD_OK)
     {
-        return;
+		Messagebox::Init_Box("Sounds/GameBGM.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/DouDouDouDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[1]);
     if (result != FMOD_OK)
     {
-        return;
+		Messagebox::Init_Box("Sounds/DouDouDouDoubleCheck.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/GameBGM.mp3", FMOD_DEFAULT, nullptr, &sound[2]);
     if (result != FMOD_OK)
     {
-        return;
-    }*/
+		Messagebox::Init_Box("Sounds/GameBGM.mp3");
+    }
 }
 
 /* Playing specific sound */
