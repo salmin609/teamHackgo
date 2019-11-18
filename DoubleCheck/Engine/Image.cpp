@@ -15,7 +15,9 @@
 #define STBI_MSC_SECURE_CRT
 #include <stb_image_write.h>
 
-
+#include <exception>
+#include <fstream>
+#include "Messagebox.h"
 void Image::ResizeToPixelWidthHeight(const int pixel_width, const int pixel_height) noexcept
 {
     assert(pixel_height > 0 && pixel_width > 0);
@@ -72,7 +74,26 @@ Color4ub* Image::GetPixelsPointer() noexcept
 
 const Color4ub* Image::GetPixelsPointer() const noexcept
 {
-    return &pixels[0];
+	/*int input = 0;
+	if (input < 0)
+	{
+		throw(input);
+	}
+
+    return &pixels[input];*/
+
+	//std::ifstream f;
+	//f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	//try
+	//{
+	//	f.open(pixels[0]);
+	//	//return &pixels[0];
+	//}
+	//catch (std::system_error & e)
+	//{
+	//	Messagebox::Init_Box();
+	//}
+	return &pixels[0];
 }
 
 int Image::GetPixelsBufferBytesSize() const noexcept

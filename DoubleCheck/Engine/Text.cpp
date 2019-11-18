@@ -2,6 +2,10 @@
 #include "Mesh.hpp"
 #include "StockShaders.hpp"
 #include "Text.hpp"
+
+#include <exception>
+#include <fstream>
+#include "Messagebox.h"
 Text::Text(std::wstring text_string, const BitmapFont& text_font) noexcept
 {
 	string = text_string;

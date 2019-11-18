@@ -29,7 +29,6 @@ void Level1::Load()
     
     ObjectManager::GetObjectManager()->AddObject(player);
 
-
     player_sec = new Object();
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
@@ -41,7 +40,6 @@ void Level1::Load()
     
 
     player->AddComponent(new Collision());
-
 
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 }

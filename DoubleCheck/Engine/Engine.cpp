@@ -81,14 +81,26 @@ void Engine::Init()
 
 
 
- //   Object* temp = new Object();
- //   temp->AddComponent(new Physics);
- //   temp->AddComponent(new Collision);
- //   temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
- //   temp->SetTranslation({ 200, 200 });
- //   //temp->AddComponent(new Player());
- //   temp->AddComponent(new Component_Transform());
- //   temp->Set_Name("first");
+    Object* temp = new Object();
+    temp->AddComponent(new Physics);
+    temp->AddComponent(new Collision);
+	temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
+	/*std::ifstream f;
+	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	try
+	{
+		f.open("../sprite/anime.png");
+		temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
+	}
+	catch (std::system_error & e)
+	{
+		std::cerr << e.code().message() << std::endl;
+	}*/
+
+    temp->SetTranslation({ 200, 200 });
+    //temp->AddComponent(new Player());
+    temp->AddComponent(new Component_Transform());
+    temp->Set_Name("first");
 
 
  //   Object* temp_sec = new Object();
@@ -99,14 +111,13 @@ void Engine::Init()
  //   temp_sec->Set_Name("second");
  //   temp_sec->Set_Tag("enemy");
 
-
- //   Object* temp_third = new Object();
- //   temp_third->AddComponent(new Physics);
- //   temp_third->AddComponent(new Sprite(temp_third, "../sprite/pen_red.png"));
- //   temp_third->AddComponent(new Component_Enemy());
- //   temp_third->SetTranslation({ -200, -200 });
- //   temp_third->Set_Name("third");
- //   temp_third->Set_Tag("enemy");
+    Object* temp_third = new Object();
+    temp_third->AddComponent(new Physics);
+    temp_third->AddComponent(new Sprite(temp_third, "../sprite/pen_red.png"));
+    temp_third->AddComponent(new Component_Enemy());
+    temp_third->SetTranslation({ -200, -200 });
+    temp_third->Set_Name("third");
+    temp_third->Set_Tag("enemy");
 
  //   Object* temp_fourth = new Object();
  //   temp_fourth->AddComponent(new Physics);
@@ -140,8 +151,8 @@ void Engine::Init()
 
 void Engine::Update()
 {
-    m_dt = game_timer.GetElapsedSeconds();
-    game_timer.Reset();
+	m_dt = game_timer.GetElapsedSeconds();
+	game_timer.Reset();
 
     
     app_->Update(m_dt);
@@ -150,19 +161,20 @@ void Engine::Update()
 
     object_manager->Update(m_dt);
     msg_manager->Update(m_dt);
+
     //Reset camera zoom
     Reset();
     StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
     
     
 
-    if (input.Is_Key_Triggered(GLFW_KEY_1))
-        state_manager->is_pause = !state_manager->is_pause;
-    if (input.Is_Key_Triggered(GLFW_KEY_N))
-    {
-        Clear();
-        StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
-    }
+	if (input.Is_Key_Triggered(GLFW_KEY_1))
+		state_manager->is_pause = !state_manager->is_pause;
+	if (input.Is_Key_Triggered(GLFW_KEY_N))
+	{
+		Clear();
+		StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+	}
 }
 
 void Engine::Delete()
