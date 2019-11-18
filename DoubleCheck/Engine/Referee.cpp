@@ -4,6 +4,8 @@
 #include "ObjectManager.h"
 #include "Graphic.h"
 #include "Component_Collision.h"
+#include "Component_Item.h"
+
 Referee* Referee::referee = nullptr;
 
 
@@ -21,7 +23,7 @@ void Referee::Init()
     stage_statements.clear();
     player_first_temp = new Object*[player_first_life]();
     player_sec_temp = new Object*[player_sec_life]();
-
+    item_save = new Object*[item_num]();
 
     for (int i = 0; i < player_first_life; i++)
     {
@@ -44,8 +46,17 @@ void Referee::Init()
         player_sec_temp[i]->Set_Tag("player");
         player_sec_temp[i]->SetTranslation({ 200,200 });
     }
-    
 
+    for(int i = 0; i < item_num; i++)
+    {
+        item_save[i] = new Object();
+        item_save[i]->AddComponent(new Sprite(item_save[i], "../Sprite/awesomeface_green.png"));
+        item_save[i]->AddComponent(new Item());
+        item_save[i]->AddComponent(new Physics());
+        item_save[i]->Set_Name("item");
+        item_save[i]->Set_Tag("item");
+        item_save[i]->SetTranslation({ -200,-200 });
+    }
 }
 
 void Referee::Update(float dt)
@@ -79,7 +90,19 @@ void Referee::Update(float dt)
                 }
             }
         }
+    }
+    item_respawn_timer -= dt;
+    if(item_respawn_timer <= 0.0f)
+    {
+        item_respawn_timer = 10.0f;
+        ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+        item_num--;
+    }
 
+
+    if(this->GetComponentByTemplate<Collision>() != nullptr)
+    {
+        this->GetComponentByTemplate<Collision>()->Update(dt);
     }
 
     if(this->GetComponentByTemplate<Collision>() != nullptr)

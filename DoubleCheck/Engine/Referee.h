@@ -29,17 +29,21 @@ public:
 	void Respawn(Stage_Statement statement);
 
 private:
-	Referee() {}
-	static Referee* referee;
-	std::vector<Stage_Statement> stage_statements;
+    Referee(){}
+    static Referee* referee;
 
-	float player_second_respawn_timer = 3.0f;
-	float player_first_respawn_timer = 3.0f;
 
-	Object** player_sec_temp;
-	Object** player_first_temp;
+    std::vector<Stage_Statement> stage_statements;
 
-	int player_sec_life = 3;
-	int player_first_life = 3;
+    float player_second_respawn_timer = 3.0f;
+    float player_first_respawn_timer = 3.0f;
 
+    Object** player_sec_temp;
+    Object** player_first_temp;
+
+    int player_sec_life = 3;
+    int player_first_life = 3;
+    Object** item_save;
+    float item_respawn_timer = 10.0f;
+    int item_num = 5;
 };

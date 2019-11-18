@@ -28,8 +28,6 @@ void Player::Init(Object* obj)
     this->hp_bar = hp_bar;
     m_owner->Get_Belongs_Objects().push_back(hp_bar);
 
-
-
     ObjectManager::GetObjectManager()->AddObject(hp_bar);
 }
 

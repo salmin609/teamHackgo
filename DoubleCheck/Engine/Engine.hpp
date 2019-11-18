@@ -23,6 +23,6 @@ private:
     bool is_done = false;
     float m_dt;
     Timer game_timer;
-	Text text{};
+	//Text text{};
     //std::thread thread_app;
 };
