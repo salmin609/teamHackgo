@@ -380,9 +380,11 @@ void Physics::Dash(Object* object)
     if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
     {
         timer = 0;
-        acceleration += {50 * acceleration.x, 50 * acceleration.y};
+        acceleration += {25 * acceleration.x, 25 * acceleration.y};
         object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
-        is_dashed = false;
+        object->GetMesh().Get_Is_Moved() = true;
+
+        is_dashed = true;
     }
 }
 
@@ -476,6 +478,16 @@ void Physics::BasicMovement()
     //printf("%f, %f\n", velocity.x, velocity.y);
 }
 
+void Physics::SpeedDown(Object* object)
+{
+    vector2 acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
+
+    acceleration /= 5;
+
+    object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
+    object->GetMesh().Get_Is_Moved() = true;
+}
+
 void Physics::Update(float dt)
 {
     timer += dt;
@@ -484,9 +496,14 @@ void Physics::Update(float dt)
     {
         Acceleration(0.3, 0.06);
 
-        if (is_dashed == false && timer >= 1)
+        if (is_dashed == false && timer >= 0.3)
         {
             Dash(m_owner);
+        }
+        else if(is_dashed == true && timer >= 0.1)
+        {
+            SpeedDown(m_owner);
+            is_dashed = false;
         }
     }
     else
