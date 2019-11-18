@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <iostream>
 #include "Component_Text.h"
 
