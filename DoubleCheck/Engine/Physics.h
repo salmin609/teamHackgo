@@ -7,11 +7,12 @@ class Physics : public Component
 {
 public:
     void Init(Object *obj) override;
-    void Acceleration();
+    void Acceleration(float max_accel, float min_accel);
     void JustMove();
     void KnockBack(Object* object_1, Object* object_2);
     void Dash(Object* object);
     void BasicMovement();
+    void SpeedDown(Object* object);
     void Update(float dt) override;
 
     void SetAcceleration(vector2 accel)

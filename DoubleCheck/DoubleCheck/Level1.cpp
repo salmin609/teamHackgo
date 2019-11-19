@@ -4,20 +4,34 @@
 #include "Level1.h"
 #include "Component_Collision.h"
 #include "Referee.h"
+#include "Component_Text.h"
+
 
 using namespace std;
 
 namespace
 {
     Referee* referee = nullptr;
+
+    ObjectManager* object_manager = nullptr;
+
 }
 
 void Level1::Load()
 {
     referee = Referee::Get_Referee();
     referee->Init();
+    object_manager = ObjectManager::GetObjectManager();
 
-	player = new Object();
+	arena = new Object();	
+	arena->Set_Name("icearena");	
+	arena->AddComponent(new Sprite(arena));
+
+
+	ObjectManager::GetObjectManager()->AddObject(arena);
+	
+    player = new Object();
+
 
 	ifstream readFile("../Data/Objects/Objects.txt");
 
@@ -110,7 +124,6 @@ void Level1::Load()
 	fileOut << player->GetTransform().GetScale_Reference().y << endl;
 	fileOut.close();
 
-
     player_sec = new Object();
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
@@ -119,12 +132,18 @@ void Level1::Load()
     player_sec->AddComponent(new Player());
     player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png"));
     player_sec->AddComponent(new Physics());
-    
-
-    player->AddComponent(new Collision());
-
-
     ObjectManager::GetObjectManager()->AddObject(player_sec);
+
+
+    referee->AddComponent(new Collision());
+    //text = new Object();
+    //text->AddComponent(new TextComp(text, L"Hitddfddffdfdffd!", { 255,0,0,255 }, { 50,50 }));
+    //text->SetTranslation({ 200,200 });;
+    //text->Set_Name("red_text");
+    //text->Set_Tag("text");
+
+    //object_manager->AddObject(text);
+    //ObjectManager::GetObjectManager()->AddObject(text);
 }
 
 void Level1::Update(float dt)

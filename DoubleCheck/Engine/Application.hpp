@@ -52,6 +52,12 @@ private:
     //std::thread m_thread;
 
 public:
+	/*int MessageBox(
+		HWND    hWnd,
+		LPCTSTR lpText,
+		LPCTSTR lpCaption,
+		UINT    uType
+	);*/
 	static Application* Get_Application();
 	void Init();
 	void Update(float dt);
@@ -62,6 +68,7 @@ public:
 	void Imgui_Update();
 	void Clear();
 	void Save();
+	//int DisplayConfirmSaveAsMessageBox();
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

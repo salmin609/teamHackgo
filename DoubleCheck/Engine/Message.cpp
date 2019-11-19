@@ -30,7 +30,7 @@ void Message::Update(float dt)
 
                 std::cout << "damage to target : " << damage_to_target << std::endl;
 
-                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
+                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 10);
             }
         }
 
@@ -55,6 +55,10 @@ void Message::Update(float dt)
         if(m_from->GetName() == "second")
         {
             Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_SECOND_DIE);
+        }
+        if(m_from->GetName() == "first")
+        {
+            Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FIRST_DIE);
         }
     }
 

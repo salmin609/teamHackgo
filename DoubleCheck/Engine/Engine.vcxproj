@@ -72,18 +72,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <SourcePath>$(SolutionDir)Sprite;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <SourcePath>$(SolutionDir)Sprite;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <SourcePath>$(SolutionDir)Sprite;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <SourcePath>$(SolutionDir)Sprite;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -180,6 +188,7 @@
     <ClInclude Include="Component_Collision.h" />
     <ClInclude Include="Component_Enemy.h" />
     <ClInclude Include="Component_Hpbar.h" />
+    <ClInclude Include="Component_Item.h" />
     <ClInclude Include="Component_Sprite.h" />
     <ClInclude Include="Component_Text.h" />
     <ClInclude Include="Component_TopDownMovement.h" />
@@ -193,6 +202,7 @@
     <ClInclude Include="Material.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="Messagebox.h" />
     <ClInclude Include="Message_Manager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -234,6 +244,7 @@
     <ClCompile Include="Component_Collision.cpp" />
     <ClCompile Include="Component_Enemy.cpp" />
     <ClCompile Include="Component_Hpbar.cpp" />
+    <ClCompile Include="Component_Item.cpp" />
     <ClCompile Include="Component_Player.cpp" />
     <ClCompile Include="Component_Sprite.cpp" />
     <ClCompile Include="Component_Text.cpp" />
@@ -246,6 +257,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Message.cpp" />
+    <ClCompile Include="Messagebox.cpp" />
     <ClCompile Include="Message_Mananger.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

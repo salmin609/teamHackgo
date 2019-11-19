@@ -106,6 +106,21 @@ void Sprite::Init(Object* obj)
  * Original
  */
 
+Sprite::Sprite(Object* obj, bool need_debug_drawing)
+{
+	m_owner = obj;
+
+	material.shader = &(SHADER::solid_color());
+	material.color4fUniforms["color"] = { 1.0f };
+	material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
+
+	Mesh square;
+	square = MESH::create_wire_box(2000, { 100,100,100,100 });
+	shape.InitializeWithMeshAndLayout(square, SHADER::solid_color_vertex_layout());
+
+	m_owner->SetMesh(square);
+	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+}
 
 Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawing)
 {

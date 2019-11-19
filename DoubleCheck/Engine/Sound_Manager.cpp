@@ -1,5 +1,7 @@
 ﻿#include "Sound_Manager.h"
-
+#include <fstream>
+#include <iostream>
+#include "Messagebox.h"
 float sound_timer = 0;
 
 /* Initializing Sounds */
@@ -12,20 +14,20 @@ void Sound::initialize(void)
 /* Loading Sound files */
 void Sound::load(void)
 {
-    result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
+	result = FMOD_System_CreateSound(f_system, "Sounds/TeamDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[0]);
     if (result != FMOD_OK)
     {
-        return;
+		Messagebox::Init_Box("Sounds/TeamDoubleCheck.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/DouDouDouDoubleCheck.mp3", FMOD_DEFAULT, nullptr, &sound[1]);
     if (result != FMOD_OK)
     {
-        return;
+		Messagebox::Init_Box("Sounds/DouDouDouDoubleCheck.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/GameBGM.mp3", FMOD_DEFAULT, nullptr, &sound[2]);
     if (result != FMOD_OK)
     {
-        return;
+		Messagebox::Init_Box("Sounds/GameBGM.mp3");
     }
 }
 

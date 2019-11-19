@@ -4,7 +4,9 @@
 #include <fstream>
 #include <sstream>
 
-
+#include <exception>
+#include "Messagebox.h"
+#include <iostream>
 bool BitmapFont::LoadDefinition(const std::wstring& font_definition, std::vector<Texture> page_textures)
 {
     std::wistringstream stream(font_definition);
@@ -13,8 +15,39 @@ bool BitmapFont::LoadDefinition(const std::wstring& font_definition, std::vector
     pageTextures = std::move(page_textures);
     return pageTextures.size() == details.pagesCount;
 }
-bool               BitmapFont::LoadFromFile(const std::filesystem::path& filename)
+bool BitmapFont::LoadFromFile(const std::filesystem::path& filename)
 {
+	std::ifstream f;
+	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	try
+	{
+		f.open(filename);
+		if (CanParseFile(filename))
+		{
+			Texture texture;
+
+			std::wstring temp_name;
+
+			for (int i = 0; i < details.pagesCount; i++)
+			{
+				temp_name = details.pageNames[i];
+				temp_name = filename.parent_path().append(temp_name.substr(1, 18));
+				if (texture.LoadFromPNG(temp_name))
+				{
+					pageTextures.push_back(std::move(texture));
+				}
+			}
+			return true;
+		}
+	}
+	catch (std::system_error & e)
+	{
+		std::cerr << e.code().message() << std::endl;
+		Messagebox::Init_Box(filename);
+	}
+	/*if (CanParseFile(filename))
+	{
+		Texture texture;
     if (CanParseFile(filename))
     {
         Texture texture;
@@ -36,6 +69,21 @@ bool               BitmapFont::LoadFromFile(const std::filesystem::path& filenam
     {
         return false;
     }
+		for (int i = 0; i < details.pagesCount; i++)
+		{
+			temp_name = details.pageNames[i];
+			temp_name = filename.parent_path().append(temp_name.substr(1, 18));
+			if (texture.LoadFromPNG(temp_name))
+			{
+				pageTextures.push_back(std::move(texture));
+			}
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}*/
 }
 const BitmapFont::information& BitmapFont::GetInformation() const noexcept
 {
@@ -84,6 +132,20 @@ bool BitmapFont::CanParseFile(const std::filesystem::path& filename)
     std::wifstream stream;
     stream.open(filename.c_str());
     return CanParseStream(stream);
+	/*std::wifstream stream;
+	stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	try
+	{
+		
+		stream.open(filename.c_str());
+		return CanParseStream(stream);
+	}
+	catch (std::system_error & e)
+	{
+		std::cerr << e.code().message() << std::endl;
+		Messagebox::Init_Box(filename);
+	}*/
+	
 }
 bool BitmapFont::CanParseStream(std::wistream& stream)
 {
