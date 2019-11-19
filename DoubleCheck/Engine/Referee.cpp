@@ -99,12 +99,6 @@ void Referee::Update(float dt)
         item_num--;
     }
 
-
-    if(this->GetComponentByTemplate<Collision>() != nullptr)
-    {
-        this->GetComponentByTemplate<Collision>()->Update(dt);
-    }
-
     if(this->GetComponentByTemplate<Collision>() != nullptr)
     {
         this->GetComponentByTemplate<Collision>()->Update(dt);
