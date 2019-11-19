@@ -57,12 +57,12 @@ void Update_Msg(float dt)
 
 void Engine::Init()
 {
-    sound.initialize();
-    sound.load();
-    sound.play(0);
-    sound.volume(0, 1);
-    sound.play(2);
-    sound.volume(2, 8);
+    //sound.initialize();
+    //sound.load();
+    //sound.play(0);
+    //sound.volume(0, 1);
+    //sound.play(2);
+    //sound.volume(2, 8);
 
     app_ = Application::Get_Application();
     object_manager = ObjectManager::GetObjectManager();
