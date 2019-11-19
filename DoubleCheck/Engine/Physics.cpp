@@ -13,8 +13,6 @@ void Physics::Init(Object* obj)
 
 void Physics::Acceleration(float max_accel, float min_accel)
 {
-
-
 	GLFWgamepadstate state;
 
 	int present = glfwJoystickPresent(GLFW_JOYSTICK_1);
@@ -30,25 +28,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.5, 0.12};
+					acceleration += {-max_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {-0.5, 0.5};
+					acceleration += {-max_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.12, 0.12};
+					acceleration += {-min_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {-0.12, 0.5};
+					acceleration += {-min_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -57,25 +55,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.12, 0.12};
+					acceleration += {min_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {0.12, 0.5};
+					acceleration += {min_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.5, 0.12};
+					acceleration += {max_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {0.5, 0.5};
+					acceleration += {max_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -88,13 +86,13 @@ void Physics::Acceleration(float max_accel, float min_accel)
 				}
 				if (acceleration.y >= 0)
 				{
-					acceleration += {0.00, 0.12};
+					acceleration += {0.00, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.y < 0)
 				{
-					acceleration += {0.00, 0.5};
+					acceleration += {0.00, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -106,25 +104,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.5, 0.12};
+					acceleration += {-max_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {-0.5, 0.5};
+					acceleration += {-max_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.12, 0.12};
+					acceleration += {-min_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {-0.12, 0.5};
+					acceleration += {-min_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -133,25 +131,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.5, -0.5};
+					acceleration += {-max_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {-0.5, -0.12};
+					acceleration += {-max_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.12, -0.5};
+					acceleration += {-min_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {-0.12, -0.12};
+					acceleration += {-min_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -160,13 +158,13 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0)
 				{
-					acceleration.x += -0.5;
+					acceleration.x += -max_accel;
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration.x += -0.12;
+					acceleration.x += -min_accel;
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -182,25 +180,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.12, -0.5};
+					acceleration += {min_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {0.12, -0.12};
+					acceleration += {min_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.5, -0.5};
+					acceleration += {max_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {0.5, -0.12};
+					acceleration += {max_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -210,25 +208,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.5, -0.5};
+					acceleration += {-max_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {-0.5, -0.12};
+					acceleration += {-max_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {-0.12, -0.5};
+					acceleration += {-min_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {-0.12, -0.12};
+					acceleration += {-min_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -241,13 +239,13 @@ void Physics::Acceleration(float max_accel, float min_accel)
 				}
 				if (acceleration.y >= 0)
 				{
-					acceleration.y += -0.5;
+					acceleration.y += -max_accel;
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration.y += -0.12;
+					acceleration.y += -min_accel;
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -259,25 +257,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.12, -0.5};
+					acceleration += {min_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {0.12, -0.12};
+					acceleration += {min_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.5, -0.5};
+					acceleration += {max_accel, -max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {0.5, -0.12};
+					acceleration += {max_accel, -min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -286,25 +284,25 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.12, 0.12};
+					acceleration += {min_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x >= 0 && acceleration.y < 0)
 				{
-					acceleration += {0.12, 0.5};
+					acceleration += {min_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else if (acceleration.x < 0 && acceleration.y >= 0)
 				{
-					acceleration += {0.5, 0.12};
+					acceleration += {max_accel, min_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration += {0.5, 0.5};
+					acceleration += {max_accel, max_accel};
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -313,13 +311,13 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			{
 				if (acceleration.x >= 0)
 				{
-					acceleration.x += 0.12;
+					acceleration.x += min_accel;
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
 				else
 				{
-					acceleration.x += 0.5;
+					acceleration.x += max_accel;
 					m_owner->GetTransform().AddTranslation(acceleration);
 					m_owner->GetMesh().Get_Is_Moved() = true;
 				}
@@ -335,11 +333,7 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			m_owner->GetTransform().AddTranslation(acceleration);
 			m_owner->GetMesh().Get_Is_Moved() = true;
 		}
-
-
 	}
-
-
 
     if (input.Is_Key_Pressed(GLFW_KEY_W))
     {
@@ -654,12 +648,6 @@ void Physics::Acceleration(float max_accel, float min_accel)
     }
 }
 
-
-
-//std::cout << "Number of axes available: " << std::endl;
-
-
-
 void Physics::JustMove()
 {
 	acceleration += {-acceleration.x / 100, -acceleration.y / 100};
@@ -709,8 +697,11 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
 
 void Physics::Dash(Object* object)
 {
+    vector2 acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
+    acceleration = normalize(acceleration);
 
 	int present = glfwJoystickPresent(GLFW_JOYSTICK_1);
+
 	if (present)
 	{
 		int axesCount;
@@ -719,15 +710,13 @@ void Physics::Dash(Object* object)
 		if (axes[5] > 0)
 		{
 			timer = 0;
-			acceleration += {50 * acceleration.x, 50 * acceleration.y};
+			acceleration += {25 * acceleration.x, 25 * acceleration.y};
 			object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
+            object->GetMesh().Get_Is_Moved() = true;
+
 			is_dashed = false;
 		}
 	}
-
-
-    vector2 acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
-    acceleration = normalize(acceleration);
     if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
     {
         timer = 0;
@@ -762,7 +751,7 @@ void Physics::BasicMovement()
 			m_owner->GetMesh().Get_Is_Moved() = true;
 		}
 	}
-	if (input.Is_Key_Pressed(GLFW_KEY_A))
+	else if (input.Is_Key_Pressed(GLFW_KEY_A))
 	{
 		if (input.Is_Key_Pressed(GLFW_KEY_A) && input.Is_Key_Pressed(GLFW_KEY_W))
 		{
@@ -784,7 +773,7 @@ void Physics::BasicMovement()
 			m_owner->GetMesh().Get_Is_Moved() = true;
 		}
 	}
-	if (input.Is_Key_Pressed(GLFW_KEY_S))
+	else if (input.Is_Key_Pressed(GLFW_KEY_S))
 	{
 		if (input.Is_Key_Pressed(GLFW_KEY_S) && input.Is_Key_Pressed(GLFW_KEY_A))
 		{
@@ -805,7 +794,7 @@ void Physics::BasicMovement()
 			m_owner->GetMesh().Get_Is_Moved() = true;
 		}
 	}
-	if (input.Is_Key_Pressed(GLFW_KEY_D))
+	else if (input.Is_Key_Pressed(GLFW_KEY_D))
 	{
 		if (input.Is_Key_Pressed(GLFW_KEY_D) && input.Is_Key_Pressed(GLFW_KEY_W))
 		{
@@ -826,17 +815,13 @@ void Physics::BasicMovement()
 			m_owner->GetMesh().Get_Is_Moved() = true;
 		}
 	}
-	//printf("%f, %f\n", velocity.x, velocity.y);
 
 	int status = glfwJoystickPresent(GLFW_JOYSTICK_1);
-	std::cout << "Joystick/Gamepad 1 stautus" << status << std::endl;
 
 	if (status == true)
 	{
 		int axesCount;
 		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axesCount);
-		//std::cout << "Number of axes available: " << std::endl;
-
 
 		if (axes[1] < 0)
 		{
@@ -859,7 +844,7 @@ void Physics::BasicMovement()
 				m_owner->GetMesh().Get_Is_Moved() = true;
 			}
 		}
-		if (axes[0] < 0)
+		else if (axes[0] < 0)
 		{
 			if (axes[0] < 0 && axes[1] < 0)
 			{
@@ -881,7 +866,7 @@ void Physics::BasicMovement()
 				m_owner->GetMesh().Get_Is_Moved() = true;
 			}
 		}
-		if (axes[1] > 0)
+		else if (axes[1] > 0)
 		{
 			if (axes[1] > 0 && axes[0] < 0)
 			{
@@ -902,7 +887,7 @@ void Physics::BasicMovement()
 				m_owner->GetMesh().Get_Is_Moved() = true;
 			}
 		}
-		if (axes[0] > 0)
+		else if (axes[0] > 0)
 		{
 			if (axes[0] > 0 && axes[1] < 0)
 			{
@@ -938,7 +923,6 @@ void Physics::SpeedDown(Object* object)
 
 void Physics::Update(float dt)
 {
-
     timer += dt;
 
     if (m_owner->GetName() == "first")
