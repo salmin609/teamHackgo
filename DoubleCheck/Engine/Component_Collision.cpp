@@ -125,10 +125,10 @@ void Collision::SquareArenaCollision()
         Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
         vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
 
-        const float max_x = obj_i_trans.x + 70.0;
-        const float min_x = obj_i_trans.x - 70.0;
-        const float max_y = obj_i_trans.y + 70.0;
-        const float min_y = obj_i_trans.y - 70.0;
+        const double max_x = obj_i_trans.x + 70.0;
+        const double min_x = obj_i_trans.x - 70.0;
+        const double max_y = obj_i_trans.y + 70.0;
+        const double min_y = obj_i_trans.y - 70.0;
 
         if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
         {
