@@ -284,7 +284,6 @@ void Sprite::Update(float dt)
 					}
 					if(obj->GetTransform().GetScale().x > 0)
 					{
-
 						obj->GetComponentByTemplate<Sprite>()->Get_Material().matrix3Uniforms["to_ndc"] = trans;
 						Graphic::GetGraphic()->Draw(obj->GetComponentByTemplate<Sprite>()->Get_Shape(),
 							obj->GetComponentByTemplate<Sprite>()->Get_Material());
