@@ -5,6 +5,11 @@
 #include "Input.h"
 #include "Engine.hpp"
 
+Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
+{
+	
+}
+
 void Physics::Init(Object* obj)
 {
 	m_owner = obj;
@@ -945,5 +950,21 @@ void Physics::Update(float dt)
     {
         JustMove();
     }
+
+	//if(ghost_collision_mode)
+	//{
+	//	ghost_collision_timer -= dt;
+
+	//	if(ghost_collision_timer <= 0.0f)
+	//	{
+	//		ghost_collision_mode = false;
+	//		//if(m_owner->GetComponentByTemplate<Sprite>() != nullptr)
+	//		//{
+	//		//	m_owner->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+	//		//}
+	//		//ghost_collision_timer = 1.0f;
+	//	}
+	//	
+	//}
 }
 
