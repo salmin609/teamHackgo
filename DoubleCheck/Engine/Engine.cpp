@@ -155,7 +155,6 @@ void Engine::Update()
 	m_dt = game_timer.GetElapsedSeconds();
 	game_timer.Reset();
 
-    
     app_->Update(m_dt);
     state_manager->Update(m_dt);
     graphic->Update(m_dt);
@@ -168,9 +167,6 @@ void Engine::Update()
 
     Reset();
     
-    
-    
-
 	if (input.Is_Key_Triggered(GLFW_KEY_1))
 		state_manager->is_pause = !state_manager->is_pause;
 	if (input.Is_Key_Triggered(GLFW_KEY_N))

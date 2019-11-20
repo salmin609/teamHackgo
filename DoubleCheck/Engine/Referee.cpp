@@ -91,19 +91,13 @@ void Referee::Update(float dt)
             }
         }
     }
-    item_respawn_timer -= dt;
-    if(item_respawn_timer <= 0.0f)
-    {
-        item_respawn_timer = 10.0f;
-        ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
-        item_num--;
-    }
-
-
-    if(this->GetComponentByTemplate<Collision>() != nullptr)
-    {
-        this->GetComponentByTemplate<Collision>()->Update(dt);
-    }
+    //item_respawn_timer -= dt;
+    //if(item_respawn_timer <= 0.0f)
+    //{
+    //    item_respawn_timer = 10.0f;
+    //    ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+    //    item_num--;
+    //}
 
     if(this->GetComponentByTemplate<Collision>() != nullptr)
     {
@@ -113,6 +107,7 @@ void Referee::Update(float dt)
 
 void Referee::Delete()
 {
+	
 }
 
 void Referee::Respawn(Stage_Statement statement)
@@ -120,7 +115,6 @@ void Referee::Respawn(Stage_Statement statement)
     switch(statement)
     {
     case PLAYER_SECOND_DIE:
-        
         ObjectManager::GetObjectManager()->AddObject(player_sec_temp[player_sec_life - 1]);
         break;
 
