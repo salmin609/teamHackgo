@@ -10,77 +10,77 @@
 
 void Helper_Addpoint_Circle(std::size_t& point_count, Mesh& mesh, float& radius, float position_x = 0, float position_y = 0, bool move_up_down = true)
 {
-    float theta;
-    float location_x;
-    float location_y;
-    for (int i = 1; i <= point_count + 1; i++)
-    {
-        theta = (TWO_PI * i) / static_cast<float>(point_count);
-        location_x = (radius * cosf(theta)) - position_x;
-        location_y = (radius * sinf(theta)) - position_y;
-        mesh.AddPoint({ location_x,location_y });
-        if (move_up_down)
-        {
-            mesh.AddTextureCoordinate({ to_radians(270.f), 10.f });
-        }
-        else if (!move_up_down)
-        {
-            mesh.AddTextureCoordinate({ to_radians(180.f), 10.f });
-        }
-    }
+	float theta;
+	float location_x;
+	float location_y;
+	for (int i = 1; i <= point_count + 1; i++)
+	{
+		theta = (TWO_PI * i) / static_cast<float>(point_count);
+		location_x = (radius * cosf(theta)) - position_x;
+		location_y = (radius * sinf(theta)) - position_y;
+		mesh.AddPoint({ location_x,location_y });
+		if (move_up_down)
+		{
+			mesh.AddTextureCoordinate({ to_radians(270.f), 10.f });
+		}
+		else if (!move_up_down)
+		{
+			mesh.AddTextureCoordinate({ to_radians(180.f), 10.f });
+		}
+	}
 
 }
 void Helper_Addpoint_Ellipse(std::size_t& point_count, Mesh& mesh, float& radius, float position_x = 0, float position_y = 0)
 {
-    float theta;
-    float location_y;
-    float location_x;
-    for (int i = 1; i <= point_count + 1; i++)
-    {
-        theta = (TWO_PI * i) / static_cast<float>(point_count);
-        location_x = (radius * cosf(theta)) - position_x;
-        location_y = (radius * sinf(theta) / 2) - position_y;
-        mesh.AddPoint({ location_x ,location_y });
-        mesh.AddTextureCoordinate({ to_radians(270.f), 10.f });
-    }
+	float theta;
+	float location_y;
+	float location_x;
+	for (int i = 1; i <= point_count + 1; i++)
+	{
+		theta = (TWO_PI * i) / static_cast<float>(point_count);
+		location_x = (radius * cosf(theta)) - position_x;
+		location_y = (radius * sinf(theta) / 2) - position_y;
+		mesh.AddPoint({ location_x ,location_y });
+		mesh.AddTextureCoordinate({ to_radians(270.f), 10.f });
+	}
 }
 
 Mesh m_create_circle(float radius, Color4ub color, std::size_t point_count, vector2 origin = { 0.1f, 0.1f }, bool is_ellipse = false, float location_x = 0, float location_y = 0, bool move_up_down = true) noexcept
 {
-    Mesh temp_mesh;
-    (origin);
-    temp_mesh.AddColor(color);
-    temp_mesh.SetPointListType(PointListPattern::TriangleFan);
-    if (!is_ellipse)
-    {
-        Helper_Addpoint_Circle(point_count, temp_mesh, radius, location_x, location_y, move_up_down);
-    }
-    else if (is_ellipse)
-    {
-        Helper_Addpoint_Ellipse(point_count, temp_mesh, radius, location_x, location_y);
-    }
+	Mesh temp_mesh;
+	(origin);
+	temp_mesh.AddColor(color);
+	temp_mesh.SetPointListType(PointListPattern::TriangleFan);
+	if (!is_ellipse)
+	{
+		Helper_Addpoint_Circle(point_count, temp_mesh, radius, location_x, location_y, move_up_down);
+	}
+	else if (is_ellipse)
+	{
+		Helper_Addpoint_Ellipse(point_count, temp_mesh, radius, location_x, location_y);
+	}
 
-    return temp_mesh;
+	return temp_mesh;
 }
 
 Mesh m_create_wire_circle(float radius, Color4ub color, std::size_t point_count) noexcept
 {
-    Mesh temp_mesh;
-    temp_mesh.SetPointListType(PointListPattern::LineLoop);
-    temp_mesh.AddColor(color);
-    Helper_Addpoint_Circle(point_count, temp_mesh, radius);
+	Mesh temp_mesh;
+	temp_mesh.SetPointListType(PointListPattern::LineLoop);
+	temp_mesh.AddColor(color);
+	Helper_Addpoint_Circle(point_count, temp_mesh, radius);
 
-    return temp_mesh;
+	return temp_mesh;
 }
 
 bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
 {
-    const bool is_okay = texture.LoadFromPNG(file_path);
-    if (!is_okay)
-    {
-        std::cerr << "Failed to load \"" << file_path << "\"\n";
-    }
-    return is_okay;
+	const bool is_okay = texture.LoadFromPNG(file_path);
+	if (!is_okay)
+	{
+		std::cerr << "Failed to load \"" << file_path << "\"\n";
+	}
+	return is_okay;
 }
 
 //void Sprite::Ckeck_Enemy(Object* obj)
@@ -90,21 +90,18 @@ bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
 
 void Sprite::Init(Object* obj)
 {
-    m_owner = obj;
-    m_owner->Get_Component_Info_Reference().component_info_sprite = true;
+	m_owner = obj;
+	m_owner->Get_Component_Info_Reference().component_info_sprite = true;
 
 	debug_material.shader = &(SHADER::solid_color());
-    m_owner->Set_Center({ 0.0f , 0.0f});
+	m_owner->Set_Center({ m_owner->GetTransform().GetTranslation().x , m_owner->GetTransform().GetTranslation().y });
 
-    //Mesh debug_mesh;
-    //debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
-    //debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
+	//Mesh debug_mesh;
+	//debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+	//debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
-    //m_owner->Set_Debug_Mesh(debug_mesh);
+	//m_owner->Set_Debug_Mesh(debug_mesh);
 }
-/*
- * Original
- */
 
 Sprite::Sprite(Object* obj, bool need_debug_drawing)
 {
@@ -122,7 +119,7 @@ Sprite::Sprite(Object* obj, bool need_debug_drawing)
 	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
 }
 
-Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawing)
+Sprite::Sprite(Object* obj, const char* staticSpritePath, vector2 position, bool need_debug_drawing)
 {
 	m_owner = obj;
 
@@ -135,7 +132,6 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawin
 	texture.SelectTextureForSlot(texture);
 	material.textureUniforms["texture_to_sample"] = { &(texture) };
 	material.color4fUniforms["color"] = { 1.0f };
-	material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
 
 	Mesh square;
 	square = MESH::create_box(100, { 100,100,100,255 });
@@ -143,32 +139,28 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawin
 
 	m_owner->SetMesh(square);
 	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+	m_owner->SetTranslation(position);
+	m_owner->Set_Center({ position.x , position.y });
 
-    /*
-	int size_for_normal = m_owner->GetMesh().Get_Points().size();
-
-	std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
-	for (int i = 0; i < size_for_normal; ++i)
+	if (need_debug_drawing)
 	{
-		vector2 normal_vec = vector_for_normal[i];
+		Mesh debug_mesh;
+		debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+		debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
-		normal_vec.x = normal_vec.x / abs(normal_vec.x);
-		normal_vec.y = normal_vec.y / abs(normal_vec.y);
-		m_owner->Get_Normalize_Points().push_back(normal_vec);
+		m_owner->Set_Debug_Mesh(debug_mesh);
 	}
-	m_owner->Set_Center({ 0.0f , 0.0f });
-    */
-    if(need_debug_drawing)
-    {
-        Mesh debug_mesh;
-        debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
-        debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
-        m_owner->Set_Debug_Mesh(debug_mesh);
-    }
+	float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+	matrix3 mat_ndc = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
+	mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
+	mat_ndc *= m_owner->GetTransform().GetModelToWorld();
+
+	material.matrix3Uniforms["to_ndc"] = mat_ndc * MATRIX3::build_scale(2.0f / width * zoom, 2.0f / height * zoom);
+
 }
 
-Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, bool need_debug_drawing)
+Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, vector2 position, bool need_debug_drawing)
 {
 	m_owner = obj;
 	is_animated = animated;
@@ -182,7 +174,6 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 	texture.SelectTextureForSlot(texture);
 	material.textureUniforms["texture_to_sample"] = { &(texture) };
 	material.color4fUniforms["color"] = { 1.0f };
-	material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
 
 	Mesh square;
 	square = MESH::create_box(100, { 100,100,100,255 });
@@ -190,53 +181,50 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 
 	m_owner->SetMesh(square);
 	m_owner->Get_Object_Points() = m_owner->GetMesh().Get_Points();
+	m_owner->SetTranslation(position);
+	m_owner->Set_Center({ position.x , position.y });
 
-	int size_for_normal = m_owner->GetMesh().Get_Points().size();
-
-	std::vector<vector2> vector_for_normal = m_owner->GetMesh().Get_Points();
-	for (int i = 0; i < size_for_normal; ++i)
+	if (need_debug_drawing)
 	{
-		vector2 normal_vec = vector_for_normal[i];
+		Mesh debug_mesh;
+		debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+		debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
-		normal_vec.x = normal_vec.x / abs(normal_vec.x);
-		normal_vec.y = normal_vec.y / abs(normal_vec.y);
-		m_owner->Get_Normalize_Points().push_back(normal_vec);
+		m_owner->Set_Debug_Mesh(debug_mesh);
 	}
-	m_owner->Set_Center({ 0.0f , 0.0f });
 
-    if(need_debug_drawing)
-    {
-        Mesh debug_mesh;
-        debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
-        debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
+	float zoom = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+	matrix3 mat_ndc = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
+	mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
+	mat_ndc *= m_owner->GetTransform().GetModelToWorld();
 
-        m_owner->Set_Debug_Mesh(debug_mesh);
-    }
+	material.matrix3Uniforms["to_ndc"] = mat_ndc * MATRIX3::build_scale(2.0f / width * zoom, 2.0f / height * zoom);
+
 }
 
 void Sprite::Update(float dt)
-{	
-    if(!m_owner->Get_Component_Info_Reference().component_info_sprite)
-    {
-        m_owner->DeleteComponent(this);
-    }
+{
+	if (!m_owner->Get_Component_Info_Reference().component_info_sprite)
+	{
+		m_owner->DeleteComponent(this);
+	}
 
-    shape.UpdateVerticesFromMesh(m_owner->GetMesh());
-    debug_shape.UpdateVerticesFromMesh(m_owner->Get_Debug_Mesh());
+	shape.UpdateVerticesFromMesh(m_owner->GetMesh());
+	debug_shape.UpdateVerticesFromMesh(m_owner->Get_Debug_Mesh());
 
-    seconds += dt;
+	seconds += dt;
 	uint32_t ticks = seconds + 1;
 
 	if (is_animated)
 	{
-		m_owner->GetMesh().ClearTextureCoordinates();		
+		m_owner->GetMesh().ClearTextureCoordinates();
 		if (spriteWidth <= 1)
 		{
 			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
 			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 0 });
 			spriteWidth += float(1.0 / frame);
 		}
-		else 
+		else
 		{
 			spriteWidth = 0;
 			m_owner->GetMesh().AddTextureCoordinate({ spriteWidth , 1 });
@@ -249,59 +237,72 @@ void Sprite::Update(float dt)
 		shape.UpdateVerticesFromMesh(m_owner->GetMesh());
 
 	}
-    if(m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite())
-    {
-        matrix3 mat_ndc = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
-        mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
-        mat_ndc *= m_owner->GetTransform().GetModelToWorld();
+	if (m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite() || m_owner->Get_Tag() == "arena" || m_owner->Get_Tag() == "text")
+	{
+		matrix3 mat_ndc = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
+		mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
+		mat_ndc *= m_owner->GetTransform().GetModelToWorld();
 
-        if(!m_owner->Get_Belongs_Objects().empty())
-        {
-            int size = m_owner->Get_Belongs_Objects().size();
-            for(int i = 0; i < size; i++)
-            {
-                
-                if(m_owner->Get_Belongs_Objects()[i]->GetComponentByTemplate<Sprite>() != nullptr)
-                {
-                    Object* obj = m_owner->Get_Belongs_Objects()[i];
-                    obj->GetTransform().GetTranslation_Reference() = m_owner->GetTransform().GetTranslation();
-                    obj->GetTransform().GetTranslation_Reference().x += obj->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset();
-                    //matrix3 trans = mat_ndc * MATRIX3::build_translation(0, -100);
-                    ///////////////////////////////////////////////////////////////////////////
+		if(m_owner->GetComponentByTemplate<Physics>() != nullptr)
+		{
+			if(m_owner->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference())
+			{
+				//material.shader->SendUniformVariable("color", { 1.0f,1.0f,1.0f,0.0f });
+				material.color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			}
+			else
+			{
+				material.color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+			}
+		}
+		
+		if (!m_owner->Get_Belongs_Objects().empty())
+		{
+			int size = m_owner->Get_Belongs_Objects().size();
+			for (int i = 0; i < size; i++)
+			{
 
-                    matrix3 trans = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
-                    trans *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
-                    trans *= obj->GetTransform().GetModelToWorld();
+				if (m_owner->Get_Belongs_Objects()[i]->GetComponentByTemplate<Sprite>() != nullptr)
+				{
+					Object* obj = m_owner->Get_Belongs_Objects()[i];
+					obj->GetTransform().GetTranslation_Reference() = m_owner->GetTransform().GetTranslation();
+					obj->GetTransform().GetTranslation_Reference().x += obj->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset();
+					//matrix3 trans = mat_ndc * MATRIX3::build_translation(0, -100);
+					///////////////////////////////////////////////////////////////////////////
 
-                    trans = trans * MATRIX3::build_translation(0, -100);
+					matrix3 trans = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
+					trans *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
+					trans *= obj->GetTransform().GetModelToWorld();
 
-                    float fixed_size_convert = 1.0f;
-                    if(Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom() < 1.0f)
-                    {
-                        fixed_size_convert -= Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
-                        trans = trans * MATRIX3::build_scale(1.0f + fixed_size_convert);
-                    }
+					trans = trans * MATRIX3::build_translation(0, -100);
 
-                    obj->GetComponentByTemplate<Sprite>()->Get_Material().matrix3Uniforms["to_ndc"] = trans;
-                    Graphic::GetGraphic()->Draw(obj->GetComponentByTemplate<Sprite>()->Get_Shape(),
-                        obj->GetComponentByTemplate<Sprite>()->Get_Material());
-                }
-            }
-        }
+					float fixed_size_convert = 1.0f;
+					if (Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom() < 1.0f)
+					{
+						fixed_size_convert -= Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
+						trans = trans * MATRIX3::build_scale(1.0f + fixed_size_convert);
+					}
 
-        m_owner->GetMesh().Get_Is_Moved() = false;
-        material.matrix3Uniforms["to_ndc"] = mat_ndc;
-        debug_material.matrix3Uniforms["to_ndc"] = mat_ndc;
-    }
+					obj->GetComponentByTemplate<Sprite>()->Get_Material().matrix3Uniforms["to_ndc"] = trans;
+					Graphic::GetGraphic()->Draw(obj->GetComponentByTemplate<Sprite>()->Get_Shape(),
+						obj->GetComponentByTemplate<Sprite>()->Get_Material());
+				}
+			}
+		}
 
-    material.floatUniforms["time"] = seconds;
-    debug_material.floatUniforms["time"] = seconds;
+		m_owner->GetMesh().Get_Is_Moved() = false;
+		material.matrix3Uniforms["to_ndc"] = mat_ndc;
+		debug_material.matrix3Uniforms["to_ndc"] = mat_ndc;
+	}
 
-    Graphic::GetGraphic()->Draw(shape, material);
+	material.floatUniforms["time"] = seconds;
+	debug_material.floatUniforms["time"] = seconds;
 
-    if(m_owner->Get_Is_Debugmode())
-    {
-        Graphic::GetGraphic()->Draw(debug_shape, debug_material);
-    }
-    
+	Graphic::GetGraphic()->Draw(shape, material);
+
+	if (m_owner->Get_Is_Debugmode())
+	{
+		Graphic::GetGraphic()->Draw(debug_shape, debug_material);
+	}
+
 }

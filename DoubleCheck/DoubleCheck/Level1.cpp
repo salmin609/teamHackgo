@@ -24,7 +24,8 @@ void Level1::Load()
     object_manager = ObjectManager::GetObjectManager();
 
 	arena = new Object(false);	
-	arena->Set_Name("icearena");	
+	arena->Set_Name("arena");
+	arena->Set_Tag("arena");
 	arena->AddComponent(new Sprite(arena));
 
 
@@ -43,7 +44,8 @@ void Level1::Load()
 		string name;
 		string locate;
 		string animate;
-		int result = 0, frame = 0, value_x = 0, value_y = 0;
+		int result = 0, frame = 0;
+		float value_x = 0, value_y = 0;
 		while (std::getline(readFile, line))
 		{
 			std::stringstream keystream(line);
@@ -78,7 +80,7 @@ void Level1::Load()
 				}
 
 
-				player->AddComponent(new Sprite(player, locate.c_str(), result, frame));
+				player->AddComponent(new Sprite(player, locate.c_str(), result, frame,{value_x,value_y}));
 				player->Set_path(locate);
 				player->Set_AniState(animate);
 				player->Set_Frame(frame);
@@ -128,9 +130,8 @@ void Level1::Load()
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
 
-    player_sec->SetTranslation({ 200,200 });
     player_sec->AddComponent(new Player());
-    player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png"));
+    player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png", {200,200}));
     player_sec->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 

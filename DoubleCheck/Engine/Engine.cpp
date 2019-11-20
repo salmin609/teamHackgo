@@ -59,13 +59,13 @@ void Engine::Init()
 {
 
 
-	sound.initialize();
-	sound.load();
-	sound.play(0);
-	sound.volume(0, 1);
-	Sleep(1400);
-	sound.play(2);
-	sound.volume(2, 8);
+	//sound.initialize();
+	//sound.load();
+	//sound.play(0);
+	//sound.volume(0, 1);
+	//Sleep(1400);
+	//sound.play(2);
+	//sound.volume(2, 8);
 
 	app_ = Application::Get_Application();
 	object_manager = ObjectManager::GetObjectManager();
