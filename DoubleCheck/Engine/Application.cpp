@@ -6,6 +6,8 @@
 #include "ObjectManager.h"
 #include "Message_Manager.h"
 #include "Component_Sprite.h"
+#include <fstream>
+using namespace std;
 #include "Component_Hpbar.h"
 
 Application* Application::application = nullptr;
@@ -131,6 +133,32 @@ void Application::Update(float dt)
 		//re_start.Test();
 	}
 
+
+	int status = glfwJoystickPresent(GLFW_JOYSTICK_1);
+	//std::cout << "Joystick/Gamepad 1 stautus" << status << std::endl;
+
+	if (status == true)
+	{
+		int axesCount;
+		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axesCount);
+		//std::cout << "Number of axes available: " << std::endl;
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Left Stick X axis: " << axes[0] << std::endl;
+		std::cout << "Left Stick Y axis: " << axes[1] << std::endl;
+		std::cout << "Right Stick X axis: " << axes[2] << std::endl;
+		std::cout << "Right Stick Y axis: " << axes[3] << std::endl;
+		std::cout << "Left Trigger / L2: " << axes[4] << std::endl;
+		std::cout << "Right Trigger / R2: " << axes[5] << std::endl;
+	}
+
 	save_dt += dt;
 	if (save_dt >= 1.0f)
 	{
@@ -216,8 +244,7 @@ void Application::Imgui_Update()
 			    }
 			}
 			ImGui::SliderFloat("scale_y", &this_obj->GetTransform().GetScale_Reference().y, -2.0f, 2.0f);
-			//ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);
-			//ImGui::SliderFloat("acceleration_y", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y, -2.0f, 2.0f);
+
 			if (this_obj->GetComponentByTemplate<Physics>() != nullptr)
 			{
 				ImGui::SliderFloat("acceleration_x", &this_obj->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x, -2.0f, 2.0f);

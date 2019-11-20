@@ -12,6 +12,7 @@ public:
     void KnockBack(Object* object_1, Object* object_2);
     void Dash(Object* object);
     void BasicMovement();
+    void SpeedDown(Object* object);
     void Update(float dt) override;
 
     void SetAcceleration(vector2 accel)
@@ -20,7 +21,7 @@ public:
     }
     vector2 GetAcceleration() const
     {
-        return acceleration;
+         return acceleration;
     }
 	vector2 &GetAcceleration_Reference() 
 	{

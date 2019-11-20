@@ -1,4 +1,4 @@
-#include "Referee.h"
+﻿#include "Referee.h"
 #include "Component_Player.h"
 #include "Component_Sprite.h"
 #include "ObjectManager.h"
@@ -6,20 +6,22 @@
 #include "Component_Collision.h"
 #include "Component_Item.h"
 
+
 Referee* Referee::referee = nullptr;
 
 
 Referee* Referee::Get_Referee()
 {
-    if(referee == nullptr)
-    {
-        referee = new Referee();
-    }
-    return referee;
+	if (referee == nullptr)
+	{
+		referee = new Referee();
+	}
+	return referee;
 }
 
 void Referee::Init()
 {
+
     stage_statements.clear();
     player_first_temp = new Object*[player_first_life]();
     player_sec_temp = new Object*[player_sec_life]();
@@ -47,6 +49,7 @@ void Referee::Init()
         player_sec_temp[i]->SetTranslation({ 200,200 });
     }
 
+
     for(int i = 0; i < item_num; i++)
     {
         item_save[i] = new Object();
@@ -61,6 +64,7 @@ void Referee::Init()
 
 void Referee::Update(float dt)
 {
+
     if(!stage_statements.empty())
     {
         for(auto i : stage_statements)
@@ -98,7 +102,7 @@ void Referee::Update(float dt)
     //    ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
     //    item_num--;
     //}
-
+    
     if(this->GetComponentByTemplate<Collision>() != nullptr)
     {
         this->GetComponentByTemplate<Collision>()->Update(dt);
@@ -122,4 +126,5 @@ void Referee::Respawn(Stage_Statement statement)
         ObjectManager::GetObjectManager()->AddObject(player_first_temp[player_first_life - 1]);
         break;
     }
+
 }

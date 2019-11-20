@@ -1,4 +1,4 @@
-#include "Engine.hpp"
+﻿#include "Engine.hpp"
 #include "Application.hpp"
 #include "ObjectManager.h"
 #include "Input.h"
@@ -29,11 +29,11 @@ Sound sound;
 
 namespace
 {
-    Application* app_ = nullptr;
-    ObjectManager* object_manager = nullptr;
-    StateManager* state_manager = nullptr;
-    Graphic* graphic = nullptr;
-    Message_Manager* msg_manager = nullptr;
+	Application* app_ = nullptr;
+	ObjectManager* object_manager = nullptr;
+	StateManager* state_manager = nullptr;
+	Graphic* graphic = nullptr;
+	Message_Manager* msg_manager = nullptr;
 }
 
 void Update_App(float dt)
@@ -57,96 +57,36 @@ void Update_Msg(float dt)
 
 void Engine::Init()
 {
-   /* sound.initialize();
-    sound.load();
-    sound.play(0);
-    sound.volume(0, 1);
-    Sleep(1400);
-    sound.play(2);
-    sound.volume(2, 8);*/
-
-    app_ = Application::Get_Application();
-    object_manager = ObjectManager::GetObjectManager();
-    state_manager = StateManager::GetStateManager();
-    graphic = Graphic::GetGraphic();
-    msg_manager = Message_Manager::Get_Message_Manager();
-
-    app_->Init();
-    object_manager->Init();
-    state_manager->Init();
-    graphic->Init();
-    msg_manager->Init();
-
-    state_manager->AddState("Menu", new Menu);
-    state_manager->AddState("Level1", new Level1);
 
 
+	sound.initialize();
+	sound.load();
+	sound.play(0);
+	sound.volume(0, 1);
+	Sleep(1400);
+	sound.play(2);
+	sound.volume(2, 8);
 
-    Object* temp = new Object();
-    temp->AddComponent(new Physics);
-    temp->AddComponent(new Collision);
-	temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
-	/*std::ifstream f;
-	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	try
-	{
-		f.open("../sprite/anime.png");
-		temp->AddComponent(new Sprite(temp, "../sprite/anime.png", true, 6));
-	}
-	catch (std::system_error & e)
-	{
-		std::cerr << e.code().message() << std::endl;
-	}*/
+	app_ = Application::Get_Application();
+	object_manager = ObjectManager::GetObjectManager();
+	state_manager = StateManager::GetStateManager();
+	graphic = Graphic::GetGraphic();
+	msg_manager = Message_Manager::Get_Message_Manager();
 
-    temp->SetTranslation({ 200, 200 });
-    //temp->AddComponent(new Player());
-    temp->AddComponent(new Component_Transform());
-    temp->Set_Name("first");
+	app_->Init();
+	object_manager->Init();
+	state_manager->Init();
+	graphic->Init();
+	msg_manager->Init();
+
+	state_manager->AddState("Menu", new Menu);
+	state_manager->AddState("Level1", new Level1);
+
+	StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+
+	game_timer.Reset();
 
 
- //   Object* temp_sec = new Object();
- //   temp_sec->AddComponent(new Physics);
- //   temp_sec->AddComponent(new Sprite(temp_sec, "../sprite/pen_normal.png"));
- //   temp_sec->SetTranslation({ -200, 0});
- //   temp_sec->AddComponent(new Component_Transform());
- //   temp_sec->Set_Name("second");
- //   temp_sec->Set_Tag("enemy");
-
-    Object* temp_third = new Object();
-    temp_third->AddComponent(new Physics);
-    temp_third->AddComponent(new Sprite(temp_third, "../sprite/pen_red.png"));
-    temp_third->AddComponent(new Component_Enemy());
-    temp_third->SetTranslation({ -200, -200 });
-    temp_third->Set_Name("third");
-    temp_third->Set_Tag("enemy");
-
- //   Object* temp_fourth = new Object();
- //   temp_fourth->AddComponent(new Physics);
- //   temp_fourth->AddComponent(new Sprite(temp_fourth, "../sprite/pen_purple.png"));
- //   temp_fourth->SetTranslation({ -400, 0 });
- //   temp_fourth->AddComponent(new Component_Transform());
- //   temp_fourth->Set_Name("fourth");
-
- //   Object* temp_fifth = new Object();
- //   temp_fifth ->AddComponent(new Physics);
- //   temp_fifth ->AddComponent(new Sprite(temp_fifth, "../sprite/pen_green.png"));
- //   temp_fifth ->SetTranslation({ -400, -200 });
- //   temp_fifth ->AddComponent(new Component_Transform());
- //   temp_fifth ->Set_Name("fifth");
-
-	//Object* text_obj = new Object();
-	//text_obj->AddComponent(new TextComp(text_obj, L"Please jump on 5th floor Suhwan!", { 255,0,0,255 }, { 50,50 }));
-	//text_obj->SetTranslation({500,300});
-	//text_obj->Set_Name("text");
-
- //   object_manager->AddObject(temp);
- //   object_manager->AddObject(temp_sec);
- //   object_manager->AddObject(temp_third);
- //   object_manager->AddObject(temp_fourth);
- //   object_manager->AddObject(temp_fifth);
-	//object_manager->AddObject(text_obj);
-    StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
-    game_timer.Reset();
 }
 
 
@@ -178,19 +118,20 @@ void Engine::Update()
 
 void Engine::Delete()
 {
-    object_manager->Delete();
+	object_manager->Delete();
 }
 
 void Engine::Reset()
 {
-    if (Graphic::GetGraphic()->get_need_update_sprite())
-    {
-        Graphic::GetGraphic()->get_need_update_sprite() = false;
-    }
+	if (Graphic::GetGraphic()->get_need_update_sprite())
+	{
+		Graphic::GetGraphic()->get_need_update_sprite() = false;
+	}
 }
 
 void Engine::Clear()
 {
-    object_manager->Clear();
-    //app_->Clear();
+	object_manager->Clear();
+	//app_->Clear();
 }
+

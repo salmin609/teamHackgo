@@ -115,7 +115,7 @@ Sprite::Sprite(Object* obj, bool need_debug_drawing)
 	material.matrix3Uniforms["to_ndc"] = MATRIX3::build_scale(2.0f / width, 2.0f / height);
 
 	Mesh square;
-	square = MESH::create_box(10000, { 100,100,100,100 });
+	square = MESH::create_wire_box(2000, { 100,100,100,100 });
 	shape.InitializeWithMeshAndLayout(square, SHADER::solid_color_vertex_layout());
 
 	m_owner->SetMesh(square);
