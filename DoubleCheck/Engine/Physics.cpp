@@ -24,7 +24,7 @@ void Physics::Acceleration(float max_accel, float min_accel)
 
 	int present = glfwJoystickPresent(GLFW_JOYSTICK_1);
 
-	if (present)
+	if (m_owner->GetName() == "first")
 	{
 		int axesCount;
 		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axesCount);
@@ -341,7 +341,7 @@ void Physics::Acceleration(float max_accel, float min_accel)
 			m_owner->GetMesh().Get_Is_Moved() = true;
 		}
 	}
-    else
+    else if(m_owner->GetName() == "second")
     {
         if (input.Is_Key_Pressed(GLFW_KEY_W))
         {
@@ -711,29 +711,42 @@ void Physics::Dash(Object* object)
 
 	int present = glfwJoystickPresent(GLFW_JOYSTICK_1);
 
-	if (present)
+	if (object->GetName() == "first")
 	{
 		int axesCount;
 		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axesCount);
 
-		if (axes[5] > 0)
+		if (axes[5] > 0.4 && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
 		{
 			timer = 0;
-			acceleration += {25 * acceleration.x, 25 * acceleration.y};
+			acceleration += {50 * acceleration.x, 50 * acceleration.y};
 			object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
             object->GetMesh().Get_Is_Moved() = true;
-
-			is_dashed = false;
+			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+			is_dashed = true;
 		}
 	}
-    if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
-    {
-        timer = 0;
-        acceleration += {25 * acceleration.x, 25 * acceleration.y};
-        object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
-        object->GetMesh().Get_Is_Moved() = true;
+
+	if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
+	{
+		timer = 0;
+		acceleration += {25 * acceleration.x, 25 * acceleration.y};
+		object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
+		object->GetMesh().Get_Is_Moved() = true;
 		object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-        is_dashed = true;
+		is_dashed = true;
+	}
+    else if (object->GetName() == "second" && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
+    {
+        if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
+        {
+            timer = 0;
+            acceleration += {50 * acceleration.x, 50 * acceleration.y};
+            object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
+            object->GetMesh().Get_Is_Moved() = true;
+
+            is_dashed = true;
+        }
     }
 }
 
@@ -946,7 +959,21 @@ void Physics::Update(float dt)
         	
             
         }
-        else if(is_dashed == true && timer >= 0.1)
+        else if(is_dashed == true && timer >= 0.3)
+        {
+            SpeedDown(m_owner);
+            is_dashed = false;
+        }
+    }
+    else if(m_owner->GetName() == "second")
+    {
+        Acceleration(0.3, 0.06);
+
+        if (is_dashed == false && timer >= 0.3)
+        {
+            Dash(m_owner);
+        }
+        else if (is_dashed == true && timer >= 0.3)
         {
             SpeedDown(m_owner);
             is_dashed = false;
