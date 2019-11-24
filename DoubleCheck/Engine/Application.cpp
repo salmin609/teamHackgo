@@ -316,13 +316,13 @@ void Application::Imgui_Update()
 					//this_obj->AddComponent(new Sprite());
 				}
 			}
-			if (ImGui::Checkbox("Component_Top_Down_Move", &this_obj->Get_Component_Info_Reference().component_info_top_down_movement))
-			{
-				if (this_obj->Get_Component_Info_Reference().component_info_top_down_movement)
-				{
-					this_obj->AddComponent(new Component_TopDownMovement());
-				}
-			}
+			//if (ImGui::Checkbox("Component_Top_Down_Move", &this_obj->Get_Component_Info_Reference().component_info_top_down_movement))
+			//{
+			//	if (this_obj->Get_Component_Info_Reference().component_info_top_down_movement)
+			//	{
+			//		this_obj->AddComponent(new Component_TopDownMovement());
+			//	}
+			//}
             
 
 			ImGui::TreePop();

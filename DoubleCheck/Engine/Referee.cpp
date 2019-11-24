@@ -25,14 +25,14 @@ void Referee::Init()
     stage_statements.clear();
     player_first_temp = new Object*[player_first_life]();
     player_sec_temp = new Object*[player_sec_life]();
-    //item_save = new Object*[item_num]();
+    item_save = new Object*[item_num]();
 
     for (int i = 0; i < player_first_life; i++)
     {
         player_first_temp[i] = new Object();
         player_first_temp[i]->AddComponent(new Player());
         player_first_temp[i]->AddComponent(new Sprite(player_first_temp[i], "../Sprite/awesomeface.png", {0,0}));
-        player_first_temp[i]->AddComponent(new Physics());
+        player_first_temp[i]->AddComponent(new Physics(true));
         player_first_temp[i]->Set_Name("first");
         player_first_temp[i]->Set_Tag("player");
     }
@@ -42,22 +42,23 @@ void Referee::Init()
         player_sec_temp[i] = new Object();
         player_sec_temp[i]->AddComponent(new Player());
         player_sec_temp[i]->AddComponent(new Sprite(player_sec_temp[i], "../Sprite/awesomeface_red.png", {200,200}));
-        player_sec_temp[i]->AddComponent(new Physics());
+        player_sec_temp[i]->AddComponent(new Physics(true));
         player_sec_temp[i]->Set_Name("second");
         player_sec_temp[i]->Set_Tag("player");
     }
 
 
-    //for(int i = 0; i < item_num; i++)
-    //{
-    //    item_save[i] = new Object();
-    //    item_save[i]->AddComponent(new Sprite(item_save[i], "../Sprite/awesomeface_green.png"));
-    //    item_save[i]->AddComponent(new Item());
-    //    item_save[i]->AddComponent(new Physics());
-    //    item_save[i]->Set_Name("item");
-    //    item_save[i]->Set_Tag("item");
-    //    item_save[i]->SetTranslation({ -200,-200 });
-    //}
+    for(int i = 0; i < item_num; i++)
+    {
+        item_save[i] = new Object();
+        item_save[i]->AddComponent(new Sprite(item_save[i], "../Sprite/awesomeface_green.png", {-100,-100}));
+        item_save[i]->AddComponent(new Item());
+        item_save[i]->AddComponent(new Physics());
+        item_save[i]->Set_Name("item");
+        item_save[i]->Set_Tag("item");
+        item_save[i]->SetTranslation({ -200,-200 });
+		item_save[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::Dash);
+    }
 }
 
 void Referee::Update(float dt)
@@ -93,13 +94,13 @@ void Referee::Update(float dt)
             }
         }
     }
-    //item_respawn_timer -= dt;
-    //if(item_respawn_timer <= 0.0f)
-    //{
-    //    item_respawn_timer = 10.0f;
-    //    ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
-    //    item_num--;
-    //}
+    item_respawn_timer -= dt;
+    if(item_respawn_timer <= 0.0f && item_num > 0)
+    {
+        item_respawn_timer = 10.0f;
+        ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+        item_num--;
+    }
     
     if(this->GetComponentByTemplate<Collision>() != nullptr)
     {

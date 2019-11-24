@@ -13,6 +13,8 @@ public:
     void Init(Object *obj) override;
     void Update(float dt) override;
     void Set_Kind(Item_Kind kind);
+	Item_Kind Get_Kind();
+	
 
 private:
     Item_Kind this_kind = Item_Kind::None;

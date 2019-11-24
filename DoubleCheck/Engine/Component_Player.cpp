@@ -70,3 +70,13 @@ void Player::Attack()
 		  }
 	  }*/
 }
+
+Item::Item_Kind Player::Get_Item_State()
+{
+	return belong_item;
+}
+
+void Player::Set_Item_State(Item::Item_Kind state)
+{
+	this->belong_item = state;
+}

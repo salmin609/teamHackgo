@@ -124,13 +124,16 @@ void Level1::Load()
 	fileOut << player->GetTransform().GetTranslation_Reference().y << endl;
 	fileOut << "Scale: " << player->GetTransform().GetScale_Reference().x << " ";
 	fileOut << player->GetTransform().GetScale_Reference().y << endl;
+	player->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 	fileOut.close();
 
     player_sec = new Object();
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
+	
 
     player_sec->AddComponent(new Player());
+	player_sec->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
     player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png", {200,200}));
     player_sec->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_sec);

@@ -5,22 +5,23 @@
 #include <imgui.h>
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-#include "Engine.hpp"
-
-#include "StateManager.h"
+//#include "Engine.hpp"
+//
+//#include "StateManager.h"
 #include "Graphic.h"
 #include "ObjectManager.h"
 #include "Application.hpp"
 
 #include "Component_Sprite.h"
+/*
 #include "Component_Transform.h"
 #include "Component_TopDownMovement.h"
 #include "example.hpp"
 #include "../DoubleCheck/MainMenu.h"
-#include "../DoubleCheck/Level1.h"
+#include "../DoubleCheck/Level1.h"*/
 
-#include "Transform.hpp"
-#include <thread>
+
+
 
 class Application
 {
@@ -52,12 +53,6 @@ private:
     //std::thread m_thread;
 
 public:
-	/*int MessageBox(
-		HWND    hWnd,
-		LPCTSTR lpText,
-		LPCTSTR lpCaption,
-		UINT    uType
-	);*/
 	static Application* Get_Application();
 	void Init();
 	void Update(float dt);

@@ -5,6 +5,7 @@
 #include "Engine.hpp"
 #include "Component_Hpbar.h"
 #include "Message_Manager.h"
+#include "Component_Sprite.h"
 
 #define  PI  3.14159265359
 float RadianToDegree(float radian)
@@ -83,15 +84,16 @@ bool Collision::CircleToCircleCollision()
 
 								//if (!obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() && !obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference())
 								//{
-								if (distance <= ((obj_i_radius + obj_j_radius) - 10))
+								//if (distance <= ((obj_i_radius + obj_j_radius) - 10))
+								//{
+								//	obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = true;
+								//	obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = true;
+								//}
+								//else
+								if(!obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() && !obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference())
 								{
-									obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = true;
-									obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = true;
-								}
-								else
-								{
-									obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = false;
-									obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = false;
+									//obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = false;
+									//obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() = false;
 									obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
 									obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().y;
 									obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().x;

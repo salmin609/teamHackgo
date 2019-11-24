@@ -45,5 +45,5 @@ private:
     int player_first_life = 3;
     Object** item_save;
     float item_respawn_timer = 0.0f;
-    int item_num = 1;
+    int item_num = 5;
 };

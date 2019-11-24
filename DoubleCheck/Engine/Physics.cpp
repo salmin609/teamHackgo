@@ -4,6 +4,8 @@
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
 #include "Engine.hpp"
+#include "Component_Sprite.h"
+#include "Component_Player.h"
 
 Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
 {
@@ -724,13 +726,13 @@ void Physics::Dash(Object* object)
 			is_dashed = false;
 		}
 	}
-    if (input.Is_Key_Pressed(GLFW_KEY_SPACE))
+    if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
     {
         timer = 0;
         acceleration += {25 * acceleration.x, 25 * acceleration.y};
         object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
         object->GetMesh().Get_Is_Moved() = true;
-
+		object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
         is_dashed = true;
     }
 }
@@ -938,7 +940,11 @@ void Physics::Update(float dt)
 
         if (is_dashed == false && timer >= 0.3)
         {
-            Dash(m_owner);
+
+				Dash(m_owner);
+
+        	
+            
         }
         else if(is_dashed == true && timer >= 0.1)
         {
@@ -951,20 +957,20 @@ void Physics::Update(float dt)
         JustMove();
     }
 
-	//if(ghost_collision_mode)
-	//{
-	//	ghost_collision_timer -= dt;
+	if(ghost_collision_mode)
+	{
+		ghost_collision_timer -= dt;
 
-	//	if(ghost_collision_timer <= 0.0f)
-	//	{
-	//		ghost_collision_mode = false;
-	//		//if(m_owner->GetComponentByTemplate<Sprite>() != nullptr)
-	//		//{
-	//		//	m_owner->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
-	//		//}
-	//		//ghost_collision_timer = 1.0f;
-	//	}
-	//	
-	//}
+		if(ghost_collision_timer <= 0.0f)
+		{
+			ghost_collision_mode = false;
+			if(m_owner->GetComponentByTemplate<Sprite>() != nullptr)
+			{
+				m_owner->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+			}
+			ghost_collision_timer = 1.0f;
+		}
+		
+	}
 }
 

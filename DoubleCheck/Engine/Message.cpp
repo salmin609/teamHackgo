@@ -5,6 +5,7 @@
 #include "Message_Manager.h"
 #include "Component_Hpbar.h"
 #include "Referee.h"
+#include "Component_Item.h"
 
 void Message::Init()
 {
@@ -18,37 +19,63 @@ void Message::Update(float dt)
     }
     if(message_name == "collision")
     {
-        Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
-        if(target_hp_bar != nullptr)
-        {
-            if(target_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
-            {
-                float damage_to_target = 0;
-                Physics* temp_physics = m_from->GetComponentByTemplate<Physics>();
-                damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
-                    (temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
+		if(m_target->Get_Tag() == "item")
+		{
+			std::cout << "item" << std::endl;
+			if(m_target->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::Dash)
+			{
+				m_target->SetDeadCondition(true);
+				if(m_from->GetComponentByTemplate<Player>() != nullptr)
+				{
+					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
+				}
+			}
+		}
+		else if(m_from->Get_Tag() == "item")
+		{
+			if (m_from->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::Dash)
+			{
+				m_from->SetDeadCondition(true);
+				if (m_target->GetComponentByTemplate<Player>() != nullptr)
+				{
+					m_target->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
+				}
+			}
+		}
+		else
+		{
+			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
+			if (target_hp_bar != nullptr)
+			{
+				if (target_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
+				{
+					float damage_to_target = 0;
+					Physics* temp_physics = m_from->GetComponentByTemplate<Physics>();
+					damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
+						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
 
-                std::cout << "damage to target : " << damage_to_target << std::endl;
+					std::cout << "damage to target : " << damage_to_target << std::endl;
 
-                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
-            }
-        }
+					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
+				}
+			}
 
-        Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
-        if (from_hp_bar != nullptr)
-        {
-            if (from_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
-            {
-                float damage_to_target = 0;
-                Physics* temp_physics = m_target->GetComponentByTemplate<Physics>();
-                damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
-                    (temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
+			Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
+			if (from_hp_bar != nullptr)
+			{
+				if (from_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
+				{
+					float damage_to_target = 0;
+					Physics* temp_physics = m_target->GetComponentByTemplate<Physics>();
+					damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
+						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
 
-                std::cout << "damage to from : " << damage_to_target << std::endl;
+					std::cout << "damage to from : " << damage_to_target << std::endl;
 
-                from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
-            }
-        }
+					from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
+				}
+			}
+		}
     }
     if(message_name == "respawn")
     {
