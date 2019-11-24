@@ -9,6 +9,7 @@ void Hp_Bar::Init(Object* obj)
 {
     m_owner = obj;
     offset = 0;
+	hp = 100;
 }
 
 void Hp_Bar::Update(float dt)
@@ -26,16 +27,6 @@ void Hp_Bar::Decrease(float dmg)
         m_owner->GetTransform().GetScale_Reference().x -= damage;
         offset -= static_cast<int>(damage * 50);
 
-        //if(Hp_Owner_Obj->Get_Name() == "second")
-        //{
-        //    Object* text = ObjectManager::GetObjectManager()->Find_Object_By_Name("red_text");
-        //    vector2 text_pos = Hp_Owner_Obj->GetTransform().GetTranslation();
-        //    text_pos.y += 10;
-        //    text->GetTransform().SetTranslation(text_pos);
-        //    //ObjectManager::GetObjectManager()->AddObject(text);
-
-        //}
-
         if(m_owner->GetTransform().GetScale_Reference().x <= 0)
         {
             m_owner->SetDeadCondition(true);
@@ -44,6 +35,20 @@ void Hp_Bar::Decrease(float dmg)
         }
         
     }
+    /*if(hp > 0)
+    {
+		hp -= dmg;
+		Object* Hp_Owner_Obj = m_owner->Get_This_Obj_Owner();
+		m_owner->GetTransform().GetScale_Reference().x -= (hp / 100);
+		offset -= static_cast<int>(dmg * 50);
+    
+		if(hp <= 0)
+		{
+			m_owner->SetDeadCondition(true);
+			Hp_Owner_Obj->SetDeadCondition(true);
+			Message_Manager::Get_Message_Manager()->Save_Message(new Message(Referee::Get_Referee(), Hp_Owner_Obj, "respawn"));
+		}
+	}*/
 
 }
 

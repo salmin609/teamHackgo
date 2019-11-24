@@ -13,5 +13,5 @@ public:
 
 private:
     int offset;
-
+	int hp;
 };

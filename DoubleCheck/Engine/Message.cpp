@@ -30,7 +30,7 @@ void Message::Update(float dt)
 
                 std::cout << "damage to target : " << damage_to_target << std::endl;
 
-                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 10);
+                target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
             }
         }
 
@@ -39,7 +39,7 @@ void Message::Update(float dt)
         {
             if (from_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
             {
-                float damage_to_target = 1;
+                float damage_to_target = 0;
                 Physics* temp_physics = m_target->GetComponentByTemplate<Physics>();
                 damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
                     (temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));

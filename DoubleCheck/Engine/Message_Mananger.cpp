@@ -25,7 +25,7 @@ void Message_Manager::Update(float dt)
     {
         delete_msg.clear();
 
-        for(int i = 0; i < messages.size(); i++)
+        for(int i = 0 ; i < messages.size(); i++)
         {
             messages[i]->Update(dt);
 

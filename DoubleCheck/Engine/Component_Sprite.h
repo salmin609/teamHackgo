@@ -10,34 +10,34 @@ class Sprite : public Component
 {
 public:
 	Sprite(Object* obj, bool need_debug_drawing = false);
-	Sprite(Object* obj, const char* staticSpritePath, bool need_debug_drawing = true);
-	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, bool need_debug_drawing = true);
+	Sprite(Object* obj, const char* staticSpritePath, vector2 position, bool need_debug_drawing = true);
+	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, vector2 position, bool need_debug_drawing = true);
 	void Init(Object* obj) override;
 	void Update(float dt) override;
-    bool Can_Load_To_Texture(Texture& texture, const char* file_path);
-    material& Get_Material()
-    {
-        return material;
-    }
-    Vertices& Get_Shape()
-    {
-        return shape;
-    }
+	bool Can_Load_To_Texture(Texture& texture, const char* file_path);
+	material& Get_Material()
+	{
+		return material;
+	}
+	Vertices& Get_Shape()
+	{
+		return shape;
+	}
 private:
 
-    Shader debug_shader;
-    Vertices debug_shape;
-    material debug_material;
-    
-    Shader shader;
-    Vertices shape;
-    material material;
-    Texture texture;
-    Image image;
+	Shader debug_shader;
+	Vertices debug_shape;
+	material debug_material;
+
+	Shader shader;
+	Vertices shape;
+	material material;
+	Texture texture;
+	Image image;
 
 
-    float seconds = 0;
-    int width = 1280, height = 720;
+	float seconds = 0;
+	int width = 1280, height = 720;
 
 	bool is_animated = false;
 	int frame = 0;

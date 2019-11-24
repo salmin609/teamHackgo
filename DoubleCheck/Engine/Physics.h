@@ -6,6 +6,7 @@
 class Physics : public Component
 {
 public:
+	Physics(bool ghost_collision_mode = false);
     void Init(Object *obj) override;
     void Acceleration(float max_accel, float min_accel);
     void JustMove();
@@ -31,6 +32,10 @@ public:
     {
         return accel_save;
     }
+	bool& Get_Ghost_Collision_Reference()
+    {
+		return ghost_collision_mode;
+    }
 
     bool is_collided = false;
     bool is_dashed = false;
@@ -42,4 +47,8 @@ private:
     vector2 prev_pos;
     vector2 direction_vector{};
     vector2 accel_save{};
+
+	bool ghost_collision_mode;
+	float ghost_collision_timer = 5.0f;
+	
 };
