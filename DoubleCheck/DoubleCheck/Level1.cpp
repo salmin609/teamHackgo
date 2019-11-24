@@ -23,7 +23,7 @@ void Level1::Load()
     referee->Init();
     object_manager = ObjectManager::GetObjectManager();
 
-	arena = new Object(false);	
+	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
 	arena->AddComponent(new Sprite(arena));
