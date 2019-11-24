@@ -25,13 +25,13 @@ void Message_Manager::Update(float dt)
     {
         delete_msg.clear();
 
-        for(Message* msg : messages)
+        for(int i = 0; i < messages.size(); i++)
         {
-            msg->Update(dt);
+            messages[i]->Update(dt);
 
-            if(msg->Get_Should_Delete())
+            if(messages[i]->Get_Should_Delete())
             {
-                delete_msg.push_back(msg);
+                delete_msg.push_back(messages[i]);
             }
         }
         for(auto& delete_msg : this->delete_msg)
