@@ -29,6 +29,11 @@ void Sound::load(void)
     {
 		Messagebox::Init_Box("Sounds/GameBGM.mp3");
     }
+    result = FMOD_System_CreateSound(f_system, "Sounds/Bounce.mp3", FMOD_DEFAULT, nullptr, &sound[3]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/Bounce.mp3");
+    }
 }
 
 /* Playing specific sound */

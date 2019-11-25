@@ -724,13 +724,13 @@ void Physics::Update(float dt)
 
     if (m_owner->GetName() == "first")
     {
-        Acceleration(0.3, 0.06);
+        Acceleration(0.6, 0.12);
 
         if (is_dashed == false && timer >= 0.3)
         {
             Dash(m_owner);
         }
-        else if (is_dashed == true && timer >= 0.3)
+        else if (is_dashed == true && timer >= 0.5)
         {
             SpeedDown(m_owner);
             is_dashed = false;
@@ -738,13 +738,13 @@ void Physics::Update(float dt)
     }
     else if (m_owner->GetName() == "second")
     {
-        Acceleration(0.3, 0.06);
+        Acceleration(0.6, 0.12);
 
         if (is_dashed == false && timer >= 0.3)
         {
             Dash(m_owner);
         }
-        else if (is_dashed == true && timer >= 0.3)
+        else if (is_dashed == true && timer >= 0.5)
         {
             SpeedDown(m_owner);
             is_dashed = false;
@@ -752,13 +752,13 @@ void Physics::Update(float dt)
     }
     else if (m_owner->GetName() == "third")
     {
-        Acceleration(0.3, 0.06);
+        Acceleration(0.6, 0.12);
 
         if (is_dashed == false && timer >= 0.3)
         {
             Dash(m_owner);
         }
-        else if (is_dashed == true && timer >= 0.3)
+        else if (is_dashed == true && timer >= 0.5)
         {
             SpeedDown(m_owner);
             is_dashed = false;
@@ -766,13 +766,13 @@ void Physics::Update(float dt)
     }
     else if (m_owner->GetName() == "forth")
     {
-        Acceleration(0.3, 0.06);
+        Acceleration(0.6, 0.12);
 
         if (is_dashed == false && timer >= 0.3)
         {
             Dash(m_owner);
         }
-        else if (is_dashed == true && timer >= 0.3)
+        else if (is_dashed == true && timer >= 0.5)
         {
             SpeedDown(m_owner);
             is_dashed = false;

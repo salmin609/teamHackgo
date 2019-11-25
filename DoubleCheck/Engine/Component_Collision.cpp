@@ -25,6 +25,7 @@ float DegreeToRadian(float degree)
 void Collision::Init(Object* obj)
 {
     m_owner = obj;
+    sound.volume(3, 1);
 }
 
 bool Collision::BoxToBoxCollision(Mesh mesh) const
@@ -59,6 +60,10 @@ bool Collision::CircleToCircleCollision()
     for (unsigned int i = 0; i < object_position_size; ++i)
     {
         Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
+        if(obj_i->GetName() == "arena" || obj_i->GetName() == "item")
+        {
+            continue;
+        }
         if (obj_i->Get_Need_To_Update())
         {
             vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
@@ -80,7 +85,6 @@ bool Collision::CircleToCircleCollision()
                         {
                             if_it_is_collide = true;
 
-
                             if (obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_j->GetComponentByTemplate<Physics>() != nullptr)
                             {
                                 if (!obj_i->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference() && !obj_j->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference())
@@ -90,6 +94,8 @@ bool Collision::CircleToCircleCollision()
                                     obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().x;
                                     obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().y;
                                     Message_Manager::Get_Message_Manager()->Save_Message(new Message(obj_j, obj_i, "collision"));
+                                    sound.play(3);
+
                                     physics.KnockBack(obj_i, obj_j);
                                 }
                             }
@@ -208,12 +214,6 @@ void Collision::SquareArenaCollision()
 void Collision::Update(float dt)
 {
     sound_timer += dt;
-
-    if (CircleToCircleCollision() == true && sound_timer >= 0.2)
-    {
-        sound.play(1);
-        sound.volume(1, 1);
-        sound_timer = 0;
-    }
+    CircleToCircleCollision();
     SquareArenaCollision();
 }
