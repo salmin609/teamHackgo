@@ -29,7 +29,7 @@ void Hp_Bar::Decrease(float dmg)
 
         if(m_owner->GetTransform().GetScale_Reference().x <= 0)
         {
-			m_owner->Get_This_Obj_Owner()->Get_Hitted_By()->GetTransform().GetScale_Reference() += {0.5f, 0.5f};
+			m_owner->Get_This_Obj_Owner()->Get_Hitted_By()->GetTransform().GetScale_Reference() += {0.3f, 0.3f};
             m_owner->SetDeadCondition(true);
             Hp_Owner_Obj->SetDeadCondition(true);
             Message_Manager::Get_Message_Manager()->Save_Message(new Message(Referee::Get_Referee(), Hp_Owner_Obj, "respawn"));

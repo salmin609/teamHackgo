@@ -1179,7 +1179,7 @@ void Physics::Update(float dt)
         }
         else if (is_dashed == true && timer >= 0.3)
         {
-            SpeedDown(m_owner);
+            //SpeedDown(m_owner);
             is_dashed = false;
         }
     }
@@ -1193,7 +1193,7 @@ void Physics::Update(float dt)
         }
         else if (is_dashed == true && timer >= 0.3)
         {
-            SpeedDown(m_owner);
+            //SpeedDown(m_owner);
             is_dashed = false;
         }
     }
@@ -1207,7 +1207,7 @@ void Physics::Update(float dt)
         }
         else if (is_dashed == true && timer >= 0.3)
         {
-            SpeedDown(m_owner);
+            //SpeedDown(m_owner);
             is_dashed = false;
         }
     }
@@ -1221,7 +1221,7 @@ void Physics::Update(float dt)
         }
         else if (is_dashed == true && timer >= 0.3)
         {
-            SpeedDown(m_owner);
+            //SpeedDown(m_owner);
             is_dashed = false;
         }
     }

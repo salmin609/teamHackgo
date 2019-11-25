@@ -22,7 +22,7 @@ void Level1::Load()
     referee = Referee::Get_Referee();
     referee->Init();
     object_manager = ObjectManager::GetObjectManager();
-
+	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
 	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
@@ -134,7 +134,7 @@ void Level1::Load()
 
     player_sec->AddComponent(new Player());
 	player_sec->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-    player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png", {200,200}));
+    player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png", {400,-400}));
     player_sec->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 
@@ -152,7 +152,7 @@ void Level1::Load()
     player_forth->Set_Tag("player");
     player_forth->AddComponent(new Player());
     player_forth->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-    player_forth->AddComponent(new Sprite(player_forth, "../Sprite/awesomeface.png", { -100,-100 }));
+    player_forth->AddComponent(new Sprite(player_forth, "../Sprite/awesomeface.png", { -400,-400 }));
     player_forth->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_forth);
 

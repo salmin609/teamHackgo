@@ -33,7 +33,7 @@ void Message::Update(float dt)
 
 					std::cout << "damage from wall : " << damage_to_target << std::endl;
 
-					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
+					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 200);
 				}
 			}
 		}
@@ -78,10 +78,11 @@ void Message::Update(float dt)
 						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
 
 					std::cout << "damage to target : " << damage_to_target << std::endl;
-
-					m_target->Set_Hitted_By(m_from);
-					
-					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
+					if (m_from->GetComponentByTemplate<Player>() != nullptr)
+					{
+						m_target->Set_Hitted_By(m_from);
+					}
+					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
 				}
 			}
 
@@ -96,8 +97,10 @@ void Message::Update(float dt)
 						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
 
 					std::cout << "damage to from : " << damage_to_target << std::endl;
-
-					m_from->Set_Hitted_By(m_target);
+					if(m_target->GetComponentByTemplate<Player>() != nullptr)
+					{
+						m_from->Set_Hitted_By(m_target);
+					}					
 					
 					from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
 				}

@@ -35,7 +35,7 @@ void Referee::Init()
     {
         player_first_temp[i] = new Object();
         player_first_temp[i]->AddComponent(new Player());
-        player_first_temp[i]->AddComponent(new Sprite(player_first_temp[i], "../Sprite/awesomeface.png", {0,0}));
+        player_first_temp[i]->AddComponent(new Sprite(player_first_temp[i], "../Sprite/awesomeface_green.png", {400,400}));
         player_first_temp[i]->AddComponent(new Physics(true));
         player_first_temp[i]->Set_Name("first");
         player_first_temp[i]->Set_Tag("player");
@@ -45,7 +45,7 @@ void Referee::Init()
     {
         player_sec_temp[i] = new Object();
         player_sec_temp[i]->AddComponent(new Player());
-        player_sec_temp[i]->AddComponent(new Sprite(player_sec_temp[i], "../Sprite/awesomeface_red.png", {200,200}));
+        player_sec_temp[i]->AddComponent(new Sprite(player_sec_temp[i], "../Sprite/awesomeface_red.png", {400,-400}));
         player_sec_temp[i]->AddComponent(new Physics(true));
         player_sec_temp[i]->Set_Name("second");
         player_sec_temp[i]->Set_Tag("player");
@@ -54,7 +54,7 @@ void Referee::Init()
     {
         player_third_temp[i] = new Object();
         player_third_temp[i]->AddComponent(new Player());
-        player_third_temp[i]->AddComponent(new Sprite(player_third_temp[i], "../Sprite/awesomeface_blue.png", { 200,200 }));
+        player_third_temp[i]->AddComponent(new Sprite(player_third_temp[i], "../Sprite/awesomeface_blue.png", { -400,400 }));
         player_third_temp[i]->AddComponent(new Physics(true));
         player_third_temp[i]->Set_Name("third");
         player_third_temp[i]->Set_Tag("player");
@@ -63,7 +63,7 @@ void Referee::Init()
     {
         player_fourth_temp[i] = new Object();
         player_fourth_temp[i]->AddComponent(new Player());
-        player_fourth_temp[i]->AddComponent(new Sprite(player_fourth_temp[i], "../Sprite/awesomeface.png", { 200,200 }));
+        player_fourth_temp[i]->AddComponent(new Sprite(player_fourth_temp[i], "../Sprite/awesomeface.png", { -400,-400 }));
         player_fourth_temp[i]->AddComponent(new Physics(true));
         player_fourth_temp[i]->Set_Name("forth");
         player_fourth_temp[i]->Set_Tag("player");
@@ -73,12 +73,12 @@ void Referee::Init()
     for(int i = 0; i < item_num; i++)
     {
         item_save[i] = new Object();
-        item_save[i]->AddComponent(new Sprite(item_save[i], "../Sprite/awesomeface_green.png", {-100,-100}));
+        item_save[i]->AddComponent(new Sprite(item_save[i], "../Sprite/item.png", {0,0} , false));
         item_save[i]->AddComponent(new Item());
         item_save[i]->AddComponent(new Physics());
         item_save[i]->Set_Name("item");
         item_save[i]->Set_Tag("item");
-        item_save[i]->SetTranslation({ -200,-200 });
+        item_save[i]->SetTranslation({ 0,0 });
 		item_save[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::Dash);
     }
 }
