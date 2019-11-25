@@ -39,6 +39,7 @@ public:
 
     bool is_collided = false;
     bool is_dashed = false;
+
 private:
     std::vector<vector2> points{};
     vector2 acceleration{};
