@@ -87,6 +87,14 @@ void Message::Update(float dt)
         {
             Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FIRST_DIE);
         }
+        if (m_from->GetName() == "third")
+        {
+            Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_THIRD_DIE);
+        }
+        if (m_from->GetName() == "forth")
+        {
+            Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FOURTH_DIE);
+        }
     }
 
     std::string log = m_from->Get_Name() + " " + message_name + " " + m_target->Get_Name();

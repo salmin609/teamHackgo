@@ -25,6 +25,10 @@ void Referee::Init()
     stage_statements.clear();
     player_first_temp = new Object*[player_first_life]();
     player_sec_temp = new Object*[player_sec_life]();
+
+    player_third_temp = new Object * [player_third_life]();
+    player_fourth_temp = new Object * [player_fourth_life]();
+
     item_save = new Object*[item_num]();
 
     for (int i = 0; i < player_first_life; i++)
@@ -45,6 +49,24 @@ void Referee::Init()
         player_sec_temp[i]->AddComponent(new Physics(true));
         player_sec_temp[i]->Set_Name("second");
         player_sec_temp[i]->Set_Tag("player");
+    }
+    for (int i = 0; i < player_third_life; i++)
+    {
+        player_third_temp[i] = new Object();
+        player_third_temp[i]->AddComponent(new Player());
+        player_third_temp[i]->AddComponent(new Sprite(player_third_temp[i], "../Sprite/awesomeface_blue.png", { 200,200 }));
+        player_third_temp[i]->AddComponent(new Physics(true));
+        player_third_temp[i]->Set_Name("third");
+        player_third_temp[i]->Set_Tag("player");
+    }
+    for (int i = 0; i < player_fourth_life; i++)
+    {
+        player_fourth_temp[i] = new Object();
+        player_fourth_temp[i]->AddComponent(new Player());
+        player_fourth_temp[i]->AddComponent(new Sprite(player_fourth_temp[i], "../Sprite/awesomeface.png", { 200,200 }));
+        player_fourth_temp[i]->AddComponent(new Physics(true));
+        player_fourth_temp[i]->Set_Name("forth");
+        player_fourth_temp[i]->Set_Tag("player");
     }
 
 
@@ -92,6 +114,30 @@ void Referee::Update(float dt)
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
                 }
             }
+            if (i == PLAYER_THIRD_DIE && player_third_life > 0)
+            {
+                player_third_respawn_timer -= dt;
+
+                if (player_third_respawn_timer <= 0.0f)
+                {
+                    player_third_respawn_timer = 3.0f;
+                    Respawn(i);
+                    player_third_life--;
+                    stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
+                }
+            }
+            if (i == PLAYER_FOURTH_DIE && player_fourth_life > 0)
+            {
+                player_fourth_respawn_timer -= dt;
+
+                if (player_fourth_respawn_timer <= 0.0f)
+                {
+                    player_fourth_respawn_timer = 3.0f;
+                    Respawn(i);
+                    player_fourth_life--;
+                    stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
+                }
+            }
         }
     }
     item_respawn_timer -= dt;
@@ -123,6 +169,14 @@ void Referee::Respawn(Stage_Statement statement)
 
     case PLAYER_FIRST_DIE:
         ObjectManager::GetObjectManager()->AddObject(player_first_temp[player_first_life - 1]);
+        break;
+
+    case PLAYER_THIRD_DIE:
+        ObjectManager::GetObjectManager()->AddObject(player_third_temp[player_third_life - 1]);
+        break;
+
+    case PLAYER_FOURTH_DIE:
+        ObjectManager::GetObjectManager()->AddObject(player_fourth_temp[player_fourth_life - 1]);
         break;
     }
 

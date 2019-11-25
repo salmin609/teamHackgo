@@ -37,6 +37,8 @@ public:
 private:
     Object* player;
     Object* player_sec;
+    Object* player_third;
+    Object* player_forth;
 
     Object* text;
 	Object* arena;

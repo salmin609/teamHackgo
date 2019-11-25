@@ -138,6 +138,23 @@ void Level1::Load()
     player_sec->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 
+    player_third = new Object();
+    player_third->Set_Name("third");
+    player_third->Set_Tag("player");
+    player_third->AddComponent(new Player());
+    player_third->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+    player_third->AddComponent(new Sprite(player_third, "../Sprite/awesomeface_blue.png", { -400,400 }));
+    player_third->AddComponent(new Physics());
+    ObjectManager::GetObjectManager()->AddObject(player_third);
+
+    player_forth = new Object();
+    player_forth->Set_Name("forth");
+    player_forth->Set_Tag("player");
+    player_forth->AddComponent(new Player());
+    player_forth->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+    player_forth->AddComponent(new Sprite(player_forth, "../Sprite/awesomeface.png", { -100,-100 }));
+    player_forth->AddComponent(new Physics());
+    ObjectManager::GetObjectManager()->AddObject(player_forth);
 
     referee->AddComponent(new Collision());
     //text = new Object();
