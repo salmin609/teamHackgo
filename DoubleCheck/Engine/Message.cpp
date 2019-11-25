@@ -17,9 +17,30 @@ void Message::Update(float dt)
     {
         m_target->GetComponentByTemplate<Component_Enemy>()->Decrease_HP(m_from->GetComponentByTemplate<Player>()->Get_Damage());
     }
+	else if(message_name == "wall_collision")
+	{
+		if(m_target->GetComponentByTemplate<Player>() != nullptr)
+		{
+			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
+			if (target_hp_bar != nullptr)
+			{
+				if (target_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
+				{
+					float damage_to_target = 0;
+					Physics* temp_physics = m_target->GetComponentByTemplate<Physics>();
+					damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
+						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
+
+					std::cout << "damage from wall : " << damage_to_target << std::endl;
+
+					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
+				}
+			}
+		}
+	}
     if(message_name == "collision")
     {
-		if(m_target->Get_Tag() == "item")
+		if(m_target->Get_Tag() == "item" && m_from->Get_Tag() == "player")
 		{
 			std::cout << "item" << std::endl;
 			if(m_target->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::Dash)
@@ -31,7 +52,7 @@ void Message::Update(float dt)
 				}
 			}
 		}
-		else if(m_from->Get_Tag() == "item")
+		else if(m_from->Get_Tag() == "item" && m_target->Get_Tag() == "player")
 		{
 			if (m_from->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::Dash)
 			{
@@ -42,6 +63,7 @@ void Message::Update(float dt)
 				}
 			}
 		}
+		
 		else
 		{
 			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
@@ -96,10 +118,15 @@ void Message::Update(float dt)
             Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FOURTH_DIE);
         }
     }
+	if(m_from != nullptr && m_target != nullptr)
+	{
+		std::string log = m_from->Get_Name() + " " + message_name + " " + m_target->Get_Name();
 
-    std::string log = m_from->Get_Name() + " " + message_name + " " + m_target->Get_Name();
+		Message_Manager::Get_Message_Manager()->Get_Log().push_back(log);
+	}
+    
 
-    Message_Manager::Get_Message_Manager()->Get_Log().push_back(log);
+
 
     should_delete = true;
 }
