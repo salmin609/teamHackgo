@@ -1,5 +1,6 @@
 #include "Component_TopDownMovement.h"
-
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 
 void Component_TopDownMovement::Init(Object* obj)

@@ -79,7 +79,7 @@ void Engine::Init()
 	graphic->Init();
 	msg_manager->Init();
 
-	state_manager->AddState("Menu", new Menu);
+	state_manager->AddState("Menu", new MainMenu);
 	state_manager->AddState("Level1", new Level1);
 
 	StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();

@@ -1,10 +1,20 @@
+//#include "Physics.h"
+//#include "ObjectManager.h"
+//#include <cmath>
+//#include "../Math_lib/vector2.hpp"
+//#include "Input.h"
+//#include "Engine.hpp"
+//#include "Component_Sprite.h"
+//#include "Component_Player.h"
+
 #include "Physics.h"
 #include "ObjectManager.h"
 #include <cmath>
 #include "../Math_lib/vector2.hpp"
 #include "Input.h"
 #include "Component_Sprite.h"
-#include "Component_Player.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
 {
