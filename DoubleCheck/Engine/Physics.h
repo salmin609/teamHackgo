@@ -46,10 +46,9 @@ private:
     vector2 velocity{};
     mutable float timer = 0;
     vector2 prev_pos;
-    vector2 direction_vector{};
     vector2 accel_save{};
+    const float* axes;
 
 	bool ghost_collision_mode;
 	float ghost_collision_timer = 5.0f;
-	
 };
