@@ -67,6 +67,7 @@ void Message::Update(float dt)
 		else
 		{
 			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
+			
 			if (target_hp_bar != nullptr)
 			{
 				if (target_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
@@ -78,6 +79,8 @@ void Message::Update(float dt)
 
 					std::cout << "damage to target : " << damage_to_target << std::endl;
 
+					m_target->Set_Hitted_By(m_from);
+					
 					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
 				}
 			}
@@ -94,7 +97,9 @@ void Message::Update(float dt)
 
 					std::cout << "damage to from : " << damage_to_target << std::endl;
 
-					from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 20);
+					m_from->Set_Hitted_By(m_target);
+					
+					from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
 				}
 			}
 		}

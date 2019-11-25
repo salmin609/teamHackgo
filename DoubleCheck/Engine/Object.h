@@ -37,10 +37,19 @@ private:
 	std::string m_state;
 	int m_frame;
 	Object* this_obj_owner = nullptr;
-
+	Object* hitted_by = nullptr;
 	bool need_to_update;
 
 public:
+	Object* Get_Hitted_By()
+	{
+		return hitted_by;
+	}
+	void Set_Hitted_By(Object* hitted_by)
+	{
+		this->hitted_by = hitted_by;
+	}
+	
 	Object_Component_Info& Get_Component_Info_Reference()
 	{
 		return component_info;
