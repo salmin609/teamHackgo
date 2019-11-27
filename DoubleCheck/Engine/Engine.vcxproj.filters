@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="..\external\imgui\imgui.cpp" />
     <ClCompile Include="..\external\imgui\imgui_demo.cpp" />
     <ClCompile Include="..\external\imgui\imgui_draw.cpp" />
@@ -29,11 +28,13 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Message.cpp" />
+    <ClCompile Include="Messagebox.cpp" />
     <ClCompile Include="Message_Mananger.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Object_Component_Info.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Referee.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound_Manager.cpp" />
@@ -44,7 +45,7 @@
     <ClCompile Include="VertexLayoutDescription.cpp" />
     <ClCompile Include="Vertices.cpp" />
     <ClCompile Include="View.cpp" />
-    <ClCompile Include="Messagebox.cpp" />
+    <ClCompile Include="Player_UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\imgui\imconfig.h" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Material.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="Messagebox.h" />
     <ClInclude Include="Message_Manager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -99,315 +101,9 @@
     <ClInclude Include="VertexLayoutDescription.hpp" />
     <ClInclude Include="Vertices.hpp" />
     <ClInclude Include="View.h" />
-    <ClInclude Include="Messagebox.h" />
-=======
-    <ClCompile Include="Component_Collision.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Enemy.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Hpbar.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Item.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Player.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Sprite.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Text.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_TopDownMovement.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Component_Transform.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="BitmapFont.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraView.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="GL.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\imgui\imgui.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\imgui\imgui_demo.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\imgui\imgui_draw.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\imgui\imgui_impl_glfw.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\imgui\imgui_impl_opengl3.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\imgui\imgui_widgets.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Message.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Message_Mananger.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Messagebox.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Object_Component_Info.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Referee.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound_Manager.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexLayoutDescription.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertices.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>components</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="angles.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="BitmapFont.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraView.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Color4ub.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common_Header.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Collision.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Enemy.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Hpbar.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Item.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Player.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Sprite.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Text.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_TopDownMovement.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Component_Transform.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="GL.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="glCheck.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imconfig.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui_impl_glfw.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui_impl_opengl3.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imgui_internal.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imstb_rectpack.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imstb_textedit.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\external\imgui\imstb_truetype.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Message.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Message_Manager.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Messagebox.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Object_Component_Info.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Referee.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound_Manager.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="StockShaders.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexLayoutDescription.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertices.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
->>>>>>> ce887b638a07eda7e2fa1749903d24b8caf59896
+    <ClInclude Include="Player_Ui.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StockShaders.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="header">
-      <UniqueIdentifier>{c1ed580a-2bcc-4ffb-9724-f33cb0f0f42a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source">
-      <UniqueIdentifier>{a3c1cfea-fa0a-4b66-ae86-3724a886637d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="components">
-      <UniqueIdentifier>{b4420b3e-ccb3-4b5b-bae6-b6f7496f24ae}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>

@@ -8,6 +8,8 @@
 #include "Common_Header.h"
 //#include "Component_Text.h"
 
+class PLAYER_UI;
+
 class Level1 : public State
 {
 public:
@@ -43,4 +45,9 @@ private:
     Object* text;
 	Object* arena;
 
+	PLAYER_UI* player_first_ui;
+	PLAYER_UI* player_second_ui;
+	PLAYER_UI* player_third_ui;
+	PLAYER_UI* player_fourth_ui;
+	
 };

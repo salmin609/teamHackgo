@@ -6,6 +6,7 @@
 #include "Engine.hpp"
 #include "Component_Sprite.h"
 #include "Component_Player.h"
+#include "Player_Ui.h"
 
 Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
 {
@@ -922,6 +923,10 @@ void Physics::Dash(Object* object)
             object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
             object->GetMesh().Get_Is_Moved() = true;
             object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+        	
             is_dashed = true;
         }
     }
@@ -937,6 +942,9 @@ void Physics::Dash(Object* object)
             object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
             object->GetMesh().Get_Is_Moved() = true;
             object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
             is_dashed = true;
         }
     }
@@ -952,6 +960,9 @@ void Physics::Dash(Object* object)
             object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
             object->GetMesh().Get_Is_Moved() = true;
             object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
             is_dashed = true;
         }
     }
@@ -967,6 +978,9 @@ void Physics::Dash(Object* object)
             object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
             object->GetMesh().Get_Is_Moved() = true;
             object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
             is_dashed = true;
         }
     }

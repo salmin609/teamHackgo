@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 
+class PLAYER_UI;
 
 class Referee : public Object
 {
@@ -27,6 +28,23 @@ public:
 		return stage_statements;
 	}
 	void Respawn(Stage_Statement statement);
+
+	void Set_First_Ui(PLAYER_UI* ui)
+	{
+		first_ui = ui;
+	}
+	void Set_Second_Ui(PLAYER_UI* ui)
+	{
+		second_ui = ui;
+	}
+	void Set_Third_Ui(PLAYER_UI* ui)
+	{
+		third_ui = ui;
+	}
+	void Set_Fourth_Ui(PLAYER_UI* ui)
+	{
+		fourth_ui = ui;
+	}
 
 private:
     Referee(){}
@@ -56,4 +74,9 @@ private:
     Object** item_save;
     float item_respawn_timer = 0.0f;
     int item_num = 5;
+
+	PLAYER_UI* first_ui;
+	PLAYER_UI* second_ui;
+	PLAYER_UI* third_ui;
+	PLAYER_UI* fourth_ui;
 };

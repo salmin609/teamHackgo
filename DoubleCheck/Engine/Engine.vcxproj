@@ -209,6 +209,7 @@
     <ClInclude Include="Component_Player.h" />
     <ClInclude Include="Object_Component_Info.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="Player_Ui.h" />
     <ClInclude Include="Referee.h" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="Sound_Manager.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Object_Component_Info.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Player_UI.cpp" />
     <ClCompile Include="ResourceManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

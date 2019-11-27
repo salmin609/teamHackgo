@@ -55,20 +55,6 @@ void Player::Update(float dt)
 
 void Player::Attack()
 {
-	/* if (input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_LEFT))
-	 {
-		 Object* obj = ObjectManager::GetObjectManager()->GetObjectManagerContainer_Value()[1].get();
-		 Message_Manager::Get_Message_Manager()->Save_Message(new Message(obj, m_owner, "attack"));
-	 }*/
-	 /* if(input.Is_Mouse_Triggered(GLFW_MOUSE_BUTTON_RIGHT))
-	  {
-		  std::vector<Object*> objects_with_tag;
-		  objects_with_tag = ObjectManager::GetObjectManager()->Find_Objects_By_Tag("enemy");
-		  for (auto objects : objects_with_tag)
-		  {
-			  Message_Manager::Get_Message_Manager()->Save_Message(new Message(objects, m_owner, "attack"));
-		  }
-	  }*/
 }
 
 Item::Item_Kind Player::Get_Item_State()
@@ -76,7 +62,17 @@ Item::Item_Kind Player::Get_Item_State()
 	return belong_item;
 }
 
+void Player::Set_This_UI_info(PLAYER_UI* ui)
+{
+	this_ui = ui;
+}
+
 void Player::Set_Item_State(Item::Item_Kind state)
 {
 	this->belong_item = state;
+}
+
+PLAYER_UI* Player::Get_Ui()
+{
+	return this_ui;
 }

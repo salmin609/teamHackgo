@@ -5,7 +5,7 @@
 #include "Component_Collision.h"
 #include "Referee.h"
 #include "Component_Text.h"
-
+#include "Player_Ui.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ namespace
 void Level1::Load()
 {
     referee = Referee::Get_Referee();
-    referee->Init();
+    
     object_manager = ObjectManager::GetObjectManager();
 	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
 	arena = new Object();	
@@ -130,8 +130,6 @@ void Level1::Load()
     player_sec = new Object();
     player_sec->Set_Name("second");
     player_sec->Set_Tag("player");
-	
-
     player_sec->AddComponent(new Player());
 	player_sec->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
     player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png", {400,-400}));
@@ -157,14 +155,52 @@ void Level1::Load()
     ObjectManager::GetObjectManager()->AddObject(player_forth);
 
     referee->AddComponent(new Collision());
-    //text = new Object();
-    //text->AddComponent(new TextComp(text, L"Hitddfddffdfdffd!", { 255,0,0,255 }, { 50,50 }));
-    //text->SetTranslation({ 200,200 });;
-    //text->Set_Name("red_text");
-    //text->Set_Tag("text");
 
-    //object_manager->AddObject(text);
-    //ObjectManager::GetObjectManager()->AddObject(text);
+	player_first_ui = new PLAYER_UI();
+	player_first_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
+	player_first_ui->Set_Name("first_ui");
+	player_first_ui->Set_Tag("ui");
+	player_first_ui->AddComponent(new Sprite(player_first_ui, "../sprite/awesomeface_green.png", {-1600, 800}));
+	player_first_ui->Initialize();
+	ObjectManager::GetObjectManager()->AddObject(player_first_ui);
+
+	player_second_ui = new PLAYER_UI();
+	player_second_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
+	player_second_ui->Set_Name("first_ui");
+	player_second_ui->Set_Tag("ui");
+	player_second_ui->AddComponent(new Sprite(player_second_ui, "../sprite/awesomeface_red.png", { -1600, -800 }));
+	player_second_ui->Initialize();
+	ObjectManager::GetObjectManager()->AddObject(player_second_ui);
+
+	player_third_ui = new PLAYER_UI();
+	player_third_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
+	player_third_ui->Set_Name("first_ui");
+	player_third_ui->Set_Tag("ui");
+	player_third_ui->AddComponent(new Sprite(player_third_ui, "../sprite/awesomeface_blue.png", { 1200, 800 }));
+	player_third_ui->Initialize();
+	ObjectManager::GetObjectManager()->AddObject(player_third_ui);
+
+	player_fourth_ui = new PLAYER_UI();
+	player_fourth_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
+	player_fourth_ui->Set_Name("first_ui");
+	player_fourth_ui->Set_Tag("ui");
+	player_fourth_ui->AddComponent(new Sprite(player_fourth_ui, "../sprite/awesomeface.png", { 1200, -800 }));
+	player_fourth_ui->Initialize();
+	ObjectManager::GetObjectManager()->AddObject(player_fourth_ui);
+
+	player->GetComponentByTemplate<Player>()->Set_This_UI_info(player_first_ui);
+	player_sec->GetComponentByTemplate<Player>()->Set_This_UI_info(player_second_ui);
+	player_third->GetComponentByTemplate<Player>()->Set_This_UI_info(player_third_ui);
+	player_forth->GetComponentByTemplate<Player>()->Set_This_UI_info(player_fourth_ui);
+	
+	Graphic::GetGraphic()->get_need_update_sprite() = true;
+
+	Referee::Get_Referee()->Set_First_Ui(player_first_ui);
+	Referee::Get_Referee()->Set_Second_Ui(player_second_ui);
+	Referee::Get_Referee()->Set_Third_Ui(player_third_ui);
+	Referee::Get_Referee()->Set_Fourth_Ui(player_fourth_ui);
+
+	referee->Init();
 }
 
 void Level1::Update(float dt)

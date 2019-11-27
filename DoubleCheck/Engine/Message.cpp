@@ -6,6 +6,7 @@
 #include "Component_Hpbar.h"
 #include "Referee.h"
 #include "Component_Item.h"
+#include "Player_Ui.h"
 
 void Message::Init()
 {
@@ -49,6 +50,9 @@ void Message::Update(float dt)
 				if(m_from->GetComponentByTemplate<Player>() != nullptr)
 				{
 					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
+					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
+					->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 				}
 			}
 		}
@@ -60,6 +64,10 @@ void Message::Update(float dt)
 				if (m_target->GetComponentByTemplate<Player>() != nullptr)
 				{
 					m_target->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
+
+					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
+						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 				}
 			}
 		}
