@@ -23,6 +23,7 @@ public:
     {
         return should_delete;
     }
+	std::pair<float, float> Damaege_Calculation(Object target, Object from);
     void Init();
     void Update(float dt);
     void Delete();
