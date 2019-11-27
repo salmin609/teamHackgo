@@ -37,7 +37,11 @@ void Hp_Bar::Decrease(float dmg)
 			m_owner->Get_This_Obj_Owner()->GetComponentByTemplate<Player>()->Get_Ui()->Get_Hp_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
 			m_owner->Get_This_Obj_Owner()->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
 			m_owner->Get_This_Obj_Owner()->Get_Hitted_By()->GetTransform().GetScale_Reference() += {0.3f, 0.3f};
-            m_owner->SetDeadCondition(true);
+            if(m_owner->Get_This_Obj_Owner()->Get_Hitted_By() != nullptr)
+            {
+                m_owner->Get_This_Obj_Owner()->Get_Hitted_By()->GetTransform().GetScale_Reference() += {0.3f, 0.3f};
+            }
+			            m_owner->SetDeadCondition(true);
             Hp_Owner_Obj->SetDeadCondition(true);
             Message_Manager::Get_Message_Manager()->Save_Message(new Message(Referee::Get_Referee(), Hp_Owner_Obj, "respawn"));
         }

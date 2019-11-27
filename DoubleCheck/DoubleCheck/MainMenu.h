@@ -1,35 +1,28 @@
 #pragma once
 #include "State.h"
-#include <string>
-#include <iostream>
-#include "Input.h"
-#include <GLFW/glfw3.h>
+#include "GLFW/glfw3.h"
 
-class Menu : public State
+//#include <string>
+//#include <iostream>
+//#include "Input.h"
+//#include <GLFW/glfw3.h>
+class Object;
+
+class MainMenu : public State
 {
 public:
-    Menu()
+	MainMenu()
     {
         current_state = GameState::Menu;
     }
 
-    virtual void Load()
-    {
-        std::cout << "Menu init" << std::endl;
-    }
-    virtual void Update(float dt)
-    {
-        
-
-        if(input.Is_Key_Triggered(GLFW_KEY_N))
-        {
-            is_next = true;
-            next_level = "Level1";
-        }
-    }
+	virtual void Load();
+	virtual void Update(float dt);
     virtual void UnLoad()
     {
         next_level = {};
         is_next = false;
     }
+private:
+	Object* text;
 };

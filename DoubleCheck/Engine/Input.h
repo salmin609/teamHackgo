@@ -1,21 +1,27 @@
 #pragma once
 
+//#include <bitset>
+//#include <GL/glew.h>
+//#include <GLFW/glfw3.h>
+//#include "vector2.hpp"
+
 #include <bitset>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include "vector2.hpp"
+#define NEW_GLFW_KEY_LAST_ 348
+#define NEW_GLFW_MOUSE_BUTTON_LAST_ 7
 
 class Input
 {
 private:
-    std::bitset<GLFW_KEY_LAST> key_pressed;
-    std::bitset<GLFW_KEY_LAST> key_released;
-    std::bitset<GLFW_KEY_LAST> key_triggered;
+    std::bitset<NEW_GLFW_KEY_LAST_> key_pressed;
+    std::bitset<NEW_GLFW_KEY_LAST_> key_released;
+    std::bitset<NEW_GLFW_KEY_LAST_> key_triggered;
 
-    std::bitset<GLFW_MOUSE_BUTTON_LAST> mouse_triggered;
-    std::bitset<GLFW_MOUSE_BUTTON_LAST> mouse_released;
-    std::bitset<GLFW_MOUSE_BUTTON_LAST> mouse_double_clicked;
-    std::bitset<GLFW_MOUSE_BUTTON_LAST> mouse_pressed;
+    std::bitset<NEW_GLFW_MOUSE_BUTTON_LAST_> mouse_triggered;
+    std::bitset<NEW_GLFW_MOUSE_BUTTON_LAST_> mouse_released;
+    std::bitset<NEW_GLFW_MOUSE_BUTTON_LAST_> mouse_double_clicked;
+    std::bitset<NEW_GLFW_MOUSE_BUTTON_LAST_> mouse_pressed;
 
     vector2 mouse_position{};
     double x_offset = 0.0;

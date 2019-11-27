@@ -57,15 +57,13 @@ void Update_Msg(float dt)
 
 void Engine::Init()
 {
-
-
-	//sound.initialize();
-	//sound.load();
-	//sound.play(0);
-	//sound.volume(0, 1);
-	//Sleep(1400);
-	//sound.play(2);
-	//sound.volume(2, 8);
+	sound.initialize();
+	sound.load();
+	sound.play(0);
+	sound.volume(0, 1);
+	Sleep(1400);
+	sound.play(2);
+	sound.volume(2, 8);
 
 	app_ = Application::Get_Application();
 	object_manager = ObjectManager::GetObjectManager();
@@ -79,7 +77,7 @@ void Engine::Init()
 	graphic->Init();
 	msg_manager->Init();
 
-	state_manager->AddState("Menu", new Menu);
+	state_manager->AddState("Menu", new MainMenu);
 	state_manager->AddState("Level1", new Level1);
 
 	StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
