@@ -147,7 +147,7 @@ void Collision::SquareArenaCollision()
         const double max_y = obj_i_trans.y + (70.0 * obj_i_scale.y);
         const double min_y = obj_i_trans.y - (70.0 * obj_i_scale.y);
 
-        if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
+        if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_i->Get_Tag() == "player")
         {
             vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 
