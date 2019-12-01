@@ -312,8 +312,11 @@ void Message::Update(float dt)
 			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
 			Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
 
-			target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.first / 50);
-			from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.second / 50);
+			if(target_hp_bar != nullptr || from_hp_bar != nullptr)
+			{
+				target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.first / 50);
+				from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.second / 50);
+			}
 		}
 	}
 	if (message_name == "respawn")

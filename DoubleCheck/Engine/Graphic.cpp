@@ -34,7 +34,7 @@ void Graphic::Update(float dt)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    Application::Get_Application()->Imgui_Update();
+    //Application::Get_Application()->Imgui_Update();
 
     seconds += dt;
 
