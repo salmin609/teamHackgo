@@ -162,7 +162,7 @@ void Level1::Load()
 	player_first_ui->Set_Tag("ui");
 	player_first_ui->AddComponent(new Sprite(player_first_ui, "../sprite/awesomeface_green.png", {-1600, 800}));
 	player_first_ui->Initialize();
-	//ObjectManager::GetObjectManager()->AddObject(player_first_ui);
+	ObjectManager::GetObjectManager()->AddObject(player_first_ui);
 
 	player_second_ui = new PLAYER_UI();
 	player_second_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
@@ -170,7 +170,7 @@ void Level1::Load()
 	player_second_ui->Set_Tag("ui");
 	player_second_ui->AddComponent(new Sprite(player_second_ui, "../sprite/awesomeface_red.png", { -1600, -800 }));
 	player_second_ui->Initialize();
-	//ObjectManager::GetObjectManager()->AddObject(player_second_ui);
+	ObjectManager::GetObjectManager()->AddObject(player_second_ui);
 
 	player_third_ui = new PLAYER_UI();
 	player_third_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
@@ -178,7 +178,7 @@ void Level1::Load()
 	player_third_ui->Set_Tag("ui");
 	player_third_ui->AddComponent(new Sprite(player_third_ui, "../sprite/awesomeface_blue.png", { 1200, 800 }));
 	player_third_ui->Initialize();
-	//ObjectManager::GetObjectManager()->AddObject(player_third_ui);
+	ObjectManager::GetObjectManager()->AddObject(player_third_ui);
 
 	player_fourth_ui = new PLAYER_UI();
 	player_fourth_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
@@ -186,7 +186,7 @@ void Level1::Load()
 	player_fourth_ui->Set_Tag("ui");
 	player_fourth_ui->AddComponent(new Sprite(player_fourth_ui, "../sprite/awesomeface.png", { 1200, -800 }));
 	player_fourth_ui->Initialize();
-	//ObjectManager::GetObjectManager()->AddObject(player_fourth_ui);
+	ObjectManager::GetObjectManager()->AddObject(player_fourth_ui);
 
 	player->GetComponentByTemplate<Player>()->Set_This_UI_info(player_first_ui);
 	player_sec->GetComponentByTemplate<Player>()->Set_This_UI_info(player_second_ui);

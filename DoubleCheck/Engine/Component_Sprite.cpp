@@ -307,9 +307,8 @@ void Sprite::Update(float dt)
 	material.floatUniforms["time"] = seconds;
 	debug_material.floatUniforms["time"] = seconds;
 
-	//if(m_owner->Get_Tag() == "player" || m_owner->Get_Tag() == "item" || m_owner->GetName() == "arena")
-		Graphic::GetGraphic()->Draw(shape, material);
-	
+	Graphic::GetGraphic()->Draw(shape, material);
+
 
 
 
