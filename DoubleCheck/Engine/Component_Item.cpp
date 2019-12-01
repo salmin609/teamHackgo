@@ -1,14 +1,44 @@
 #include "Component_Item.h"
-
+#include "time.h"
+#include "Object.h"
 
 void Item::Init(Object* obj)
 {
-
+	m_owner = obj;
 }
 
 void Item::Update(float dt)
 {
+	srand(time(NULL));
+	int random = rand() % 8;
 
+	switch(random)
+	{
+	case 0:
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x += 0.1f;
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y += 0.1f;
+		break;
+
+	case 1:
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x -= 0.1f;
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y += 0.1f;
+		break;
+
+	case 2:
+
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x += 0.1f;
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y -= 0.1f;
+		break;
+
+	case 3:
+
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().x -= 0.1f;
+		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y -= 0.1f;
+		break;
+	}
+	
+
+	
 }
 
 void Item::Set_Kind(Item_Kind kind)

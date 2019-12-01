@@ -8,6 +8,7 @@
 #include "Player_Ui.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Component_Hpbar.h"
 
 Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
 {
@@ -556,27 +557,45 @@ void Physics::Dash(Object* object)
 			Object* hp_bar = object->Get_Belong_Object_By_Tag("hp_bar");
 			hp_bar->GetTransform().GetScale_Reference().x = 1.f;
 			hp_bar->GetMesh().Get_Is_Moved() = true;
-
-			
-			
-			is_dashed = true;
 		}
 
         return;
     }
 
-    if (axes[5] > 0.4 && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
+    if (axes[5] > 0.4)
     {
-        timer = 0;
-        acceleration += {50 * acceleration.x, 50 * acceleration.y};
-        object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
-        object->GetMesh().Get_Is_Moved() = true;
-        object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+    	if(object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
+    	{
+			timer = 0;
+			acceleration += {50 * acceleration.x, 50 * acceleration.y};
+			object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
+			object->GetMesh().Get_Is_Moved() = true;
+			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 
-		object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
-		object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
-    	
-        is_dashed = true;
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+
+			is_dashed = true;
+    	}
+    	if(object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
+    	{
+			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Hp_Info()->GetTransform().GetScale_Reference().x = 4.f;
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+
+			Object* hp_bar = object->Get_Belong_Object_By_Tag("hp_bar");
+			float offset = 1.f - hp_bar->GetTransform().GetScale_Reference().x;
+
+			//hp_bar->GetTransform().GetTranslation_Reference().x += offset * 200;
+    		if(hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
+    		{
+				hp_bar->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset() = offset * 4.f;
+    			
+    		}
+			hp_bar->GetTransform().GetScale_Reference().x = 1.f;
+			hp_bar->GetMesh().Get_Is_Moved() = true;
+    	}
     }
 }
 
