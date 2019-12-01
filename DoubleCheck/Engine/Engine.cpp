@@ -103,7 +103,7 @@ void Engine::Update()
 
     StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
 
-    Reset();
+    //Reset();
     
 	if (input.Is_Key_Triggered(GLFW_KEY_1))
 		state_manager->is_pause = !state_manager->is_pause;

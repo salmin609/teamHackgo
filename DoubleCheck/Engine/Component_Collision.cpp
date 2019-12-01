@@ -152,7 +152,7 @@ void Collision::SquareArenaCollision()
         const double max_y = obj_i_trans.y + (70.0 * obj_i_scale.y);
         const double min_y = obj_i_trans.y - (70.0 * obj_i_scale.y);
 
-        if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
+        if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_i->Get_Tag() == "player")
         {
             vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 
@@ -160,7 +160,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             //dmg
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
@@ -176,7 +176,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             //dmg
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
@@ -192,7 +192,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().y;
@@ -207,7 +207,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().y;
