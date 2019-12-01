@@ -7,7 +7,8 @@ public:
     enum class Item_Kind
     {
         None,
-        Dash
+        Dash,
+    	HP
     };
 
     void Init(Object *obj) override;

@@ -31,6 +31,7 @@ void Referee::Init()
     player_fourth_temp = new Object * [player_fourth_life]();
 
     item_save = new Object*[item_num]();
+	item_save_hp = new Object * [item_num]();
 
     for (int i = 0; i < player_first_life; i++)
     {
@@ -86,6 +87,18 @@ void Referee::Init()
         item_save[i]->SetTranslation({ 0,0 });
 		item_save[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::Dash);
     }
+
+	for (int i = 0; i < item_num; i++)
+	{
+		item_save_hp[i] = new Object();
+		item_save_hp[i]->AddComponent(new Sprite(item_save_hp[i], "../Sprite/item.png", { 0,0 }, false));
+		item_save_hp[i]->AddComponent(new Item());
+		item_save_hp[i]->AddComponent(new Physics());
+		item_save_hp[i]->Set_Name("item");
+		item_save_hp[i]->Set_Tag("item");
+		item_save_hp[i]->SetTranslation({ -400,0 });
+		item_save_hp[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::HP);
+	}
 }
 
 void Referee::Update(float dt)
@@ -150,6 +163,7 @@ void Referee::Update(float dt)
     {
         item_respawn_timer = 10.0f;
         ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+		ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num - 1]);
         item_num--;
     }
     

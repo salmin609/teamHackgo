@@ -6,6 +6,7 @@
 #include "Graphic.h"
 #include "Object.h"
 #include "Component_Hpbar.h"
+#include <thread>
 
 
 void Helper_Addpoint_Circle(std::size_t& point_count, Mesh& mesh, float& radius, float position_x = 0, float position_y = 0, bool move_up_down = true)
@@ -202,6 +203,12 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 
 }
 
+
+void draw(Vertices shape, material material)
+{
+	Graphic::GetGraphic()->Draw(shape, material);
+}
+
 void Sprite::Update(float dt)
 {
 	if (!m_owner->Get_Component_Info_Reference().component_info_sprite)
@@ -243,9 +250,9 @@ void Sprite::Update(float dt)
 		mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();
 		mat_ndc *= m_owner->GetTransform().GetModelToWorld();
 
-		if(m_owner->GetComponentByTemplate<Physics>() != nullptr)
+		if (m_owner->GetComponentByTemplate<Physics>() != nullptr)
 		{
-			if(m_owner->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference())
+			if (m_owner->GetComponentByTemplate<Physics>()->Get_Ghost_Collision_Reference())
 			{
 				//material.shader->SendUniformVariable("color", { 1.0f,1.0f,1.0f,0.0f });
 				material.color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
@@ -255,7 +262,7 @@ void Sprite::Update(float dt)
 				material.color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
 			}
 		}
-		
+
 		if (!m_owner->Get_Belongs_Objects().empty())
 		{
 			int size = m_owner->Get_Belongs_Objects().size();
@@ -282,7 +289,7 @@ void Sprite::Update(float dt)
 						fixed_size_convert -= Graphic::GetGraphic()->Get_View().Get_Camera_View().GetZoom();
 						trans = trans * MATRIX3::build_scale(1.0f + fixed_size_convert);
 					}
-					if(obj->GetTransform().GetScale().x > 0)
+					if (obj->GetTransform().GetScale().x > 0)
 					{
 						obj->GetComponentByTemplate<Sprite>()->Get_Material().matrix3Uniforms["to_ndc"] = trans;
 						Graphic::GetGraphic()->Draw(obj->GetComponentByTemplate<Sprite>()->Get_Shape(),
@@ -301,6 +308,9 @@ void Sprite::Update(float dt)
 	debug_material.floatUniforms["time"] = seconds;
 
 	Graphic::GetGraphic()->Draw(shape, material);
+
+
+
 
 	if (m_owner->Get_Is_Debugmode())
 	{

@@ -238,6 +238,18 @@ void Message::Update(float dt)
 					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 				}
 			}
+			if (m_target->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::HP)
+			{
+				m_target->SetDeadCondition(true);
+				if (m_from->GetComponentByTemplate<Player>() != nullptr)
+				{
+					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::HP);
+					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
+						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+				}
+			}
+			
 		}
 		else if (m_from->Get_Tag() == "item" && m_target->Get_Tag() == "player")
 		{
@@ -253,52 +265,22 @@ void Message::Update(float dt)
 					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 				}
 			}
+			if (m_from->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::HP)
+			{
+				m_from->SetDeadCondition(true);
+				if (m_target->GetComponentByTemplate<Player>() != nullptr)
+				{
+					m_target->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::HP);
+
+					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
+						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+				}
+			}
 		}
 
 		else
 		{
-			/*Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
-
-			if (target_hp_bar != nullptr)
-			{
-				if (target_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
-				{
-					float damage_to_target = 0;
-					Physics* temp_physics = m_from->GetComponentByTemplate<Physics>();
-					damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
-						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
-
-					std::cout << "damage to target : " << damage_to_target << std::endl;
-					if (m_from->GetComponentByTemplate<Player>() != nullptr)
-					{
-						m_target->Set_Hitted_By(m_from);
-					}
-					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
-				}
-			}
-
-			Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
-			if (from_hp_bar != nullptr)
-			{
-				if (from_hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
-				{
-					float damage_to_target = 0;
-					Physics* temp_physics = m_target->GetComponentByTemplate<Physics>();
-					damage_to_target += (sqrt((temp_physics->Get_Save_Acceleration_Reference().x * temp_physics->Get_Save_Acceleration_Reference().x) +
-						(temp_physics->Get_Save_Acceleration_Reference().y * temp_physics->Get_Save_Acceleration_Reference().y)));
-
-					std::cout << "damage to from : " << damage_to_target << std::endl;
-					if(m_target->GetComponentByTemplate<Player>() != nullptr)
-					{
-						m_from->Set_Hitted_By(m_target);
-					}
-
-					from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 50);
-				}
-			}
-			*/
-			//vector2 target_accel = m_target->GetComponentByTemplate<Physics>()->GetAcceleration();
-			//vector2 from_accel = m_from->GetComponentByTemplate<Physics>()->GetAcceleration();
 			std::pair<float, float> dmg_set = Damaege_Calculation(*m_target, *m_from);
 			if (m_from->GetComponentByTemplate<Player>() != nullptr)
 			{
@@ -312,8 +294,11 @@ void Message::Update(float dt)
 			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
 			Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
 
-			target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.first / 50);
-			from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.second / 50);
+			if(target_hp_bar != nullptr || from_hp_bar != nullptr)
+			{
+				target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.first / 50);
+				from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.second / 50);
+			}
 		}
 	}
 	if (message_name == "respawn")

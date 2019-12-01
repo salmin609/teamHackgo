@@ -72,6 +72,7 @@ private:
     int player_fourth_life = 3;
 
     Object** item_save;
+	Object** item_save_hp;
     float item_respawn_timer = 0.0f;
     int item_num = 5;
 

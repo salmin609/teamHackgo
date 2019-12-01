@@ -220,6 +220,9 @@ DoubleCheck/DoubleCheck/x64/Release/DoubleCheck.tlog/link.command.1.tlog
 DoubleCheck/DoubleCheck/x64/Release/DoubleCheck.tlog/CL.read.1.tlog
 DoubleCheck/DoubleCheck/x64/Release/DoubleCheck.tlog/CL.command.1.tlog
 DoubleCheck/DoubleCheck/x64/Release/DoubleCheck.log
+<<<<<<< HEAD
+DoubleCheck/DoubleCheck/x64/Release/DoubleCheck.tlog/link.delete.1.tlog
+=======
 
 DoubleCheck/DoubleCheck/Debug/DoubleCheck.tlog/unsuccessfulbuild
 
@@ -230,3 +233,4 @@ DoubleCheck/DoubleCheck/Debug/DoubleCheck.tlog/CL.write.1.tlog
 DoubleCheck/DoubleCheck/Debug/DoubleCheck.tlog/CL.read.1.tlog
 
 DoubleCheck/DoubleCheck/Debug/DoubleCheck.tlog/CL.command.1.tlog
+>>>>>>> 8e4fde60a0bc11eb0f43f9d510e3c9251d73ec20
