@@ -66,7 +66,7 @@ bool Collision::CircleToCircleCollision()
 			if (obj_i->Get_Need_To_Update())
 			{
 				vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
-				float obj_i_radius = obj_i->GetTransform().GetScale().x * 70.f;
+				float obj_i_radius = obj_i->GetTransform().GetScale().x * 30.f;
 
 				for (unsigned int j = 0; j < object_position_size; ++j)
 				{
@@ -77,7 +77,7 @@ bool Collision::CircleToCircleCollision()
 						if (obj_j->Get_Need_To_Update())
 						{
 							vector2 obj_j_trans = obj_j->GetTransform().GetTranslation();
-							float obj_j_radius = obj_j->GetTransform().GetScale().x * 70.f;
+							float obj_j_radius = obj_j->GetTransform().GetScale().x * 30.f;
 							if (i != j)
 							{
 
@@ -147,10 +147,10 @@ void Collision::SquareArenaCollision()
         vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
 		vector2 obj_i_scale = obj_i->GetTransform().GetScale();
 
-        const double max_x = obj_i_trans.x + (70.0 * obj_i_scale.x);
-        const double min_x = obj_i_trans.x - (70.0 * obj_i_scale.x);
-        const double max_y = obj_i_trans.y + (70.0 * obj_i_scale.y);
-        const double min_y = obj_i_trans.y - (70.0 * obj_i_scale.y);
+        const double max_x = obj_i_trans.x + (30.0 * obj_i_scale.x);
+        const double min_x = obj_i_trans.x - (30.0 * obj_i_scale.x);
+        const double max_y = obj_i_trans.y + (30.0 * obj_i_scale.y);
+        const double min_y = obj_i_trans.y - (30.0 * obj_i_scale.y);
 
         if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_i->Get_Tag() == "player")
         {
