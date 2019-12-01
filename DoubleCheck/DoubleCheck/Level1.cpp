@@ -81,7 +81,7 @@ void Level1::Load()
 				}
 
 
-				player->AddComponent(new Sprite(player, locate.c_str(), result, frame,{value_x,value_y}));
+				player->AddComponent(new Sprite(player, locate.c_str(),{value_x,value_y}));
 				player->Set_path(locate);
 				player->Set_AniState(animate);
 				player->Set_Frame(frame);
@@ -126,6 +126,7 @@ void Level1::Load()
 	fileOut << player->GetTransform().GetScale_Reference().y << endl;
 	player->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 	fileOut.close();
+    player->GetTransform().SetScale({ 1, 1 });
 
     player_sec = new Object();
     player_sec->Set_Name("second");

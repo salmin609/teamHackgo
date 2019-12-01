@@ -145,7 +145,7 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath, vector2 position, bool
 	if (need_debug_drawing)
 	{
 		Mesh debug_mesh;
-		debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+		debug_mesh = MESH::create_wire_circle(30, { 255,0,0,255 });
 		debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
 		m_owner->Set_Debug_Mesh(debug_mesh);
@@ -187,7 +187,7 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 	if (need_debug_drawing)
 	{
 		Mesh debug_mesh;
-		debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
+		debug_mesh = MESH::create_wire_circle(30, { 255,0,0,255 });
 		debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
 
 		m_owner->Set_Debug_Mesh(debug_mesh);
