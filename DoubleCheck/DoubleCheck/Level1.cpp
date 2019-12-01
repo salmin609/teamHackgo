@@ -132,7 +132,7 @@ void Level1::Load()
     player_sec->Set_Tag("player");
     player_sec->AddComponent(new Player());
 	player_sec->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-    player_sec->AddComponent(new Sprite(player_sec, "../Sprite/awesomeface_red.png", {400,-400}));
+    player_sec->AddComponent(new Sprite(player_sec, "../Sprite/pen_red.png", {400,-400}));
     player_sec->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 
@@ -141,7 +141,7 @@ void Level1::Load()
     player_third->Set_Tag("player");
     player_third->AddComponent(new Player());
     player_third->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-    player_third->AddComponent(new Sprite(player_third, "../Sprite/awesomeface_blue.png", { -400,400 }));
+    player_third->AddComponent(new Sprite(player_third, "../Sprite/pen_purple.png", { -400,400 }));
     player_third->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_third);
 
@@ -150,7 +150,7 @@ void Level1::Load()
     player_forth->Set_Tag("player");
     player_forth->AddComponent(new Player());
     player_forth->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-    player_forth->AddComponent(new Sprite(player_forth, "../Sprite/awesomeface.png", { -400,-400 }));
+    player_forth->AddComponent(new Sprite(player_forth, "../Sprite/pen_normal.png", { -400,-400 }));
     player_forth->AddComponent(new Physics());
     ObjectManager::GetObjectManager()->AddObject(player_forth);
 
@@ -160,7 +160,7 @@ void Level1::Load()
 	player_first_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
 	player_first_ui->Set_Name("first_ui");
 	player_first_ui->Set_Tag("ui");
-	player_first_ui->AddComponent(new Sprite(player_first_ui, "../sprite/awesomeface_green.png", {-1600, 800}));
+	player_first_ui->AddComponent(new Sprite(player_first_ui, "../sprite/pen_green.png", {-1600, 800}));
 	player_first_ui->Initialize();
 	//ObjectManager::GetObjectManager()->AddObject(player_first_ui);
 
@@ -168,7 +168,7 @@ void Level1::Load()
 	player_second_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
 	player_second_ui->Set_Name("first_ui");
 	player_second_ui->Set_Tag("ui");
-	player_second_ui->AddComponent(new Sprite(player_second_ui, "../sprite/awesomeface_red.png", { -1600, -800 }));
+	player_second_ui->AddComponent(new Sprite(player_second_ui, "../sprite/pen_red.png", { -1600, -800 }));
 	player_second_ui->Initialize();
 	//ObjectManager::GetObjectManager()->AddObject(player_second_ui);
 
@@ -176,7 +176,7 @@ void Level1::Load()
 	player_third_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
 	player_third_ui->Set_Name("first_ui");
 	player_third_ui->Set_Tag("ui");
-	player_third_ui->AddComponent(new Sprite(player_third_ui, "../sprite/awesomeface_blue.png", { 1200, 800 }));
+	player_third_ui->AddComponent(new Sprite(player_third_ui, "../sprite/pen_purple.png", { 1200, 800 }));
 	player_third_ui->Initialize();
 	//ObjectManager::GetObjectManager()->AddObject(player_third_ui);
 
@@ -184,7 +184,7 @@ void Level1::Load()
 	player_fourth_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
 	player_fourth_ui->Set_Name("first_ui");
 	player_fourth_ui->Set_Tag("ui");
-	player_fourth_ui->AddComponent(new Sprite(player_fourth_ui, "../sprite/awesomeface.png", { 1200, -800 }));
+	player_fourth_ui->AddComponent(new Sprite(player_fourth_ui, "../sprite/pen_normal.png", { 1200, -800 }));
 	player_fourth_ui->Initialize();
 	//ObjectManager::GetObjectManager()->AddObject(player_fourth_ui);
 
