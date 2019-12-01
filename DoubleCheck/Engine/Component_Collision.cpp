@@ -155,7 +155,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             //dmg
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
@@ -171,7 +171,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             //dmg
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
@@ -187,7 +187,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().y;
@@ -202,7 +202,7 @@ void Collision::SquareArenaCollision()
             angle2 = 2 * (180 - angle);
             angle = 360 - angle2;
             direction_to_go = rotate_by(DegreeToRadian(angle), direction_to_go);
-            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * 0.5);
+            obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go);
 
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().x;
             obj_i->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration().y;
