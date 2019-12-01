@@ -36,7 +36,7 @@ void Referee::Init()
     {
         player_first_temp[i] = new Object();
         player_first_temp[i]->AddComponent(new Player());
-        player_first_temp[i]->AddComponent(new Sprite(player_first_temp[i], "../Sprite/awesomeface_green.png", {400,400}));
+        player_first_temp[i]->AddComponent(new Sprite(player_first_temp[i], "../Sprite/pen_green.png", {400,400}));
         player_first_temp[i]->AddComponent(new Physics(true));
         player_first_temp[i]->Set_Name("first");
         player_first_temp[i]->Set_Tag("player");
@@ -47,7 +47,7 @@ void Referee::Init()
     {
         player_sec_temp[i] = new Object();
         player_sec_temp[i]->AddComponent(new Player());
-        player_sec_temp[i]->AddComponent(new Sprite(player_sec_temp[i], "../Sprite/awesomeface_red.png", {400,-400}));
+        player_sec_temp[i]->AddComponent(new Sprite(player_sec_temp[i], "../Sprite/pen_red.png", {400,-400}));
         player_sec_temp[i]->AddComponent(new Physics(true));
         player_sec_temp[i]->Set_Name("second");
         player_sec_temp[i]->Set_Tag("player");
@@ -57,7 +57,7 @@ void Referee::Init()
     {
         player_third_temp[i] = new Object();
         player_third_temp[i]->AddComponent(new Player());
-        player_third_temp[i]->AddComponent(new Sprite(player_third_temp[i], "../Sprite/awesomeface_blue.png", { -400,400 }));
+        player_third_temp[i]->AddComponent(new Sprite(player_third_temp[i], "../Sprite/pen_purple.png", { -400,400 }));
         player_third_temp[i]->AddComponent(new Physics(true));
         player_third_temp[i]->Set_Name("third");
         player_third_temp[i]->Set_Tag("player");
@@ -67,7 +67,7 @@ void Referee::Init()
     {
         player_fourth_temp[i] = new Object();
         player_fourth_temp[i]->AddComponent(new Player());
-        player_fourth_temp[i]->AddComponent(new Sprite(player_fourth_temp[i], "../Sprite/awesomeface.png", { -400,-400 }));
+        player_fourth_temp[i]->AddComponent(new Sprite(player_fourth_temp[i], "../Sprite/pen_normal.png", { -400,-400 }));
         player_fourth_temp[i]->AddComponent(new Physics(true));
         player_fourth_temp[i]->Set_Name("forth");
         player_fourth_temp[i]->Set_Tag("player");

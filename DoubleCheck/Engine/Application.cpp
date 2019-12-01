@@ -81,11 +81,11 @@ void Application::Init()
 
 	glfwSwapInterval(true);
 
-	object1.LoadFromPNG("../sprite/dicksean.png");
-	object2.LoadFromPNG("../sprite/kingchulseong.png");
-	object3.LoadFromPNG("../sprite/waterpunch.png");
-	object4.LoadFromPNG("../sprite/temp.png");
-	object5.LoadFromPNG("../sprite/maknae.png");
+	object1.LoadFromPNG("../sprite/HP.png");
+	object2.LoadFromPNG("../sprite/HP.png");
+	object3.LoadFromPNG("../sprite/HP.png");
+	object4.LoadFromPNG("../sprite/HP.png");
+	object5.LoadFromPNG("../sprite/HP.png");
 
     //m_thread = std::thread(this->Update, this);
 }
