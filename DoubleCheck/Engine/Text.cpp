@@ -19,8 +19,11 @@ std::vector<std::pair<Vertices*, const Texture*>> Text::GetVerticesWithMatchingT
 
 	for (int i = 0; i < font->GetInformation().pagesCount; i++)
 	{
-		std::pair pairVerticesTexture(&vertices.at(i), &font->GetTexture(i));
-		newMesh.push_back(pairVerticesTexture);
+		//if()
+		{
+			std::pair pairVerticesTexture(&vertices.at(i), &font->GetTexture(i));
+			newMesh.push_back(pairVerticesTexture);
+		}		
 	}
 	return newMesh;
 }

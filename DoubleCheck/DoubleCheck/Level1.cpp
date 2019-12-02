@@ -24,11 +24,11 @@ void Level1::Load()
     
     object_manager = ObjectManager::GetObjectManager();
 	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
+
 	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
 	arena->AddComponent(new Sprite(arena));
-
 
 	ObjectManager::GetObjectManager()->AddObject(arena);
 	
@@ -156,6 +156,11 @@ void Level1::Load()
     ObjectManager::GetObjectManager()->AddObject(player_forth);
 
     referee->AddComponent(new Collision());
+    //text = new Object();
+    //text->AddComponent(new TextComp(text, L"Hitddfddffdfdffd!", { 255,0,0,255 }, { 50,50 }));
+    //text->SetTranslation({ 200,200 });;
+    //text->Set_Name("red_text");
+    //text->Set_Tag("text");
 
 	player_first_ui = new PLAYER_UI();
 	player_first_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };

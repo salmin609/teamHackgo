@@ -244,7 +244,7 @@ void Sprite::Update(float dt)
 		shape.UpdateVerticesFromMesh(m_owner->GetMesh());
 
 	}
-	if (m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite() || m_owner->Get_Tag() == "arena" || m_owner->Get_Tag() == "text")
+	if (m_owner->GetMesh().Get_Is_Moved() || Graphic::GetGraphic()->get_need_update_sprite() || m_owner->Get_Tag() == "arena")
 	{
 		matrix3 mat_ndc = Graphic::GetGraphic()->Get_View().Get_Camera_View().GetCameraToNDCTransform();
 		mat_ndc *= Graphic::GetGraphic()->Get_View().Get_Camera().WorldToCamera();

@@ -64,17 +64,16 @@ private:
 
     Object** player_third_temp;
     Object** player_fourth_temp;
-
-    int player_sec_life = 3;
-    int player_first_life = 3;
-
-    int player_third_life = 3;
-    int player_fourth_life = 3;
+	
+	int player_first_life = 5;
+    int player_sec_life = 5;
+    int player_third_life = 5;
+    int player_fourth_life = 5;
 
     Object** item_save;
 	Object** item_save_hp;
     float item_respawn_timer = 0.0f;
-    int item_num = 5;
+    int item_num = 10;
 
 	PLAYER_UI* first_ui;
 	PLAYER_UI* second_ui;

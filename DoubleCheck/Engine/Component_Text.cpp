@@ -14,7 +14,7 @@ TextComp::TextComp(Object* obj, std::wstring text_string, Color4f color, vector2
 		std::cout << "Failed to Load Font!" <<std::endl;
 	}
 	Mesh square;
-	square = MESH::create_box(size.x, { 100,100,100,255 });
+	square = MESH::create_rectangle(size.x, size.y, { 100,100,100,255 });
 	lineVertices.InitializeWithMeshAndLayout(square, SHADER::textured_vertex_layout());
 	m_owner = obj;
 	m_owner->SetMesh(square);
@@ -62,12 +62,14 @@ void TextComp::Update(float dt)
 	//textMaterial.floatUniforms["time"] = seconds;
 
 
-	const float left = -width * 0.5f + m_owner->GetTransform().GetTranslation().x;
-	const float top = height * 0.5f - m_owner->GetTransform().GetTranslation().y;
+	const float left = /*-width * 0.5f + */m_owner->GetTransform().GetTranslation().x;
+	const float top = /*height * 0.5f - */m_owner->GetTransform().GetTranslation().y;
 
+	lineVertices.UpdateVerticesFromMesh(m_owner->GetMesh());
 
-	textMaterial.matrix3Uniforms[SHADER::Uniform_ToNDC] =
+	textMaterial.matrix3Uniforms["to_ndc"] =
 		view.GetCameraToNDCTransform() * MATRIX3::build_translation(left, top);
+	
 	for (auto& vertices_texture_pair : text.GetVerticesWithMatchingTextures())
 	{
 		Vertices& text_vertices = *vertices_texture_pair.first;
