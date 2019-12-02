@@ -100,9 +100,6 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Player_UI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Referee.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -135,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_UI.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

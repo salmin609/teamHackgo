@@ -137,8 +137,8 @@ void Collision::CircleArenaCollision()
 void Collision::SquareArenaCollision()
 {
     const unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
-    const float line_max_point = 1000;
-    const float line_min_point = -1000;
+    const float line_max_point = 980;
+    const float line_min_point = -980;
     float angle = 0;
     float angle2 = 0;
     for (unsigned int i = 0; i < object_position_size; ++i)
