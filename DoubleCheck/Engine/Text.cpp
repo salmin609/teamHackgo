@@ -15,15 +15,14 @@ Text::Text(std::wstring text_string, const BitmapFont& text_font) noexcept
 
 std::vector<std::pair<Vertices*, const Texture*>> Text::GetVerticesWithMatchingTextures() const noexcept
 {
+	BuildNewMeshesIfNeeded();
 	std::vector<std::pair<Vertices*, const Texture*>> newMesh;
-
-	for (int i = 0; i < font->GetInformation().pagesCount; i++)
+	for (int i = 0; i < vertices.size(); ++i)/*font->GetInformation().pagesCount*/
 	{
-		//if()
+		if (vertices.at(i).GetVerticesCount() != 0)
 		{
-			std::pair pairVerticesTexture(&vertices.at(i), &font->GetTexture(i));
-			newMesh.push_back(pairVerticesTexture);
-		}		
+			newMesh.push_back(std::pair<Vertices*, const Texture*>{&vertices.at(i), & font->GetTexture(i)});
+		}
 	}
 	return newMesh;
 }
@@ -39,7 +38,6 @@ void Text::SetString(const std::wstring& text_string) noexcept
 	{
 		string = text_string;
 		needNewMeshes = true;
-		BuildNewMeshesIfNeeded();
 	}
 }
 
@@ -50,13 +48,14 @@ const BitmapFont* Text::GetFont() const noexcept
 
 void Text::SetFont(const BitmapFont& text_font) noexcept
 {
-	vertices.clear();
 	font = &text_font;
+	InitializeWithEmptyVertices();
 	needNewMeshes = true;
 }
 
 void Text::InitializeWithEmptyVertices() const noexcept
 {
+	vertices.clear();
 	Mesh mesh;
 	for (int i = 0; i < font->GetInformation().pagesCount; i++)
 	{
@@ -67,109 +66,88 @@ void Text::InitializeWithEmptyVertices() const noexcept
 
 void Text::BuildNewMeshesIfNeeded() const noexcept
 {
-	if (needNewMeshes)
+	if (needNewMeshes == false)
 	{
-		Mesh                  png0;
-		Mesh                  png2;
-		Mesh                  png3;
-		BitmapFont::character characterNumber;
-		std::pair<int, int>   cursor = { 0, 0 };
+		return;
+	}
 
-		for (int count = 0; count < string.size(); count++)
+	const BitmapFont::information& information = font->GetInformation();
+
+	for (unsigned short i = 0; i < information.pagesCount; ++i)
+	{
+		Mesh     png;
+		Vertices vertice;
+		vector2  cursor{ 0.f };
+		for (const auto& element : string)
 		{
-			float left = static_cast<float>(cursor.first) + font->GetCharacter(string[count]).xOffset;
-			float right = left + font->GetCharacter(string[count]).width;
-			float bottom =
-				(font->GetCharacter(string[count]).yOffset + font->GetCharacter(string[count]).height) * -1 +
-				font->GetLineHeight() + static_cast<float>(cursor.second);
-			float top = bottom + font->GetCharacter(string[count]).height;
-			float left_up_point = font->GetCharacter(string[count]).x;
-			float left_Uvec = left_up_point / font->GetInformation().imageWidth;
-			float right_up_point = left_up_point + font->GetCharacter(string[count]).width;
-			float right_Uvec = right_up_point / font->GetInformation().imageWidth;
-			float left_down_point = font->GetCharacter(string[count]).y;
-			float top_Vvec = left_down_point / font->GetInformation().imageHeight;
-			float right_down_point = left_down_point + font->GetCharacter(string[count]).height;
-			float bottom_Vvec = right_down_point / font->GetInformation().imageHeight;
-			characterNumber = font->GetCharacter(string[static_cast<wchar_t>(count)]);
+			const BitmapFont::character& character = font->GetCharacter(element);
+			png.SetPointListType(PointListPattern::Triangles);
 
-			if (string[count] == L' ')
+			if (element == L' ')
 			{
-				cursor.first += font->GetCharacter(string[count]).xAdvance;
+				if (font->HasCharacter(wchar_t(' ')))
+				{
+					cursor.x += character.xAdvance;
+				}
+				else
+				{
+					cursor.x += information.fontSize;
+				}
 			}
-			else if (string[count] == L'\t')
+			else if (element == L'\t')
 			{
-				cursor.first += 4 * font->GetCharacter(string[count]).xAdvance;
+				if (font->HasCharacter(wchar_t(' ')))
+				{
+					cursor.x = 4.f * character.xAdvance;
+				}
+				else
+				{
+					cursor.x = 4.f * information.fontSize;
+				}
 			}
-			else if (string[count] == L'\n')
+			else if (element == L'\n')
 			{
-				cursor.first = 0;
-				cursor.second -= font->GetLineHeight();
+				cursor.x = 0;
+				cursor.y -= information.lineHeight;
+			}
+			else if (character.page == i)
+			{
+
+				const float left = character.xOffset + cursor.x;
+				const float bottom = (character.yOffset + character.height) * -1 + font->GetLineHeight() + cursor.y;
+				const float right = left + character.width;
+				const float top = bottom + character.height;
+
+				const float left_u = static_cast<float>(character.x) / information.imageWidth;
+				const float right_u = static_cast<float>(character.x + character.width) / information.imageWidth;
+				const float top_v = static_cast<float>(character.y) / information.imageHeight;
+				const float bottom_v = static_cast<float>(character.y + character.height) / information.imageHeight;
+
+				png.AddPoint(vector2{ left, top });
+				png.AddTextureCoordinate(vector2{ left_u, top_v });
+				png.AddPoint(vector2{ right, top });
+				png.AddTextureCoordinate(vector2{ right_u, top_v });
+				png.AddPoint(vector2{ left, bottom });
+				png.AddTextureCoordinate(vector2{ left_u, bottom_v });
+
+				png.AddPoint(vector2{ right, top });
+				png.AddTextureCoordinate(vector2{ right_u, top_v });
+				png.AddPoint(vector2{ left, bottom });
+				png.AddTextureCoordinate(vector2{ left_u, bottom_v });
+				png.AddPoint(vector2{ right, bottom });
+				png.AddTextureCoordinate(vector2{ right_u, bottom_v });
+
+				cursor.x += character.xAdvance;
 			}
 			else
 			{
-				if (characterNumber.page == 0)
-				{
-					png0.SetPointListType(PointListPattern::Triangles);
-
-					png0.AddPoint(vector2{ left, top });
-					png0.AddTextureCoordinate(vector2{ left_Uvec, top_Vvec });
-					png0.AddPoint(vector2{ left, bottom });
-					png0.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png0.AddPoint(vector2{ right, top });
-					png0.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png0.AddPoint(vector2{ right, top });
-					png0.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png0.AddPoint(vector2{ left, bottom });
-					png0.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png0.AddPoint(vector2{ right, bottom });
-					png0.AddTextureCoordinate(vector2{ right_Uvec, bottom_Vvec });
-
-					vertices[characterNumber.page].InitializeWithMeshAndLayout(png0, SHADER::textured_vertex_layout());
-				}
-				if (characterNumber.page == 1)
-				{
-					png2.SetPointListType(PointListPattern::Triangles);
-
-					png2.AddPoint(vector2{ left, top });
-					png2.AddTextureCoordinate(vector2{ left_Uvec, top_Vvec });
-					png2.AddPoint(vector2{ left, bottom });
-					png2.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png2.AddPoint(vector2{ right, top });
-					png2.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png2.AddPoint(vector2{ right, top });
-					png2.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png2.AddPoint(vector2{ left, bottom });
-					png2.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png2.AddPoint(vector2{ right, bottom });
-					png2.AddTextureCoordinate(vector2{ right_Uvec, bottom_Vvec });
-
-					vertices[characterNumber.page].InitializeWithMeshAndLayout(png2, SHADER::textured_vertex_layout());
-				}
-				if (characterNumber.page == 2)
-				{
-					png3.SetPointListType(PointListPattern::Triangles);
-
-					png3.AddPoint(vector2{ left, top });
-					png3.AddTextureCoordinate(vector2{ left_Uvec, top_Vvec });
-					png3.AddPoint(vector2{ left, bottom });
-					png3.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png3.AddPoint(vector2{ right, top });
-					png3.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png3.AddPoint(vector2{ right, top });
-					png3.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png3.AddPoint(vector2{ left, bottom });
-					png3.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png3.AddPoint(vector2{ right, bottom });
-					png3.AddTextureCoordinate(vector2{ right_Uvec, bottom_Vvec });
-
-					vertices[characterNumber.page].InitializeWithMeshAndLayout(png3,
-						SHADER::textured_vertex_layout());
-				}
-				cursor.first += font->GetCharacter(string[count]).xAdvance;
+				cursor.x += character.xAdvance;
 			}
 		}
+		vertice.InitializeWithMeshAndLayout(png, SHADER::textured_vertex_layout());
+		vertices.insert_or_assign(i, std::move(vertice));
 	}
+	needNewMeshes = false;
 }
 
 
