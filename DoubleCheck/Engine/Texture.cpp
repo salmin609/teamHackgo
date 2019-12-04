@@ -12,7 +12,6 @@
 bool Texture::LoadFromPNG(const std::filesystem::path& file_path) noexcept
 {
 	std::ifstream f;
-	//std::cout << file_path.c_str() << std::endl;
 	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try
 	{

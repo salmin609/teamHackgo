@@ -36,8 +36,16 @@ bool BitmapFont::LoadFromFile(const std::filesystem::path& filename)
 				{
 					pageTextures.push_back(std::move(texture));
 				}
+				else
+				{
+					return false;
+				}
 			}
 			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	catch (std::system_error & e)

@@ -18,10 +18,10 @@ class TextComp : public Component
 {
 public:
 	TextComp();
-	TextComp(Object* obj, std::wstring text_string, Color4f color, vector2 size);
+	TextComp(Object* obj, std::wstring text_string, Color4f color, vector2 size, BitmapFont& font);
 	void Init(Object* obj) override;
 	void Update(float dt) override;
-
+	Text& GetText();
 private:
 	BitmapFont      font{};
 	Text text{};
