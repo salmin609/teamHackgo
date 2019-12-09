@@ -77,6 +77,7 @@ void Input::Triggered_Reset()
     key_triggered.reset();
     mouse_triggered.reset();
     mouse_double_clicked.reset();
+	mouse_released.reset();
 }
 
 void Input::Set_Keyboard_Input(int key, int action)

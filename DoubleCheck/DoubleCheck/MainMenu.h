@@ -1,28 +1,29 @@
 #pragma once
 #include "State.h"
 #include "GLFW/glfw3.h"
+#include "vector2.hpp"
 
-//#include <string>
-//#include <iostream>
-//#include "Input.h"
-//#include <GLFW/glfw3.h>
 class Object;
 
 class MainMenu : public State
 {
 public:
-	MainMenu()
-    {
-        current_state = GameState::Menu;
-    }
+	MainMenu() :State()
+	{
+		current_state = GameState::Menu;
+	}
 
 	virtual void Load();
 	virtual void Update(float dt);
-    virtual void UnLoad()
-    {
-        next_level = {};
-        is_next = false;
-    }
+	virtual void Clear();
+	virtual void UnLoad()
+	{
+		next_level = {};
+		is_next = false;
+	}
+	bool MouseCollision(vector2 position_max, vector2 position_min, vector2 mouse_pos);
 private:
-	Object* text;
+	Object* button;
+	Object* collision_button;
+	//std::unordered_map<std::string, std::shared_ptr<State>> states;
 };

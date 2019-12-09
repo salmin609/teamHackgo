@@ -28,9 +28,6 @@ public:
     {
         return objects;
     }
-   
-
-
 private:
     static ObjectManager* object_manager;
     std::vector<std::shared_ptr<Object>> objects{};

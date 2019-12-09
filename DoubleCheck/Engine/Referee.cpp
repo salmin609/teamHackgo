@@ -8,8 +8,11 @@
 #include "Player_Ui.h"
 
 
-Referee* Referee::referee = nullptr;
+#include "StateManager.h"
+#include "State.h"
 
+Referee* Referee::referee = nullptr;
+StateManager* state_manager = nullptr;
 
 Referee* Referee::Get_Referee()
 {
@@ -158,6 +161,10 @@ void Referee::Update(float dt)
             }
         }
     }
+	/*if (player_first_life == 1 && player_sec_life == 0 && player_third_life == 0 && player_fourth_life == 0)
+	{
+		StateManager::GetStateManager()->Get_States().
+	}*/
     item_respawn_timer -= dt;
     if(item_respawn_timer <= 0.0f && item_num > 0)
     {

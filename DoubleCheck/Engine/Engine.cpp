@@ -9,6 +9,7 @@
 #include "StateManager.h"
 #include "../DoubleCheck/MainMenu.h"
 #include "../DoubleCheck/Level1.h"
+#include "../DoubleCheck/End.h"
 #include "Component_Sprite.h"
 #include "Component_Text.h"
 #include "Component_Transform.h"
@@ -21,8 +22,6 @@
 #include "Component_Enemy.h"
 #include "BitmapFont.hpp"
 #include "Shader.hpp"
-
-
 #include <thread>
 
 Sound sound;
@@ -79,12 +78,10 @@ void Engine::Init()
 
 	state_manager->AddState("Menu", new MainMenu);
 	state_manager->AddState("Level1", new Level1);
-
-	StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+	//state_manager->AddState("End", new End);
+	//StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
 
 	game_timer.Reset();
-
-
 }
 
 
@@ -96,17 +93,14 @@ void Engine::Update()
     app_->Update(m_dt);
     state_manager->Update(m_dt);
     graphic->Update(m_dt);
-
     object_manager->Update(m_dt);
-
     msg_manager->Update(m_dt);
-
-    StateManager::GetStateManager()->Get_States().at("Level1").get()->Update(m_dt);
-
     //Reset();
     
 	if (input.Is_Key_Triggered(GLFW_KEY_1))
+	{
 		state_manager->is_pause = !state_manager->is_pause;
+	}
 	if (input.Is_Key_Triggered(GLFW_KEY_N))
 	{
 		Clear();
