@@ -25,6 +25,8 @@ void Level1::Load()
     object_manager = ObjectManager::GetObjectManager();
 	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
 
+	
+	
 	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
@@ -156,12 +158,33 @@ void Level1::Load()
     ObjectManager::GetObjectManager()->AddObject(player_forth);
 
     referee->AddComponent(new Collision());
-    //text = new Object();
-    //text->AddComponent(new TextComp(text, L"Hitddfddffdfdffd!", { 255,0,0,255 }, { 50,50 }));
-    //text->SetTranslation({ 200,200 });;
-    //text->Set_Name("red_text");
-    //text->Set_Tag("text");
 
+	if (!font.LoadFromFile(L"../assets/malgungothic.fnt"))
+	{
+		std::cout << "Failed to Load Font!" << std::endl;
+	}
+	
+    text = new Object();
+	text->SetTranslation({ 200,0 });
+    text->AddComponent(new TextComp(text, L"fuck sangmin! fuck suhwan! fuck everybody!", { 1,0,0,1 }, { 200,200 }, font));
+    text->Set_Name("red_text");
+    text->Set_Tag("text");
+	ObjectManager::GetObjectManager()->AddObject(text);
+
+	Object* text_2 = new Object();
+	text_2->SetTranslation({ 200,-200 });
+	text_2->AddComponent(new TextComp(text_2, L"18181818", { 1,0,0,1 }, { 100,100 }, font));
+	text_2->Set_Name("red_text");
+	text_2->Set_Tag("text");
+	ObjectManager::GetObjectManager()->AddObject(text_2);
+
+	Object* text_3 = new Object();
+	text_3->SetTranslation({ 200,-400 });
+	text_3->AddComponent(new TextComp(text_3, L"JOT GAT EUN TEXT HAS BEEN FIXED", { 1,0,0,1 }, { 150,150 }, font));
+	text_3->Set_Name("red_text");
+	text_3->Set_Tag("text");
+	ObjectManager::GetObjectManager()->AddObject(text_3);
+	
 	player_first_ui = new PLAYER_UI();
 	player_first_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
 	player_first_ui->Set_Name("first_ui");

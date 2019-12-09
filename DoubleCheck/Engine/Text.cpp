@@ -15,15 +15,14 @@ Text::Text(std::wstring text_string, const BitmapFont& text_font) noexcept
 
 std::vector<std::pair<Vertices*, const Texture*>> Text::GetVerticesWithMatchingTextures() const noexcept
 {
+	BuildNewMeshesIfNeeded();
 	std::vector<std::pair<Vertices*, const Texture*>> newMesh;
-
-	for (int i = 0; i < font->GetInformation().pagesCount; i++)
+	for (int i = 0; i < vertices.size(); ++i)/*font->GetInformation().pagesCount*/
 	{
-		//if()
+		if (vertices.at(i).GetVerticesCount() != 0)
 		{
-			std::pair pairVerticesTexture(&vertices.at(i), &font->GetTexture(i));
-			newMesh.push_back(pairVerticesTexture);
-		}		
+			newMesh.push_back(std::pair<Vertices*, const Texture*>{&vertices.at(i), & font->GetTexture(i)});
+		}
 	}
 	return newMesh;
 }
@@ -39,7 +38,6 @@ void Text::SetString(const std::wstring& text_string) noexcept
 	{
 		string = text_string;
 		needNewMeshes = true;
-		BuildNewMeshesIfNeeded();
 	}
 }
 
@@ -50,13 +48,14 @@ const BitmapFont* Text::GetFont() const noexcept
 
 void Text::SetFont(const BitmapFont& text_font) noexcept
 {
-	vertices.clear();
 	font = &text_font;
+	InitializeWithEmptyVertices();
 	needNewMeshes = true;
 }
 
 void Text::InitializeWithEmptyVertices() const noexcept
 {
+	vertices.clear();
 	Mesh mesh;
 	for (int i = 0; i < font->GetInformation().pagesCount; i++)
 	{
@@ -67,109 +66,77 @@ void Text::InitializeWithEmptyVertices() const noexcept
 
 void Text::BuildNewMeshesIfNeeded() const noexcept
 {
-	if (needNewMeshes)
+	if (!needNewMeshes)
+		return;
+
+	const BitmapFont::information& information = font->GetInformation();
+
+	for (int i = 0; i < information.pagesCount; ++i)
 	{
-		Mesh                  png0;
-		Mesh                  png2;
-		Mesh                  png3;
-		BitmapFont::character characterNumber;
-		std::pair<int, int>   cursor = { 0, 0 };
-
-		for (int count = 0; count < string.size(); count++)
+		Mesh     new_mesh;
+		Vertices vertice;
+		std::pair<int, int>  cursor{ 0.0f , 0.0f };
+		for (const auto& content : string)
 		{
-			float left = static_cast<float>(cursor.first) + font->GetCharacter(string[count]).xOffset;
-			float right = left + font->GetCharacter(string[count]).width;
-			float bottom =
-				(font->GetCharacter(string[count]).yOffset + font->GetCharacter(string[count]).height) * -1 +
-				font->GetLineHeight() + static_cast<float>(cursor.second);
-			float top = bottom + font->GetCharacter(string[count]).height;
-			float left_up_point = font->GetCharacter(string[count]).x;
-			float left_Uvec = left_up_point / font->GetInformation().imageWidth;
-			float right_up_point = left_up_point + font->GetCharacter(string[count]).width;
-			float right_Uvec = right_up_point / font->GetInformation().imageWidth;
-			float left_down_point = font->GetCharacter(string[count]).y;
-			float top_Vvec = left_down_point / font->GetInformation().imageHeight;
-			float right_down_point = left_down_point + font->GetCharacter(string[count]).height;
-			float bottom_Vvec = right_down_point / font->GetInformation().imageHeight;
-			characterNumber = font->GetCharacter(string[static_cast<wchar_t>(count)]);
+			const BitmapFont::character& character = font->GetCharacter(content);
+			new_mesh.SetPointListType(PointListPattern::Triangles);
+			if (character.page == i)
+			{
 
-			if (string[count] == L' ')
-			{
-				cursor.first += font->GetCharacter(string[count]).xAdvance;
+				float left = character.xOffset + cursor.first;
+				float bottom = (character.yOffset + character.height) * -1 + font->GetLineHeight() + cursor.second;
+				float right = left + character.width;
+				float top = bottom + character.height;
+
+				float left_u_vec = static_cast<float>(character.x) / information.imageWidth;
+				float right_u_vec = static_cast<float>(character.x + character.width) / information.imageWidth;
+				float top_v_vec = static_cast<float>(character.y) / information.imageHeight;
+				float bottom_v_vec = static_cast<float>(character.y + character.height) / information.imageHeight;
+
+				new_mesh.AddPoint(vector2{ left, top });
+				new_mesh.AddPoint(vector2{ right, top });
+				new_mesh.AddPoint(vector2{ left, bottom });
+				new_mesh.AddPoint(vector2{ right, top });
+				new_mesh.AddPoint(vector2{ left, bottom });
+				new_mesh.AddPoint(vector2{ right, bottom });
+
+				new_mesh.AddTextureCoordinate(vector2{ left_u_vec, top_v_vec });
+				new_mesh.AddTextureCoordinate(vector2{ right_u_vec, top_v_vec });
+				new_mesh.AddTextureCoordinate(vector2{ left_u_vec, bottom_v_vec });
+				new_mesh.AddTextureCoordinate(vector2{ right_u_vec, top_v_vec });
+				new_mesh.AddTextureCoordinate(vector2{ left_u_vec, bottom_v_vec });
+				new_mesh.AddTextureCoordinate(vector2{ right_u_vec, bottom_v_vec });
+
+				cursor.first += character.xAdvance;
 			}
-			else if (string[count] == L'\t')
+
+			else if (content == L' ')
 			{
-				cursor.first += 4 * font->GetCharacter(string[count]).xAdvance;
+				if (font->HasCharacter(wchar_t(' ')))
+				{
+					cursor.first += character.xAdvance;
+				}
+				else
+				{
+					cursor.first += information.fontSize;
+				}
 			}
-			else if (string[count] == L'\n')
+
+			else if (content == L'\n')
 			{
-				cursor.first = 0;
-				cursor.second -= font->GetLineHeight();
+				cursor.first = 0.0f;
+				cursor.second -= information.lineHeight;
 			}
+
 			else
 			{
-				if (characterNumber.page == 0)
-				{
-					png0.SetPointListType(PointListPattern::Triangles);
-
-					png0.AddPoint(vector2{ left, top });
-					png0.AddTextureCoordinate(vector2{ left_Uvec, top_Vvec });
-					png0.AddPoint(vector2{ left, bottom });
-					png0.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png0.AddPoint(vector2{ right, top });
-					png0.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png0.AddPoint(vector2{ right, top });
-					png0.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png0.AddPoint(vector2{ left, bottom });
-					png0.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png0.AddPoint(vector2{ right, bottom });
-					png0.AddTextureCoordinate(vector2{ right_Uvec, bottom_Vvec });
-
-					vertices[characterNumber.page].InitializeWithMeshAndLayout(png0, SHADER::textured_vertex_layout());
-				}
-				if (characterNumber.page == 1)
-				{
-					png2.SetPointListType(PointListPattern::Triangles);
-
-					png2.AddPoint(vector2{ left, top });
-					png2.AddTextureCoordinate(vector2{ left_Uvec, top_Vvec });
-					png2.AddPoint(vector2{ left, bottom });
-					png2.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png2.AddPoint(vector2{ right, top });
-					png2.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png2.AddPoint(vector2{ right, top });
-					png2.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png2.AddPoint(vector2{ left, bottom });
-					png2.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png2.AddPoint(vector2{ right, bottom });
-					png2.AddTextureCoordinate(vector2{ right_Uvec, bottom_Vvec });
-
-					vertices[characterNumber.page].InitializeWithMeshAndLayout(png2, SHADER::textured_vertex_layout());
-				}
-				if (characterNumber.page == 2)
-				{
-					png3.SetPointListType(PointListPattern::Triangles);
-
-					png3.AddPoint(vector2{ left, top });
-					png3.AddTextureCoordinate(vector2{ left_Uvec, top_Vvec });
-					png3.AddPoint(vector2{ left, bottom });
-					png3.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png3.AddPoint(vector2{ right, top });
-					png3.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png3.AddPoint(vector2{ right, top });
-					png3.AddTextureCoordinate(vector2{ right_Uvec, top_Vvec });
-					png3.AddPoint(vector2{ left, bottom });
-					png3.AddTextureCoordinate(vector2{ left_Uvec, bottom_Vvec });
-					png3.AddPoint(vector2{ right, bottom });
-					png3.AddTextureCoordinate(vector2{ right_Uvec, bottom_Vvec });
-
-					vertices[characterNumber.page].InitializeWithMeshAndLayout(png3,
-						SHADER::textured_vertex_layout());
-				}
-				cursor.first += font->GetCharacter(string[count]).xAdvance;
+				cursor.first += character.xAdvance;
 			}
 		}
+		vertice.InitializeWithMeshAndLayout(new_mesh, SHADER::textured_vertex_layout());
+		vertices.insert_or_assign(i, std::move(vertice));
 	}
+	needNewMeshes = false;
 }
 
 

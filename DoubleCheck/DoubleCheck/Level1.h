@@ -6,6 +6,7 @@
 #include "ObjectManager.h"
 #include "Physics.h"
 #include "Common_Header.h"
+#include "BitmapFont.hpp"
 //#include "Component_Text.h"
 
 class PLAYER_UI;
@@ -49,5 +50,6 @@ private:
 	PLAYER_UI* player_second_ui;
 	PLAYER_UI* player_third_ui;
 	PLAYER_UI* player_fourth_ui;
-	
+
+	BitmapFont      font{};
 };

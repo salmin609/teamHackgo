@@ -1,4 +1,4 @@
-#include "Component_Sprite.h"
+ #include "Component_Sprite.h"
 #include "angles.hpp"
 #include "Mesh.hpp"
 #include <GL/glew.h>
@@ -79,15 +79,10 @@ bool Sprite::Can_Load_To_Texture(Texture& texture, const char* file_path)
 	const bool is_okay = texture.LoadFromPNG(file_path);
 	if (!is_okay)
 	{
-		std::cerr << "Failed to load \"" << file_path << "\"\n";
+		//std::cerr << "Failed to load \"" << file_path << "\"\n";
 	}
 	return is_okay;
 }
-
-//void Sprite::Ckeck_Enemy(Object* obj)
-//{
-//	
-//}
 
 void Sprite::Init(Object* obj)
 {
@@ -97,11 +92,6 @@ void Sprite::Init(Object* obj)
 	debug_material.shader = &(SHADER::solid_color());
 	m_owner->Set_Center({ m_owner->GetTransform().GetTranslation().x , m_owner->GetTransform().GetTranslation().y });
 
-	//Mesh debug_mesh;
-	//debug_mesh = MESH::create_wire_circle(70, { 255,0,0,255 });
-	//debug_shape.InitializeWithMeshAndLayout(debug_mesh, SHADER::solid_color_vertex_layout());
-
-	//m_owner->Set_Debug_Mesh(debug_mesh);
 }
 
 Sprite::Sprite(Object* obj, bool need_debug_drawing)
@@ -128,7 +118,7 @@ Sprite::Sprite(Object* obj, const char* staticSpritePath, vector2 position, bool
 	material.shader = &(SHADER::textured());
 	if (!Can_Load_To_Texture(texture, path))
 	{
-		std::cout << "fail to load texture" << std::endl;
+		//std::cout << "fail to load texture" << std::endl;
 	}
 	texture.SelectTextureForSlot(texture);
 	material.textureUniforms["texture_to_sample"] = { &(texture) };
@@ -170,7 +160,7 @@ Sprite::Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int f
 	material.shader = &(SHADER::textured());
 	if (!Can_Load_To_Texture(texture, path))
 	{
-		std::cout << "fail to load texture" << std::endl;
+		//std::cout << "fail to load texture" << std::endl;
 	}
 	texture.SelectTextureForSlot(texture);
 	material.textureUniforms["texture_to_sample"] = { &(texture) };
