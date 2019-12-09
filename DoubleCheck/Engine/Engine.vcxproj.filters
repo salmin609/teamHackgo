@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Headers</Filter>
-    </ClCompile>
     <ClCompile Include="Component_Collision.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -135,6 +132,12 @@
     </ClCompile>
     <ClCompile Include="Player_UI.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Damage.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +302,9 @@
     </ClInclude>
     <ClInclude Include="Engine.hpp">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Damage.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

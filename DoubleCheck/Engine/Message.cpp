@@ -10,10 +10,6 @@
 
 std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 {
-	//(+,+)
-	//(+,+)
-	//(-,-)
-	//(-,-)
 	Physics* target_physics = target.GetComponentByTemplate<Physics>();
 	Physics* from_physics = from.GetComponentByTemplate<Physics>();
 	vector2 target_pos = target.GetTransform().GetTranslation();
@@ -188,7 +184,6 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 
 		return std::pair<float, float> {target_dmg, from_dmg};
 	}
-
 }
 
 void Message::Init()

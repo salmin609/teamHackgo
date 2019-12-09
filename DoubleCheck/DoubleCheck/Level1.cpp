@@ -169,26 +169,12 @@ void Level1::Load()
 	}
 	
     text = new Object();
-	text->SetTranslation({ 200,0 });
-    text->AddComponent(new TextComp(text, L"fuck sangmin! fuck suhwan! fuck everybody!", { 1,0,0,1 }, { 200,200 }, font));
+	text->SetTranslation({ 0,500 });
+    text->AddComponent(new TextComp(text, L"Text", { 0,0,0,1 }, { 200,200 }, font));
     text->Set_Name("red_text");
     text->Set_Tag("text");
 	ObjectManager::GetObjectManager()->AddObject(text);
 
-	Object* text_2 = new Object();
-	text_2->SetTranslation({ 200,-200 });
-	text_2->AddComponent(new TextComp(text_2, L"18181818", { 1,0,0,1 }, { 100,100 }, font));
-	text_2->Set_Name("red_text");
-	text_2->Set_Tag("text");
-	ObjectManager::GetObjectManager()->AddObject(text_2);
-
-	Object* text_3 = new Object();
-	text_3->SetTranslation({ 200,-400 });
-	text_3->AddComponent(new TextComp(text_3, L"JOT GAT EUN TEXT HAS BEEN FIXED", { 1,0,0,1 }, { 150,150 }, font));
-	text_3->Set_Name("red_text");
-	text_3->Set_Tag("text");
-	ObjectManager::GetObjectManager()->AddObject(text_3);
-	
 	player_first_ui = new PLAYER_UI();
 	player_first_ui->GetTransform().GetScale_Reference() = { 3.0f,3.0f };
 	player_first_ui->Set_Name("first_ui");

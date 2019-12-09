@@ -50,9 +50,6 @@ private:
 	PLAYER_UI* player_second_ui;
 	PLAYER_UI* player_third_ui;
 	PLAYER_UI* player_fourth_ui;
-<<<<<<< HEAD
-=======
 
 	BitmapFont      font{};
->>>>>>> master
 };
