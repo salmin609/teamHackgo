@@ -3,7 +3,7 @@
 
 enum class GameState
 {
-    Menu, Game, Credit, None
+    Menu, Game, /*End,*/ Credit, None
 };
 
 class State
@@ -28,6 +28,24 @@ public:
     {
         return current_state;
     }
+
+	void Set_is_next(bool set_is_next)
+	{
+		is_next = set_is_next;
+	}
+	bool Get_is_next()
+	{
+		return is_next;
+	}
+
+	void Set_next_level(std::string set_next_level)
+	{
+		next_level = set_next_level;
+	}
+	std::string Get_next_level()
+	{
+		return next_level;
+	}
 protected:
     std::string next_level;
     bool is_next = false;

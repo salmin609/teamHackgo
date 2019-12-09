@@ -163,7 +163,7 @@ void Application::Update(float dt)
 	if (save_dt >= 1.0f)
 	{
 		std::stringstream title;
-		title << "sangministhebest" << " " << " [" << FPS_frame << " FPS]";
+		title << "DoubleCheck" << " " << " [" << FPS_frame << " FPS]";
 		glfwSetWindowTitle(window, title.str().c_str());
 		FPS_frame = 0;
 		save_dt = 0;
@@ -225,7 +225,7 @@ void Application::Imgui_Update()
 	static vector2 origin_mouse_pos;
 	//if (show_demo_window)
 	//    ImGui::ShowDemoWindow(&show_demo_window);
-	ImGui::Begin("salmin gui");
+	ImGui::Begin("IMGUI");
 
 	for (int i = 0; i < ObjectManager::GetObjectManager()->GetObjectManagerContainer().size(); i++)
 	{
@@ -233,7 +233,7 @@ void Application::Imgui_Update()
 		this_obj->Get_Is_Debugmode();
 		if (ImGui::TreeNode(this_obj->Get_Name().c_str()))
 		{
-			ImGui::TextWrapped("Salmin UI");
+			ImGui::TextWrapped("IMGUI");
 			ImGui::SliderFloat("translation_x", &this_obj->GetTransform().GetTranslation_Reference().x, -1.0f, 150.0f);
 			ImGui::SliderFloat("translation_y", &this_obj->GetTransform().GetTranslation_Reference().y, -1.0f, 1.0f);
 			if(ImGui::SliderFloat("scale_x", &this_obj->GetTransform().GetScale_Reference().x, -2.0f, 2.0f))
@@ -391,7 +391,7 @@ void Application::Imgui_Update()
 			if (which_one_to_make == names[0])
 			{
 				new_obj->Set_Name(names[0]);
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/dicksean.png"));
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/dicksean.png", {60,60}));
 			}
 			else if (which_one_to_make == names[1])
 			{
