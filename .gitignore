@@ -242,3 +242,9 @@ DoubleCheck/x64/Release/DoubleCheck.ipdb
 DoubleCheck/x64/Release/Engine.lib
 
 DoubleCheck/x64/Release/DoubleCheck.iobj
+
+*.lib
+
+*.ipdb
+
+*.iobj
