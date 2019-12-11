@@ -33,4 +33,6 @@ private:
 	int height = 720;
 	vector2 text_position;
 	vector2 text_size;
+	float timer = 0.1f;
+	Color4f color;
 };

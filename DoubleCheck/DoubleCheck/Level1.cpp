@@ -128,7 +128,7 @@ void Level1::Load()
 	fileOut << player->GetTransform().GetScale_Reference().y << endl;
 	player->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 	fileOut.close();
-    player->GetTransform().SetScale({ 1, 1 });
+    player->GetTransform().SetScale({ 3, 3 });
 
     player_sec = new Object();
     player_sec->Set_Name("second");
@@ -137,6 +137,7 @@ void Level1::Load()
 	player_sec->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
     player_sec->AddComponent(new Sprite(player_sec, "../Sprite/pen_red.png", {400,-400}));
     player_sec->AddComponent(new Physics());
+	player_sec->GetTransform().SetScale({ 3.f,3.f });
     ObjectManager::GetObjectManager()->AddObject(player_sec);
 
     player_third = new Object();
@@ -146,6 +147,7 @@ void Level1::Load()
     player_third->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
     player_third->AddComponent(new Sprite(player_third, "../Sprite/pen_purple.png", { -400,400 }));
     player_third->AddComponent(new Physics());
+	player_third->GetTransform().SetScale({ 3.f,3.f });
     ObjectManager::GetObjectManager()->AddObject(player_third);
 
     player_forth = new Object();
@@ -155,6 +157,7 @@ void Level1::Load()
     player_forth->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
     player_forth->AddComponent(new Sprite(player_forth, "../Sprite/pen_normal.png", { -400,-400 }));
     player_forth->AddComponent(new Physics());
+	player_forth->GetTransform().SetScale({ 3.f,3.f });
     ObjectManager::GetObjectManager()->AddObject(player_forth);
 
     referee->AddComponent(new Collision());
@@ -166,24 +169,35 @@ void Level1::Load()
 	
     text = new Object();
 	text->SetTranslation({ 200,0 });
-    text->AddComponent(new TextComp(text, L"fuck sangmin! fuck suhwan! fuck everybody!", { 1,0,0,1 }, { 200,200 }, font));
+    text->AddComponent(new TextComp(text, L" ", { 0,1,0,1 }, { 150,150 }, font));
     text->Set_Name("red_text");
     text->Set_Tag("text");
 	ObjectManager::GetObjectManager()->AddObject(text);
+	player->Set_Dmg_Text(text);
 
 	Object* text_2 = new Object();
 	text_2->SetTranslation({ 200,-200 });
-	text_2->AddComponent(new TextComp(text_2, L"18181818", { 1,0,0,1 }, { 100,100 }, font));
-	text_2->Set_Name("red_text");
+	text_2->AddComponent(new TextComp(text_2, L" ", { 1,0,0,1 }, { 150,150 }, font));
+	text_2->Set_Name("green_text");
 	text_2->Set_Tag("text");
 	ObjectManager::GetObjectManager()->AddObject(text_2);
+	player_sec->Set_Dmg_Text(text_2);
 
 	Object* text_3 = new Object();
 	text_3->SetTranslation({ 200,-400 });
-	text_3->AddComponent(new TextComp(text_3, L"JOT GAT EUN TEXT HAS BEEN FIXED", { 1,0,0,1 }, { 150,150 }, font));
-	text_3->Set_Name("red_text");
+	text_3->AddComponent(new TextComp(text_3, L" ", { 0.54,0,1,1 }, { 150,150 }, font));
+	text_3->Set_Name("blue_text");
 	text_3->Set_Tag("text");
 	ObjectManager::GetObjectManager()->AddObject(text_3);
+	player_third->Set_Dmg_Text(text_3);
+
+	Object* text_4 = new Object();
+	text_4->SetTranslation({ 200,-400 });
+	text_4->AddComponent(new TextComp(text_4, L" ", { 0.5,0.5,0.5,1 }, { 150,150 }, font));
+	text_4->Set_Name("yellow_text");
+	text_4->Set_Tag("text");
+	ObjectManager::GetObjectManager()->AddObject(text_4);
+	player_forth->Set_Dmg_Text(text_4);
 	
 	player_first_ui = new PLAYER_UI();
 	player_first_ui->GetTransform().GetScale_Reference() = { 2.0f,2.0f };
@@ -229,6 +243,11 @@ void Level1::Load()
 	Referee::Get_Referee()->Set_Third_Ui(player_third_ui);
 	Referee::Get_Referee()->Set_Fourth_Ui(player_fourth_ui);
 
+	Referee::Get_Referee()->Set_First_Text(text);
+	Referee::Get_Referee()->Set_Second_Text(text_2);
+	Referee::Get_Referee()->Set_Third_Text(text_3);
+	Referee::Get_Referee()->Set_Fourth_Text(text_4);
+	
 	referee->Init();
 }
 

@@ -72,6 +72,10 @@ bool Collision::CircleToCircleCollision()
 				{
 					Object* obj_j = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[j].get();
 
+					if (obj_j->Get_Tag() == "item" && obj_i->Get_Tag() == "item")
+					{
+						continue;
+					}
 					if (obj_j->Get_Tag() == "player" || obj_j->Get_Tag() == "item")
 					{
 						if (obj_j->Get_Need_To_Update())
@@ -80,9 +84,9 @@ bool Collision::CircleToCircleCollision()
 							float obj_j_radius = obj_j->GetTransform().GetScale().x * 30.f;
 							if (i != j)
 							{
-								
+
 								const float distance = sqrt((obj_i_trans.x - obj_j_trans.x) * (obj_i_trans.x - obj_j_trans.x) + (obj_i_trans.y - obj_j_trans.y) * (obj_i_trans.y - obj_j_trans.y));
-								if(distance < obj_i_radius + obj_j_radius)
+								if (distance < obj_i_radius + obj_j_radius)
 								{
 
 									if (obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_j->GetComponentByTemplate<Physics>() != nullptr)
@@ -106,6 +110,7 @@ bool Collision::CircleToCircleCollision()
 						}
 
 					}
+
 				}
 			}
 		}

@@ -46,6 +46,23 @@ public:
 		fourth_ui = ui;
 	}
 
+	void Set_First_Text(Object* ui)
+	{
+		first_text = ui;
+	}
+	void Set_Second_Text(Object* ui)
+	{
+		second_text = ui;
+	}
+	void Set_Third_Text(Object* ui)
+	{
+		third_text = ui;
+	}
+	void Set_Fourth_Text(Object* ui)
+	{
+		fourth_text = ui;
+	}
+
 private:
     Referee(){}
     static Referee* referee;
@@ -79,4 +96,9 @@ private:
 	PLAYER_UI* second_ui;
 	PLAYER_UI* third_ui;
 	PLAYER_UI* fourth_ui;
+
+	Object* first_text;
+	Object* second_text;
+	Object* third_text;
+	Object* fourth_text;
 };

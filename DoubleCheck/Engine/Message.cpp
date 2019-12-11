@@ -7,6 +7,8 @@
 #include "Referee.h"
 #include "Component_Item.h"
 #include "Player_Ui.h"
+#include "Component_Text.h"
+
 
 std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 {
@@ -190,9 +192,11 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 	}
 
 }
+//Object effect[5];
 
 void Message::Init()
 {
+
 }
 
 void Message::Update(float dt)
@@ -200,6 +204,7 @@ void Message::Update(float dt)
 	if (message_name == "attack")
 	{
 		m_target->GetComponentByTemplate<Component_Enemy>()->Decrease_HP(m_from->GetComponentByTemplate<Player>()->Get_Damage());
+		should_delete = true;
 	}
 	else if (message_name == "wall_collision")
 	{
@@ -221,6 +226,7 @@ void Message::Update(float dt)
 				}
 			}
 		}
+		should_delete = true;
 	}
 	if (message_name == "collision")
 	{
@@ -249,7 +255,7 @@ void Message::Update(float dt)
 					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 				}
 			}
-			
+
 		}
 		else if (m_from->Get_Tag() == "item" && m_target->Get_Tag() == "player")
 		{
@@ -282,6 +288,15 @@ void Message::Update(float dt)
 		else
 		{
 			std::pair<float, float> dmg_set = Damaege_Calculation(*m_target, *m_from);
+
+			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(dmg_set.first)));
+			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(dmg_set.second)));
+			m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_target->GetTransform().GetTranslation().x;
+			m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_target->GetTransform().GetTranslation().y;
+
+			m_from->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_from->GetTransform().GetTranslation().x;
+			m_from->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_from->GetTransform().GetTranslation().y;
+			
 			if (m_from->GetComponentByTemplate<Player>() != nullptr)
 			{
 				m_target->Set_Hitted_By(m_from);
@@ -294,12 +309,13 @@ void Message::Update(float dt)
 			Object* target_hp_bar = m_target->Get_Belong_Object_By_Tag("hp_bar");
 			Object* from_hp_bar = m_from->Get_Belong_Object_By_Tag("hp_bar");
 
-			if(target_hp_bar != nullptr || from_hp_bar != nullptr)
+			if (target_hp_bar != nullptr || from_hp_bar != nullptr)
 			{
 				target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.first / 50);
 				from_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(dmg_set.second / 50);
 			}
 		}
+		should_delete = true;
 	}
 	if (message_name == "respawn")
 	{
@@ -319,6 +335,7 @@ void Message::Update(float dt)
 		{
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FOURTH_DIE);
 		}
+		should_delete = true;
 	}
 	if (m_from != nullptr && m_target != nullptr)
 	{
@@ -326,11 +343,36 @@ void Message::Update(float dt)
 
 		Message_Manager::Get_Message_Manager()->Get_Log().push_back(log);
 	}
+	if (message_name == "recover")
+	{
+		if (timer >= 0.f)
+		{
+			timer -= dt;
+
+			std::cout << "check!" << std::endl;
+			if (m_target->GetTransform().GetScale_Reference().x <= 1.f)
+			{
+				m_target->GetTransform().GetScale_Reference().x += dt;
+				m_target->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset() = 0.f;
+				m_target->GetTransform().GetTranslation_Reference().x = m_target->Get_This_Obj_Owner()->GetTransform().GetTranslation().x;
+			}
+
+			if (timer <= 0.f)
+			{
+				should_delete = true;
+			}
+		}
+	}
+	if (message_name == "dash")
+	{
+		should_delete = true;
+	}
 
 
 
+	//std::vector<std::string> check = Message_Manager::Get_Message_Manager()->Get_Log();
 
-	should_delete = true;
+
 }
 
 void Message::Delete()

@@ -44,7 +44,9 @@ void Referee::Init()
         player_first_temp[i]->AddComponent(new Physics(true));
         player_first_temp[i]->Set_Name("first");
         player_first_temp[i]->Set_Tag("player");
+		player_first_temp[i]->SetScale({ 3.f,3.f });
 		player_first_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(first_ui);
+		player_first_temp[i]->Set_Dmg_Text(first_text);
     }
 
     for(int i = 0 ; i < player_sec_life; i++)
@@ -55,7 +57,9 @@ void Referee::Init()
         player_sec_temp[i]->AddComponent(new Physics(true));
         player_sec_temp[i]->Set_Name("second");
         player_sec_temp[i]->Set_Tag("player");
+		player_sec_temp[i]->SetScale({ 3.f,3.f });
 		player_sec_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(second_ui);
+		player_sec_temp[i]->Set_Dmg_Text(second_text);
     }
     for (int i = 0; i < player_third_life; i++)
     {
@@ -65,7 +69,9 @@ void Referee::Init()
         player_third_temp[i]->AddComponent(new Physics(true));
         player_third_temp[i]->Set_Name("third");
         player_third_temp[i]->Set_Tag("player");
+		player_third_temp[i]->SetScale({ 3.f,3.f });
 		player_third_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(third_ui);
+		player_third_temp[i]->Set_Dmg_Text(third_text);
     }
     for (int i = 0; i < player_fourth_life; i++)
     {
@@ -75,7 +81,9 @@ void Referee::Init()
         player_fourth_temp[i]->AddComponent(new Physics(true));
         player_fourth_temp[i]->Set_Name("forth");
         player_fourth_temp[i]->Set_Tag("player");
+		player_fourth_temp[i]->SetScale({ 3.f,3.f });
 		player_fourth_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(fourth_ui);
+		player_fourth_temp[i]->Set_Dmg_Text(fourth_text);
     }
 
 
