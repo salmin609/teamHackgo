@@ -248,3 +248,5 @@ DoubleCheck/x64/Release/DoubleCheck.iobj
 *.ipdb
 
 *.iobj
+
+DoubleCheck/Engine/x64/Release/Engine.tlog/unsuccessfulbuild
