@@ -39,8 +39,7 @@ void MainMenu::Update(float dt)
 		
 		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
 		{
-            sound.volume(4, 8);
-            sound.play(4);
+            sound.play(SOUND::Click);
 			is_next = true;
 			next_level = "Level1";
 			Clear();

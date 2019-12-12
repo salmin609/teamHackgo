@@ -58,11 +58,11 @@ void Engine::Init()
 {
 	sound.initialize();
 	sound.load();
-	sound.play(0);
-	sound.volume(0, 1);
+	sound.play(SOUND::TeamDoubleCheck);
+    sound.volume(SOUND::TeamDoubleCheck, 1);
 	Sleep(2000);
-	sound.play(2);
-	sound.volume(2, 1);
+	sound.play(SOUND::BGM);
+    sound.volume(SOUND::BGM, 1);
 
 	app_ = Application::Get_Application();
 	object_manager = ObjectManager::GetObjectManager();

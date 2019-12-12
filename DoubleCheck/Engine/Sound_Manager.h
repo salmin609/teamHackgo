@@ -8,6 +8,21 @@
 #pragma once
 #define SOUND_NUM 20
 
+enum class SOUND
+{
+    TeamDoubleCheck = 0,
+    DouDouDouDoubleCheck, 
+    BGM,
+    Respawn,
+    Click,
+    BGM2,
+    Crack,
+    Item,
+    Dash,
+    HP,
+    Die,
+    BulkUp
+};
 
 #include "fmod.hpp"
 extern float sound_timer;
@@ -22,7 +37,7 @@ public:
 
     void initialize();
     void load();
-    void play(int Sound_Num);
-    void volume(int Channel_Num, float Volume);
-    void stop(int Sound_Num);
+    void play(SOUND Sound_Num);
+    void volume(SOUND Channel_Num, float Volume);
+    void stop(SOUND Sound_Num);
 };
