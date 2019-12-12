@@ -26,6 +26,10 @@ public:
 	{
 		return timer;
 	}
+	bool& Get_Need_To_Keep_Drawing()
+	{
+		return need_to_keep_drawing;
+	}
 private:
 	BitmapFont      font{};
 	Text text{};
@@ -39,4 +43,5 @@ private:
 	vector2 text_size;
 	float timer = 0.1f;
 	Color4f color;
+	bool need_to_keep_drawing = false;
 };

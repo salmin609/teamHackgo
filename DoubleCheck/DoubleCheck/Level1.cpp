@@ -204,6 +204,7 @@ void Level1::Load()
 	player_first_ui->Set_Name("first_ui");
 	player_first_ui->Set_Tag("ui");
 	player_first_ui->AddComponent(new Sprite(player_first_ui, "../sprite/pen_green.png", {1200, 800}));
+	player_first_ui->Set_Bitmap_Font(&font);
 	player_first_ui->Initialize();
 	ObjectManager::GetObjectManager()->AddObject(player_first_ui);
 
@@ -212,6 +213,7 @@ void Level1::Load()
 	player_second_ui->Set_Name("second_ui");
 	player_second_ui->Set_Tag("ui");
 	player_second_ui->AddComponent(new Sprite(player_second_ui, "../sprite/pen_red.png", { 1200, -600 }));
+	player_second_ui->Set_Bitmap_Font(&font);
 	player_second_ui->Initialize();
 	ObjectManager::GetObjectManager()->AddObject(player_second_ui);
 
@@ -220,6 +222,7 @@ void Level1::Load()
 	player_third_ui->Set_Name("third_ui");
 	player_third_ui->Set_Tag("ui");
 	player_third_ui->AddComponent(new Sprite(player_third_ui, "../sprite/pen_purple.png", { -1600, 800 }));
+	player_third_ui->Set_Bitmap_Font(&font);
 	player_third_ui->Initialize();
 	ObjectManager::GetObjectManager()->AddObject(player_third_ui);
 
@@ -228,6 +231,7 @@ void Level1::Load()
 	player_fourth_ui->Set_Name("fourth_ui");
 	player_fourth_ui->Set_Tag("ui");
 	player_fourth_ui->AddComponent(new Sprite(player_fourth_ui, "../sprite/pen_normal.png", { -1600, -600 }));
+	player_fourth_ui->Set_Bitmap_Font(&font);
 	player_fourth_ui->Initialize();
 	ObjectManager::GetObjectManager()->AddObject(player_fourth_ui);
 

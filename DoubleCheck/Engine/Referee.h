@@ -89,6 +89,7 @@ private:
 
     Object** item_save;
 	Object** item_save_hp;
+	Object** item_bulk_up;
     float item_respawn_timer = 0.0f;
     int item_num = 10;
 

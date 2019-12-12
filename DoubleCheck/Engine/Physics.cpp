@@ -559,8 +559,27 @@ void Physics::Dash(Object* object)
 				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
 			
 			Object* hp_bar = object->Get_Belong_Object_By_Tag("hp_bar");
+
+			if (hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
+			{
+				hp_bar->GetTransform().GetTranslation_Reference().x = 0.f;
+				hp_bar->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset() = 0.f;
+
+			}
+			
 			hp_bar->GetMesh().Get_Is_Moved() = true;
 			Message_Manager::Get_Message_Manager()->Save_Message(new Message(hp_bar, nullptr, "recover", 1.f));
+		}
+
+		if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Bulkup)
+		{
+			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
+				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
+
+			
+			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "bulkup", 1.f));
 		}
 
 		return;
@@ -605,6 +624,19 @@ void Physics::Dash(Object* object)
 			Message_Manager::Get_Message_Manager()->Save_Message(new Message(hp_bar, nullptr, "recover", 1.f));
 
 		}
+
+		if (object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Bulkup)
+		{
+			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
+				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
+
+			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "recover", 1.f));
+
+		}
+
+		
 	}
 }
 
