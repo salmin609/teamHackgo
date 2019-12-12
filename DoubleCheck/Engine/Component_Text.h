@@ -22,6 +22,10 @@ public:
 	void Init(Object* obj) override;
 	void Update(float dt) override;
 	Text& GetText();
+	float& Get_Timer()
+	{
+		return timer;
+	}
 private:
 	BitmapFont      font{};
 	Text text{};

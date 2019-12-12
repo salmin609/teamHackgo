@@ -223,7 +223,14 @@ void Message::Update(float dt)
 					std::cout << "damage from wall : " << damage_to_target << std::endl;
 
 					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 200);
+
+					m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(damage_to_target)));
+					m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 2.f;
+					m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_target->GetTransform().GetTranslation().x;
+					m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_target->GetTransform().GetTranslation().y;
 				}
+
+
 			}
 		}
 		should_delete = true;
@@ -241,6 +248,7 @@ void Message::Update(float dt)
 					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
 					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
 						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
+					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Can_Load_To_Texture()
 					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 				}
 			}
@@ -290,7 +298,10 @@ void Message::Update(float dt)
 			std::pair<float, float> dmg_set = Damaege_Calculation(*m_target, *m_from);
 
 			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(dmg_set.first)));
+			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 2.f;
 			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(dmg_set.second)));
+			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 2.f;
+			
 			m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_target->GetTransform().GetTranslation().x;
 			m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_target->GetTransform().GetTranslation().y;
 

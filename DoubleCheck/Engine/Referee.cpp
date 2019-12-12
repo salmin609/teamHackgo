@@ -177,8 +177,15 @@ void Referee::Update(float dt)
     if(item_respawn_timer <= 0.0f && item_num > 0)
     {
         item_respawn_timer = 10.0f;
-        ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
-		ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num - 1]);
+
+    	if(item_num % 2 == 0)
+    	{
+			ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+    	}
+		else
+		{
+			ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num - 1]);
+		}
         item_num--;
     }
     
