@@ -19,10 +19,10 @@ void PLAYER_UI::Initialize()
 	info_item->GetTransform().GetTranslation_Reference().y = this->GetTransform().GetTranslation().y - 200;
 	info_item->GetTransform().GetScale_Reference().x = 2.0f;
 	info_item->GetTransform().GetScale_Reference().y = 2.0f;
-	info_item->AddComponent(new Sprite(info_item, "../Sprite/item.png", info_item->GetTransform().GetTranslation(), false));
+	//info_item->AddComponent(new Sprite(info_item, "../Sprite/item.png", info_item->GetTransform().GetTranslation(), false));
 	info_item->Set_Tag("item_info");
 	info_item->Set_Name(this->GetName() + "info_item");
-	info_item->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+	//info_item->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
 	ObjectManager::GetObjectManager()->AddObject(info_item);
 	
 }
@@ -41,6 +41,6 @@ void PLAYER_UI::Reset()
 
 	info_item->GetTransform().GetTranslation_Reference().x = this->GetTransform().GetTranslation().x + 400;
 	info_item->GetTransform().GetTranslation_Reference().y = this->GetTransform().GetTranslation().y - 200;
-	info_item->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
+	//info_item->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
 	info_item->GetMesh().Get_Is_Moved() = true;
 }

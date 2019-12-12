@@ -18,6 +18,11 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 	//(-,-)
 	Physics* target_physics = target.GetComponentByTemplate<Physics>();
 	Physics* from_physics = from.GetComponentByTemplate<Physics>();
+	float target_scale = 1.f;
+	target_scale += target.Get_Plus_Dmg();
+	float from_scale = 1.f;
+	from_scale += from.Get_Plus_Dmg();
+	
 	vector2 target_pos = target.GetTransform().GetTranslation();
 	vector2 from_pos = from.GetTransform().GetTranslation();
 
@@ -40,7 +45,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 				dmg.second = 0;
 				return dmg;
 			}
@@ -48,16 +53,17 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 				dmg.first = 0;
 				return dmg;
 			}
 
 			float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+			target_dmg -= target_scale;
 			float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-				(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
-
+				(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+			from_dmg -= from_scale;
 			return std::pair<float, float> {target_dmg, from_dmg};
 		}
 		if (target_physics->GetAcceleration().x < 0)
@@ -66,7 +72,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 				dmg.second = 0;
 				return dmg;
 			}
@@ -74,15 +80,17 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 				dmg.first = 0;
 				return dmg;
 			}
 
 			float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+			target_dmg -= target_scale;
 			float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-				(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+				(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+			from_dmg -= from_scale;
 
 			return std::pair<float, float> {target_dmg, from_dmg};
 		}
@@ -95,7 +103,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 				dmg.second = 0;
 				return dmg;
 			}
@@ -103,7 +111,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 				dmg.first = 0;
 				return dmg;
 			}
@@ -114,7 +122,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 				dmg.second = 0;
 				return dmg;
 			}
@@ -122,16 +130,17 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 				dmg.first = 0;
 				return dmg;
 			}
 		}
 		float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+		target_dmg -= target_scale;
 		float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
-
+			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+		from_dmg -= from_scale;
 		return std::pair<float, float> {target_dmg, from_dmg};
 	}
 	else if (same_direction_y)
@@ -142,7 +151,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 				dmg.second = 0;
 				return dmg;
 			}
@@ -150,7 +159,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 				dmg.first = 0;
 				return dmg;
 			}
@@ -161,7 +170,7 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 				dmg.second = 0;
 				return dmg;
 			}
@@ -169,25 +178,27 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			{
 				std::pair<float, float> dmg;
 				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 				dmg.first = 0;
 				return dmg;
 			}
 		}
 		float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+		target_dmg -= target_scale;
 		float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
-
+			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+		from_dmg -= from_scale;
 		return std::pair<float, float> {target_dmg, from_dmg};
 	}
 	else
 	{
 		float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y)));
+			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 		float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y)));
-
+			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+		target_dmg -= target_scale;
+		from_dmg -= from_scale;
 		return std::pair<float, float> {target_dmg, from_dmg};
 	}
 
@@ -224,8 +235,8 @@ void Message::Update(float dt)
 
 					target_hp_bar->GetComponentByTemplate<Hp_Bar>()->Decrease(damage_to_target / 200);
 
-					m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(damage_to_target)));
-					m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 2.f;
+					m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(damage_to_target)));
+					m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 1.f;
 					m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_target->GetTransform().GetTranslation().x;
 					m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_target->GetTransform().GetTranslation().y;
 				}
@@ -246,10 +257,16 @@ void Message::Update(float dt)
 				if (m_from->GetComponentByTemplate<Player>() != nullptr)
 				{
 					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
-					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
-						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
-					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Can_Load_To_Texture()
-					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+
+					if(m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>() == nullptr)
+					{
+						m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->AddComponent(new Sprite(
+							m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info(), "../sprite/dash.png",
+							m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetTransform().GetTranslation()
+							, false));
+
+						m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+					}
 				}
 			}
 			if (m_target->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::HP)
@@ -258,9 +275,16 @@ void Message::Update(float dt)
 				if (m_from->GetComponentByTemplate<Player>() != nullptr)
 				{
 					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::HP);
-					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
-						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
-					m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+
+					if (m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>() == nullptr)
+					{
+						m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->AddComponent(new Sprite(
+							m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info(), "../sprite/heal.png",
+							m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetTransform().GetTranslation(), false));
+
+
+						m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+					}
 				}
 			}
 
@@ -274,9 +298,15 @@ void Message::Update(float dt)
 				{
 					m_target->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
 
-					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
-						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
-					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+					if (m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>() == nullptr)
+					{
+						m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->AddComponent(new Sprite(
+							m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info(), "../sprite/dash.png",
+							m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetTransform().GetTranslation(), false));
+
+
+						m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+					}
 				}
 			}
 			if (m_from->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::HP)
@@ -286,9 +316,14 @@ void Message::Update(float dt)
 				{
 					m_target->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::HP);
 
-					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()
-						->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 1.0f,1.0f,1.0f,1.0f };
-					m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+					if (m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>() == nullptr)
+					{
+						m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->AddComponent(new Sprite(
+							m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info(), "../sprite/heal.png",
+							m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetTransform().GetTranslation(), false));
+
+						m_target->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+					}
 				}
 			}
 		}
@@ -297,17 +332,17 @@ void Message::Update(float dt)
 		{
 			std::pair<float, float> dmg_set = Damaege_Calculation(*m_target, *m_from);
 
-			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(dmg_set.first)));
-			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 2.f;
-			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(static_cast<int>(dmg_set.second)));
-			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 2.f;
-			
+			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(dmg_set.first)));
+			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 1.f;
+			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(dmg_set.second)));
+			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 1.f;
+
 			m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_target->GetTransform().GetTranslation().x;
 			m_target->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_target->GetTransform().GetTranslation().y;
 
 			m_from->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().x = m_from->GetTransform().GetTranslation().x;
 			m_from->Get_Dmg_Text()->GetTransform().GetTranslation_Reference().y = m_from->GetTransform().GetTranslation().y;
-			
+
 			if (m_from->GetComponentByTemplate<Player>() != nullptr)
 			{
 				m_target->Set_Hitted_By(m_from);

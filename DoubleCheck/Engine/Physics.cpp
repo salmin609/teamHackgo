@@ -544,19 +544,21 @@ void Physics::Dash(Object* object)
 			object->GetMesh().Get_Is_Moved() = true;
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "dash", 1.f));
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
+				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
+
+			
 			is_dashed = true;
 		}
 		if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
 		{
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetTransform().GetScale_Reference().x = 4.f;
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
+				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
+			
 			Object* hp_bar = object->Get_Belong_Object_By_Tag("hp_bar");
-			//hp_bar->GetTransform().GetScale_Reference().x = 1.f;
 			hp_bar->GetMesh().Get_Is_Moved() = true;
 			Message_Manager::Get_Message_Manager()->Save_Message(new Message(hp_bar, nullptr, "recover", 1.f));
 		}
@@ -574,22 +576,24 @@ void Physics::Dash(Object* object)
 			object->GetMesh().Get_Is_Moved() = true;
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "dash", 1.f));
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
 
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
+				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
+			
 			is_dashed = true;
 		}
 		if (object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
 		{
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Hp_Info()->GetTransform().GetScale_Reference().x = 4.f;
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
-			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
-
+			
 			Object* hp_bar = object->Get_Belong_Object_By_Tag("hp_bar");
 			float offset = 1.f - hp_bar->GetTransform().GetScale_Reference().x;
 
-			//hp_bar->GetTransform().GetTranslation_Reference().x += offset * 200;
+
+			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
+				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
+			
 			if (hp_bar->GetComponentByTemplate<Hp_Bar>() != nullptr)
 			{
 				hp_bar->GetTransform().GetTranslation_Reference().x = 0.f;
