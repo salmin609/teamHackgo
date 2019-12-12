@@ -6,7 +6,7 @@
 #include "Component_Collision.h"
 #include "Component_Item.h"
 #include "Player_Ui.h"
-
+#include "Engine.hpp"
 
 #include "StateManager.h"
 #include "State.h"
@@ -141,8 +141,11 @@ void Referee::Update(float dt)
 
                 if(player_second_respawn_timer <= 0.0f)
                 {
+                    sound.play(3);
+
                     player_second_respawn_timer = 3.0f;
                     Respawn(i);
+
                     player_sec_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
 					second_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_sec_life));
@@ -150,12 +153,16 @@ void Referee::Update(float dt)
             }
             if (i == PLAYER_FIRST_DIE && player_first_life > 0)
             {
+
                 player_first_respawn_timer -= dt;
 
                 if (player_first_respawn_timer <= 0.0f)
                 {
+                    sound.play(3);
+
                     player_first_respawn_timer = 3.0f;
                     Respawn(i);
+
                     player_first_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
 					first_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_first_life));
@@ -163,12 +170,15 @@ void Referee::Update(float dt)
             }
             if (i == PLAYER_THIRD_DIE && player_third_life > 0)
             {
+
                 player_third_respawn_timer -= dt;
 
                 if (player_third_respawn_timer <= 0.0f)
                 {
+                    sound.play(3);
                     player_third_respawn_timer = 3.0f;
                     Respawn(i);
+
                     player_third_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
 					third_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_third_life));
@@ -176,12 +186,16 @@ void Referee::Update(float dt)
             }
             if (i == PLAYER_FOURTH_DIE && player_fourth_life > 0)
             {
+
                 player_fourth_respawn_timer -= dt;
 
                 if (player_fourth_respawn_timer <= 0.0f)
                 {
+                    sound.play(3);
+
                     player_fourth_respawn_timer = 3.0f;
                     Respawn(i);
+
                     player_fourth_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
 					fourth_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_fourth_life));

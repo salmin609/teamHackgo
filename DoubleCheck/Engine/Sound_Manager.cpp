@@ -24,15 +24,50 @@ void Sound::load(void)
     {
 		Messagebox::Init_Box("Sounds/DouDouDouDoubleCheck.mp3");
     }
-    result = FMOD_System_CreateSound(f_system, "Sounds/GameBGM.mp3", FMOD_DEFAULT, nullptr, &sound[2]);
+    result = FMOD_System_CreateSound(f_system, "Sounds/BGM.mp3", FMOD_LOOP_NORMAL, nullptr, &sound[2]);
     if (result != FMOD_OK)
     {
-		Messagebox::Init_Box("Sounds/GameBGM.mp3");
+		Messagebox::Init_Box("Sounds/Respawn.mp3");
     }
-    result = FMOD_System_CreateSound(f_system, "Sounds/Bounce.mp3", FMOD_DEFAULT, nullptr, &sound[3]);
+    result = FMOD_System_CreateSound(f_system, "Sounds/Respawn.mp3", FMOD_DEFAULT, nullptr, &sound[3]);
     if (result != FMOD_OK)
     {
         Messagebox::Init_Box("Sounds/Bounce.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/Click.mp3", FMOD_DEFAULT, nullptr, &sound[4]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/Click.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/BGM2.mp3", FMOD_LOOP_NORMAL, nullptr, &sound[5]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/BGM2.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/Crack.mp3", FMOD_DEFAULT, nullptr, &sound[6]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/Crack.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/Item.mp3", FMOD_DEFAULT, nullptr, &sound[7]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/Item.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/Dash.mp3", FMOD_DEFAULT, nullptr, &sound[8]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/Dash.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/HP.mp3", FMOD_DEFAULT, nullptr, &sound[9]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/HP.mp3");
+    }
+    result = FMOD_System_CreateSound(f_system, "Sounds/Die.mp3", FMOD_DEFAULT, nullptr, &sound[10]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/Die.mp3");
     }
 }
 

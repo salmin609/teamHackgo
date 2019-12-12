@@ -1,11 +1,12 @@
 ﻿#include <fstream>
 #include <sstream>
-
+#include "Windows.h"
 #include "Level1.h"
 #include "Component_Collision.h"
 #include "Referee.h"
 #include "Component_Text.h"
 #include "Player_Ui.h"
+#include "Engine.hpp"
 
 using namespace std;
 
@@ -25,13 +26,15 @@ void Level1::Load()
     object_manager = ObjectManager::GetObjectManager();
 	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
 
-	
+    sound.stop(2);
+    Sleep(300);
+    sound.play(5);
 	
 	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
-	arena->AddComponent(new Sprite(arena));
-
+    arena->AddComponent(new Sprite(arena, "../Sprite/IceGround.png", { 0,0 }, false));
+    arena->SetScale({ 20, 20});
 	ObjectManager::GetObjectManager()->AddObject(arena);
 	
     player = new Object();

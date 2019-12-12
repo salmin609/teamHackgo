@@ -8,7 +8,7 @@
 #include "Component_Item.h"
 #include "Player_Ui.h"
 #include "Component_Text.h"
-
+#include "Engine.hpp"
 
 std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 {
@@ -281,6 +281,7 @@ void Message::Update(float dt)
 	{
 		if (m_target->Get_Tag() == "item" && m_from->Get_Tag() == "player")
 		{
+            sound.play(7);
 			std::cout << "item" << std::endl;
 			if (m_target->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::Dash)
 			{
@@ -436,18 +437,25 @@ void Message::Update(float dt)
 	{
 		if (m_from->GetName() == "second")
 		{
+            sound.play(10);
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_SECOND_DIE);
 		}
 		if (m_from->GetName() == "first")
 		{
+            sound.play(10);
+
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FIRST_DIE);
 		}
 		if (m_from->GetName() == "third")
 		{
+            sound.play(10);
+
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_THIRD_DIE);
 		}
 		if (m_from->GetName() == "forth")
 		{
+            sound.play(10);
+
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FOURTH_DIE);
 		}
 		should_delete = true;

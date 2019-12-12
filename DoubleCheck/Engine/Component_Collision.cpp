@@ -5,6 +5,7 @@
 #include "Engine.hpp"
 #include "Message_Manager.h"
 #include "Component_Sprite.h"
+#include "Message.h"
 
 #define  PI  3.14159265359
 
@@ -71,7 +72,10 @@ bool Collision::CircleToCircleCollision()
 				for (unsigned int j = 0; j < object_position_size; ++j)
 				{
 					Object* obj_j = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[j].get();
-
+                    if(obj_j->GetName() == "arena" || obj_i->GetName() == "arena")
+                    {
+                        continue;
+                    }
 					if (obj_j->Get_Tag() == "item" && obj_i->Get_Tag() == "item")
 					{
 						continue;
@@ -98,7 +102,7 @@ bool Collision::CircleToCircleCollision()
 											obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().x = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().x;
 											obj_j->GetComponentByTemplate<Physics>()->Get_Save_Acceleration_Reference().y = obj_j->GetComponentByTemplate<Physics>()->GetAcceleration().y;
 											Message_Manager::Get_Message_Manager()->Save_Message(new Message(obj_j, obj_i, "collision"));
-											sound.play(3);
+											
 											if (obj_i->Get_Tag() != "item" && obj_j->Get_Tag() != "item")
 											{
 												physics.KnockBack(obj_i, obj_j);
@@ -131,6 +135,7 @@ void Collision::CircleArenaCollision()
 
 		if (distance >= 10000)
 		{
+
 			const vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			obj_i->GetComponentByTemplate<Physics>()->SetAcceleration(-direction_to_go);
 		}
@@ -139,15 +144,15 @@ void Collision::CircleArenaCollision()
 
 void Collision::SquareArenaCollision()
 {
-	const unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
-	const float line_max_point = 1000;
-	const float line_min_point = -1000;
-	float angle = 0;
-	float angle2 = 0;
-	for (unsigned int i = 0; i < object_position_size; ++i)
-	{
-		Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
-		vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
+    const unsigned int object_position_size = ObjectManager::GetObjectManager()->GetObjectManagerContainer().size();
+    const float line_max_point = 980;
+    const float line_min_point = -980;
+    float angle = 0;
+    float angle2 = 0;
+    for (unsigned int i = 0; i < object_position_size; ++i)
+    {
+        Object* obj_i = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[i].get();
+        vector2 obj_i_trans = obj_i->GetTransform().GetTranslation();
 		vector2 obj_i_scale = obj_i->GetTransform().GetScale();
 
 		const double max_x = obj_i_trans.x + (30.0 * obj_i_scale.x);
@@ -157,6 +162,8 @@ void Collision::SquareArenaCollision()
 
 		if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_i->Get_Tag() == "player")
 		{
+            sound.play(6);
+
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 
 			angle = RadianToDegree(angle_between({ 0,1 }, direction_to_go));
@@ -173,6 +180,8 @@ void Collision::SquareArenaCollision()
 		}
 		else if (line_max_point - max_y < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
+            sound.play(6);
+
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			angle = RadianToDegree(angle_between({ -1,0 }, direction_to_go));
 
@@ -189,6 +198,8 @@ void Collision::SquareArenaCollision()
 		}
 		else if (line_min_point - min_x > 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
+            sound.play(6);
+
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			angle = RadianToDegree(angle_between({ 0,-1 }, direction_to_go));
 
@@ -204,6 +215,8 @@ void Collision::SquareArenaCollision()
 		}
 		else if (line_min_point - min_y > 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
+            sound.play(6);
+
 			vector2 direction_to_go = obj_i->GetComponentByTemplate<Physics>()->GetAcceleration();
 			angle = RadianToDegree(angle_between({ 1,0 }, direction_to_go));
 

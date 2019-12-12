@@ -193,6 +193,7 @@
     <ClInclude Include="Component_Text.h" />
     <ClInclude Include="Component_TopDownMovement.h" />
     <ClInclude Include="Component_Transform.h" />
+    <ClInclude Include="Damage.h" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="GL.hpp" />
     <ClInclude Include="glCheck.hpp" />
@@ -251,6 +252,7 @@
     <ClCompile Include="Component_Text.cpp" />
     <ClCompile Include="Component_TopDownMovement.cpp" />
     <ClCompile Include="Component_Transform.cpp" />
+    <ClCompile Include="Damage.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GL.cpp" />
     <ClCompile Include="Graphic.cpp" />

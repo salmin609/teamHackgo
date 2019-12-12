@@ -10,6 +10,8 @@
 #include <GLFW/glfw3.h>
 #include "Component_Hpbar.h"
 #include "Message_Manager.h"
+#include "Engine.hpp"
+#include "Message.h"
 
 Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
 {
@@ -479,6 +481,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
 
 		if (object_2_speed >= object_1_speed)
 		{
+            sound.play(6);
 			direction_to_go = normalize(object_1_pos - object_2_pos);
 
 			object_1->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * object_2_speed);
@@ -491,6 +494,8 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
 		}
 		else if (object_2_speed < object_1_speed)
 		{
+            sound.play(6);
+
 			direction_to_go = normalize(object_2_pos - object_1_pos);
 
 			object_2->GetComponentByTemplate<Physics>()->SetAcceleration(direction_to_go * object_1_speed);
@@ -538,6 +543,7 @@ void Physics::Dash(Object* object)
 	{
 		if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
 		{
+            sound.play(8);
 			timer = 0;
 			acceleration += {50 * acceleration.x, 50 * acceleration.y};
 			object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
@@ -553,6 +559,8 @@ void Physics::Dash(Object* object)
 		}
 		if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
 		{
+            sound.play(9);
+
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
@@ -573,6 +581,8 @@ void Physics::Dash(Object* object)
 
 		if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Bulkup)
 		{
+            //sound.play(8);
+
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
@@ -589,6 +599,8 @@ void Physics::Dash(Object* object)
 	{
 		if (object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
 		{
+            sound.play(8);
+
 			timer = 0;
 			acceleration += {50 * acceleration.x, 50 * acceleration.y};
 			object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
@@ -603,6 +615,8 @@ void Physics::Dash(Object* object)
 		}
 		if (object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
 		{
+            sound.play(9);
+
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Hp_Info()->GetTransform().GetScale_Reference().x = 4.f;
 			
