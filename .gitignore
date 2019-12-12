@@ -250,3 +250,7 @@ DoubleCheck/x64/Release/DoubleCheck.iobj
 *.iobj
 
 DoubleCheck/Engine/x64/Release/Engine.tlog/unsuccessfulbuild
+
+*.txt
+
+*.log
