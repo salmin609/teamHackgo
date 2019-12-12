@@ -8,7 +8,8 @@ public:
     {
         None,
         Dash,
-    	HP
+    	HP,
+    	Bulkup
     };
 
     void Init(Object *obj) override;

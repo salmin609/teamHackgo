@@ -10,6 +10,7 @@
 
 #include "StateManager.h"
 #include "State.h"
+#include "Component_Text.h"
 
 Referee* Referee::referee = nullptr;
 StateManager* state_manager = nullptr;
@@ -35,6 +36,7 @@ void Referee::Init()
 
     item_save = new Object*[item_num]();
 	item_save_hp = new Object * [item_num]();
+	item_bulk_up = new Object * [item_num]();
 
     for (int i = 0; i < player_first_life; i++)
     {
@@ -44,7 +46,9 @@ void Referee::Init()
         player_first_temp[i]->AddComponent(new Physics(true));
         player_first_temp[i]->Set_Name("first");
         player_first_temp[i]->Set_Tag("player");
+		player_first_temp[i]->SetScale({ 3.f,3.f });
 		player_first_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(first_ui);
+		player_first_temp[i]->Set_Dmg_Text(first_text);
     }
 
     for(int i = 0 ; i < player_sec_life; i++)
@@ -55,7 +59,9 @@ void Referee::Init()
         player_sec_temp[i]->AddComponent(new Physics(true));
         player_sec_temp[i]->Set_Name("second");
         player_sec_temp[i]->Set_Tag("player");
+		player_sec_temp[i]->SetScale({ 3.f,3.f });
 		player_sec_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(second_ui);
+		player_sec_temp[i]->Set_Dmg_Text(second_text);
     }
     for (int i = 0; i < player_third_life; i++)
     {
@@ -65,7 +71,9 @@ void Referee::Init()
         player_third_temp[i]->AddComponent(new Physics(true));
         player_third_temp[i]->Set_Name("third");
         player_third_temp[i]->Set_Tag("player");
+		player_third_temp[i]->SetScale({ 3.f,3.f });
 		player_third_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(third_ui);
+		player_third_temp[i]->Set_Dmg_Text(third_text);
     }
     for (int i = 0; i < player_fourth_life; i++)
     {
@@ -75,7 +83,9 @@ void Referee::Init()
         player_fourth_temp[i]->AddComponent(new Physics(true));
         player_fourth_temp[i]->Set_Name("forth");
         player_fourth_temp[i]->Set_Tag("player");
+		player_fourth_temp[i]->SetScale({ 3.f,3.f });
 		player_fourth_temp[i]->GetComponentByTemplate<Player>()->Set_This_UI_info(fourth_ui);
+		player_fourth_temp[i]->Set_Dmg_Text(fourth_text);
     }
 
 
@@ -102,6 +112,18 @@ void Referee::Init()
 		item_save_hp[i]->SetTranslation({ -400,0 });
 		item_save_hp[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::HP);
 	}
+
+	for (int i = 0; i < item_num; i++)
+	{
+		item_bulk_up[i] = new Object();
+		item_bulk_up[i]->AddComponent(new Sprite(item_bulk_up[i], "../Sprite/item.png", { 0,0 }, false));
+		item_bulk_up[i]->AddComponent(new Item());
+		item_bulk_up[i]->AddComponent(new Physics());
+		item_bulk_up[i]->Set_Name("item");
+		item_bulk_up[i]->Set_Tag("item");
+		item_bulk_up[i]->SetTranslation({ 400,0 });
+		item_bulk_up[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::Bulkup);
+	}
 }
 
 void Referee::Update(float dt)
@@ -124,6 +146,7 @@ void Referee::Update(float dt)
 
                     player_sec_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
+					second_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_sec_life));
                 }
             }
             if (i == PLAYER_FIRST_DIE && player_first_life > 0)
@@ -140,6 +163,7 @@ void Referee::Update(float dt)
 
                     player_first_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
+					first_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_first_life));
                 }
             }
             if (i == PLAYER_THIRD_DIE && player_third_life > 0)
@@ -155,6 +179,7 @@ void Referee::Update(float dt)
 
                     player_third_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
+					third_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_third_life));
                 }
             }
             if (i == PLAYER_FOURTH_DIE && player_fourth_life > 0)
@@ -171,6 +196,7 @@ void Referee::Update(float dt)
 
                     player_fourth_life--;
                     stage_statements.erase(std::find(stage_statements.begin(), stage_statements.end(), i));
+					fourth_ui->Get_Life_Num()->GetComponentByTemplate<TextComp>()->GetText().SetString(std::to_wstring(player_fourth_life));
                 }
             }
         }
@@ -183,8 +209,19 @@ void Referee::Update(float dt)
     if(item_respawn_timer <= 0.0f && item_num > 0)
     {
         item_respawn_timer = 10.0f;
-        ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
-		ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num - 1]);
+
+    	if(item_num % 3 == 2)
+    	{
+			ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+    	}
+		else if(item_num % 3 == 1)
+		{
+			ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num - 1]);
+		}
+		else
+		{
+			ObjectManager::GetObjectManager()->AddObject(item_bulk_up[item_num - 1]);
+		}
         item_num--;
     }
     

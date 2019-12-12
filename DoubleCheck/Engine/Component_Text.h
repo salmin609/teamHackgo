@@ -22,6 +22,14 @@ public:
 	void Init(Object* obj) override;
 	void Update(float dt) override;
 	Text& GetText();
+	float& Get_Timer()
+	{
+		return timer;
+	}
+	bool& Get_Need_To_Keep_Drawing()
+	{
+		return need_to_keep_drawing;
+	}
 private:
 	BitmapFont      font{};
 	Text text{};
@@ -33,4 +41,7 @@ private:
 	int height = 720;
 	vector2 text_position;
 	vector2 text_size;
+	float timer = 0.1f;
+	Color4f color;
+	bool need_to_keep_drawing = false;
 };

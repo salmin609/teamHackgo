@@ -39,12 +39,28 @@ private:
 	Object* this_obj_owner = nullptr;
 	Object* hitted_by = nullptr;
 	bool need_to_update;
+	Object* dmg_text = nullptr;
+	float dmg_plus = 0.f;
 
 public:
 	Object* Get_Hitted_By()
 	{
 		return hitted_by;
 	}
+	Object* Get_Dmg_Text()
+	{
+		return dmg_text;
+	}
+	float& Get_Plus_Dmg()
+	{
+		return dmg_plus;
+	}
+
+	void Set_Dmg_Text(Object* text)
+	{
+		this->dmg_text = text;
+	}
+	
 	void Set_Hitted_By(Object* hitted_by)
 	{
 		this->hitted_by = hitted_by;
