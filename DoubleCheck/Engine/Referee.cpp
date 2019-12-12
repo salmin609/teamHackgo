@@ -124,6 +124,8 @@ void Referee::Init()
 		item_bulk_up[i]->SetTranslation({ 400,0 });
 		item_bulk_up[i]->GetComponentByTemplate<Item>()->Set_Kind(Item::Item_Kind::Bulkup);
 	}
+
+	//item_num = 30;
 }
 
 void Referee::Update(float dt)
@@ -192,23 +194,26 @@ void Referee::Update(float dt)
 		StateManager::GetStateManager()->Get_States().
 	}*/
     item_respawn_timer -= dt;
-    if(item_respawn_timer <= 0.0f && item_num > 0)
+    if(item_respawn_timer <= 0.0f && total_item_num > 0)
     {
-        item_respawn_timer = 10.0f;
+        item_respawn_timer = 5.0f;
 
-    	if(item_num % 3 == 2)
+    	if(total_item_num % 3 == 2)
     	{
-			ObjectManager::GetObjectManager()->AddObject(item_save[item_num - 1]);
+			ObjectManager::GetObjectManager()->AddObject(item_save[item_num_dash - 1]);
+			item_num_dash--;
     	}
-		else if(item_num % 3 == 1)
+		else if(total_item_num % 3 == 1)
 		{
-			ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num - 1]);
+			ObjectManager::GetObjectManager()->AddObject(item_save_hp[item_num_hp - 1]);
+			item_num_hp--;
 		}
 		else
 		{
-			ObjectManager::GetObjectManager()->AddObject(item_bulk_up[item_num - 1]);
+			ObjectManager::GetObjectManager()->AddObject(item_bulk_up[item_num_bulk_up - 1]);
+			item_num_bulk_up--;
 		}
-        item_num--;
+		total_item_num--;
     }
     
     if(this->GetComponentByTemplate<Collision>() != nullptr)

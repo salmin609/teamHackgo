@@ -92,6 +92,11 @@ private:
 	Object** item_bulk_up;
     float item_respawn_timer = 0.0f;
     int item_num = 10;
+	int item_num_hp = 10;
+	int item_num_dash = 10;
+	int item_num_bulk_up = 10;
+	
+	int total_item_num = 30;
 
 	PLAYER_UI* first_ui;
 	PLAYER_UI* second_ui;

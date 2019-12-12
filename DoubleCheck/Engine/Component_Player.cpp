@@ -37,19 +37,21 @@ void Player::Update(float dt)
 {
 	Attack();
 
-	if (input.Is_Key_Triggered(GLFW_KEY_U))
+	if (bulkup_timer >= 0.f)
 	{
-		std::cout << "center_pos_x :" << m_owner->GetTransform().GetTranslation().x << std::endl;
-		std::cout << "center_pos_y :" << m_owner->GetTransform().GetTranslation().y << std::endl;
-		std::cout << std::endl;
+		bulkup_timer -= dt;
 	}
-
-	if (input.Is_Key_Triggered(GLFW_KEY_L))
+	else
 	{
-		Object* obj = ObjectManager::GetObjectManager()->Find_Object_By_Name("hp_bar");
-
-		//obj->GetComponentByTemplate<Hp_Bar>()->Decrease();
-
+		if (m_owner->GetTransform().GetScale().x >= 3.f)
+		{
+			m_owner->GetTransform().GetScale_Reference().x -= dt;
+			m_owner->GetTransform().GetScale_Reference().y -= dt;
+		}
+		else
+		{
+			m_owner->Get_Plus_Dmg() = 0.f;
+		}
 	}
 }
 

@@ -579,7 +579,7 @@ void Physics::Dash(Object* object)
 				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
 
 			
-			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "bulkup", 1.f));
+			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "bulkup", 3.f));
 		}
 
 		return;
@@ -632,7 +632,7 @@ void Physics::Dash(Object* object)
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->DeleteComponent(
 				object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>());
 
-			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "recover", 1.f));
+			Message_Manager::Get_Message_Manager()->Save_Message(new Message(object, nullptr, "bulkup", 3.f));
 
 		}
 

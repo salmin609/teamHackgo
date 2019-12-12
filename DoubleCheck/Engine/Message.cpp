@@ -398,6 +398,9 @@ void Message::Update(float dt)
 		{
 			std::pair<float, float> dmg_set = Damaege_Calculation(*m_target, *m_from);
 
+			m_target->GetComponentByTemplate<Player>()->Get_Regeneration_Timer() = 0.f;
+			m_from->GetComponentByTemplate<Player>()->Get_Regeneration_Timer() = 0.f;
+			
 			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(dmg_set.first)));
 			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 1.f;
 			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(dmg_set.second)));
@@ -477,17 +480,24 @@ void Message::Update(float dt)
 	}
 	if(message_name == "bulkup")
 	{
+		m_target->GetComponentByTemplate<Player>()->Get_Bulkup_Timer() = 5.f;
 		if(timer >= 0.f)
 		{
 			timer -= dt;
-			std::cout << "bulkup!" << std::endl;
-			if (m_target->GetTransform().GetScale_Reference().x <= 7.f)
+			
+			if (m_target->GetTransform().GetScale_Reference().x <= 5.f)
 			{
-				m_target->Get_Plus_Dmg() = 0.5f;
+				m_target->Get_Plus_Dmg() = 2.f;
 				m_target->GetTransform().GetScale_Reference().x += dt;
 				m_target->GetTransform().GetScale_Reference().y += dt;
+				
 			}
 		}
+		else
+		{
+			should_delete = true;
+		}
+		
 	}
 	if (message_name == "dash")
 	{

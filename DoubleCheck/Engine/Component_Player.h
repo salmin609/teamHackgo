@@ -18,6 +18,14 @@ public:
 	void Set_Item_State(Item::Item_Kind state);
 	PLAYER_UI* Get_Ui();
 	Item::Item_Kind Get_Item_State();
+	float& Get_Regeneration_Timer()
+	{
+		return regeneration_timer;
+	}
+	float& Get_Bulkup_Timer()
+	{
+		return bulkup_timer;
+	}
 
 	
 private:
@@ -25,4 +33,6 @@ private:
 	Item::Item_Kind belong_item = Item::Item_Kind::None;
     int damage = 2;
 	PLAYER_UI* this_ui;
+	float regeneration_timer = 0.f;
+	float bulkup_timer = 0.f;
 };
