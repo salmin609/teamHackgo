@@ -5,6 +5,7 @@
 #include "Engine.hpp"
 #include "Message_Manager.h"
 #include "Component_Sprite.h"
+#include "Message.h"
 
 #define  PI  3.14159265359
 
@@ -71,7 +72,10 @@ bool Collision::CircleToCircleCollision()
 				for (unsigned int j = 0; j < object_position_size; ++j)
 				{
 					Object* obj_j = ObjectManager::GetObjectManager()->GetObjectManagerContainer()[j].get();
-
+                    if(obj_j->GetName() == "arena" || obj_i->GetName() == "arena")
+                    {
+                        continue;
+                    }
 					if (obj_j->Get_Tag() == "item" && obj_i->Get_Tag() == "item")
 					{
 						continue;
