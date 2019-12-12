@@ -6,6 +6,8 @@
 #include "Referee.h"
 #include "Component_Text.h"
 #include "Player_Ui.h"
+#include "Engine.hpp"
+#include "Windows.h"
 
 using namespace std;
 
@@ -25,7 +27,10 @@ void Level1::Load()
     object_manager = ObjectManager::GetObjectManager();
 	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
 
-	
+    sound.stop(2);
+    Sleep(500);
+    sound.volume(5, 0.5);
+    sound.play(5);
 	
 	arena = new Object();	
 	arena->Set_Name("arena");

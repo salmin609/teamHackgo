@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Component_Hpbar.h"
-
+#include "Engine.hpp"
 Physics::Physics(bool ghost_collision_mode) : ghost_collision_mode(ghost_collision_mode)
 {
 
@@ -465,6 +465,8 @@ void Physics::JustMove()
 
 void Physics::KnockBack(Object* object_1, Object* object_2)
 {
+    sound.play(6);
+
     if (object_1->GetComponentByTemplate<Physics>() != nullptr && object_2->GetComponentByTemplate<Physics>() != nullptr)
     {
         vector2 object_1_pos = object_1->GetTransform().GetTranslation();
@@ -505,6 +507,7 @@ void Physics::KnockBack(Object* object_1, Object* object_2)
 
 void Physics::Dash(Object* object)
 {
+    sound.volume(8, 4);
     vector2 acceleration = object->GetComponentByTemplate<Physics>()->GetAcceleration();
     acceleration = normalize(acceleration);
 
@@ -546,6 +549,7 @@ void Physics::Dash(Object* object)
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetMesh().Get_Is_Moved() = true;
             is_dashed = true;
+            sound.play(8);
         }
 		if (input.Is_Key_Pressed(GLFW_KEY_SPACE) && object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
 		{
@@ -557,6 +561,7 @@ void Physics::Dash(Object* object)
 			Object* hp_bar = object->Get_Belong_Object_By_Tag("hp_bar");
 			hp_bar->GetTransform().GetScale_Reference().x = 1.f;
 			hp_bar->GetMesh().Get_Is_Moved() = true;
+            sound.play(9);
 		}
 
         return;
@@ -566,6 +571,8 @@ void Physics::Dash(Object* object)
     {
     	if(object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::Dash)
     	{
+            sound.play(8);
+
 			timer = 0;
 			acceleration += {50 * acceleration.x, 50 * acceleration.y};
 			object->GetComponentByTemplate<Physics>()->SetAcceleration(acceleration);
@@ -579,6 +586,8 @@ void Physics::Dash(Object* object)
     	}
     	if(object->GetComponentByTemplate<Player>()->Get_Item_State() == Item::Item_Kind::HP)
     	{
+            sound.play(9);
+
 			object->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::None);
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Hp_Info()->GetTransform().GetScale_Reference().x = 4.f;
 			object->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>()->Get_Material().color4fUniforms["color"] = { 0.5f,0.5f,0.5f,0.5f };
