@@ -7,6 +7,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:header file which represent color value.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 

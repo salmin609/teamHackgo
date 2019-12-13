@@ -7,6 +7,8 @@
  * Date			:2019/12/11
  * Description	:This file is for intialize the stuff required on the prototype.
  *				 There are Player objects, refree, items, text, ui information.
+ *				 
+ *				 copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 

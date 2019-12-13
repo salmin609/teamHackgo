@@ -7,6 +7,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:Enemy component which is not used at now.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Component_Enemy.h"

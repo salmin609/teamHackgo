@@ -10,6 +10,8 @@
  *				 Check the enemy's current health, decrease the scale,
  *				 manipulate the translation offset.
  *				 If the player is dead, send message for respawn to referee.
+ *
+ *	copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Component_Hpbar.h"

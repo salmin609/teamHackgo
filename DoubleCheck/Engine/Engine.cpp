@@ -6,7 +6,9 @@
  * Class		:GAM200
  * Project		:GAM200 Project
  * Date			:2019/12/11
- * Description	:The basic engine initiailze & update, managers initialize & update is implemented in here 
+ * Description	:The basic engine initiailze & update, managers initialize & update is implemented in here
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Engine.hpp"

@@ -6,6 +6,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:Acceleration / Knockback / user input by controller is implemented.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Physics.h"

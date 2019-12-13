@@ -7,6 +7,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:header file for Input.cpp
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #pragma once

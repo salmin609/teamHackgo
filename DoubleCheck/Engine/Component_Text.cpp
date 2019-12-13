@@ -7,6 +7,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:Basic text component which is initialize the text object.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include <GL/glew.h>

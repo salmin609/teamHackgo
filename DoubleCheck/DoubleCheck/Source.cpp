@@ -6,6 +6,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:Containing the main function of our engine.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Engine.hpp"

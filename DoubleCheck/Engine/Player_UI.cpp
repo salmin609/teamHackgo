@@ -10,6 +10,8 @@
  *				 In initialize, set the translation, name, scale, image.
  *
  *				 In reset, reset the color, scale, translation to initial value.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 #include "Player_Ui.h"
 #include "Component_Sprite.h"

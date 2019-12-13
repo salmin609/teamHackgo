@@ -7,6 +7,8 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:Basic movement implemented in here, not used now.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Component_TopDownMovement.h"

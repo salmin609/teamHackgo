@@ -1,5 +1,5 @@
 /*
- * Author		:jeesoo.kim
+ * Author		:sangmin.kim
  * File			:CameraView.cpp
  * Term			:2019 Fall
  * Class		:GAM200

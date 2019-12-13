@@ -9,6 +9,8 @@
  * Description	:Basic component for player, which initialize the hpbar object and
  *				 attach to the owner object.
  *				 UI Objects are attached in here too.
+ *
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 #include "Component_Player.h"
