@@ -1,7 +1,6 @@
 ﻿#include "Sound_Manager.h"
-#include <fstream>
-#include <iostream>
 #include "Messagebox.h"
+
 float sound_timer = 0;
 
 /* Initializing Sounds */
@@ -69,12 +68,17 @@ void Sound::load(void)
     {
         Messagebox::Init_Box("Sounds/Die.mp3");
     }
+    result = FMOD_System_CreateSound(f_system, "Sounds/BulkUp.mp3", FMOD_DEFAULT, nullptr, &sound[11]);
+    if (result != FMOD_OK)
+    {
+        Messagebox::Init_Box("Sounds/BulkUp.mp3");
+    }
 }
 
 /* Playing specific sound */
-void Sound::play(int Sound_Num)
+void Sound::play(SOUND Sound_Num)
 {
-    result = FMOD_System_PlaySound(f_system, sound[Sound_Num], 0, 0, &channel[Sound_Num]);
+    result = FMOD_System_PlaySound(f_system, sound[(int)Sound_Num], 0, 0, &channel[(int)Sound_Num]);
     result = FMOD_System_Update(f_system);
     if (result != FMOD_OK)
     {
@@ -83,16 +87,16 @@ void Sound::play(int Sound_Num)
 }
 
 /* Set Volume in specific channel */
-void Sound::volume(int Channel_Num, float Volume)
+void Sound::volume(SOUND Channel_Num, float Volume)
 {
-    result = FMOD_Channel_SetVolume(channel[Channel_Num], Volume);
+    result = FMOD_Channel_SetVolume(channel[(int)Channel_Num], Volume);
     if (result != FMOD_OK)
     {
         return;
     }
 }
 
-void Sound::stop(int Sound_Num)
+void Sound::stop(SOUND Sound_Num)
 {
-    result = FMOD_Channel_Stop(channel[Sound_Num]);
+    result = FMOD_Channel_Stop(channel[(int)Sound_Num]);
 }

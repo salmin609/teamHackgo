@@ -8,6 +8,8 @@
 #include "Engine.hpp"
 #include "Sound_Manager.h"
 #include <iostream>
+GLFWgamepadstate state;
+
 namespace
 {
 	ObjectManager* object_manager = nullptr;
@@ -17,6 +19,7 @@ namespace
 
 void MainMenu::Load()
 {
+
     state_manager = StateManager::GetStateManager();
     object_manager = ObjectManager::GetObjectManager();
 
@@ -32,15 +35,26 @@ void MainMenu::Load()
 
 void MainMenu::Update(float dt)
 {
-	if (MouseCollision(vector2{ 54, 54 }, vector2{ -54, -54 },
+    
+    if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state))
+    {
+        if(state.buttons[GLFW_GAMEPAD_BUTTON_A])
+        {
+            sound.play(SOUND::Click);
+            is_next = true;
+            next_level = "Level1";
+            Clear();
+        }
+    }
+
+    if (MouseCollision(vector2{ 54, 54 }, vector2{ -54, -54 },
 		vector2{input.Get_Mouse_Pos().x, input.Get_Mouse_Pos().y}) == true)
 	{
 		//ObjectManager::GetObjectManager()->AddObject(collision_button);
 		
 		if (input.Is_Mouse_Released(GLFW_MOUSE_BUTTON_LEFT))
 		{
-            sound.volume(4, 8);
-            sound.play(4);
+            sound.play(SOUND::Click);
 			is_next = true;
 			next_level = "Level1";
 			Clear();

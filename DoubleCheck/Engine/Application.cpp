@@ -12,7 +12,6 @@ using namespace std;
 
 Application* Application::application = nullptr;
 
-
 namespace
 {
 	void    key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -116,11 +115,20 @@ void Application::Update(float dt)
 	glfwGetWindowSize(window, &w, &h);
 	window_size.width = (float)w;
 	window_size.height = (float)h;
+    GLFWgamepadstate state;
 
+    if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state))
+    {
+        if(state.buttons[GLFW_GAMEPAD_BUTTON_B])
+        {
+            Toggle_Fullscreen();
+        }
+    }
 	if (input.Is_Key_Triggered(GLFW_KEY_F))
 	{
 		Toggle_Fullscreen();
 	}
+    
 	if (input.Is_Key_Triggered(GLFW_KEY_K))
 	{
 		Save();

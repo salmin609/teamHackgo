@@ -26,14 +26,15 @@ void Level1::Load()
     object_manager = ObjectManager::GetObjectManager();
 	Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
 
-    sound.stop(2);
+    sound.stop(SOUND::BGM);
     Sleep(300);
-    sound.play(5);
+    sound.play(SOUND::BGM2);
+    sound.volume(SOUND::BGM2, 0.3);
 	
 	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
-    arena->AddComponent(new Sprite(arena, "../Sprite/IceGround.png", { 0,0 }, false));
+    arena->AddComponent(new Sprite(arena, "../Sprite/IceGround2.png", { 0,0 }, false));
     arena->SetScale({ 20, 20});
 	ObjectManager::GetObjectManager()->AddObject(arena);
 	
