@@ -3,7 +3,7 @@
 
 enum class GameState
 {
-    Menu, Game, /*End,*/ Credit, None
+    Logo, Menu, Game, /*End,*/ Credit, None
 };
 
 class State

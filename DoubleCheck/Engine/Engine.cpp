@@ -23,6 +23,7 @@
 #include "BitmapFont.hpp"
 #include "Shader.hpp"
 #include <thread>
+#include "../DoubleCheck/Logo.h"
 
 Sound sound;
 
@@ -76,10 +77,11 @@ void Engine::Init()
 	graphic->Init();
 	msg_manager->Init();
 
+    state_manager->AddState("Logo", new Logo);
 	state_manager->AddState("Menu", new MainMenu);
 	state_manager->AddState("Level1", new Level1);
-	//state_manager->AddState("End", new End);
-	//StateManager::GetStateManager()->Get_States().at("Level1").get()->Load();
+
+
 
 	game_timer.Reset();
 }

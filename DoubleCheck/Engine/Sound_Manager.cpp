@@ -26,12 +26,12 @@ void Sound::load(void)
     result = FMOD_System_CreateSound(f_system, "Sounds/BGM.mp3", FMOD_LOOP_NORMAL, nullptr, &sound[2]);
     if (result != FMOD_OK)
     {
-		Messagebox::Init_Box("Sounds/Respawn.mp3");
+		Messagebox::Init_Box("Sounds/BGM.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/Respawn.mp3", FMOD_DEFAULT, nullptr, &sound[3]);
     if (result != FMOD_OK)
     {
-        Messagebox::Init_Box("Sounds/Bounce.mp3");
+        Messagebox::Init_Box("Sounds/Respawn.mp3");
     }
     result = FMOD_System_CreateSound(f_system, "Sounds/Click.mp3", FMOD_DEFAULT, nullptr, &sound[4]);
     if (result != FMOD_OK)
