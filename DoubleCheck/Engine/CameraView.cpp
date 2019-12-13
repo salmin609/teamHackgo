@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:CameraView.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Cpp file for implement frame of reference.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "CameraView.hpp"
 
 // For RightHanded_OriginCenter

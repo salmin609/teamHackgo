@@ -1,3 +1,15 @@
+/*
+ * Author		:sangmin.kim
+ * File			:Message_Manager.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:manager which control messages.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Message_Manager.h"
 
 Message_Manager* Message_Manager::msg_manager = nullptr;

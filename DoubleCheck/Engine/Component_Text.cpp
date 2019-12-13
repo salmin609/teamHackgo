@@ -1,3 +1,14 @@
+
+/*
+ * Author		:jeesoo.kim
+ * File			:Component_Text.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Basic text component which is initialize the text object.
+ */
+
 #include <GL/glew.h>
 #include <iostream>
 #include "Component_Text.h"

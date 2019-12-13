@@ -1,3 +1,16 @@
+/*
+ * Author		:Suhwan.kim
+ * File			:MainMenu.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Header file of MainMenu.cpp
+ */
+
+
+
+
 #pragma once
 #include "State.h"
 #include "GLFW/glfw3.h"

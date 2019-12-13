@@ -1,12 +1,17 @@
+
+/*
+ * Author		:suwhan.kim
+ * File			:Input.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Input.cpp
+ */
+
 #pragma once
 
-//#include <bitset>
-//#include <GL/glew.h>
-//#include <GLFW/glfw3.h>
-//#include "vector2.hpp"
-
 #include <bitset>
-//#include <GLFW/glfw3.h>
 #include "vector2.hpp"
 #define NEW_GLFW_KEY_LAST_ 348
 #define NEW_GLFW_MOUSE_BUTTON_LAST_ 7

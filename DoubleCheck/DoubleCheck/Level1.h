@@ -1,3 +1,14 @@
+/*
+ * Author		:suhwan.kim
+ * File			:Level1.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Header file for Level1.cpp
+ */
+
+
 #pragma once
 #include "State.h"
 #include <string>
@@ -7,14 +18,13 @@
 #include "Physics.h"
 #include "Common_Header.h"
 #include "BitmapFont.hpp"
-//#include "Component_Text.h"
 
 class PLAYER_UI;
 
 class Level1 : public State
 {
 public:
-    //class TextComp;
+
     Level1()
     {
         current_state = GameState::Game;
@@ -22,15 +32,7 @@ public:
 
     virtual void Load();
     virtual void Update(float dt);
-    /*
-    std::cout << "Level1 Update" << std::endl;
-
-    if (input.Is_Key_Triggered(GLFW_KEY_N))
-    {
-        is_next = true;
-        next_level = "Menu";
-    }*/
-
+    
     virtual void UnLoad()
     {
         next_level = {};

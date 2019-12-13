@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component_Hpbar.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Component_Hpbar.cpp
+ */
+
 #pragma once
 #include "Component.hpp"
 

@@ -1,3 +1,13 @@
+/*
+ * Author		:Sangmin.kim
+ * File			:Source.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Containing the main function of our engine.
+ */
+
 #include "Engine.hpp"
 
 #include <exception>
@@ -6,24 +16,6 @@
 #include "Messagebox.h"
 int main()
 {
-	/*std::ifstream f;
-	f.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	try
-	{
-		Engine engine;
-		engine.Init();
-		while (!engine.IsDone())
-			engine.Update();
-
-		engine.Delete();
-		return 0;
-	}
-	catch (std::system_error & e)
-	{
-		std::cerr << e.code().message() << std::endl;
-		Messagebox::Init_Box(file_path);
-	}*/
-	
 	Engine engine;
 	engine.Init();
 	while (!engine.IsDone())

@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Component.cpp
+ */
+
 #pragma once
 #include <string>
 

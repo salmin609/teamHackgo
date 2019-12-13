@@ -1,3 +1,14 @@
+
+/*
+ * Author		:minseok.sung
+ * File			:Application.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for application.cpp
+ */
+
 #pragma once
 #include "vector2.hpp"
 #include <GL/glew.h>
@@ -5,20 +16,10 @@
 #include <imgui.h>
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-//#include "Engine.hpp"
-//
-//#include "StateManager.h"
 #include "Graphic.h"
 #include "ObjectManager.h"
 #include "Application.hpp"
-
 #include "Component_Sprite.h"
-/*
-#include "Component_Transform.h"
-#include "Component_TopDownMovement.h"
-#include "example.hpp"
-#include "../DoubleCheck/MainMenu.h"
-#include "../DoubleCheck/Level1.h"*/
 
 
 

@@ -1,3 +1,14 @@
+/*
+ * Author		:Suhwan.kim
+ * File			:MainMenu.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Cpp for main menu.
+ */
+
+
 #include "MainMenu.h"
 #include "Input.h"
 #include "ObjectManager.h"

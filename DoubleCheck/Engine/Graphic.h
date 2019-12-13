@@ -1,3 +1,14 @@
+
+/*
+ * Author		:jeesoo.kim
+ * File			:Graphic.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Graphic.cpp
+ */
+
 #pragma once
 
 #include "Shader.hpp"

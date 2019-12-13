@@ -1,9 +1,14 @@
-/************************************************
- *NAME              : sangmin.kim
- *ASSIGNMENT NUMBER : 3
- *COURSE NAME       : CS230
- *TERM              : Spring 2019
- ************************************************/
+/*
+ * Author		:jeesoo.kim
+ * File			:Color.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Cpp file for implement Color in graphic. Which represented by float, unsigned byte.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
 #include "Color4f.hpp"
 #include "Color4ub.hpp"
 

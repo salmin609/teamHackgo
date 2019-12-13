@@ -1,3 +1,14 @@
+
+/*
+ * Author		:minseok.sung
+ * File			:angles.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:angles value saved.
+ */
+
 #pragma once
 
 

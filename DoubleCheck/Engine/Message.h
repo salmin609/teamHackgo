@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Message.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Header file for Message.cpp
+ */
+
 #pragma once
 #include "vector2.hpp"
 #include <GL/glew.h>

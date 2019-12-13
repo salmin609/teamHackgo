@@ -1,4 +1,16 @@
-﻿#include <fstream>
+﻿/*
+ * Author		:suwhan.kim
+ * File			:Level1.cpp 
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:This file is for intialize the stuff required on the prototype.
+ *				 There are Player objects, refree, items, text, ui information.
+ */
+
+
+#include <fstream>
 #include <sstream>
 #include "Windows.h"
 #include "Level1.h"
@@ -34,7 +46,7 @@ void Level1::Load()
 	arena = new Object();	
 	arena->Set_Name("arena");
 	arena->Set_Tag("arena");
-    arena->AddComponent(new Sprite(arena, "../Sprite/IceGround2.png", { 0,0 }, false));
+    arena->AddComponent(new Sprite(arena, "../Sprite/IceGround.png", { 0,0 }, false));
     arena->SetScale({ 20, 20});
 	ObjectManager::GetObjectManager()->AddObject(arena);
 	
@@ -125,7 +137,7 @@ void Level1::Load()
 	fileOut << "Name: " << player->Get_Name() << endl;
 	fileOut << "Sprite: " << player->Get_Path() << " ";
 	fileOut << player->Get_AnimateState() << " ";
-	fileOut << player->Get_Frame() << endl; //오브젝트에 만들어서 패스 경로 생성
+	fileOut << player->Get_Frame() << endl;
 	fileOut << "Position: " << player->GetTransform().GetTranslation_Reference().x << " ";
 	fileOut << player->GetTransform().GetTranslation_Reference().y << endl;
 	fileOut << "Scale: " << player->GetTransform().GetScale_Reference().x << " ";

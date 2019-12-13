@@ -1,3 +1,15 @@
+/*
+ * Author		:minseok.sung
+ * File			:Messagebox.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for message error box.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include <Windows.h>
 #include <system_error>
 #include "Messagebox.h"

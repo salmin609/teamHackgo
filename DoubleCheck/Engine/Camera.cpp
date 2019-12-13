@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:Camera.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for camera in the engine.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Camera.hpp"
 
 matrix3 Helper_build_world_to_camera(vector2 center_vec, vector2 up_vec, vector2 right_vec)

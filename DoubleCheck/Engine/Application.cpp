@@ -1,3 +1,15 @@
+/*
+ * Author		:minseok.sung
+ * File			:Applicaion.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for creating window, getting input.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Application.hpp"
 #include <iostream>
 #include "vector2.hpp"
@@ -149,22 +161,6 @@ void Application::Update(float dt)
 	{
 		int axesCount;
 		const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axesCount);
-		//std::cout << "Number of axes available: " << std::endl;
-
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << std::endl;
-		//std::cout << "Left Stick X axis: " << axes[0] << std::endl;
-		//std::cout << "Left Stick Y axis: " << axes[1] << std::endl;
-		//std::cout << "Right Stick X axis: " << axes[2] << std::endl;
-		//std::cout << "Right Stick Y axis: " << axes[3] << std::endl;
-		//std::cout << "Left Trigger / L2: " << axes[4] << std::endl;
-		//std::cout << "Right Trigger / R2: " << axes[5] << std::endl;
 	}
 
 	save_dt += dt;
@@ -404,22 +400,22 @@ void Application::Imgui_Update()
 			else if (which_one_to_make == names[1])
 			{
 				new_obj->Set_Name(names[1]);
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/kingchulseong.png"));
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/kingchulseong.png", { 60,60 }));
 			}
 			else if (which_one_to_make == names[2])
 			{
 				new_obj->Set_Name(names[2]);
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/waterpunch.png"));
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/waterpunch.png", { 60,60 }));
 			}
 			else if (which_one_to_make == names[3])
 			{
 				new_obj->Set_Name(names[3]);
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png"));
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/temp.png", { 60,60 }));
 			}
 			else if (which_one_to_make == names[4])
 			{
 				new_obj->Set_Name(names[4]);
-				new_obj->AddComponent(new Sprite(new_obj, "../sprite/maknae.png"));
+				new_obj->AddComponent(new Sprite(new_obj, "../sprite/maknae.png", { 60,60 }));
 			}
 			new_obj->SetTranslation(this_pos);
 			new_obj->AddComponent(new Physics);

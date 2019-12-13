@@ -1,9 +1,14 @@
-/************************************************
- *NAME              : sangmin.kim
- *ASSIGNMENT NUMBER : 1
- *COURSE NAME       : CS230
- *TERM              : Spring 2019
- ************************************************/
+/*
+ * Author		:minseok.sung
+ * File			:vector2.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for vector2.cpp
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
 #include "vector2.hpp"
 #include <cassert>
 #include <limits>

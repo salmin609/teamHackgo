@@ -1,3 +1,14 @@
+
+/*
+ * Author		:jeesoo.kim
+ * File			:Mesh.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Mesh.cpp
+ */
+
 #pragma once
 #include "Color4ub.hpp"
 #include <vector2.hpp>

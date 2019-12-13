@@ -1,3 +1,17 @@
+/*
+ * Author		:sangmin.kim
+ * File			:Message.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for implementing message system's message part.
+ *				 Checking the vector which contains messages, depends on the message type,
+ *				 implementing proper function.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Message.h"
 #include "Component_Player.h"
 #include "Component_Sprite.h"
@@ -16,52 +30,149 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 	//(+,+)
 	//(-,-)
 	//(-,-)
+
+
 	Physics* target_physics = target.GetComponentByTemplate<Physics>();
 	Physics* from_physics = from.GetComponentByTemplate<Physics>();
-	float target_scale = 1.f;
-	target_scale += target.Get_Plus_Dmg();
-	float from_scale = 1.f;
-	from_scale += from.Get_Plus_Dmg();
-	
-	vector2 target_pos = target.GetTransform().GetTranslation();
-	vector2 from_pos = from.GetTransform().GetTranslation();
 
-	bool same_direction_x = false;
-	bool same_direction_y = false;
-
-	same_direction_x = (target_physics->GetAcceleration().x < 0 && from_physics->GetAcceleration().x < 0);
-	same_direction_x |= (target_physics->GetAcceleration().x > 0 && from_physics->GetAcceleration().x > 0);
-	same_direction_y = (target_physics->GetAcceleration().y < 0 && from_physics->GetAcceleration().y < 0);
-	same_direction_y |= (target_physics->GetAcceleration().y > 0 && from_physics->GetAcceleration().y > 0);
-
-
-	//both directions are same.
-	if (same_direction_x && same_direction_y)
+	if (target_physics != nullptr && from_physics != nullptr)
 	{
-		//if the positive.
-		if (target_physics->GetAcceleration().x > 0)
-		{
-			if (target_pos.x > from_pos.x && target_pos.y > from_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-				dmg.first -= target_scale;
-				dmg.second = 2;
-				dmg.second -= from_scale;
-				return dmg;
-			}
-			if (from_pos.x > target_pos.x&& from_pos.y > target_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-				dmg.second -= from_scale;
-				dmg.first = 2;
-				dmg.first -= target_scale;
-				return dmg;
-			}
+		float target_scale = 1.f;
+		target_scale += target.Get_Plus_Dmg();
+		float from_scale = 1.f;
+		from_scale += from.Get_Plus_Dmg();
 
+		vector2 target_pos = target.GetTransform().GetTranslation();
+		vector2 from_pos = from.GetTransform().GetTranslation();
+
+		bool same_direction_x = false;
+		bool same_direction_y = false;
+
+		same_direction_x = (target_physics->GetAcceleration().x < 0 && from_physics->GetAcceleration().x < 0);
+		same_direction_x |= (target_physics->GetAcceleration().x > 0 && from_physics->GetAcceleration().x > 0);
+		same_direction_y = (target_physics->GetAcceleration().y < 0 && from_physics->GetAcceleration().y < 0);
+		same_direction_y |= (target_physics->GetAcceleration().y > 0 && from_physics->GetAcceleration().y > 0);
+
+
+		//both directions are same.
+		if (same_direction_x && same_direction_y)
+		{
+			//if the positive.
+			if (target_physics->GetAcceleration().x > 0)
+			{
+				if (target_pos.x > from_pos.x&& target_pos.y > from_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+						(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+					dmg.first -= target_scale;
+					dmg.second = 2;
+					dmg.second -= from_scale;
+					return dmg;
+				}
+				if (from_pos.x > target_pos.x&& from_pos.y > target_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+						(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+					dmg.second -= from_scale;
+					dmg.first = 2;
+					dmg.first -= target_scale;
+					return dmg;
+				}
+
+				float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+				target_dmg -= target_scale;
+				float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+				from_dmg -= from_scale;
+				return std::pair<float, float> {target_dmg, from_dmg};
+			}
+			if (target_physics->GetAcceleration().x < 0)
+			{
+				if (target_pos.x < from_pos.x && target_pos.y < from_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+						(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+					dmg.first -= target_scale;
+					dmg.second = 2;
+					dmg.second -= from_scale;
+					return dmg;
+				}
+				if (from_pos.x < target_pos.x && from_pos.y < target_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+						(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+					dmg.first = 2;
+					dmg.second -= from_scale;
+					dmg.first -= target_scale;
+					return dmg;
+				}
+
+				float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+				target_dmg -= target_scale;
+				float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+				from_dmg -= from_scale;
+
+				return std::pair<float, float> {target_dmg, from_dmg};
+			}
+		}
+		else if (same_direction_x)
+		{
+			if (target_physics->GetAcceleration().x > 0)
+			{
+				if (target_pos.x > from_pos.x)
+				{
+					std::pair<float, float> dmg;
+					dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+						(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+					dmg.first -= target_scale;
+					dmg.second = 2;
+					dmg.second -= from_scale;
+					return dmg;
+				}
+				if (from_pos.x > target_pos.x)
+				{
+					std::pair<float, float> dmg;
+					dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+						(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+
+					dmg.first = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
+					return dmg;
+				}
+			}
+			if (target_physics->GetAcceleration().x < 0)
+			{
+				if (target_pos.x < from_pos.x)
+				{
+					std::pair<float, float> dmg;
+					dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+						(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+					dmg.second = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
+
+					return dmg;
+				}
+				if (from_pos.x < target_pos.x)
+				{
+					std::pair<float, float> dmg;
+					dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+						(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+					dmg.first = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
+
+					return dmg;
+				}
+			}
 			float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
 				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 			target_dmg -= target_scale;
@@ -70,167 +181,77 @@ std::pair<float, float> Message::Damaege_Calculation(Object target, Object from)
 			from_dmg -= from_scale;
 			return std::pair<float, float> {target_dmg, from_dmg};
 		}
-		if (target_physics->GetAcceleration().x < 0)
+		else if (same_direction_y)
 		{
-			if (target_pos.x < from_pos.x && target_pos.y < from_pos.y)
+			if (target_physics->GetAcceleration().y > 0)
 			{
-				std::pair<float, float> dmg;
-				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-				dmg.first -= target_scale;
-				dmg.second = 2;
-				dmg.second -= from_scale;
-				return dmg;
-			}
-			if (from_pos.x < target_pos.x && from_pos.y < target_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-				dmg.first = 2;
-				dmg.second -= from_scale;
-				dmg.first -= target_scale;
-				return dmg;
-			}
+				if (target_pos.y > from_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+						(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+					dmg.second = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
 
+					return dmg;
+				}
+				if (from_pos.y > target_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+						(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+					dmg.first = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
+
+					return dmg;
+				}
+			}
+			if (target_physics->GetAcceleration().y < 0)
+			{
+				if (target_pos.y < from_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+						(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+					dmg.second = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
+
+					return dmg;
+				}
+				if (from_pos.y < target_pos.y)
+				{
+					std::pair<float, float> dmg;
+					dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+						(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+					dmg.first = 2;
+					dmg.first -= target_scale;
+					dmg.second -= from_scale;
+
+					return dmg;
+				}
+			}
 			float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
 				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
 			target_dmg -= target_scale;
 			float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
 				(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
 			from_dmg -= from_scale;
-
 			return std::pair<float, float> {target_dmg, from_dmg};
 		}
-	}
-	else if (same_direction_x)
-	{
-		if (target_physics->GetAcceleration().x > 0)
+		else
 		{
-			if (target_pos.x > from_pos.x)
-			{
-				std::pair<float, float> dmg;
-				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-				dmg.first -= target_scale;
-				dmg.second = 2;
-				dmg.second -= from_scale;
-				return dmg;
-			}
-			if (from_pos.x > target_pos.x)
-			{
-				std::pair<float, float> dmg;
-				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-				
-				dmg.first = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
-				return dmg;
-			}
+			float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
+				(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
+			float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
+				(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
+			target_dmg -= target_scale;
+			from_dmg -= from_scale;
+			return std::pair<float, float> {target_dmg, from_dmg};
 		}
-		if (target_physics->GetAcceleration().x < 0)
-		{
-			if (target_pos.x < from_pos.x)
-			{
-				std::pair<float, float> dmg;
-				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-				dmg.second = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
 
-				return dmg;
-			}
-			if (from_pos.x < target_pos.x)
-			{
-				std::pair<float, float> dmg;
-				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-				dmg.first = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
-
-				return dmg;
-			}
-		}
-		float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-		target_dmg -= target_scale;
-		float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-		from_dmg -= from_scale;
-		return std::pair<float, float> {target_dmg, from_dmg};
-	}
-	else if (same_direction_y)
-	{
-		if (target_physics->GetAcceleration().y > 0)
-		{
-			if (target_pos.y > from_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-				dmg.second = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
-
-				return dmg;
-			}
-			if (from_pos.y > target_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-				dmg.first = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
-
-				return dmg;
-			}
-		}
-		if (target_physics->GetAcceleration().y < 0)
-		{
-			if (target_pos.y < from_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.first = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-					(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-				dmg.second = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
-
-				return dmg;
-			}
-			if (from_pos.y < target_pos.y)
-			{
-				std::pair<float, float> dmg;
-				dmg.second = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-					(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-				dmg.first = 2;
-				dmg.first -= target_scale;
-				dmg.second -= from_scale;
-
-				return dmg;
-			}
-		}
-		float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-		target_dmg -= target_scale;
-		float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-		from_dmg -= from_scale;
-		return std::pair<float, float> {target_dmg, from_dmg};
-	}
-	else
-	{
-		float target_dmg = (sqrt((from_physics->Get_Save_Acceleration_Reference().x * from_physics->Get_Save_Acceleration_Reference().x) +
-			(from_physics->Get_Save_Acceleration_Reference().y * from_physics->Get_Save_Acceleration_Reference().y))) * from_scale;
-		float from_dmg = (sqrt((target_physics->Get_Save_Acceleration_Reference().x * target_physics->Get_Save_Acceleration_Reference().x) +
-			(target_physics->Get_Save_Acceleration_Reference().y * target_physics->Get_Save_Acceleration_Reference().y))) * target_scale;
-		target_dmg -= target_scale;
-		from_dmg -= from_scale;
-		return std::pair<float, float> {target_dmg, from_dmg};
 	}
 
 }
@@ -281,7 +302,7 @@ void Message::Update(float dt)
 	{
 		if (m_target->Get_Tag() == "item" && m_from->Get_Tag() == "player")
 		{
-            sound.play(SOUND::Item);
+			sound.play(SOUND::Item);
 			std::cout << "item" << std::endl;
 			if (m_target->GetComponentByTemplate<Item>()->Get_Kind() == Item::Item_Kind::Dash)
 			{
@@ -290,7 +311,7 @@ void Message::Update(float dt)
 				{
 					m_from->GetComponentByTemplate<Player>()->Set_Item_State(Item::Item_Kind::Dash);
 
-					if(m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>() == nullptr)
+					if (m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->GetComponentByTemplate<Sprite>() == nullptr)
 					{
 						m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info()->AddComponent(new Sprite(
 							m_from->GetComponentByTemplate<Player>()->Get_Ui()->Get_Item_Info(), "../sprite/dash.png",
@@ -401,7 +422,7 @@ void Message::Update(float dt)
 
 			m_target->GetComponentByTemplate<Player>()->Get_Regeneration_Timer() = 0.f;
 			m_from->GetComponentByTemplate<Player>()->Get_Regeneration_Timer() = 0.f;
-			
+
 			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(dmg_set.first)));
 			m_target->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->Get_Timer() = 1.f;
 			m_from->Get_Dmg_Text()->GetComponentByTemplate<TextComp>()->GetText().SetString(L"-" + std::to_wstring(static_cast<int>(dmg_set.second)));
@@ -437,28 +458,28 @@ void Message::Update(float dt)
 	{
 		if (m_from->GetName() == "second")
 		{
-            sound.play(SOUND::Die);
-            sound.volume(SOUND::Die, 3);
+			sound.play(SOUND::Die);
+			sound.volume(SOUND::Die, 3);
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_SECOND_DIE);
 		}
 		if (m_from->GetName() == "first")
 		{
-            sound.play(SOUND::Die);
-            sound.volume(SOUND::Die, 3);
+			sound.play(SOUND::Die);
+			sound.volume(SOUND::Die, 3);
 
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FIRST_DIE);
 		}
 		if (m_from->GetName() == "third")
 		{
-            sound.play(SOUND::Die);
-            sound.volume(SOUND::Die, 3);
+			sound.play(SOUND::Die);
+			sound.volume(SOUND::Die, 3);
 
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_THIRD_DIE);
 		}
 		if (m_from->GetName() == "forth")
 		{
-            sound.play(SOUND::Die);
-            sound.volume(SOUND::Die, 3);
+			sound.play(SOUND::Die);
+			sound.volume(SOUND::Die, 3);
 
 			Referee::Get_Referee()->Get_Stage_Statement().push_back(Referee::PLAYER_FOURTH_DIE);
 		}
@@ -480,7 +501,12 @@ void Message::Update(float dt)
 			if (m_target->GetTransform().GetScale_Reference().x <= 1.f)
 			{
 				m_target->GetTransform().GetScale_Reference().x += dt;
-				m_target->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset() = 0.f;
+
+				if (m_target->GetComponentByTemplate<Hp_Bar>() != nullptr)
+				{
+					m_target->GetComponentByTemplate<Hp_Bar>()->Get_Set_Offset() = 0.f;
+				}
+
 				m_target->GetTransform().GetTranslation_Reference().x = m_target->Get_This_Obj_Owner()->GetTransform().GetTranslation().x;
 			}
 
@@ -490,26 +516,30 @@ void Message::Update(float dt)
 			}
 		}
 	}
-	if(message_name == "bulkup")
+	if (message_name == "bulkup")
 	{
-		m_target->GetComponentByTemplate<Player>()->Get_Bulkup_Timer() = 5.f;
-		if(timer >= 0.f)
+		if (m_target->GetComponentByTemplate<Player>() != nullptr)
+		{
+			m_target->GetComponentByTemplate<Player>()->Get_Bulkup_Timer() = 5.f;
+		}
+
+		if (timer >= 0.f)
 		{
 			timer -= dt;
-			
+
 			if (m_target->GetTransform().GetScale_Reference().x <= 5.f)
 			{
 				m_target->Get_Plus_Dmg() = 2.f;
 				m_target->GetTransform().GetScale_Reference().x += dt;
 				m_target->GetTransform().GetScale_Reference().y += dt;
-				
+
 			}
 		}
 		else
 		{
 			should_delete = true;
 		}
-		
+
 	}
 	if (message_name == "dash")
 	{

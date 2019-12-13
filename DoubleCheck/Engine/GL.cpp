@@ -1,10 +1,21 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:GL.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for using OpenGL function.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Color4f.hpp"
 #include "GL.hpp"
 #include "Material.hpp"
 #include "Shader.hpp"
 #include "Texture.hpp"
 #include "Vertices.hpp"
-//#include <CS230/graphics/glCheck.hpp>
 #include <GL/glew.h>
 #include <iostream>
 

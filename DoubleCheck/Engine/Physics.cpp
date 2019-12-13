@@ -1,3 +1,13 @@
+/*
+ * Author		:chulseung.lee
+ * File			:Physics.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Acceleration / Knockback / user input by controller is implemented.
+ */
+
 #include "Physics.h"
 #include "ObjectManager.h"
 #include <cmath>

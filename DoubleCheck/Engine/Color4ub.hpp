@@ -1,4 +1,15 @@
 
+/*
+ * Author		:jeesoo.kim
+ * File			:Color4ub.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file which represent color value.
+ */
+
+
 #pragma once
 
 class[[nodiscard]] Color4ub

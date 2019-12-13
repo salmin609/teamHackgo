@@ -1,4 +1,15 @@
-﻿#pragma once
+﻿
+/*
+ * Author		:jeesoo.kim
+ * File			:Image.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:hpp file for Image.cpp
+ */
+
+#pragma once
 #include "Color4ub.hpp"
 #include <filesystem>
 #include <vector>

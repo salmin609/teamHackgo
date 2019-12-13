@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:VertexLayoutDescription.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for VertexLayoutDescription.cpp
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #pragma once
 #include <vector>
 

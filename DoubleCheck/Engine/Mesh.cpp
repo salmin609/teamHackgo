@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:Mesh.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for implementing mesh of the object.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Mesh.hpp"
 #include "angles.hpp"
 #include <cmath>

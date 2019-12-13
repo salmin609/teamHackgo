@@ -1,4 +1,16 @@
- #include <algorithm>
+/*
+ * Author		:sangmin.kim
+ * File			:Object.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for object. Which contains components, update & initialize the components.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
+#include <algorithm>
 #include "Object.h"
 
 void Object::AddComponent(Component* comp)

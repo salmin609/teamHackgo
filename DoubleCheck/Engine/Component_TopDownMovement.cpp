@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component_TopDownMovement.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Basic movement implemented in here, not used now.
+ */
+
 #include "Component_TopDownMovement.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>

@@ -1,3 +1,17 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component_Hpbar.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Component for hpbar objects for each player.
+ *				 Check the enemy's current health, decrease the scale,
+ *				 manipulate the translation offset.
+ *				 If the player is dead, send message for respawn to referee.
+ */
+
 #include "Component_Hpbar.h"
 #include "Object.h"
 #include "Message_Manager.h"

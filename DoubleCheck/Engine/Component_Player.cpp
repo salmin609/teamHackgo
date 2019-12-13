@@ -1,3 +1,16 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component_Player.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Basic component for player, which initialize the hpbar object and
+ *				 attach to the owner object.
+ *				 UI Objects are attached in here too.
+ */
+
 #include "Component_Player.h"
 #include "Message_Manager.h"
 #include "ObjectManager.h"

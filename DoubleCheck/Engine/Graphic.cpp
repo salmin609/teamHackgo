@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:Graphic.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for refresh screen & background color.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Graphic.h"
 #include "StockShaders.hpp"
 #include <GL/glew.h>

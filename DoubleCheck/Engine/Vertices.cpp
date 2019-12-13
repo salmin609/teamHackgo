@@ -1,14 +1,17 @@
-/************************************************
- *NAME              : sangmin.kim
- *ASSIGNMENT NUMBER : 4
- *COURSE NAME       : CS230
- *TERM              : Spring 2019
- ************************************************/
+/*
+ * Author		:sangmin.kim
+ * File			:Vertices.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file vertices of objects.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
 #include "Mesh.hpp"
 #include "VertexLayoutDescription.hpp"
 #include "Vertices.hpp"
-
-
 #include <GL/glew.h>
 #include <cassert>
 #include <sys/stat.h>

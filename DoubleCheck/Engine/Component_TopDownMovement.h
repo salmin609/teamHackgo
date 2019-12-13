@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component_TopDownMovement.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Component_TopDownMovement.cpp
+ */
+
 #pragma once
 #include "Component.hpp"
 #include "Transform.hpp"

@@ -1,4 +1,15 @@
-﻿#include "Engine.hpp"
+﻿
+/*
+ * Author		:sangmin.kim
+ * File			:Engine.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:The basic engine initiailze & update, managers initialize & update is implemented in here 
+ */
+
+#include "Engine.hpp"
 #include "Application.hpp"
 #include "ObjectManager.h"
 #include "Input.h"

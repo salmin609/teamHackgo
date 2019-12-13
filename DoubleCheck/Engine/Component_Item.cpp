@@ -1,3 +1,13 @@
+
+/*
+ * Author		:suhwan.kim
+ * File			:Component_Item.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Basic ai movement for item object is implemented in here.
+ */
 #include "Component_Item.h"
 #include "time.h"
 #include "Object.h"
@@ -36,9 +46,6 @@ void Item::Update(float dt)
 		m_owner->GetComponentByTemplate<Physics>()->GetAcceleration_Reference().y -= 0.1f;
 		break;
 	}
-	
-
-	
 }
 
 void Item::Set_Kind(Item_Kind kind)

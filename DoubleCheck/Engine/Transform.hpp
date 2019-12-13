@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:Transform.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Transform.cpp
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #pragma once
 #include <matrix3.hpp>
 #include <vector2.hpp>

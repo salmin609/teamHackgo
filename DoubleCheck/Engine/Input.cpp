@@ -1,7 +1,13 @@
-//#include "Input.h"
-//#include "Application.hpp"
-//#include <assert.h>
-//#include <chrono>
+/*
+ * Author		:suwhan.kim
+ * File			:Input.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for getting user input.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
 
 #include "Input.h"
 #include <GL/glew.h>

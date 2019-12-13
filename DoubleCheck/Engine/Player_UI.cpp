@@ -1,3 +1,16 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Player_UI.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Objects which represent UI is initialized & reset in here.
+ *				 In initialize, set the translation, name, scale, image.
+ *
+ *				 In reset, reset the color, scale, translation to initial value.
+ */
 #include "Player_Ui.h"
 #include "Component_Sprite.h"
 #include "ObjectManager.h"

@@ -1,8 +1,14 @@
 /*
- * Rudy Castan
- * Math Library
- * CS230
+ * Author		:minseok.sung
+ * File			:vector2.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:hpp file for vector2.cpp
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
+
 #pragma once
 #pragma warning(push)
 #pragma warning(disable : 4201) // warning C4201 : nonstandard extension used : nameless struct / union

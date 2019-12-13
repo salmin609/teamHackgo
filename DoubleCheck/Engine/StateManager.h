@@ -1,3 +1,15 @@
+/*
+ * Author		:sangmin.kim
+ * File			:StateManager.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for StateManager.cpp
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #pragma once
 #include "State.h"
 #include <unordered_map>

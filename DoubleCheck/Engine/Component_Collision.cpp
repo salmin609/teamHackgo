@@ -1,3 +1,14 @@
+
+/*
+ * Author		:Chulseung.lee
+ * File			:Component_Collision.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Collision check of objects in engine.
+ */
+
 #include "Component_Collision.h"
 #include "Physics.h"
 #include "Object.h"
@@ -159,7 +170,7 @@ void Collision::SquareArenaCollision()
 		const double max_y = obj_i_trans.y + (30.0 * obj_i_scale.y);
 		const double min_y = obj_i_trans.y - (30.0 * obj_i_scale.y);
 
-		if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr && obj_i->Get_Tag() == "player")
+		if (line_max_point - max_x < 0 && obj_i->GetComponentByTemplate<Physics>() != nullptr)
 		{
             sound.play(SOUND::Crack);
 

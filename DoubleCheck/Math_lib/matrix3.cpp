@@ -1,9 +1,14 @@
-/************************************************
- *NAME              : sangmin.kim
- *ASSIGNMENT NUMBER : 1
- *COURSE NAME       : CS230
- *TERM              : Spring 2019
- ************************************************/
+/*
+ * Author		:minseok.sung
+ * File			:matrix3.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for matrix3.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
 #include "matrix3.hpp"
 #include "vector2.hpp"
 #include <cassert>

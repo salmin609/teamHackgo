@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:ObjectManager.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for ObjectManager.cpp
+ */
+
 #pragma once
 #include <vector>
 #include "Object.h"

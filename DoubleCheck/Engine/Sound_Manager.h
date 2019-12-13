@@ -1,10 +1,14 @@
-
 /*
-   \file        Sound_Manager.h
-   \project     Shooting Craft
-   \author(s)   Chulseung Lee
-   \copyright   All content ?2018 DigiPen (USA) Corporation, all rights reserved
-*/
+ * Author		:chulseung.lee
+ * File			:Sound_Manager.h
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Sound_Manager.cpp
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
 #pragma once
 #define SOUND_NUM 20
 

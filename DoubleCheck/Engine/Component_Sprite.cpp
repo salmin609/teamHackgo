@@ -1,4 +1,14 @@
- #include "Component_Sprite.h"
+
+/*
+ * Author		:jeesoo.kim
+ * File			:Component_Sprite.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Sprite component cpp for basic sprite of object.
+ */
+#include "Component_Sprite.h"
 #include "angles.hpp"
 #include "Mesh.hpp"
 #include <GL/glew.h>

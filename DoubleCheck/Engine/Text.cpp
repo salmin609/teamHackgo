@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:Text.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for text component.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include <iostream>
 #include "Mesh.hpp"
 #include "StockShaders.hpp"

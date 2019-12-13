@@ -1,3 +1,14 @@
+
+/*
+ * Author		:jeesoo.kim
+ * File			:Camera.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Header file for Camera.cpp
+ */
+
 #pragma once
 
 #include <matrix3.hpp>

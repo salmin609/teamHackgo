@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:BitmapFont.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for loading the fnt file for implement text.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "BitmapFont.hpp"
 #include <cassert>
 #include <filesystem>

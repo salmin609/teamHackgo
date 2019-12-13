@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Component_Enemy.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Enemy component which is not used at now.
+ */
+
 #include "Component_Enemy.h"
 
 void Component_Enemy::Init(Object* obj)

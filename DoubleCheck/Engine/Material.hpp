@@ -1,3 +1,14 @@
+
+/*
+ * Author		:jeesoo.kim
+ * File			:Material.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for Material.cpp
+ */
+
 #pragma once
 #include "Color4f.hpp"
 #include "matrix3.hpp"

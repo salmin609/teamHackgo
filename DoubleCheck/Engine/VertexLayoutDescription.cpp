@@ -1,3 +1,15 @@
+/*
+ * Author		:jeesoo.kim
+ * File			:VertexLayoutDescription.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for layout description which pass to shader code.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
 #include "Mesh.hpp"
 #include "VertexLayoutDescription.hpp"
 #include "Vertices.hpp"

@@ -1,3 +1,14 @@
+
+/*
+ * Author		:jeesoo.kim
+ * File			:BitmapFont.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:header file for BitmapFont.cpp
+ */
+
 #pragma once
 #include "Texture.hpp"
 #include <filesystem>

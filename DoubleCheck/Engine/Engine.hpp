@@ -1,3 +1,14 @@
+
+/*
+ * Author		:sangmin.kim
+ * File			:Engine.hpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:Header file for engine.cpp
+ */
+
 #pragma once
 #include "Timer.hpp"
 #include "Sound_Manager.h"

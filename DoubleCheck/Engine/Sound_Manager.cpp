@@ -1,4 +1,16 @@
-﻿#include "Sound_Manager.h"
+﻿/*
+ * Author		:chulseung.lee
+ * File			:Sound_Manager.cpp
+ * Term			:2019 Fall
+ * Class		:GAM200
+ * Project		:GAM200 Project
+ * Date			:2019/12/11
+ * Description	:cpp file for implement sound manager of engine. Which control music play & stop & volume.
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ */
+
+
+#include "Sound_Manager.h"
 #include "Messagebox.h"
 
 float sound_timer = 0;
