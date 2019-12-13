@@ -22,7 +22,7 @@ class Sprite : public Component
 public:
 	Sprite(Object* obj, bool need_debug_drawing = false);
 	Sprite(Object* obj, const char* staticSpritePath, vector2 position, bool need_debug_drnawing = true);
-	Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, vector2 position, bool need_debug_drawing = true);
+    Sprite(Object* obj, const char* aniamtedSpritePath, bool animated, int frames, float m_speed, vector2 position, vector2 scale, Color4ub color = { 255,255,255,255 });
 	void Init(Object* obj) override;
 	void Update(float dt) override;
 	bool Can_Load_To_Texture(Texture& texture, const char* file_path);

@@ -18,6 +18,7 @@
 #include "Transform.hpp"
 #include "Engine.hpp"
 #include "Sound_Manager.h"
+#include "Windows.h"
 #include <iostream>
 GLFWgamepadstate state;
 
@@ -36,12 +37,15 @@ void MainMenu::Load()
 
     Graphic::GetGraphic()->Get_View().Get_Camera_View().SetZoom(0.35f);
     Graphic::GetGraphic()->get_need_update_sprite() = true; //draw picture(initialize)
+
     button = new Object();
     button->Set_Name("play_button");
     button->Set_Tag("button");
     button->AddComponent(new Sprite(button, "../Sprite/play_button.png", { 0, 0 }));
     button->GetTransform().SetScale({ 3, 3 });
     ObjectManager::GetObjectManager()->AddObject(button);
+
+
 }
 
 void MainMenu::Update(float dt)

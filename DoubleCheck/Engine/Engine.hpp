@@ -12,6 +12,7 @@
 #pragma once
 #include "Timer.hpp"
 #include "Sound_Manager.h"
+#include "Object.h"
 
 extern Sound sound;
 

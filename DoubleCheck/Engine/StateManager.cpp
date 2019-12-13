@@ -61,7 +61,7 @@ void StateManager::AddState(std::string name, State* state)
 
     if (current_state == nullptr)
     {
-        if (state->GetStateInfo() == GameState::Menu)
+        if (state->GetStateInfo() == GameState::Logo)
         {
             current_state = state;
             current_state->Load();

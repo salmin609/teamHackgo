@@ -38,5 +38,6 @@ public:
 private:
 	Object* button;
 	Object* collision_button;
+
 	//std::unordered_map<std::string, std::shared_ptr<State>> states;
 };
