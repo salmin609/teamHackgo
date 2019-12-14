@@ -6,7 +6,7 @@
  * Project		:GAM200 Project
  * Date			:2019/12/11
  * Description	:Header file for Level1.cpp
- * * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
+ * copyright   All content ?2019 DigiPen (USA) Corporation, all rights reserved
  */
 
 
